@@ -1,16 +1,36 @@
-# mahati_mobile
+# Mahati Mobile
 
-A new Flutter project.
+## Introduction
 
-## Getting Started
+Mahati is Mobile Aplikasi Sahabat Hipertensi. Created at January 2024.
 
-This project is a starting point for a Flutter application.
+## How to Run
 
-A few resources to get you started if this is your first Flutter project:
+- Clone Project
+- Install depedencies on [pubspec.yaml](./pubspec.yaml)
+- Run and Debug on android emulator
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Table of Contents
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Introduction](#introduction)
+- [How to Run](#how-to-run)
+- [Features](#features)
+- [Project Structure](#project-structure)
+
+## Features
+
+- Check Blood Pressure
+- Medicine Reminder
+- Education
+- Article
+
+## Project Structure
+
+- `lib`
+  - `app`
+    - `components`
+    - `data`
+    - `modules`
+    - `routes`
+    - `utils`
+  - `main.dart`
