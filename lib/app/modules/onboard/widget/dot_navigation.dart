@@ -11,9 +11,10 @@ class DotNavigation extends StatelessWidget {
     final controller = OnBoardingController.instance;
 
     return Positioned(
-      // bottom: ScreenDimensions.bottomNavigationBarHeight(context),
+      bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 3.4,
+
       // left: 25.0,
-      
+
       child: SmoothPageIndicator(
         // navigation dot clicked
         onDotClicked: controller.dotNavigatorClick,
