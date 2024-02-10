@@ -4,6 +4,7 @@ import 'package:mahati_mobile/app/modules/onboard/widget/dot_navigation.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/next_button.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/onboarding_page.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/skip_button.dart';
+import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
 import 'package:mahati_mobile/app/utils/constants/image_urls.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,7 @@ class OnboardingScreen extends StatelessWidget {
         color: Color(0xFFFFFFFF),
         child: SafeArea(
           child: Stack(
+            alignment: Alignment.center,
             children: [
               // onboarding pages
               PageView(
@@ -29,19 +31,19 @@ class OnboardingScreen extends StatelessWidget {
                 children: const [
                   // page - 1
                   OnBoardingPage(
-                    imageUrl: ImageUrls.onboardingGif,
+                    animationUrl: AnimationUrls.pillAnimation,
                     title: TextStrings.onboardingTitle1,
                     subTitle: TextStrings.onboardingSubTitle1,
                   ),
                   // page - 2
                   OnBoardingPage(
-                    imageUrl: ImageUrls.onboardingGif,
+                    animationUrl: AnimationUrls.timeAnimation,
                     title: TextStrings.onboardingTitle2,
                     subTitle: TextStrings.onboardingSubTitle2,
                   ),
                   // page - 3
                   OnBoardingPage(
-                    imageUrl: ImageUrls.onboardingGif,
+                    animationUrl: AnimationUrls.educationAnimation,
                     title: TextStrings.onboardingTitle3,
                     subTitle: TextStrings.onboardingSubTitle3,
                   ),
