@@ -5,10 +5,8 @@ import 'package:mahati_mobile/app/modules/onboard/widget/next_button.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/onboarding_page.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/skip_button.dart';
 import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
-import 'package:mahati_mobile/app/utils/constants/image_urls.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/utils/resources.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
