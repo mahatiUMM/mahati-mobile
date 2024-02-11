@@ -15,7 +15,7 @@ class NextButton extends StatelessWidget {
           backgroundColor: const Color(0xFF40D99E),
           foregroundColor: Colors.white,
         ),
-        onPressed: OnBoardingController.instance.nextPage,
+        onPressed: OnBoardController.instance.nextPage,
         child: const Icon(Icons.arrow_forward),
       ),
     );

@@ -7,17 +7,16 @@ import 'package:mahati_mobile/app/modules/onboard/widget/skip_button.dart';
 import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+class OnboardView extends GetView<OnBoardController> {
+  const OnboardView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController());
-
     return Scaffold(
       body: Container(
-        color: Color(0xFFFFFFFF),
+        color: Resources.color.whiteColor,
         child: SafeArea(
           child: Stack(
             alignment: Alignment.center,

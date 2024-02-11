@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/login/login_screen.dart';
 
-class OnBoardingController extends GetxController {
-  static OnBoardingController get instance => Get.find();
+class OnBoardController extends GetxController {
+  static OnBoardController get instance => Get.find();
 
   // page controller
   final pageController = PageController();

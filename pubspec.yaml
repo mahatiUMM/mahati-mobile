@@ -9,6 +9,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.6
   flutter_svg: ^2.0.9
+  smooth_page_indicator: ^1.1.0
+  lottie: ^3.0.0
   flutter:
     sdk: flutter
 
@@ -29,7 +31,7 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Light.ttf
-        - asset: assets/fonts/Inter-Reguler.ttf
+        - asset: assets/fonts/Inter-Regular.ttf
         - asset: assets/fonts/Inter-Medium.ttf
         - asset: assets/fonts/Inter-SemiBold.ttf
         - asset: assets/fonts/Inter-Bold.ttf

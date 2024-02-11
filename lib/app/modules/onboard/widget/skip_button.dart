@@ -12,7 +12,7 @@ class SkipButton extends StatelessWidget {
       bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 0.65,
       left: 25.0,
       child: TextButton(
-        onPressed: () => OnBoardingController.instance.skipPage(),
+        onPressed: () => OnBoardController.instance.skipPage(),
         child: const Text(
           "Lewati",
           style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black),

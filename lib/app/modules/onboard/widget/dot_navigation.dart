@@ -8,7 +8,7 @@ class DotNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = OnBoardingController.instance;
+    final controller = OnBoardController.instance;
 
     return Positioned(
       bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 3.4,

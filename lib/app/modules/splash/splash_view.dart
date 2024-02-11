@@ -10,49 +10,50 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            child: SvgPicture.asset(
-              "assets/svgs/mahati_logo.svg",
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "mahati.\n",
-                    style: TextStyle(
-                      color: Resources.color.baseColor,
-                      fontFamily: Resources.font.primaryFont,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 32,
-                    ),
-                  ),
-                  const WidgetSpan(
-                    child: SizedBox(height: 30.0),
-                  ),
-                  TextSpan(
-                    text: "Mobile Aplikasi Sahabat\nHipertensi",
-                    style: TextStyle(
-                      color: Resources.color.baseColor,
-                      fontFamily: Resources.font.primaryFont,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              child: SvgPicture.asset(
+                controller.logo,
+                fit: BoxFit.cover,
               ),
             ),
-          )
-        ],
+            SizedBox(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "mahati.\n",
+                      style: TextStyle(
+                        color: Resources.color.baseColor,
+                        fontFamily: Resources.font.primaryFont,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 32,
+                      ),
+                    ),
+                    const WidgetSpan(
+                      child: SizedBox(height: 30.0),
+                    ),
+                    TextSpan(
+                      text: "Mobile Aplikasi Sahabat\nHipertensi",
+                      style: TextStyle(
+                        color: Resources.color.baseColor,
+                        fontFamily: Resources.font.primaryFont,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
