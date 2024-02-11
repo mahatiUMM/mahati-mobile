@@ -3,27 +3,18 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/login/login_screen.dart';
 
 class OnBoardController extends GetxController {
-  static OnBoardController get instance => Get.find();
+  final PageController pageController = PageController();
+  final RxInt currentPageIndex = 0.obs;
 
-  // page controller
-  final pageController = PageController();
+  void updatePageIndicator(int index) => currentPageIndex.value = index;
 
-  // initial page index
-  Rx<int> currentPageIndex = 0.obs;
-
-  // update the page indicator
-  void updatePageIndicator(index) => currentPageIndex.value = index;
-
-  // jump to specific page, display dot on selected page
-  void dotNavigatorClick(index) {
+  void dotNavigatorClick(int index) {
     currentPageIndex.value = index;
     pageController.jumpToPage(index);
   }
 
-  // update the current index, jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      // navigate to login screen
       Get.to(() => const LoginScreen());
     } else {
       int pageIndex = currentPageIndex.value + 1;
@@ -31,7 +22,6 @@ class OnBoardController extends GetxController {
     }
   }
 
-  // jump to the last page, when the skip button in pressed
   void skipPage() {
     currentPageIndex.value = 2;
     pageController.jumpToPage(2);

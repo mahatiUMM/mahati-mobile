@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_controller.dart';
 import 'package:mahati_mobile/app/utils/dimensions/screen_dimensions.dart';
 
-class NextButton extends StatelessWidget {
+class NextButton extends GetView<OnBoardController> {
   const NextButton({super.key});
 
   @override
@@ -15,7 +16,7 @@ class NextButton extends StatelessWidget {
           backgroundColor: const Color(0xFF40D99E),
           foregroundColor: Colors.white,
         ),
-        onPressed: OnBoardController.instance.nextPage,
+        onPressed: controller.nextPage,
         child: const Icon(Icons.arrow_forward),
       ),
     );
