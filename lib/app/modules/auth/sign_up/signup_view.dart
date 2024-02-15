@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/modules/auth/sign_in/signin_controller.dart';
-import 'package:mahati_mobile/app/modules/auth/sign_in/widget/body_signin.dart';
 
-class SignInView extends GetView<SignInController> {
-  const SignInView({super.key});
+class SignUpView extends GetView {
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +55,7 @@ class SignInView extends GetView<SignInController> {
                 const SizedBox(
                   width: 325,
                   child: Text(
-                    'Silahkan masukan Email dan Password Anda untuk masuk ke akun Anda.',
+                    'Silakan masukan Username, Email, dan Password Anda untuk mendaftarkan akun Anda.',
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       color: Color(0xFF383838),
@@ -70,16 +68,15 @@ class SignInView extends GetView<SignInController> {
                 const SizedBox(
                   height: 30,
                 ),
-                const BodySignIn(),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed("/signup");
+                    Get.toNamed("/signin");
                   },
                   child: const Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Belum punya akun? ',
+                          text: 'Sudah punya akun? ',
                           style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Color(0xFF11371C),
@@ -90,7 +87,7 @@ class SignInView extends GetView<SignInController> {
                           ),
                         ),
                         TextSpan(
-                          text: 'Daftar disini',
+                          text: 'Masuk disini',
                           style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Color(0xFF40D99E),
