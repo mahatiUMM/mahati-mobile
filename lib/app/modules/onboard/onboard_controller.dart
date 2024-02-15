@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/modules/login/login_screen.dart';
 
 class OnBoardController extends GetxController {
   final PageController pageController = PageController();
@@ -15,7 +14,7 @@ class OnBoardController extends GetxController {
 
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      Get.to(() => const LoginScreen());
+      Get.offNamed("/signin");
     } else {
       int pageIndex = currentPageIndex.value + 1;
       pageController.jumpToPage(pageIndex);
