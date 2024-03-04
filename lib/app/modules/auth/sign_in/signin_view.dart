@@ -54,21 +54,13 @@ class SignInView extends GetView<SignInController> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(
-                        height: 5,
+                      SizedBox(
+                        height: 1.h,
                       ),
                       SizedBox(
                         width: 90.w,
-                        child: Text(
-                          TextStrings.signInSubtitle1,
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            color: ColorApp.subTitleColor,
-                            fontSize: 11.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        child: Text(TextStrings.signInTitle1,
+                            style: StyleText.authSubtitle1),
                       ),
                       SizedBox(
                         height: 4.h,

@@ -89,7 +89,7 @@ class BodySignIn extends GetView {
                 child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      TextStrings.signInSubtitle2,
+                      TextStrings.signInSubtitle1,
                       textAlign: TextAlign.right,
                       style: StyleText.authTextButton,
                     )),
@@ -117,7 +117,7 @@ class BodySignIn extends GetView {
                 alignment: Alignment.center,
                 width: 100.w,
                 child: Text(
-                  TextStrings.signInSubtitle3,
+                  TextStrings.signInSubtitle2,
                   style: StyleText.authTitle2,
                 ),
               ),
@@ -175,7 +175,7 @@ class BodySignIn extends GetView {
                 width: 100.w,
                 child: SizedBox(
                   width: 70.w,
-                  child: TextStrings.signInSubtitle4,
+                  child: TextStrings.authSubtitle4,
                 ),
               ),
               SizedBox(
@@ -192,7 +192,7 @@ class BodySignIn extends GetView {
                       children: [
                         TextSpan(
                             text: 'Belum punya akun? ',
-                            style: StyleText.signInSubtitle1),
+                            style: StyleText.authSubtitle1),
                         TextSpan(
                             text: 'Daftar disini',
                             style: StyleText.authTextButton),
