@@ -1,112 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/auth/sign_up/widget/body_signup.dart';
+import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
+import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
+import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUpView extends GetView {
   const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      height: Get.height,
-      clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(color: Colors.white),
-      child: Stack(
-        children: [
-          Positioned(
-            child: Container(
-              width: Get.width,
-              height: Get.height,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(0.00, -1.00),
-                  end: Alignment(0, 0.5),
-                  colors: [Color(0xFF40D99E), Color(0x0040D99E)],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 70, left: 30, right: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Container(
+            width: Get.width,
+            height: Get.height,
+            clipBehavior: Clip.antiAlias,
+            decoration: const BoxDecoration(color: Colors.white),
+            child: Stack(
               children: [
-                const Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Selamat Datang 👋',
-                        style: TextStyle(
-                          decoration: TextDecoration.none,
-                          color: Color(0xFF11371C),
-                          fontSize: 28,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w700,
-                          height: 0,
-                        ),
+                Positioned(
+                  child: Container(
+                    width: Get.width,
+                    height: Get.height,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: const Alignment(0.00, -1.00),
+                        end: const Alignment(0, 0.5),
+                        colors: [
+                          ColorApp.primaryColor,
+                          ColorApp.primaryColorOnGradient
+                        ],
                       ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const SizedBox(
-                  width: 325,
-                  child: Text(
-                    'Silakan masukan Username, Email, dan Password Anda untuk mendaftarkan akun Anda.',
-                    style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: Color(0xFF383838),
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed("/signin");
-                  },
-                  child: const Text.rich(
-                    TextSpan(
+                SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 70, left: 30, right: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(
-                          text: 'Sudah punya akun? ',
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            color: Color(0xFF11371C),
-                            fontSize: 17,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: TextStrings.authTitle1,
+                                  style: StyleText.authTitle1),
+                            ],
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                        TextSpan(
-                          text: 'Masuk disini',
-                          style: TextStyle(
-                            decoration: TextDecoration.none,
-                            color: Color(0xFF40D99E),
-                            fontSize: 17,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
+                        SizedBox(
+                          height: 1.h,
                         ),
+                        SizedBox(
+                          width: 90.w,
+                          child: Text(TextStrings.signUpTitle1,
+                              style: StyleText.authSubtitle1),
+                        ),
+                        SizedBox(
+                          height: 4.h,
+                        ),
+                        BodySignUp(),
                       ],
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

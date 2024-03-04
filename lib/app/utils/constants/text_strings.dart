@@ -20,10 +20,22 @@ class TextStrings {
   static const String authTitle1 = "Selamat Datang 👋";
   static const String authTitle2 = "Email";
   static const String authTitle3 = "Password";
+  static const String authTitle4 = "Username";
 
   //Auth subtitle
   static const String authSubtitle1 = "Masukkan Email";
   static const String authSubtitle2 = "Masukkan Password";
+  static const String authSubtitle3 = "Masukkan Username";
+  static RichText authSubtitle4 = RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(children: [
+        TextSpan(text: "Dengan masuk, \nAnda ", style: StyleText.authSubtitle1),
+        TextSpan(
+            text: "menerima persyaratan layanan ",
+            style: StyleText.signInSubtitle2),
+        TextSpan(text: "dan ", style: StyleText.authSubtitle1),
+        TextSpan(text: "kebijakan privasi ", style: StyleText.signInSubtitle2),
+      ]));
 
   //Auth text
   static const String authText1 = "disini";
@@ -34,19 +46,13 @@ class TextStrings {
   static const String signTitle2 = "Masuk";
 
   //Sign In Subtitle
-  static const String signInSubtitle1 =
-      "Silahkan masukan Email dan Password Anda untuk masuk ke akun Anda.";
-  static const String signInSubtitle2 = "Lupa Password?";
-  static const String signInSubtitle3 = "Atau lanjutkan dengan";
-  static RichText signInSubtitle4 = RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(children: [
-        TextSpan(
-            text: "Dengan masuk, \nAnda ", style: StyleText.signInSubtitle1),
-        TextSpan(
-            text: "menerima persyaratan layanan ",
-            style: StyleText.signInSubtitle2),
-        TextSpan(text: "dan ", style: StyleText.signInSubtitle1),
-        TextSpan(text: "kebijakan privasi ", style: StyleText.signInSubtitle2),
-      ]));
+  static const String signInSubtitle1 = "Lupa Password?";
+  static const String signInSubtitle2 = "Atau lanjutkan dengan";
+
+  //Sign Up title
+  static const String signUpTitle1 =
+      "Silahkan masukan Username, Email, dan Password Anda untuk mendaftarkan akun Anda.";
+  static const String signUpTitle2 = "Daftar";
+
+  //Sign Up subtitle
 }

@@ -20,6 +20,14 @@ class StyleText {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle authSubtitle1 = TextStyle(
+    decoration: TextDecoration.none,
+    color: ColorApp.subTitleColor,
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
+  );
+
   static TextStyle signInField = TextStyle(
       color: ColorApp.hintColor,
       fontSize: 10.sp,
