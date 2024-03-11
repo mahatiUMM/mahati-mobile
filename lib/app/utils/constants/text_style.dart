@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
+import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:sizer/sizer.dart';
 
 class StyleText {

@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
-import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
+import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:sizer/sizer.dart';
