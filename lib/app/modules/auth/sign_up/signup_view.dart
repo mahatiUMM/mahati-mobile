@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/widget/body_signup.dart';
-import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
+import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:sizer/sizer.dart';
 
-class SignUpView extends GetView {
+class SignUpView extends GetView<SignUpController> {
   const SignUpView({super.key});
 
   @override

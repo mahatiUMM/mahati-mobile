@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
-import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
+import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:sizer/sizer.dart';
 
-class BodySignUp extends GetView {
-  BodySignUp({super.key});
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class BodySignUp extends GetView<SignUpController> {
+  const BodySignUp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +37,7 @@ class BodySignUp extends GetView {
                 height: Get.height / 16,
                 width: Get.width,
                 child: TextField(
-                  controller: _usernameController,
+                  controller: controller.usernameController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
@@ -68,7 +67,7 @@ class BodySignUp extends GetView {
                 height: Get.height / 16,
                 width: Get.width,
                 child: TextField(
-                  controller: _emailController,
+                  controller: controller.emailController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
@@ -98,7 +97,7 @@ class BodySignUp extends GetView {
                 height: Get.height / 16,
                 width: Get.width,
                 child: TextField(
-                  controller: _passwordController,
+                  controller: controller.passwordController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
@@ -121,10 +120,19 @@ class BodySignUp extends GetView {
                 width: 1000.w,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorApp.primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    onPressed: () {},
+                      backgroundColor: ColorApp.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await controller.sendData(
+                        username: controller.usernameController.text,
+                        email: controller.emailController.text,
+                        password: controller.passwordController.text,
+                        number: "",
+                      );
+                    },
                     child: Text(
                       TextStrings.signUpTitle2,
                       style: StyleText.authElevatedButton,
