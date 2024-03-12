@@ -23,29 +23,6 @@ class RestClient extends GetxService {
       Uri uri = Uri.parse(BASE_URL + url);
       late http.Response response;
 
-      // switch (method) {
-      //   case HttpMethod.POST:
-      //     response = await http.post(
-      //       uri,
-      //       body: params != null ? jsonEncode(params) : '', // Handle empty body
-      //       headers: header(),
-      //     );
-      //     break;
-      //   case HttpMethod.DELETE:
-      //     response = await http.delete(uri, headers: header());
-      //     break;
-      //   case HttpMethod.PUT:
-      //     response = await http.patch(
-      //       uri,
-      //       body: params != null ? jsonEncode(params) : '', // Handle empty body
-      //       headers: header(),
-      //     );
-      //     break;
-      //   default:
-      //     response = await http.get(uri, headers: header());
-      //     break;
-      // }
-
       params ??= {};
 
       if (method == HttpMethod.POST) {
@@ -68,19 +45,15 @@ class RestClient extends GetxService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response;
-      } else if (response.statusCode == 401) {
-        throw Exception("Unauthorized");
-      } else if (response.statusCode == 500) {
-        throw Exception("Server Error");
       } else {
-        throw Exception("Something Went Wrong");
+        return response;
       }
     } on SocketException {
       throw Exception("No Internet Connection");
     } on FormatException {
       throw Exception("Bad Response Format!");
     } catch (e) {
-      throw Exception("Something Went Wrong");
+      throw Exception(e);
     }
   }
 }

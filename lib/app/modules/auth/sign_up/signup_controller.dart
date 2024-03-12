@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/core/data/SignUp.model.dart';
+import 'package:mahati_mobile/app/core/data/signup_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 
 class SignUpController extends GetxController {
   late RestClient restClient;
@@ -41,23 +42,13 @@ class SignUpController extends GetxController {
 
       if (username.isEmpty || email.isEmpty || password.isEmpty) {
         isToLoadMore = false;
-        Get.showSnackbar(
-          const GetSnackBar(
-            message: "Please fill in all required fields.",
-            duration: Duration(milliseconds: 3000),
-          ),
-        );
+        showErrorMessage('Please fill all the fields.');
         return;
       }
 
       if (!GetUtils.isEmail(email)) {
         isToLoadMore = false;
-        Get.showSnackbar(
-          const GetSnackBar(
-            message: "Please enter a valid email address.",
-            duration: Duration(milliseconds: 3000),
-          ),
-        );
+        showErrorMessage('Please enter a valid email address');
         return;
       }
 
@@ -65,8 +56,8 @@ class SignUpController extends GetxController {
         username: username,
         email: email,
         password: password,
-        number: number,
-        photo: "",
+        number: "test",
+        photo: "test",
       );
 
       final result = await restClient.request(
@@ -75,42 +66,29 @@ class SignUpController extends GetxController {
         signUpModel.toJson(),
       );
 
-      if (result.statusCode == 200 || result.statusCode == 201) {
+      print(result.body);
+      var responseData = jsonDecode(result.body);
+
+      if (responseData["success"] == true) {
+        Get.offAllNamed('/signin');
         var responseData = SignUpModel.fromJson(jsonDecode(result.body));
         signUp.add(responseData);
-        Get.offAllNamed('/login');
-
-        Get.showSnackbar(
-          const GetSnackBar(
-            message: "Registration successful. Redirecting to login...",
-            duration: Duration(milliseconds: 3000),
-          ),
-        );
+        showSuccessMessage(
+            'Registration successful', 'Redirecting to login...');
       } else {
         isToLoadMore = false;
-        print("Registration failed. Response content: ${result.body}");
-        Get.showSnackbar(
-          const GetSnackBar(
-            message: "Registration failed. Please try again.",
-            duration: Duration(milliseconds: 3000),
-          ),
-        );
+        showErrorMessage(responseData["message"]);
       }
     } on SocketException catch (_) {
-      handleException("No Internet Connection");
+      showErrorMessage('No Internet Connection');
     } on FormatException catch (_) {
-      handleException("Bad Response Format!");
+      showErrorMessage('Bad Response Format!');
     } catch (e) {
-      handleException("Something Went Wrong");
+      /*
+        ERROR: Data Type Is NULL but the body is STRING
+      */
+      print(e);
+      showErrorMessage('Registration failed. $e');
     }
   }
-}
-
-void handleException(String errorMessage) {
-  Get.showSnackbar(
-    GetSnackBar(
-      message: errorMessage,
-      duration: const Duration(milliseconds: 3000),
-    ),
-  );
 }
