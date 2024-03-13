@@ -65,7 +65,7 @@ class SignInView extends GetView<SignInController> {
                       SizedBox(
                         height: 4.h,
                       ),
-                      BodySignIn(),
+                      const BodySignIn(),
                     ],
                   ),
                 ),

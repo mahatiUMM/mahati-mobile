@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 void showErrorMessage(String message) {
   Get.snackbar(
-    'Registration failed',
+    'Authentication failed',
     message,
     messageText: Text(
       message,

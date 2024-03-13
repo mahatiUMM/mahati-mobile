@@ -96,9 +96,11 @@ class BodySignUp extends GetView<SignUpController> {
               SizedBox(
                 height: Get.height / 16,
                 width: Get.width,
-                child: TextField(
-                  controller: controller.passwordController,
-                  decoration: InputDecoration(
+                child: Obx(
+                  () => TextField(
+                    controller: controller.passwordController,
+                    obscureText: controller.showPassword.value,
+                    decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
                       hintText: TextStrings.authSubtitle2,
@@ -110,7 +112,20 @@ class BodySignUp extends GetView<SignUpController> {
                       focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: ColorApp.textFieldColor),
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.showPassword.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black54,
+                        ),
+                        onPressed: () {
+                          controller.toggleObscureText();
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -126,7 +141,7 @@ class BodySignUp extends GetView<SignUpController> {
                       ),
                     ),
                     onPressed: () async {
-                      await controller.sendData(
+                      await controller.registerAccount(
                         username: controller.usernameController.text,
                         email: controller.emailController.text,
                         password: controller.passwordController.text,
