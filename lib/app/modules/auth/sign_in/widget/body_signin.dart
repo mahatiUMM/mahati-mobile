@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/auth/sign_in/signin_controller.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
 import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:sizer/sizer.dart';
 
-class BodySignIn extends GetView {
-  BodySignIn({super.key});
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class BodySignIn extends GetView<SignInController> {
+  const BodySignIn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class BodySignIn extends GetView {
                 height: Get.height / 16,
                 width: Get.width,
                 child: TextField(
-                  controller: _emailController,
+                  controller: controller.emailController,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
@@ -66,9 +65,11 @@ class BodySignIn extends GetView {
               SizedBox(
                 height: Get.height / 16,
                 width: Get.width,
-                child: TextField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
+                child: Obx(
+                  () => TextField(
+                    controller: controller.passwordController,
+                    obscureText: controller.showPassword.value,
+                    decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
@@ -80,7 +81,20 @@ class BodySignIn extends GetView {
                       focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: ColorApp.textFieldColor),
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.showPassword.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.black54,
+                        ),
+                        onPressed: () {
+                          controller.toggleObscureText();
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -104,7 +118,12 @@ class BodySignIn extends GetView {
                         backgroundColor: ColorApp.primaryColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.loginAccount(
+                        email: controller.emailController.text,
+                        password: controller.passwordController.text,
+                      );
+                    },
                     child: Text(
                       TextStrings.signTitle2,
                       style: StyleText.authElevatedButton,

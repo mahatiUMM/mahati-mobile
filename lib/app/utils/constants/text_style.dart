@@ -63,4 +63,6 @@ class StyleText {
       fontSize: 12.sp,
       fontFamily: 'Inter',
       fontWeight: FontWeight.w700);
+
+  // home text style
 }

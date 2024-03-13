@@ -10,7 +10,7 @@ import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 class SignUpController extends GetxController {
   late RestClient restClient;
   final signUp = <SignUpModel>[].obs;
-  var isToLoadMore = true;
+  RxBool showPassword = true.obs;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -30,24 +30,26 @@ class SignUpController extends GetxController {
     super.onClose();
   }
 
-  sendData({
+  void toggleObscureText() {
+    showPassword.value = !showPassword.value;
+    print("After toggle: ${showPassword.value}");
+  }
+
+  registerAccount({
     required String username,
     required String email,
     required String password,
     required String number,
   }) async {
     try {
-      isToLoadMore = true;
       update();
 
       if (username.isEmpty || email.isEmpty || password.isEmpty) {
-        isToLoadMore = false;
         showErrorMessage('Please fill all the fields.');
         return;
       }
 
       if (!GetUtils.isEmail(email)) {
-        isToLoadMore = false;
         showErrorMessage('Please enter a valid email address');
         return;
       }
@@ -76,7 +78,6 @@ class SignUpController extends GetxController {
         showSuccessMessage(
             'Registration successful', 'Redirecting to login...');
       } else {
-        isToLoadMore = false;
         showErrorMessage(responseData["message"]);
       }
     } on SocketException catch (_) {
