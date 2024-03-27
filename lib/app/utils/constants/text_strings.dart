@@ -53,4 +53,7 @@ class TextStrings {
   static const String signUpTitle1 =
       "Silahkan masukan Username, Email, dan Password Anda untuk mendaftarkan akun Anda.";
   static const String signUpTitle2 = "Daftar";
+
+  // Home greeting
+  static const String homeGreeting = "Selamat Datang!";
 }
