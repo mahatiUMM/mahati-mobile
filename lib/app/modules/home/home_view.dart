@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/modules/home/widget/bottom_navbar.dart';
+import 'package:mahati_mobile/app/modules/home/widget/greeting.dart';
+import 'package:mahati_mobile/app/modules/home/widget/slider.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeView extends GetView {
@@ -24,52 +25,44 @@ class HomeView extends GetView {
                 ),
                 const SizedBox(height: 20),
                 sliderWidget(),
-                BottomNavbarHome()
               ],
+            ),
+          ),
+          bottomNavigationBar: Padding(
+            padding:
+                const EdgeInsets.only(bottom: 30.0, left: 30.0, right: 30.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: BottomAppBar(
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.home),
+                      onPressed: () {
+                        print("clicked 1st icon");
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.inbox),
+                      onPressed: () {
+                        print("clicked 2nd icon");
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.person),
+                      onPressed: () {
+                        print("clicked 3rd icon");
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         );
       },
     );
   }
-}
-
-Widget greetingWidget(String username) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 70.0, left: 30.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Hai, $username',
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        const Text(
-          'Selamat Datang!',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: Colors.grey,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget sliderWidget() {
-  return Container(
-    width: 350,
-    height: 200,
-    decoration: ShapeDecoration(
-      color: const Color(0xFF808080),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-    ),
-  );
 }

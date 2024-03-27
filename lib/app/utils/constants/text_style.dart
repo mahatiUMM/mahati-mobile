@@ -65,4 +65,19 @@ class StyleText {
       fontWeight: FontWeight.w700);
 
   // home text style
+  static TextStyle homeGreeting1 = TextStyle(
+    decoration: TextDecoration.none,
+    color: ColorApp.subTitleColor,
+    fontSize: 15.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w800,
+  );
+
+  static TextStyle homeGreeting2 = TextStyle(
+    decoration: TextDecoration.none,
+    color: ColorApp.subTitleColor,
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+  );
 }
