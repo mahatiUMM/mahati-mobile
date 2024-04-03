@@ -5,8 +5,14 @@ import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
 import 'package:mahati_mobile/app/modules/home/home_binding.dart';
 import 'package:mahati_mobile/app/modules/home/home_view.dart';
+import 'package:mahati_mobile/app/modules/inbox/inbox_binding.dart';
+import 'package:mahati_mobile/app/modules/inbox/inbox_view.dart';
+import 'package:mahati_mobile/app/modules/layout/layout_binding.dart';
+import 'package:mahati_mobile/app/modules/layout/layout_view.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_binding.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_view.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_view.dart';
 
@@ -47,9 +53,30 @@ class AppPages {
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
+      name: _Paths.layout,
+      page: () => const LayoutView(),
+      binding: LayoutBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
       name: _Paths.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.inbox,
+      page: () => const InboxView(),
+      binding: InboxBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.profile,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

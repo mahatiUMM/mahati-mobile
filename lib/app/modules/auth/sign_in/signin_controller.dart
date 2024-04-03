@@ -53,7 +53,7 @@ class SignInController extends GetxController {
       var responseData = jsonDecode(result.body);
 
       if (responseData["status"] == 200) {
-        Get.offAllNamed("/home");
+        Get.offAllNamed("/layout");
         var responseData = SignInModel.fromJson(jsonDecode(result.body));
         signIn.add(responseData);
         showSuccessMessage(
