@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-class InboxView extends GetView {
-  const InboxView({super.key});
+class ProfileView extends GetView {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundHome,
       body: Container(
-        child: Text("Inbox View"),
+        child: Text("Profile View"),
       ),
     );
   }
