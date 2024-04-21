@@ -18,7 +18,7 @@ class LayoutView extends GetView<LayoutController> {
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children: [
+              children: const [
                 HomeView(),
                 InboxView(),
                 ProfileView(),
@@ -27,39 +27,42 @@ class LayoutView extends GetView<LayoutController> {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: BottomNavigationBar(
-                enableFeedback: true,
-                unselectedItemColor: Resources.color.baseColor1,
-                selectedItemColor: Resources.color.primaryColor,
-                onTap: controller.changeTabIndex,
-                currentIndex: controller.tabIndex,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Resources.color.whiteColor,
-                landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-                selectedLabelStyle: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                  fontFamily: Resources.font.primaryFont,
+            child: SizedBox(
+              height: 70,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: BottomNavigationBar(
+                  enableFeedback: true,
+                  unselectedItemColor: Resources.color.baseColor1,
+                  selectedItemColor: Resources.color.primaryColor,
+                  onTap: controller.changeTabIndex,
+                  currentIndex: controller.tabIndex,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: Resources.color.whiteColor,
+                  landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+                  selectedLabelStyle: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: Resources.font.primaryFont,
+                  ),
+                  elevation: 8,
+                  items: [
+                    bottomNavbar(
+                      icon: Icons.home_filled,
+                      label: 'Home',
+                    ),
+                    bottomNavbar(
+                      icon: Icons.inbox,
+                      label: 'Inbox',
+                    ),
+                    bottomNavbar(
+                      icon: Icons.person,
+                      label: 'Profile',
+                    ),
+                  ],
                 ),
-                elevation: 8,
-                items: [
-                  bottomNavbar(
-                    icon: Icons.home_filled,
-                    label: 'Home',
-                  ),
-                  bottomNavbar(
-                    icon: Icons.inbox,
-                    label: 'Inbox',
-                  ),
-                  bottomNavbar(
-                    icon: Icons.person,
-                    label: 'Profile',
-                  ),
-                ],
               ),
             ),
           ),
