@@ -11,6 +11,7 @@ abstract class Routes {
   static const home = _Paths.home;
   static const inbox = _Paths.inbox;
   static const profile = _Paths.profile;
+  static const pressure = _Paths.pressure;
 }
 
 abstract class _Paths {
@@ -24,4 +25,5 @@ abstract class _Paths {
   static const home = '/home';
   static const inbox = '/inbox';
   static const profile = '/profile';
+  static const pressure = '/pressure';
 }

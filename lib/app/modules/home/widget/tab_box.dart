@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 
 class TabItem extends StatelessWidget {
   final String title;
@@ -17,32 +18,11 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onClick,
-      child: SizedBox(
-        width: 58,
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              top: 68,
-              child: SizedBox(
-                width: 58,
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              top: 0,
-              child: Container(
+      child: Column(
+        children: [
+          Column(
+            children: [
+              Container(
                 width: 58,
                 height: 58,
                 decoration: ShapeDecoration(
@@ -52,9 +32,23 @@ class TabItem extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 5),
+              SizedBox(
+                width: 75,
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontFamily: Resources.font.primaryFont,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -75,31 +69,31 @@ class TabBox extends StatelessWidget {
         children: [
           TabItem(
             title: 'Pengingat',
-            color: Color(0xFFE8CB64),
+            color: const Color(0xFFE8CB64),
             onClick: () {
               print("Pengingat");
             },
           ),
-          SizedBox(width: 23),
+          const SizedBox(width: 23),
           TabItem(
             title: 'Tekanan Darah',
-            color: Color(0xFFE87E6E),
+            color: const Color(0xFFE87E6E),
             onClick: () {
-              print("Tekanan Darah");
+              Get.toNamed('/pressure');
             },
           ),
-          SizedBox(width: 23),
+          const SizedBox(width: 23),
           TabItem(
             title: 'Edukasi',
-            color: Color(0xFF4A87D8),
+            color: const Color(0xFF4A87D8),
             onClick: () {
               print("Edukasi");
             },
           ),
-          SizedBox(width: 23),
+          const SizedBox(width: 23),
           TabItem(
             title: 'Kuesioner',
-            color: Color(0xFF40D99E),
+            color: const Color(0xFF40D99E),
             onClick: () {
               print("Kuesioner");
             },

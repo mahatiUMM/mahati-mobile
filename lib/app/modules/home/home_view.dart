@@ -17,21 +17,28 @@ class HomeView extends GetView<HomeController> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.backgroundHome,
-          body: SizedBox(
-            width: Get.width,
-            height: Get.height,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    greetingWidget("Rizky Haksono"),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                sliderWidget(),
-                const SizedBox(height: 20),
-                TabBox(),
-              ],
+          body: SingleChildScrollView(
+            child: SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: const Column(
+                children: [
+                  Row(
+                    children: [
+                      GreetingWidget(
+                        /*
+                        ! Change the username value from API MAHATI
+                        */
+                        username: 'Rizky Haksono',
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  SliderWidget(),
+                  SizedBox(height: 20),
+                  TabBox(),
+                ],
+              ),
             ),
           ),
         );
