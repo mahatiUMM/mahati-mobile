@@ -11,6 +11,8 @@ import 'package:mahati_mobile/app/modules/layout/layout_binding.dart';
 import 'package:mahati_mobile/app/modules/layout/layout_view.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_binding.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_view.dart';
+import 'package:mahati_mobile/app/modules/pressure/pressure_binding.dart';
+import 'package:mahati_mobile/app/modules/pressure/pressure_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
@@ -80,5 +82,12 @@ class AppPages {
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
+    GetPage(
+      name: _Paths.pressure,
+      page: () => PressureView(),
+      binding: PressureBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    )
   ];
 }

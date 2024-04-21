@@ -10,7 +10,7 @@ class InboxView extends GetView {
     return Scaffold(
       backgroundColor: AppColors.backgroundHome,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
