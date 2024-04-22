@@ -11,11 +11,11 @@ class BodySignUp extends GetView {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.height,
       decoration: ShapeDecoration(
           color: ColorApp.backgroundColor,
           shape:
@@ -69,6 +69,7 @@ class BodySignUp extends GetView {
                 width: Get.width,
                 child: TextField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
@@ -99,10 +100,42 @@ class BodySignUp extends GetView {
                 width: Get.width,
                 child: TextField(
                   controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
                       hintText: TextStrings.authSubtitle2,
+                      hintStyle: StyleText.signInField,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorApp.textFieldColor),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorApp.textFieldColor),
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Text(
+                "Phone Number",
+                style: StyleText.authTitle2,
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              SizedBox(
+                height: Get.height / 16,
+                width: Get.width,
+                child: TextField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: ColorApp.textFieldColor,
+                      hintText: "Masukkan Nomor Telp",
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -131,7 +164,7 @@ class BodySignUp extends GetView {
                     )),
               ),
               SizedBox(
-                height: 5.h,
+                height: 2.h,
               ),
               Container(
                 alignment: Alignment.center,

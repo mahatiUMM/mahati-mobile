@@ -64,7 +64,7 @@ class SignUpView extends GetView {
                               style: StyleText.authSubtitle1),
                         ),
                         SizedBox(
-                          height: 4.h,
+                          height: 3.h,
                         ),
                         BodySignUp(),
                       ],
