@@ -64,6 +64,7 @@ class PressureView extends StatelessWidget {
                 _buildPressureReading('Pulse', '20', '(BMP)'),
               ],
             ),
+            const SizedBox(height: 20),
             Text(
               'Media',
               style: TextStyle(
@@ -73,8 +74,9 @@ class PressureView extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            const SizedBox(height: 10),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildMediaOption('Open Camera', Icons.camera_alt),
                 const SizedBox(height: 10),
@@ -82,9 +84,10 @@ class PressureView extends StatelessWidget {
                 const SizedBox(height: 20),
               ],
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Add your save functionality here
+                print("Save Button Clicked");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Resources.color.primaryColor,
@@ -92,15 +95,18 @@ class PressureView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 120),
-                child: Text(
-                  'Simpan',
-                  style: TextStyle(
-                    color: Resources.color.whiteColor,
-                    fontSize: 16,
-                    fontFamily: Resources.font.primaryFont,
-                    fontWeight: FontWeight.w700,
+              child: SizedBox(
+                width: Get.width,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    'Simpan',
+                    style: TextStyle(
+                      color: Resources.color.whiteColor,
+                      fontSize: 16,
+                      fontFamily: Resources.font.primaryFont,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
