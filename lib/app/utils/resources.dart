@@ -26,6 +26,7 @@ class AppColors {
   Color baseColor2 = const Color(0xFFA9A9A9);
 
   Color whiteColor = const Color(0xFFFFFFFF);
+  Color hintColor = const Color(0xFFEEEEEE);
 
   //Background Color
   static Color backgroundHome = const Color(0xFFF9F9F9);

@@ -3,6 +3,8 @@ import 'package:mahati_mobile/app/modules/auth/sign_in/signin_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_view.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
+import 'package:mahati_mobile/app/modules/education/education_binding.dart';
+import 'package:mahati_mobile/app/modules/education/education_view.dart';
 import 'package:mahati_mobile/app/modules/home/home_binding.dart';
 import 'package:mahati_mobile/app/modules/home/home_view.dart';
 import 'package:mahati_mobile/app/modules/inbox/inbox_binding.dart';
@@ -86,6 +88,13 @@ class AppPages {
       name: _Paths.pressure,
       page: () => PressureView(),
       binding: PressureBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.education,
+      page: () => EducationView(),
+      binding: EducationBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     )
