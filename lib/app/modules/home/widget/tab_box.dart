@@ -87,7 +87,7 @@ class TabBox extends StatelessWidget {
             title: 'Edukasi',
             color: const Color(0xFF4A87D8),
             onClick: () {
-              print("Edukasi");
+              Get.toNamed('/education');
             },
           ),
           const SizedBox(width: 23),
