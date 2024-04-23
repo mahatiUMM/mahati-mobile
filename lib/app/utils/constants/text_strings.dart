@@ -21,6 +21,7 @@ class TextStrings {
   static const String authTitle2 = "Email";
   static const String authTitle3 = "Password";
   static const String authTitle4 = "Username";
+  static const String authTitle5 = "Phone Number";
 
   //Auth subtitle
   static const String authSubtitle1 = "Masukkan Email";
