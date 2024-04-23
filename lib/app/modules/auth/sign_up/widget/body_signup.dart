@@ -68,10 +68,42 @@ class BodySignUp extends GetView<SignUpController> {
                 width: Get.width,
                 child: TextField(
                   controller: controller.emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: ColorApp.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
+                      hintStyle: StyleText.signInField,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorApp.textFieldColor),
+                          borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: ColorApp.textFieldColor),
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Text(
+                TextStrings.authTitle5,
+                style: StyleText.authTitle2,
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              SizedBox(
+                height: Get.height / 16,
+                width: Get.width,
+                child: TextField(
+                  controller: controller.phoneController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: ColorApp.textFieldColor,
+                      hintText: "Masukkan Nomor Telp",
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -93,12 +125,13 @@ class BodySignUp extends GetView<SignUpController> {
               SizedBox(
                 height: 2.h,
               ),
-              SizedBox(
-                height: Get.height / 16,
-                width: Get.width,
-                child: Obx(
-                  () => TextField(
+              Obx(
+                () => SizedBox(
+                  height: Get.height / 16,
+                  width: Get.width,
+                  child: TextField(
                     controller: controller.passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     obscureText: controller.showPassword.value,
                     decoration: InputDecoration(
                       filled: true,
@@ -145,7 +178,7 @@ class BodySignUp extends GetView<SignUpController> {
                         username: controller.usernameController.text,
                         email: controller.emailController.text,
                         password: controller.passwordController.text,
-                        number: "",
+                        number: controller.phoneController.text,
                       );
                     },
                     child: Text(
@@ -154,7 +187,7 @@ class BodySignUp extends GetView<SignUpController> {
                     )),
               ),
               SizedBox(
-                height: 5.h,
+                height: 2.h,
               ),
               Container(
                 alignment: Alignment.center,

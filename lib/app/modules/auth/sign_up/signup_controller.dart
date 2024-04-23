@@ -15,19 +15,12 @@ class SignUpController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
     restClient = Get.put(RestClient());
-  }
-
-  @override
-  void onClose() {
-    usernameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
   }
 
   void toggleObscureText() {
@@ -58,8 +51,8 @@ class SignUpController extends GetxController {
         username: username,
         email: email,
         password: password,
-        number: "test",
-        photo: "test",
+        number: number,
+        photo: "",
       );
 
       final result = await restClient.request(
