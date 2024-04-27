@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class TabItem extends StatelessWidget {
   final String title;
   final Color color;
+  final Icon icon;
   final VoidCallback? onClick;
 
   const TabItem({
     Key? key,
     required this.title,
     required this.color,
+    required this.icon,
     this.onClick,
   }) : super(key: key);
 
@@ -31,6 +34,7 @@ class TabItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                child: icon,
               ),
               const SizedBox(height: 5),
               SizedBox(
@@ -70,6 +74,10 @@ class TabBox extends StatelessWidget {
           TabItem(
             title: 'Pengingat',
             color: const Color(0xFFE8CB64),
+            icon: const Icon(
+              FontAwesomeIcons.solidBell,
+              color: Colors.white,
+            ),
             onClick: () {
               print("Pengingat");
             },
@@ -78,6 +86,10 @@ class TabBox extends StatelessWidget {
           TabItem(
             title: 'Tekanan Darah',
             color: const Color(0xFFE87E6E),
+            icon: const Icon(
+              FontAwesomeIcons.heartPulse,
+              color: Colors.white,
+            ),
             onClick: () {
               Get.toNamed('/pressure');
             },
@@ -86,6 +98,10 @@ class TabBox extends StatelessWidget {
           TabItem(
             title: 'Edukasi',
             color: const Color(0xFF4A87D8),
+            icon: const Icon(
+              FontAwesomeIcons.bookOpen,
+              color: Colors.white,
+            ),
             onClick: () {
               print("Edukasi");
             },
@@ -94,6 +110,10 @@ class TabBox extends StatelessWidget {
           TabItem(
             title: 'Kuesioner',
             color: const Color(0xFF40D99E),
+            icon: const Icon(
+              FontAwesomeIcons.fileCircleQuestion,
+              color: Colors.white,
+            ),
             onClick: () {
               print("Kuesioner");
             },
