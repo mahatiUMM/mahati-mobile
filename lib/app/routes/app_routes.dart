@@ -12,6 +12,7 @@ abstract class Routes {
   static const inbox = _Paths.inbox;
   static const profile = _Paths.profile;
   static const pressure = _Paths.pressure;
+  static const education = _Paths.education;
 }
 
 abstract class _Paths {
@@ -26,4 +27,5 @@ abstract class _Paths {
   static const inbox = '/inbox';
   static const profile = '/profile';
   static const pressure = '/pressure';
+  static const education = '/education';
 }

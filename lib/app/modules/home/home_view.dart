@@ -27,8 +27,8 @@ class HomeView extends GetView<HomeController> {
                     children: [
                       GreetingWidget(
                         /*
-                        ! Change the username value from API MAHATI
-                        */
+                          ! Change the username value from API MAHATI
+                          */
                         username: 'Rizky Haksono',
                       ),
                     ],
