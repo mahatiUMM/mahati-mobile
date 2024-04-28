@@ -21,22 +21,21 @@ class HomeView extends GetView<HomeController> {
             child: SizedBox(
               width: Get.width,
               height: Get.height,
-              child: const Column(
+              child: Column(
                 children: [
                   Row(
                     children: [
-                      GreetingWidget(
-                        /*
-                          ! Change the username value from API MAHATI
-                          */
-                        username: 'Rizky Haksono',
+                      Obx(
+                        () => GreetingWidget(
+                          username: controller.username.value,
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  SliderWidget(),
-                  SizedBox(height: 20),
-                  TabBox(),
+                  const SizedBox(height: 20),
+                  const SliderWidget(),
+                  const SizedBox(height: 20),
+                  const TabBox(),
                 ],
               ),
             ),
