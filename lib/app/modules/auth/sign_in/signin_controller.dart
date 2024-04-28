@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/signin_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInController extends GetxController {
   late RestClient restClient;
@@ -32,6 +33,11 @@ class SignInController extends GetxController {
     print("After toggle: ${showPassword.value}");
   }
 
+  Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('authToken', token);
+  }
+
   loginAccount({required String email, required String password}) async {
     try {
       update();
@@ -54,10 +60,12 @@ class SignInController extends GetxController {
 
       if (responseData["status"] == 200) {
         Get.offAllNamed("/layout");
-        var responseData = SignInModel.fromJson(jsonDecode(result.body));
-        signIn.add(responseData);
+        var token = responseData["access_token"];
+        await saveToken(token);
+        var response = SignInModel.fromJson(jsonDecode(result.body));
+        signIn.add(response);
         showSuccessMessage(
-            "Registration successful", "Redirecting to dashboard");
+            "Registration successful", "Redirecting to home page");
       } else {
         showErrorMessage(responseData["message"]);
       }
