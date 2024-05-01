@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mahati_mobile/app/modules/pressure/pressure_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-class PressureView extends StatelessWidget {
-  const PressureView({Key? key}) : super(key: key);
+class PressureView extends GetView<PressureController> {
+  final File? pickedFile;
+  const PressureView({Key? key, this.pickedFile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +63,14 @@ class PressureView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildPressureReading('Systolic', '50', '(mmHg)'),
+                _buildPressureReading(
+                    'Systolic', '(mmHg),', controller.sistolController),
                 const SizedBox(width: 10),
-                _buildPressureReading('Diastolic', '50', '(mmHg)'),
+                _buildPressureReading(
+                    'Diastolic', '(mmHg)', controller.diastoleController),
                 const SizedBox(width: 10),
-                _buildPressureReading('Pulse', '20', '(BMP)'),
+                _buildPressureReading(
+                    'Pulse', '(BMP)', controller.heartbeatController),
               ],
             ),
             const SizedBox(height: 20),
@@ -86,8 +95,11 @@ class PressureView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                print("Save Button Clicked");
+              onPressed: () async {
+                await controller.postBloodPressure(
+                    sistol: int.parse(controller.sistolController.text),
+                    diastole: int.parse(controller.diastoleController.text),
+                    heartbeat: int.parse(controller.heartbeatController.text));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Resources.color.primaryColor,
@@ -117,7 +129,8 @@ class PressureView extends StatelessWidget {
     );
   }
 
-  Widget _buildPressureReading(String title, String value, String unit) {
+  Widget _buildPressureReading(
+      String title, String unit, TextEditingController controller) {
     return Row(
       children: [
         Container(
@@ -140,14 +153,30 @@ class PressureView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                value,
+              TextField(
+                controller: controller,
+                maxLength: 3,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  counter: const SizedBox.shrink(),
+                  border: InputBorder.none,
+                  hintText: "0",
+                  hintStyle: TextStyle(
+                    color: Color(0xFF2C3131),
+                    fontSize: 36,
+                    // Assuming Resources class has font property
+                    fontFamily: Resources.font.primaryFont,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
                 style: TextStyle(
                   color: Color(0xFF2C3131),
                   fontSize: 36,
+                  // Assuming Resources class has font property
                   fontFamily: Resources.font.primaryFont,
                   fontWeight: FontWeight.w700,
                 ),
+                maxLines: 1,
               ),
               Text(
                 unit,
@@ -175,7 +204,11 @@ class PressureView extends StatelessWidget {
       ),
       child: TextButton.icon(
         onPressed: () {
-          print("Media Option Clicked");
+          if (title == 'Open Camera') {
+            controller.takeBloodPressureImage(ImageSource.camera, pickedFile);
+          } else {
+            controller.takeBloodPressureImage(ImageSource.gallery, pickedFile);
+          }
         },
         icon: Icon(icon),
         label: Text(

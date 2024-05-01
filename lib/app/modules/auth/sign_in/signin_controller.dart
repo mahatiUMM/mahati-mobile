@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/data/signin_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
@@ -33,9 +34,10 @@ class SignInController extends GetxController {
     print("After toggle: ${showPassword.value}");
   }
 
-  Future<void> saveToken(String token) async {
+  Future<void> saveUserData(String token, String userId) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('authToken', token);
+    await prefs.setString('userId', userId);
   }
 
   loginAccount({required String email, required String password}) async {
@@ -59,9 +61,14 @@ class SignInController extends GetxController {
       var responseData = jsonDecode(result.body);
 
       if (responseData["status"] == 200) {
-        Get.offAllNamed("/layout");
         var token = responseData["access_token"];
-        await saveToken(token);
+        final profileData = await restClient.requestWithToken(
+            "/profile", HttpMethod.GET, null, token.toString());
+        var profile = UserModel.fromJson(jsonDecode(profileData.body));
+
+        await saveUserData(token, profile.id);
+        Get.offAllNamed("/layout");
+
         var response = SignInModel.fromJson(jsonDecode(result.body));
         signIn.add(response);
         showSuccessMessage(
