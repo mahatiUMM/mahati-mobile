@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-class ProfileView extends GetView {
+class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
 
   @override
@@ -10,7 +11,16 @@ class ProfileView extends GetView {
     return Scaffold(
       backgroundColor: AppColors.backgroundHome,
       body: Container(
-        child: Text("Profile View"),
+        child: Column(
+          children: [
+            Text("Profile View"),
+            ElevatedButton(
+                onPressed: () {
+                  controller.printToken();
+                },
+                child: Text("Get Token"))
+          ],
+        ),
       ),
     );
   }

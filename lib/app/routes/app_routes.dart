@@ -13,6 +13,7 @@ abstract class Routes {
   static const profile = _Paths.profile;
   static const pressure = _Paths.pressure;
   static const education = _Paths.education;
+  static const articleDetail = _Paths.articleDetail;
 }
 
 abstract class _Paths {
@@ -28,4 +29,5 @@ abstract class _Paths {
   static const profile = '/profile';
   static const pressure = '/pressure';
   static const education = '/education';
+  static const articleDetail = '/article/detail';
 }
