@@ -76,11 +76,33 @@ class EducationView extends GetView<EducationController> {
                         index: controller.selectedIndex.toInt(),
                         children: const [
                           SizedBox(
-                            child: VideoListCard(
-                                thumbnailUrl:
-                                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                title: "Diabetes",
-                                summary: "Gejala, Diagnosis & Cara Pengobatan"),
+                            child: Column(
+                              children: [
+                                VideoListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title:
+                                        "Diabetes Type 1 and Type 2, Animation",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan",
+                                    youtubeUrl: "https://youtu.be/XfyGv-xwjlI"),
+                                VideoListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "How insulin works",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan",
+                                    youtubeUrl: "https://youtu.be/HJGjNTJgf48"),
+                                VideoListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title:
+                                        "Diabetic Ketoacidosis (DKA) Explained Clearly",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan",
+                                    youtubeUrl: "https://youtu.be/V3bIWj8fcp8"),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             child: Column(
