@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/education/article/article_list_card.dart';
 import 'package:mahati_mobile/app/modules/education/education_controller.dart';
+import 'package:mahati_mobile/app/modules/education/video/widget/video_list_card.dart';
 import 'package:mahati_mobile/app/modules/education/widget/education_tab.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -13,6 +15,7 @@ class EducationView extends GetView<EducationController> {
       backgroundColor: Resources.color.whiteColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -65,6 +68,88 @@ class EducationView extends GetView<EducationController> {
                     },
                   )),
             ),
+            SizedBox(
+              height: null,
+              child: Obx(() => Column(children: [
+                    SizedBox(
+                      child: IndexedStack(
+                        index: controller.selectedIndex.toInt(),
+                        children: const [
+                          SizedBox(
+                            child: VideoListCard(
+                                thumbnailUrl:
+                                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                title: "Diabetes",
+                                summary: "Gejala, Diagnosis & Cara Pengobatan"),
+                          ),
+                          SizedBox(
+                            child: Column(
+                              children: [
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                                ArticleListCard(
+                                    thumbnailUrl:
+                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                                    title: "Diabetes",
+                                    summary:
+                                        "Gejala, Diagnosis & Cara Pengobatan"),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            child: Text("Brosur Container"),
+                          )
+                        ],
+                      ),
+                    ),
+                  ])),
+            )
           ],
         ),
       ),
