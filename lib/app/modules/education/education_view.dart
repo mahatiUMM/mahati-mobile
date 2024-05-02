@@ -16,17 +16,10 @@ class EducationView extends GetView<EducationController> {
     return Scaffold(
       backgroundColor: AppColors.backgroundHome,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
+        backgroundColor: AppColors.backgroundHome,
+        surfaceTintColor: AppColors.backgroundHome,
         elevation: 0,
         leadingWidth: 20,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.dark,
-          systemNavigationBarColor: Color(0xFFF9F9F9),
-          systemNavigationBarIconBrightness: Brightness.dark,
-          statusBarColor: Color(0xFFF9F9F9),
-        ),
         leading: IconButton(
           icon: const Icon(Icons.chevron_left),
           onPressed: () {

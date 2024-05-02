@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
-import 'package:mahati_mobile/app/utils/resources.dart';
 
 class BrochureThumbCard extends StatelessWidget {
   final String title;

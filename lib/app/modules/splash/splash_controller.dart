@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_view.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';

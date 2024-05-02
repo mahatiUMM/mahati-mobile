@@ -9,9 +9,9 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundHome,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           actions: [
             IconButton(
               icon: const Icon(
@@ -48,11 +48,22 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
           ),
         ),
         body: TabBarView(controller: controller.tabController, children: [
-          const SingleChildScrollView(
+          SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("1")],
+              children: [
+                Obx(
+                  // () => Text(
+                  //   controller.pressureHistory.value.toString(),
+                  // ),
+                  () => Column(
+                    children: controller.pressureHistory.value
+                        .map((e) => Text(e.toString()))
+                        .toList(),
+                  ),
+                ),
+              ],
             ),
           ),
           const SingleChildScrollView(

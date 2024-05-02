@@ -16,7 +16,7 @@ class PressureView extends GetView<PressureController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         leadingWidth: 20,
         leading: IconButton(
