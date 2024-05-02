@@ -12,6 +12,7 @@ abstract class Routes {
   static const inbox = _Paths.inbox;
   static const profile = _Paths.profile;
   static const pressure = _Paths.pressure;
+  static const pressureHistory = _Paths.pressureHistory;
   static const education = _Paths.education;
   static const articleDetail = _Paths.articleDetail;
   static const brochureDetail = _Paths.brochureDetail;
@@ -29,6 +30,7 @@ abstract class _Paths {
   static const inbox = '/inbox';
   static const profile = '/profile';
   static const pressure = '/pressure';
+  static const pressureHistory = '/pressure/history';
   static const education = '/education';
   static const articleDetail = '/article/detail';
   static const brochureDetail = '/brochure/detail';

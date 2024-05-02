@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,8 +20,8 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFF9F9F9),
-      ),
+          scaffoldBackgroundColor: const Color(0xFFF9F9F9),
+          primaryColor: Resources.color.primaryColor),
       title: "Application",
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

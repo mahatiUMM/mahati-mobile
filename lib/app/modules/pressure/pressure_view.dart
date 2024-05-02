@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/modules/pressure/pressure_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class PressureView extends GetView<PressureController> {
-  final File? pickedFile;
-  const PressureView({Key? key, this.pickedFile}) : super(key: key);
+  const PressureView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +124,19 @@ class PressureView extends GetView<PressureController> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 18),
+              child: SizedBox(
+                width: Get.width,
+                child: GestureDetector(
+                  onTap: () => Get.toNamed('/pressure/history'),
+                  child: const Text(
+                    "Riwayat Tekanan Darah",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -156,6 +169,8 @@ class PressureView extends GetView<PressureController> {
               const SizedBox(height: 10),
               TextField(
                 controller: controller,
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 maxLength: 3,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -206,12 +221,15 @@ class PressureView extends GetView<PressureController> {
       child: TextButton.icon(
         onPressed: () {
           if (title == 'Open Camera') {
-            controller.takeBloodPressureImage(ImageSource.camera, pickedFile);
+            controller.takeBloodPressureImage(ImageSource.camera);
           } else {
-            controller.takeBloodPressureImage(ImageSource.gallery, pickedFile);
+            controller.takeBloodPressureImage(ImageSource.gallery);
           }
         },
-        icon: Icon(icon),
+        icon: Icon(
+          icon,
+          color: Colors.black,
+        ),
         label: Text(
           title,
           style: TextStyle(

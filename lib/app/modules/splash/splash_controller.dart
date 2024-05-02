@@ -34,7 +34,10 @@ class SplashController extends GetxController {
       if (resultData['status'] == 401) {
         showErrorMessage('JWT Token Expired. Please login again');
         Get.off(() => const OnboardView());
-      } else {
+      } else if (resultData['status'] == 404) {
+        showErrorMessage('User not found. Please login again');
+        Get.off(() => const OnboardView());
+      } else if (resultData['status'] == 200) {
         Get.offAndToNamed('/layout');
       }
     } else {

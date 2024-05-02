@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_controller.dart';
 
 class BrochureDetailView extends GetView<BrochureDetailController> {
   const BrochureDetailView({Key? key}) : super(key: key);
@@ -47,10 +48,17 @@ class BrochureDetailView extends GetView<BrochureDetailController> {
                 return Container(
                   alignment: Alignment.center,
                   width: Get.width,
-                  child: Image.network(
-                    i,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
+                  child: PinchZoom(
+                    maxScale: 2.5,
+                    onZoomStart: () {
+                      print('Start zooming dog');
+                    },
+                    onZoomEnd: () {
+                      print('Stop zooming dog');
+                    },
+                    child: Image.network(
+                      i,
+                    ),
                   ),
                 );
               },

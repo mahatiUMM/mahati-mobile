@@ -1,6 +1,6 @@
 // print(controller.diastoleController.text);
 class BloodPressureModel {
-  String user_id;
+  int user_id;
   String image;
   int sistol;
   int diastole;
@@ -16,7 +16,7 @@ class BloodPressureModel {
 
   factory BloodPressureModel.fromJson(Map<String, dynamic> json) =>
       BloodPressureModel(
-        user_id: json['data']['user_id'].toString(),
+        user_id: json['data']['user_id'],
         image: json['data']['email'].toString(),
         sistol: json['data']['password'],
         diastole: json['data']['number'],

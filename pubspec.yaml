@@ -23,6 +23,7 @@ dependencies:
   google_ml_kit: ^0.18.0
   carousel_slider: ^4.2.1
   flutter_tesseract_ocr: ^0.3.7
+  pinch_zoom: ^2.0.0
 
 dev_dependencies:
   mockito: ^5.4.2
