@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,15 +61,31 @@ class PressureController extends GetxController {
     if (pickedImage == null) {
       return;
     } else {
-      final textRecognizer =
-          TextRecognizer(script: TextRecognitionScript.latin);
-      final RecognizedText recognizedText = await textRecognizer
-          .processImage(InputImage.fromFile(File(pickedImage.path)));
-      textRecognizer.close();
-      Get.snackbar(
-        "Blood Pressure Result,",
-        recognizedText.text,
-      );
+      final res = await FlutterTesseractOcr.extractText(pickedImage.path,
+          language: 'ssd',
+          args: {
+            "psm": "4",
+            "preserve_interword_spaces": "1",
+          });
+
+      final List<String> resultList = res.split('\n');
+      if (resultList.length < 3) {
+        Get.snackbar(
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            "AI Blood Pressure",
+            "Failed to get result, please try again.");
+      } else {
+        Get.snackbar(
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          "AI Blood Pressure",
+          "Systolic: ${resultList[0].split(' ')[0]}\nDiastolic: ${resultList[1].split(' ')[0]}\nHeartbeat: ${resultList[2].split(' ')[0]}",
+        );
+        sistolController.text = resultList[0].split(' ')[0];
+        diastoleController.text = resultList[1].split(' ')[0];
+        heartbeatController.text = resultList[2].split(' ')[0];
+      }
     }
   }
 }

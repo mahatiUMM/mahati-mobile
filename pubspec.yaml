@@ -22,6 +22,7 @@ dependencies:
   image_picker: ^1.1.1
   google_ml_kit: ^0.18.0
   carousel_slider: ^4.2.1
+  flutter_tesseract_ocr: ^0.3.7
 
 dev_dependencies:
   mockito: ^5.4.2
@@ -40,6 +41,7 @@ flutter:
     - assets/svgs/
     - assets/fonts/
     - assets/animations/
+    - assets/tessdata/
 
   fonts:
     - family: Inter
