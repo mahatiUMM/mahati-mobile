@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_list_card.dart';
+import 'package:mahati_mobile/app/modules/education/brochure/brochure_thumb_card.dart';
 import 'package:mahati_mobile/app/modules/education/education_controller.dart';
 import 'package:mahati_mobile/app/modules/education/video/widget/video_list_card.dart';
 import 'package:mahati_mobile/app/modules/education/widget/education_tab.dart';
@@ -165,7 +166,17 @@ class EducationView extends GetView<EducationController> {
                             ),
                           ),
                           SizedBox(
-                            child: Text("Brosur Container"),
+                            child: Column(
+                              children: [
+                                BrochureThumbCard(
+                                    title: 'Gejala Jantung Koroner',
+                                    imageUrl: [
+                                      "https://purwakarta.rsbh.co.id/public/uploads/artikel-28.jpg",
+                                      "https://roemahmedia.com/assets/uploads/2022/12/uqmzbak2ejas_mid.jpg",
+                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRJTe-L2OQD1cOgcnriUUvszVtrgrPr-3hkTQOzXgwev-5tDWeQnwmYSGnXDNFNUfC30w&usqp=CAU"
+                                    ])
+                              ],
+                            ),
                           )
                         ],
                       ),

@@ -21,6 +21,7 @@ dependencies:
   url_launcher: ^6.2.6
   image_picker: ^1.1.1
   google_ml_kit: ^0.18.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   mockito: ^5.4.2

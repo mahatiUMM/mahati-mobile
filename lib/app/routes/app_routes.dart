@@ -14,6 +14,7 @@ abstract class Routes {
   static const pressure = _Paths.pressure;
   static const education = _Paths.education;
   static const articleDetail = _Paths.articleDetail;
+  static const brochureDetail = _Paths.brochureDetail;
 }
 
 abstract class _Paths {
@@ -30,4 +31,5 @@ abstract class _Paths {
   static const pressure = '/pressure';
   static const education = '/education';
   static const articleDetail = '/article/detail';
+  static const brochureDetail = '/brochure/detail';
 }

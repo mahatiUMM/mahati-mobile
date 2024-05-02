@@ -5,6 +5,8 @@ import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
+import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_binding.dart';
+import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/education_binding.dart';
 import 'package:mahati_mobile/app/modules/education/education_view.dart';
 import 'package:mahati_mobile/app/modules/home/home_binding.dart';
@@ -104,6 +106,12 @@ class AppPages {
       name: _Paths.articleDetail,
       page: () => ArticleDetailView(),
       binding: ArticleDetailBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.brochureDetail,
+      page: () => BrochureDetailView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     )
