@@ -50,7 +50,7 @@ class LayoutView extends GetView<LayoutController> {
                   elevation: 8,
                   items: [
                     bottomNavbar(
-                      icon: Icons.home_filled,
+                      icon: Icons.home,
                       label: 'Home',
                     ),
                     bottomNavbar(

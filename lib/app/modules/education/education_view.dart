@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_list_card.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_thumb_card.dart';
@@ -13,13 +14,21 @@ class EducationView extends GetView<EducationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Resources.color.whiteColor,
+      backgroundColor: AppColors.backgroundHome,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
+        leadingWidth: 20,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarColor: Color(0xFFF9F9F9),
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarColor: Color(0xFFF9F9F9),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.chevron_left),
           onPressed: () {
             Get.back();
           },

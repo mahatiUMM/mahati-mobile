@@ -10,6 +10,7 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundHome,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

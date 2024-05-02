@@ -14,12 +14,20 @@ class PressureView extends GetView<PressureController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Resources.color.whiteColor,
+      backgroundColor: AppColors.backgroundHome,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leadingWidth: 20,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarColor: Color(0xFFF9F9F9),
+          systemNavigationBarIconBrightness: Brightness.dark,
+          statusBarColor: Color(0xFFF9F9F9),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.chevron_left),
           onPressed: () {
             Get.back();
           },
