@@ -13,6 +13,8 @@ dependencies:
   lottie: ^3.0.0
   sizer: ^2.0.15
   http: ^1.2.0
+  image_picker: ^1.0.4
+  get_storage: ^2.1.1
   font_awesome_flutter: ^10.7.0
   shared_preferences: ^2.0.8
   flutter_floating_bottom_bar: ^1.2.0

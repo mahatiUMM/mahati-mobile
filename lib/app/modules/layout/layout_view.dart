@@ -18,7 +18,7 @@ class LayoutView extends GetView<LayoutController> {
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children: const [
+              children: [
                 HomeView(),
                 InboxView(),
                 ProfileView(),
