@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/inbox/inbox_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
-class InboxView extends GetView {
+class InboxView extends GetView<InboxController> {
   const InboxView({Key? key}) : super(key: key);
 
   @override
@@ -63,13 +65,9 @@ class InboxView extends GetView {
                       Container(
                         width: 60,
                         height: 60,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://www.yogaiya.in/wp-content/uploads/2023/03/MAHATI-WELLNESS-PVT-LTD.jpg"),
-                            fit: BoxFit.fill,
-                          ),
+                        child: SvgPicture.asset(
+                          controller.logo,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(width: 10),

@@ -28,14 +28,9 @@ class HomeController extends GetxController {
   Future<void> getUserProfile() async {
     final token = await getToken();
     final restClient = Get.find<RestClient>();
-
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.GET, null, token.toString());
-
-    print(result.body);
     var responseData = UserModel.fromJson(jsonDecode(result.body));
-    print(responseData.username);
-
     username.value = responseData.username;
   }
 }
