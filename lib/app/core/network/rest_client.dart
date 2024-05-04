@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 enum HttpMethod { POST, GET, PUT, DELETE, PATCH }
 
 class RestClient extends GetxService {
-  static const BASE_URL = "http://192.168.185.32:3001/api";
+  // static const BASE_URL = "http://192.168.185.32:3001/api";
+  static const BASE_URL = "https://mahati.xyzuan.my.id/api";
 
   Map<String, String> header() {
     return {
