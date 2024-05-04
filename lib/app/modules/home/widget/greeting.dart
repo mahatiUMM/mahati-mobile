@@ -14,7 +14,7 @@ class GreetingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 10.0, left: 30.0),
+        padding: const EdgeInsets.only(top: 32.0, left: 30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

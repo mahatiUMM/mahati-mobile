@@ -115,7 +115,7 @@ class TabBox extends StatelessWidget {
               color: Colors.white,
             ),
             onClick: () {
-              print("Kuesioner");
+              Get.toNamed('/questioner');
             },
           ),
         ],
