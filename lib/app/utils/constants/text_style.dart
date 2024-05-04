@@ -80,4 +80,38 @@ class StyleText {
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle homeGreeting3 = TextStyle(
+    decoration: TextDecoration.none,
+    overflow: TextOverflow.ellipsis,
+    color: ColorApp.subTitleColor,
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle homeGreeting4 = TextStyle(
+      decoration: TextDecoration.none,
+      color: ColorApp.hintColor,
+      fontSize: 12.sp,
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w500);
+
+  //Video Card text style
+  static TextStyle cardTitle1 = TextStyle(
+    decoration: TextDecoration.none,
+    overflow: TextOverflow.ellipsis,
+    color: ColorApp.subTitleColor,
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w700,
+  );
+
+  static TextStyle cardSubTitle1 = TextStyle(
+    decoration: TextDecoration.none,
+    color: ColorApp.hintColor,
+    fontSize: 10.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+  );
 }
