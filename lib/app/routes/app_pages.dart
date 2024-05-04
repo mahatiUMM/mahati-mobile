@@ -5,7 +5,6 @@ import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
-import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/education_binding.dart';
 import 'package:mahati_mobile/app/modules/education/education_view.dart';

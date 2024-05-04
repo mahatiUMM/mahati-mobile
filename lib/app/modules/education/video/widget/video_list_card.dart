@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class VideoListCard extends StatelessWidget {

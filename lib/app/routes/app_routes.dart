@@ -13,6 +13,8 @@ abstract class Routes {
   static const profile = _Paths.profile;
   static const pressure = _Paths.pressure;
   static const reminder = _Paths.reminder;
+  static const reminderDetail = _Paths.reminderDetail;
+  static const reminderRefill = _Paths.reminderRefiil;
   static const pressureHistory = _Paths.pressureHistory;
   static const education = _Paths.education;
   static const articleDetail = _Paths.articleDetail;
@@ -32,6 +34,8 @@ abstract class _Paths {
   static const profile = '/profile';
   static const pressure = '/pressure';
   static const reminder = '/reminder';
+  static const reminderDetail = '/reminder/detail';
+  static const reminderRefiil = '/reminder/refill';
   static const pressureHistory = '/pressure/history';
   static const education = '/education';
   static const articleDetail = '/article/detail';

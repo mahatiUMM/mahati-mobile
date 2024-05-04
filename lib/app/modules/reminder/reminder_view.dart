@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
-import 'package:mahati_mobile/app/modules/reminder/widget/reminder_dates.dart';
+import 'package:mahati_mobile/app/modules/reminder/widget/reminder_date.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderView extends GetView<ReminderController> {
@@ -45,19 +45,24 @@ class ReminderView extends GetView<ReminderController> {
                     height: 0,
                   ),
                 ),
-                reminderDates(),
-                Container(
+                reminderDate(),
+                SizedBox(
                   height: null,
                   child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: 30,
                     itemBuilder: (BuildContext context, int index) {
-                      return reminderCard(
-                        title: controller.title,
-                        status: controller.status,
-                        strong: controller.strong,
-                        time: controller.time,
+                      return GestureDetector(
+                        onTap: () {
+                          print("Card $index clicked");
+                        },
+                        child: reminderCard(
+                          title: controller.title,
+                          status: controller.status,
+                          strong: controller.strong,
+                          time: controller.time,
+                        ),
                       );
                     },
                   ),
@@ -66,6 +71,17 @@ class ReminderView extends GetView<ReminderController> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Resources.color.whiteColor,
+        tooltip: 'Increment',
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        onPressed: () {
+          print("Add reminder clicked");
+        },
+        child: Icon(Icons.add, color: Resources.color.baseColor, size: 28),
       ),
     );
   }

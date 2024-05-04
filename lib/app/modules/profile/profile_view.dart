@@ -290,6 +290,7 @@ class ProfileView extends GetView<ProfileController> {
 
   void _showImagePicker(BuildContext context) {
     showModalBottomSheet(
+      backgroundColor: Colors.white,
       context: context,
       builder: (BuildContext context) {
         return SafeArea(

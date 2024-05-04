@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
-import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PressureController extends GetxController {

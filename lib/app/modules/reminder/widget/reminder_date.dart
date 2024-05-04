@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-Widget reminderDates() {
+Widget reminderDate() {
   return EasyDateTimeLine(
     initialDate: DateTime.now(),
     onDateChange: (selectedDate) {

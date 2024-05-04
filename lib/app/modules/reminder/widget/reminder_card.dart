@@ -30,9 +30,12 @@ Widget reminderCard(
             children: [
               Text(
                 title ?? "",
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Resources.color.baseColor,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontFamily: Resources.font.primaryFont,
+                  fontWeight: FontWeight.w800,
+                  height: 0,
                 ),
               ),
               const SizedBox(height: 10),
@@ -50,6 +53,10 @@ Widget reminderCard(
                         status ?? "",
                         style: TextStyle(
                           color: Resources.color.whiteColor,
+                          fontSize: 12,
+                          fontFamily: Resources.font.primaryFont,
+                          fontWeight: FontWeight.w800,
+                          height: 0,
                         ),
                       ),
                     ),
@@ -72,6 +79,10 @@ Widget reminderCard(
                         strong ?? "",
                         style: TextStyle(
                           color: Resources.color.whiteColor,
+                          fontSize: 12,
+                          fontFamily: Resources.font.primaryFont,
+                          fontWeight: FontWeight.w800,
+                          height: 0,
                         ),
                       ),
                     ),
@@ -89,6 +100,10 @@ Widget reminderCard(
                         time ?? "",
                         style: TextStyle(
                           color: Resources.color.whiteColor,
+                          fontSize: 12,
+                          fontFamily: Resources.font.primaryFont,
+                          fontWeight: FontWeight.w800,
+                          height: 0,
                         ),
                       ),
                     ),
