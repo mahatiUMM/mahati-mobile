@@ -56,6 +56,7 @@ class ReminderView extends GetView<ReminderController> {
                       return GestureDetector(
                         onTap: () {
                           print("Card $index clicked");
+                          Get.toNamed('/reminder/detail');
                         },
                         child: reminderCard(
                           title: controller.title,
@@ -80,6 +81,7 @@ class ReminderView extends GetView<ReminderController> {
         ),
         onPressed: () {
           print("Add reminder clicked");
+          Get.toNamed('/reminder/refill');
         },
         child: Icon(Icons.add, color: Resources.color.baseColor, size: 28),
       ),

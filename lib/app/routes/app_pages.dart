@@ -23,6 +23,10 @@ import 'package:mahati_mobile/app/modules/pressure/pressure_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_view.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_view.dart';
@@ -95,6 +99,20 @@ class AppPages {
       name: _Paths.reminder,
       page: () => ReminderView(),
       binding: ReminderBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.reminderDetail,
+      page: () => ReminderDetailView(),
+      binding: ReminderDetailBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.reminderRefiil,
+      page: () => ReminderRefillView(),
+      binding: ReminderRefillBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
