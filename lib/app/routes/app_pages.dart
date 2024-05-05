@@ -28,6 +28,10 @@ import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_deta
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_view.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_binding.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_binding.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_view.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_view.dart';
 
@@ -149,6 +153,16 @@ class AppPages {
       page: () => BrochureDetailView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
-    )
+    ),
+    GetPage(
+      name: _Paths.questionnaire,
+      page: () => const QuestionnaireView(),
+      binding: QuestionnaireBinding(),
+    ),
+    GetPage(
+      name: _Paths.questionnaireQuestion,
+      page: () => const QuestionnaireQuestionView(),
+      binding: QuestionnaireQuestionBinding(),
+    ),
   ];
 }

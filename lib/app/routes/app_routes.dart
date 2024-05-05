@@ -19,6 +19,8 @@ abstract class Routes {
   static const education = _Paths.education;
   static const articleDetail = _Paths.articleDetail;
   static const brochureDetail = _Paths.brochureDetail;
+  static const questionnaire = _Paths.questionnaire;
+  static const questionnaireQuestion = _Paths.questionnaireQuestion;
 }
 
 abstract class _Paths {
@@ -40,4 +42,6 @@ abstract class _Paths {
   static const education = '/education';
   static const articleDetail = '/article/detail';
   static const brochureDetail = '/brochure/detail';
+  static const questionnaire = '/questionnaire';
+  static const questionnaireQuestion = '/questionnaire_question';
 }
