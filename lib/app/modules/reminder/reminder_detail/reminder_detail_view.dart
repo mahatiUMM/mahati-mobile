@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
@@ -33,14 +34,140 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(0),
               child: Container(
+                height: 30,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Resources.color.whiteColor,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(30),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(32.0),
+                    topRight: Radius.circular(32.0),
                   ),
                 ),
-                child: Container(),
+                child: Container(
+                  width: 40.0,
+                  height: 5.0,
+                  decoration: BoxDecoration(
+                    color: Resources.color.baseColor,
+                    borderRadius: BorderRadius.circular(100.0),
+                  ),
+                ),
               ),
+            ),
+            leadingWidth: Get.width,
+            leading: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.chevron_left,
+                          color: Resources.color.baseColor,
+                        ),
+                        const Text(
+                          'Kembali',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    print("Three dots clicked");
+                  },
+                  icon: const Icon(Icons.more_vert),
+                ),
+              ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Paracetamol XL2",
+                        style: TextStyle(
+                          color: Resources.color.baseColor,
+                          fontSize: 20,
+                          fontFamily: Resources.font.primaryFont,
+                          fontWeight: FontWeight.w800,
+                          height: 0,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Card(
+                                color: Resources.color.whiteColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 75,
+                                  child: Center(
+                                    child: Text(
+                                      "Jadwal",
+                                      style: TextStyle(
+                                        color: Resources.color.baseColor,
+                                        fontSize: 12,
+                                        fontFamily: Resources.font.primaryFont,
+                                        fontWeight: FontWeight.w800,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Resources.color.whiteColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 75,
+                                  child: Center(
+                                    child: Text(
+                                      "Kekuatan",
+                                      style: TextStyle(
+                                        color: Resources.color.baseColor,
+                                        fontSize: 12,
+                                        fontFamily: Resources.font.primaryFont,
+                                        fontWeight: FontWeight.w800,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
