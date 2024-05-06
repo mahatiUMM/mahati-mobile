@@ -10,6 +10,8 @@ Widget reminderCard(
       borderRadius: BorderRadius.circular(30.0),
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           width: 100,
@@ -46,7 +48,7 @@ Widget reminderCard(
                       color: const Color(0xff4ECB71),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    width: 170,
+                    width: 200,
                     height: 25,
                     child: Center(
                       child: Text(

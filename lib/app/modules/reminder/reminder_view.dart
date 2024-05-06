@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_date.dart';
+import 'package:mahati_mobile/app/modules/reminder/widget/reminder_filter.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderView extends GetView<ReminderController> {
@@ -19,12 +20,24 @@ class ReminderView extends GetView<ReminderController> {
             Get.back();
           },
         ),
-        title: const Text(
-          'Kembali',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Kembali',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.filter_alt_outlined),
+              onPressed: () {
+                print("Filter clicked");
+                reminderFilter();
+              },
+            ),
+          ],
         ),
       ),
       body: ListView(
@@ -51,11 +64,11 @@ class ReminderView extends GetView<ReminderController> {
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 30,
+                    itemCount: 8,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          print("Card $index clicked");
+                          print("Card index: $index clicked");
                           Get.toNamed('/reminder/detail');
                         },
                         child: reminderCard(
