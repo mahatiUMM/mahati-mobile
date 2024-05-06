@@ -5,7 +5,10 @@ Widget reminderCard(
     {String? title, String? status, String? strong, String? time}) {
   return Card(
     color: Resources.color.whiteColor,
+    margin: const EdgeInsets.only(top: 20),
     elevation: 0,
+    shadowColor: Resources.color.whiteColor,
+    surfaceTintColor: Resources.color.whiteColor,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     ),
@@ -26,7 +29,7 @@ Widget reminderCard(
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(14.0),
+          padding: const EdgeInsets.only(left: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -48,7 +51,7 @@ Widget reminderCard(
                       color: const Color(0xff4ECB71),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    width: 200,
+                    width: 210,
                     height: 25,
                     child: Center(
                       child: Text(

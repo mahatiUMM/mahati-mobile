@@ -140,22 +140,27 @@ void reminderFilter() {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Resources.color.whiteColor,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: Resources.color.baseColor,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Reset",
-                        style: TextStyle(
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Reset clicked");
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Resources.color.whiteColor,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
                           color: Resources.color.baseColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Reset",
+                          style: TextStyle(
+                            color: Resources.color.baseColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -163,19 +168,24 @@ void reminderFilter() {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Resources.color.baseColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Terapkan",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Apply Filter clicked");
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Resources.color.baseColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Apply Filter",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
