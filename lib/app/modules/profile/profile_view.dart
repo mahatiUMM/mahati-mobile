@@ -62,7 +62,7 @@ class ProfileView extends GetView<ProfileController> {
                                 height: Get.height / 18,
                                 child: IconButton(
                                     onPressed: () {
-                                      print("Setting");
+                                      Get.toNamed("/setting");
                                     },
                                     icon: Icon(
                                       Icons.settings_outlined,
@@ -132,18 +132,20 @@ class ProfileView extends GetView<ProfileController> {
                                     ),
                                     SizedBox(height: 1.h),
                                     GestureDetector(
-                                        onTap: () {
-                                          print("Edit Profile");
-                                        },
-                                        child: Text("Edit Profile",
-                                            style: TextStyle(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              color: ColorApp.subTitleColor,
-                                              fontSize: 12.sp,
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                            ))),
+                                      onTap: () {
+                                        Get.toNamed("/profile/edit");
+                                      },
+                                      child: Text(
+                                        "Edit Profile",
+                                        style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          color: ColorApp.subTitleColor,
+                                          fontSize: 12.sp,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 )
                               ],

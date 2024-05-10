@@ -88,7 +88,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                       shadowColor: Resources.color.whiteColor,
                       surfaceTintColor: Resources.color.whiteColor,
                       elevation: 0,
-                      position: RelativeRect.fromLTRB(100, 100, 0, 100),
+                      position: const RelativeRect.fromLTRB(100, 100, 0, 100),
                       items: [
                         PopupMenuItem(
                           child: ListTile(

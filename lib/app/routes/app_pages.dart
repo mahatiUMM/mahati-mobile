@@ -21,6 +21,8 @@ import 'package:mahati_mobile/app/modules/pressure/pressure_history/pressure_his
 import 'package:mahati_mobile/app/modules/pressure/pressure_history/pressure_history_view.dart';
 import 'package:mahati_mobile/app/modules/pressure/pressure_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_binding.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_binding.dart';
@@ -32,6 +34,8 @@ import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_binding.da
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_binding.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_view.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_view.dart';
+import 'package:mahati_mobile/app/modules/setting/setting_binding.dart';
+import 'package:mahati_mobile/app/modules/setting/setting_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_view.dart';
 
@@ -96,6 +100,20 @@ class AppPages {
       name: _Paths.profile,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.profileEdit,
+      page: () => ProfileEditView(),
+      binding: ProfileEditBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.setting,
+      page: () => SettingView(),
+      binding: SettingBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
