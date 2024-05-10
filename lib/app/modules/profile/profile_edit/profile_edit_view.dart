@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_controller.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/widget/label_field.dart';
@@ -10,6 +11,13 @@ class ProfileEditView extends GetView<ProfileEditController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 20,
@@ -33,13 +41,15 @@ class ProfileEditView extends GetView<ProfileEditController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Ubah Profil Saya",
-                style: TextStyle(
-                  color: Resources.color.baseColor,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: Resources.font.primaryFont,
+              Center(
+                child: Text(
+                  "Ubah Profil Saya",
+                  style: TextStyle(
+                    color: Resources.color.baseColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    fontFamily: Resources.font.primaryFont,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -84,7 +94,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                             label: 'Username',
                             value: controller.username.value),
                     LabelField(label: 'Email', value: controller.email.value),
-                    // must decrypt password
+                    // TODO: must decrypt password to see the real password
                     LabelField(
                         label: 'Password', value: controller.password.value),
                     LabelField(

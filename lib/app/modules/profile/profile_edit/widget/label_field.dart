@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 
 class LabelField extends GetView {
   const LabelField({Key? key, required this.label, required this.value})
@@ -15,33 +16,37 @@ class LabelField extends GetView {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,
           ),
         ),
-        SizedBox(height: 5),
-        // make a textfield
+        const SizedBox(height: 5),
         TextField(
+          cursorColor: Resources.color.baseColor,
           decoration: InputDecoration(
+            fillColor: Colors.grey[100],
+            filled: true,
             hintText: value,
             hintStyle: TextStyle(
               fontSize: 16,
-              color: Colors.black,
+              color: Resources.color.baseColor,
             ),
             enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                color: Colors.grey,
+                color: Colors.grey[100]!,
               ),
             ),
             focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                color: Colors.grey,
+                color: Colors.grey[100]!,
               ),
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ],
     );
   }
