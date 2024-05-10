@@ -22,7 +22,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/reminder-header.png",
+                "assets/images/reminder_header.png",
                 fit: BoxFit.cover,
               ),
               stretchModes: const [
@@ -82,7 +82,34 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                 ),
                 IconButton(
                   onPressed: () {
-                    print("Three dots clicked");
+                    showMenu(
+                      context: context,
+                      color: Resources.color.whiteColor,
+                      shadowColor: Resources.color.whiteColor,
+                      surfaceTintColor: Resources.color.whiteColor,
+                      elevation: 0,
+                      position: RelativeRect.fromLTRB(100, 100, 0, 100),
+                      items: [
+                        PopupMenuItem(
+                          child: ListTile(
+                            leading: const Icon(Icons.add),
+                            title: const Text('Tambah Pengingat'),
+                            onTap: () {
+                              print("Tambah pengingat clicked");
+                            },
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: ListTile(
+                            leading: const Icon(Icons.edit),
+                            title: const Text('Edit Pengingat'),
+                            onTap: () {
+                              print("Edit pengingat clicked");
+                            },
+                          ),
+                        ),
+                      ],
+                    );
                   },
                   icon: const Icon(Icons.more_vert),
                 ),
@@ -92,78 +119,83 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Paracetamol XL2",
-                        style: TextStyle(
-                          color: Resources.color.baseColor,
-                          fontSize: 20,
-                          fontFamily: Resources.font.primaryFont,
-                          fontWeight: FontWeight.w800,
-                          height: 0,
+                Container(
+                  color: Resources.color.whiteColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Paracetamol XL2",
+                          style: TextStyle(
+                            color: Resources.color.baseColor,
+                            fontSize: 20,
+                            fontFamily: Resources.font.primaryFont,
+                            fontWeight: FontWeight.w800,
+                            height: 0,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Card(
-                                color: Resources.color.whiteColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 75,
-                                  child: Center(
-                                    child: Text(
-                                      "Jadwal",
-                                      style: TextStyle(
-                                        color: Resources.color.baseColor,
-                                        fontSize: 12,
-                                        fontFamily: Resources.font.primaryFont,
-                                        fontWeight: FontWeight.w800,
-                                        height: 0,
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Card(
+                                  color: Resources.color.whiteColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: SizedBox(
+                                    width: 150,
+                                    height: 75,
+                                    child: Center(
+                                      child: Text(
+                                        "Jadwal",
+                                        style: TextStyle(
+                                          color: Resources.color.baseColor,
+                                          fontSize: 12,
+                                          fontFamily:
+                                              Resources.font.primaryFont,
+                                          fontWeight: FontWeight.w800,
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Card(
-                                color: Resources.color.whiteColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: SizedBox(
-                                  width: 150,
-                                  height: 75,
-                                  child: Center(
-                                    child: Text(
-                                      "Kekuatan",
-                                      style: TextStyle(
-                                        color: Resources.color.baseColor,
-                                        fontSize: 12,
-                                        fontFamily: Resources.font.primaryFont,
-                                        fontWeight: FontWeight.w800,
-                                        height: 0,
+                                Card(
+                                  color: Resources.color.whiteColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: SizedBox(
+                                    width: 150,
+                                    height: 75,
+                                    child: Center(
+                                      child: Text(
+                                        "Kekuatan",
+                                        style: TextStyle(
+                                          color: Resources.color.baseColor,
+                                          fontSize: 12,
+                                          fontFamily:
+                                              Resources.font.primaryFont,
+                                          fontWeight: FontWeight.w800,
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

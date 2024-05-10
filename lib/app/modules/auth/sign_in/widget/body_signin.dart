@@ -155,7 +155,9 @@ class BodySignIn extends GetView<SignInController> {
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.red),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            print("google clicked");
+                          },
                           icon: FaIcon(
                             FontAwesomeIcons.google,
                             color: ColorApp.backgroundColor,
@@ -166,7 +168,9 @@ class BodySignIn extends GetView<SignInController> {
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.black),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            print("apple clicked");
+                          },
                           icon: FaIcon(
                             FontAwesomeIcons.apple,
                             color: ColorApp.backgroundColor,
@@ -177,7 +181,9 @@ class BodySignIn extends GetView<SignInController> {
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.blue),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            print("facebook clicked");
+                          },
                           icon: FaIcon(
                             FontAwesomeIcons.facebook,
                             color: ColorApp.backgroundColor,
