@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
@@ -32,7 +30,7 @@ class QuestionnaireQuestionView
           )
         ],
       ),
-      body: Container(
+      body: SizedBox(
         height: Get.height,
         child: Stack(
           children: [

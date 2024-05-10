@@ -24,6 +24,45 @@ class ProfileController extends GetxController {
   var itemCount = 0.obs;
   final storage = GetStorage();
 
+  final List<Map<String, dynamic>> gridMap = [
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+    {
+      "title": "Astro- psychological report",
+      "subtitle": "Some short description of this type of report."
+    },
+  ];
+
   Future<void> pickImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
@@ -45,25 +84,9 @@ class ProfileController extends GetxController {
     getUserProfile();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    // profileNameTextEditController.dispose();
-    // profileBioTextEditController.dispose();
-  }
-
   void logout() {
-    _prefs.remove('user_token'); // Hapus token autentikasi dari penyimpanan
-    isLoggedIn.value = false; // Set status login menjadi false
-    // _auth.signOut(); // Sign out dari Firebase Authentication
-
-    Get.offAllNamed(Routes
-        .signin); // Navigate ke HomePage dan hapus semua halaman sebelumnya
+    _prefs.remove('user_token');
+    Get.offAllNamed(Routes.signin);
   }
 
   Future<void> getUserProfile() async {

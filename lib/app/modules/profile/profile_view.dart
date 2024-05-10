@@ -1,54 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
+import 'package:mahati_mobile/app/modules/profile/widget/image_picker.dart';
 import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  ProfileView({super.key});
-  final ProfileController controllers = Get.put(ProfileController());
+  const ProfileView({super.key});
 
-  final List<Map<String, dynamic>> gridMap = [
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-    {
-      "title": "Astro- psychological report",
-      "subtitle": "Some short description of this type of report."
-    },
-  ];
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, devicetype) {
@@ -139,7 +100,7 @@ class ProfileView extends GetView<ProfileController> {
                                               Icons.camera,
                                               size: 36,
                                             ),
-                                            onPressed: () => _showImagePicker(
+                                            onPressed: () => showImagePicker(
                                               context,
                                             ),
                                           ),
@@ -155,8 +116,8 @@ class ProfileView extends GetView<ProfileController> {
                                     SizedBox(
                                       width: Get.width / 2,
                                       child: Text(
-                                        controllers.username.value.isNotEmpty
-                                            ? controllers.username.value
+                                        controller.username.value.isNotEmpty
+                                            ? controller.username.value
                                             : "Cannot Load username",
                                         style: StyleText.homeGreeting3,
                                       ),
@@ -233,7 +194,7 @@ class ProfileView extends GetView<ProfileController> {
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 12.0,
                                       mainAxisSpacing: 12.0),
-                              itemCount: gridMap.length,
+                              itemCount: controller.gridMap.length,
                               itemBuilder: (_, index) {
                                 return Card(
                                   color: ColorApp.backgroundColor,
@@ -252,7 +213,7 @@ class ProfileView extends GetView<ProfileController> {
                                             width: 32.w,
                                             height: 48,
                                             child: Text(
-                                              '${gridMap.elementAt(index)['title']}',
+                                              '${controller.gridMap.elementAt(index)['title']}',
                                               style: StyleText.cardTitle1,
                                               maxLines: 2,
                                             ),
@@ -264,7 +225,7 @@ class ProfileView extends GetView<ProfileController> {
                                             width: 32.w,
                                             height: 80,
                                             child: Text(
-                                              '${gridMap.elementAt(index)['subtitle']}',
+                                              '${controller.gridMap.elementAt(index)['subtitle']}',
                                               style: StyleText.cardSubTitle1,
                                               maxLines: 3,
                                             ),
@@ -286,36 +247,5 @@ class ProfileView extends GetView<ProfileController> {
         ),
       );
     });
-  }
-
-  void _showImagePicker(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.white,
-      context: context,
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Wrap(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.camera),
-                title: const Text('Take Photo'),
-                onTap: () {
-                  Get.back();
-                  controllers.pickImage(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Choose from Gallery'),
-                onTap: () {
-                  Get.back();
-                  controllers.pickImage(ImageSource.gallery);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
 }

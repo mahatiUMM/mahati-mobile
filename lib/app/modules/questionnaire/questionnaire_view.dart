@@ -1,18 +1,13 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_controller.dart';
-import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_view.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/widget/questionnaire_card.dart';
-import 'package:mahati_mobile/app/routes/app_pages.dart';
 
 class QuestionnaireView extends GetView<QuestionnaireController> {
   const QuestionnaireView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchQuestionnaires();
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       body: SingleChildScrollView(
@@ -80,7 +75,7 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                       } else {
                         return ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.questionnaires.length,
                           itemBuilder: (context, index) {
                             var questionnaire =
@@ -94,7 +89,8 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                                 Get.toNamed('/questionnaire_question',
                                     arguments: {
                                       'questionnaire': questionnaire,
-                                      'questionnaire_questions': questionnaire.question
+                                      'questionnaire_questions':
+                                          questionnaire.question
                                     });
                               },
                             );

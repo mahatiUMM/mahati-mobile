@@ -31,7 +31,6 @@ class SignInController extends GetxController {
 
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
-    print("After toggle: ${showPassword.value}");
   }
 
   Future<void> saveUserData(String token, String userId) async {
@@ -57,7 +56,6 @@ class SignInController extends GetxController {
       final result = await restClient.request(
           "/signin", HttpMethod.POST, signInModel.toJson());
 
-      print(result.body);
       var responseData = jsonDecode(result.body);
 
       if (responseData["status"] == 200) {
