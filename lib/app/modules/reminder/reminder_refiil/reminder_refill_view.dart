@@ -84,53 +84,44 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                   onPressed: () {
                     showMenu(
                       context: context,
-                      color: Resources.color.whiteColor,
-                      shadowColor: Resources.color.whiteColor,
-                      surfaceTintColor: Resources.color.whiteColor,
+                      color: Theme.of(context).cardColor,
+                      shadowColor: Theme.of(context).shadowColor,
+                      surfaceTintColor: Theme.of(context).canvasColor,
                       elevation: 0,
-                      position: RelativeRect.fromLTRB(100, 100, 0, 100),
+                      position: const RelativeRect.fromLTRB(100, 100, 0, 100),
                       items: [
                         PopupMenuItem(
                           child: ListTile(
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit'),
                             onTap: () {
-                              print("Edit refill clicked");
+                              Get.toNamed('/reminder/refill/edit');
                             },
                           ),
                         ),
                         PopupMenuItem(
                           child: ListTile(
                             leading: const Icon(Icons.delete),
-                            title: const Text('Delete'),
+                            title: const Text('Hapus'),
                             onTap: () {
-                              showDialog(
-                                barrierColor: Resources.color.whiteColor,
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    backgroundColor: Resources.color.whiteColor,
-                                    surfaceTintColor:
-                                        Resources.color.whiteColor,
-                                    elevation: 0,
-                                    title: const Text('Delete Reminder'),
-                                    content: const Text(
-                                        'Are you sure you want to delete this reminder?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: const Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: const Text('Delete'),
-                                      ),
-                                    ],
-                                  );
+                              Get.defaultDialog(
+                                backgroundColor: Resources.color.whiteColor,
+                                title: 'Hapus Pengingat',
+                                middleText:
+                                    'Apakah Anda yakin ingin menghapus pengingat ini?',
+                                textConfirm: 'Ya',
+                                buttonColor: Resources.color.baseColor,
+                                cancelTextColor: Resources.color.secondaryColor,
+                                textCancel: 'Tidak',
+                                confirmTextColor: Resources.color.whiteColor,
+                                onConfirm: () {
+                                  Get.back();
+                                },
+                                onCancel: () {
+                                  Get.back();
+                                },
+                                onWillPop: () async {
+                                  return false;
                                 },
                               );
                             },

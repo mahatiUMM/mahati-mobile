@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/home/home_view.dart';
 import 'package:mahati_mobile/app/modules/inbox/inbox_view.dart';
@@ -13,20 +12,13 @@ class LayoutView extends GetView<LayoutController> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.dark,
-      ),
-    );
     return GetBuilder<LayoutController>(
       builder: (controller) {
         return Scaffold(
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children: [
+              children: const [
                 HomeView(),
                 InboxView(),
                 ProfileView(),

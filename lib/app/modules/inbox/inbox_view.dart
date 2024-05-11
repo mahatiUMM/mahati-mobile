@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/inbox/inbox_controller.dart';
@@ -10,6 +11,13 @@ class InboxView extends GetView<InboxController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Resources.color.backgroundHome2,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Sizer(
       builder: (context, orientation, deviceType) {
         return Scaffold(

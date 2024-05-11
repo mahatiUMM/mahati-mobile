@@ -24,11 +24,17 @@ import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_add/reminder_add_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_add/reminder_add_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_view.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_view.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refill_edit/reminder_refill_edit_binding.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refill_edit/reminder_refill_edit_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_view.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_binding.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_binding.dart';
@@ -125,6 +131,20 @@ class AppPages {
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
+      name: _Paths.reminderAdd,
+      page: () => ReminderAddView(),
+      binding: ReminderAddBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.reminderEdit,
+      page: () => ReminderEditView(),
+      binding: ReminderEditBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
       name: _Paths.reminderDetail,
       page: () => ReminderDetailView(),
       binding: ReminderDetailBinding(),
@@ -135,6 +155,13 @@ class AppPages {
       name: _Paths.reminderRefiil,
       page: () => ReminderRefillView(),
       binding: ReminderRefillBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.reminderRefillEdit,
+      page: () => ReminderRefillEditView(),
+      binding: ReminderRefillEditBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

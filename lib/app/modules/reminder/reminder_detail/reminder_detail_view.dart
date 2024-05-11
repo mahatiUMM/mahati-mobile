@@ -22,7 +22,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/images/reminder_header.png",
+                "assets/images/reminder_detail.png",
                 fit: BoxFit.cover,
               ),
               stretchModes: const [
@@ -95,7 +95,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                             leading: const Icon(Icons.add),
                             title: const Text('Tambah Pengingat'),
                             onTap: () {
-                              print("Tambah pengingat clicked");
+                              Get.toNamed('/reminder/add');
                             },
                           ),
                         ),
@@ -104,7 +104,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit Pengingat'),
                             onTap: () {
-                              print("Edit pengingat clicked");
+                              Get.toNamed('/reminder/edit');
                             },
                           ),
                         ),

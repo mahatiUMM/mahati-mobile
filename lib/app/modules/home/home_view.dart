@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/home/widget/greeting.dart';
@@ -13,6 +14,13 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Resources.color.backgroundHome2,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Sizer(
       builder: (context, orientation, devicetype) {
         return Scaffold(
