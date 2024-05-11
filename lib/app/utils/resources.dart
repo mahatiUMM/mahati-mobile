@@ -10,6 +10,7 @@ class AppColors {
   Color primaryColor1 = const Color(0xFF6CE9B4);
   Color primaryColor2 = const Color(0xFFA6F4CE);
   Color primaryColor3 = const Color(0xFFD0FBE4);
+  Color primaryColorOnGradient = const Color(0x0040D99E);
 
   Color secondaryColor = const Color(0xFFD7371E);
   Color secondaryColor1 = const Color(0xFFF35840);
@@ -26,10 +27,15 @@ class AppColors {
   Color baseColor2 = const Color(0xFFA9A9A9);
 
   Color whiteColor = const Color(0xFFFFFFFF);
-  Color hintColor = const Color(0xFFEEEEEE);
+  Color textFieldColor = const Color(0xFFF5F6F8);
+  Color hintColor = const Color(0xFFA0A0A0);
+
+  Color titleColor = const Color(0xFF11371C);
+  Color subtitleColor = const Color(0xFF383838);
 
   //Background Color
   static Color backgroundHome = const Color(0xFFF9F9F9);
+  Color backgroundHome2 = const Color(0xFFF9F9F9);
 }
 
 class AppFonts {

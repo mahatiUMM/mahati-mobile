@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mahati_mobile/app/modules/onboard/onboard_controller.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/dot_navigation.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/next_button.dart';
@@ -14,9 +15,16 @@ class OnboardView extends GetView<OnBoardController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Resources.color.backgroundHome2,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       body: Container(
-        color: Resources.color.whiteColor,
+        color: Resources.color.backgroundHome2,
         child: SafeArea(
           child: Stack(
             alignment: Alignment.center,

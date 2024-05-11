@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/widget/body_signup.dart';
-import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUpView extends GetView<SignUpController> {
@@ -40,8 +40,8 @@ class SignUpView extends GetView<SignUpController> {
                         begin: const Alignment(0.00, -1.00),
                         end: const Alignment(0, 0.5),
                         colors: [
-                          ColorApp.primaryColor,
-                          ColorApp.primaryColorOnGradient
+                          Resources.color.primaryColor,
+                          Resources.color.primaryColorOnGradient,
                         ],
                       ),
                     ),

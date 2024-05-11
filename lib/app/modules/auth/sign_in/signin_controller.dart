@@ -22,13 +22,6 @@ class SignInController extends GetxController {
     restClient = Get.put(RestClient());
   }
 
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
-  }
-
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
   }

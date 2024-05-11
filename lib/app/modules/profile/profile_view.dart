@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:mahati_mobile/app/modules/profile/widget/image_picker.dart';
-import 'package:mahati_mobile/app/utils/Colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
@@ -12,6 +12,13 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Resources.color.whiteColor,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Sizer(builder: (context, orientation, devicetype) {
       return Scaffold(
         backgroundColor: AppColors.backgroundHome,
@@ -27,7 +34,7 @@ class ProfileView extends GetView<ProfileController> {
                     width: Get.width,
                     height: Get.height / 3,
                     decoration: ShapeDecoration(
-                      color: ColorApp.backgroundColor,
+                      color: Resources.color.whiteColor,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(32),
@@ -66,7 +73,7 @@ class ProfileView extends GetView<ProfileController> {
                                     },
                                     icon: Icon(
                                       Icons.settings_outlined,
-                                      color: ColorApp.baseColor,
+                                      color: Resources.color.baseColor,
                                     )),
                               )
                             ],
@@ -139,9 +146,10 @@ class ProfileView extends GetView<ProfileController> {
                                         "Edit Profile",
                                         style: TextStyle(
                                           decoration: TextDecoration.underline,
-                                          color: ColorApp.subTitleColor,
+                                          color: Resources.color.subtitleColor,
                                           fontSize: 12.sp,
-                                          fontFamily: 'Inter',
+                                          fontFamily:
+                                              Resources.font.primaryFont,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
@@ -180,7 +188,8 @@ class ProfileView extends GetView<ProfileController> {
                                 child: Text(
                                   "Export",
                                   style: TextStyle(
-                                      color: ColorApp.backgroundColor),
+                                    color: Resources.color.whiteColor,
+                                  ),
                                 ))
                           ],
                         ),
@@ -199,7 +208,8 @@ class ProfileView extends GetView<ProfileController> {
                               itemCount: controller.gridMap.length,
                               itemBuilder: (_, index) {
                                 return Card(
-                                  color: ColorApp.backgroundColor,
+                                  elevation: 0,
+                                  color: Resources.color.whiteColor,
                                   child: Center(
                                     child: Stack(children: [
                                       const Positioned(

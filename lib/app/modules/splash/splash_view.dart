@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +10,15 @@ class SplashView extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Resources.color.whiteColor,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
-      backgroundColor: AppColors.backgroundHome,
+      backgroundColor: Resources.color.whiteColor,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

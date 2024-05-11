@@ -62,7 +62,7 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
                               style: TextStyle(
                                 color: Color(0xFF9F9F9F),
                                 fontSize: 12,
-                                fontFamily: 'Poppins',
+                                fontFamily: Resources.font.primaryFont,
                                 fontWeight: FontWeight.w400,
                                 height: 0,
                               ),
@@ -72,7 +72,7 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
-                                fontFamily: 'Poppins',
+                                fontFamily: Resources.font.primaryFont,
                                 fontWeight: FontWeight.w700,
                                 height: 0,
                               ),
@@ -84,7 +84,7 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
                                 style: TextStyle(
                                   color: Color(0xFF9F9F9F),
                                   fontSize: 12,
-                                  fontFamily: 'Poppins',
+                                  fontFamily: Resources.font.primaryFont,
                                   fontWeight: FontWeight.w400,
                                   height: 0,
                                 ),
@@ -109,7 +109,7 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
-                                  fontFamily: 'Poppins',
+                                  fontFamily: Resources.font.primaryFont,
                                   fontWeight: FontWeight.w600,
                                   height: 0,
                                 ),

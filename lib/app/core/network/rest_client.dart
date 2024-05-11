@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: constant_identifier_names
 enum HttpMethod { POST, GET, PUT, DELETE, PATCH }
 
 class RestClient extends GetxService {
-  // static const BASE_URL = "http://192.168.185.32:3001/api";
+  // ignore: constant_identifier_names
   static const BASE_URL = "https://mahati.xyzuan.my.id/api";
 
   Map<String, String> header() {
@@ -22,6 +23,10 @@ class RestClient extends GetxService {
     };
   }
 
+  /// Request with token
+  /// [url] is endpoint
+  /// [method] is http method
+  /// [params] is request body
   Future<http.Response> request(
     String url,
     HttpMethod method,
@@ -65,6 +70,11 @@ class RestClient extends GetxService {
     }
   }
 
+  /// Request with token
+  /// [url] is endpoint
+  /// [method] is http method
+  /// [params] is request body
+  /// [accessToken] is token
   Future<http.Response> requestWithToken(
     String url,
     HttpMethod method,

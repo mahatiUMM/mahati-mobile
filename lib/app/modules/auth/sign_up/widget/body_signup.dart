@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
-import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
 class BodySignUp extends GetView<SignUpController> {
@@ -16,7 +16,7 @@ class BodySignUp extends GetView<SignUpController> {
       width: Get.width,
       height: Get.height,
       decoration: ShapeDecoration(
-          color: ColorApp.backgroundColor,
+          color: Resources.color.whiteColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
       child: Padding(
@@ -40,16 +40,16 @@ class BodySignUp extends GetView<SignUpController> {
                   controller: controller.usernameController,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: ColorApp.textFieldColor,
+                      fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle3,
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15))),
                 ),
               ),
@@ -71,16 +71,16 @@ class BodySignUp extends GetView<SignUpController> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: ColorApp.textFieldColor,
+                      fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15))),
                 ),
               ),
@@ -102,16 +102,16 @@ class BodySignUp extends GetView<SignUpController> {
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: ColorApp.textFieldColor,
+                      fillColor: Resources.color.textFieldColor,
                       hintText: "Masukkan Nomor Telp",
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15))),
                 ),
               ),
@@ -135,16 +135,16 @@ class BodySignUp extends GetView<SignUpController> {
                     obscureText: controller.showPassword.value,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: ColorApp.textFieldColor,
+                      fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle2,
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: ColorApp.textFieldColor),
+                              BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -168,7 +168,7 @@ class BodySignUp extends GetView<SignUpController> {
                 width: 1000.w,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorApp.primaryColor,
+                      backgroundColor: Resources.color.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),

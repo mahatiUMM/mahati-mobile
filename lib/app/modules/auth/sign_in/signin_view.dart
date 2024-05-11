@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_controller.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/widget/body_signin.dart';
-import 'package:mahati_mobile/app/utils/colors/color_app.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
 class SignInView extends GetView<SignInController> {
@@ -27,7 +27,9 @@ class SignInView extends GetView<SignInController> {
           width: Get.width,
           height: Get.height,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: ColorApp.backgroundColor),
+          decoration: BoxDecoration(
+            color: Resources.color.whiteColor,
+          ),
           child: Stack(
             children: [
               Positioned(
@@ -39,8 +41,8 @@ class SignInView extends GetView<SignInController> {
                       begin: const Alignment(0.00, -1.00),
                       end: const Alignment(0, 0.5),
                       colors: [
-                        ColorApp.primaryColor,
-                        ColorApp.primaryColorOnGradient
+                        Resources.color.primaryColor,
+                        Resources.color.primaryColorOnGradient,
                       ],
                     ),
                   ),

@@ -176,11 +176,13 @@ class AppPages {
       name: _Paths.questionnaire,
       page: () => const QuestionnaireView(),
       binding: QuestionnaireBinding(),
+      transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.questionnaireQuestion,
       page: () => const QuestionnaireQuestionView(),
       binding: QuestionnaireQuestionBinding(),
+      transitionDuration: const Duration(milliseconds: 300),
     ),
   ];
 }

@@ -79,7 +79,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Row(
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -90,15 +90,16 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
-                                            fontFamily: 'Poppins',
+                                            fontFamily:
+                                                Resources.font.primaryFont,
                                             fontWeight: FontWeight.w500,
                                             height: 0,
                                           ),
                                         ),
-                                        Text("(mmHg)")
+                                        const Text("(mmHg)")
                                       ],
                                     ),
-                                    Text(
+                                    const Text(
                                       '50',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -116,14 +117,15 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Column(
+                                    Column(
                                       children: [
                                         Text(
                                           "Diastolic",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
-                                            fontFamily: 'Poppins',
+                                            fontFamily:
+                                                Resources.font.primaryFont,
                                             fontWeight: FontWeight.w500,
                                             height: 0,
                                           ),
@@ -149,19 +151,20 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Column(
+                                    Column(
                                       children: [
                                         Text(
                                           "Pulse",
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
-                                            fontFamily: 'Poppins',
+                                            fontFamily:
+                                                Resources.font.primaryFont,
                                             fontWeight: FontWeight.w500,
                                             height: 0,
                                           ),
                                         ),
-                                        Text(
+                                        const Text(
                                           "(BMP)",
                                         )
                                       ],
