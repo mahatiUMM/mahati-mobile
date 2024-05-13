@@ -5,6 +5,7 @@ import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_date.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_filter.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
+import 'package:intl/intl.dart';
 
 class ReminderView extends GetView<ReminderController> {
   const ReminderView({super.key});
@@ -82,11 +83,11 @@ class ReminderView extends GetView<ReminderController> {
                                   status: controller
                                       .reminderList[index].medicineTaken
                                       .toString(),
-                                  strong: controller
-                                      .reminderList[index].medicineTotal
-                                      .toString(),
-                                  time: controller.reminderList[index].createdAt
-                                      .toString(),
+                                  strong: controller.capSizeToString(
+                                      controller.reminderList[index].capSize),
+                                  time: DateFormat('HH:mm', 'id_ID').format(
+                                      controller.reminderList[index].createdAt
+                                          .toLocal()),
                                 ),
                               );
                             },

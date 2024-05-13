@@ -23,7 +23,7 @@ Widget reminderCard(
             borderRadius: BorderRadius.horizontal(left: Radius.circular(30)),
             image: DecorationImage(
               image: NetworkImage(
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/1200px-SMPTE_Color_Bars.svg.png"),
+                  "https://www.fairobserver.com/wp-content/uploads/2020/07/bespoke-medicine-2.jpg"),
               fit: BoxFit.cover,
             ),
           ),
