@@ -27,7 +27,6 @@ class QuestionnaireController extends GetxController {
 
   Future<void> getUserProfile() async {
     final token = await getToken();
-    final restClient = Get.find<RestClient>();
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.GET, null, token.toString());
     var responseData = UserModel.fromJson(jsonDecode(result.body));

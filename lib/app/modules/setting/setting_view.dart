@@ -54,7 +54,7 @@ class SettingView extends GetView {
               ),
               settingAccount(),
               settingHelp(),
-              settingACtion(),
+              settingAction(),
             ],
           ),
         ),

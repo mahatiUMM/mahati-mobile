@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/setting/setting_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-Widget settingACtion() {
+Widget settingAction() {
+  final SettingController controller = Get.find<SettingController>();
+
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +83,17 @@ Widget settingACtion() {
       const SizedBox(height: 10),
       ElevatedButton(
         onPressed: () {
-          print("Keluar Akun");
+          Get.defaultDialog(
+            title: "Keluar Akun",
+            middleText: "Apakah anda yakin ingin keluar akun?",
+            textConfirm: "Ya",
+            textCancel: "Tidak",
+            confirmTextColor: Resources.color.baseColor,
+            cancelTextColor: Resources.color.baseColor,
+            onConfirm: () {
+              controller.removeToken();
+            },
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Resources.color.whiteColor,

@@ -14,7 +14,6 @@ class QuestionnaireQuestionController extends GetxController {
   @override
   onInit() async {
     super.onInit();
-    // await fetchQuestionnaires();
     await getQuestionnaires();
   }
 
@@ -48,33 +47,4 @@ class QuestionnaireQuestionController extends GetxController {
       }
     }
   }
-
-  // Future<void> fetchQuestionnaires() async {
-  //   try {
-  //     isLoading.value = true;
-  //     final response = await http.get(Uri.parse('${_baseUrl}'));
-  //     if (response.statusCode == 200) {
-  //       final jsonData = response.body;
-  //       final questionnaireResult =
-  //           QuestionnaireResult.fromJson(json.decode(jsonData));
-  //       questionnaires.value = questionnaireResult.questionnaires;
-  //       // print(questionnaireResult);
-
-  //       questionnaires.value.forEach((questionnaire) {
-  //         // print(questionnaire.title);
-  //         // Print other properties as needed
-  //       });
-  //     } else {
-  //       if (kDebugMode) {
-  //         print('Request failed with status: ${response.statusCode}');
-  //       }
-  //     }
-  //   } catch (e) {
-  //     if (kDebugMode) {
-  //       print('An error occurred: $e');
-  //     }
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
 }
