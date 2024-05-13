@@ -9,7 +9,7 @@ import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInController extends GetxController {
-  late RestClient restClient;
+  final RestClient restClient = Get.find<RestClient>();
   final signIn = <SignInModel>[].obs;
   RxBool showPassword = true.obs;
 
@@ -19,7 +19,7 @@ class SignInController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    restClient = Get.put(RestClient());
+    toggleObscureText();
   }
 
   void toggleObscureText() {

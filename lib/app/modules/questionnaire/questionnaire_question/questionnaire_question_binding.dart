@@ -4,6 +4,6 @@ import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/q
 class QuestionnaireQuestionBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<QuestionnaireQuestionController>(() => QuestionnaireQuestionController());
+    Get.lazyPut(() => QuestionnaireQuestionController());
   }
 }
