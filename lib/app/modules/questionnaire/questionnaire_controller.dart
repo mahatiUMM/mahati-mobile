@@ -1,13 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionnaireController extends GetxController {
   late RestClient restClient;
+  // DO NOT USE THIS IN PRODUCTION
   static const String _baseUrl = 'http://10.0.2.2:3001/api/questionnaire';
+  var username = Rx<String>('');
 
   RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);
   RxBool isLoading = false.obs;
@@ -15,8 +19,23 @@ class QuestionnaireController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await fetchQuestionnaires();
-    await getQuestionnaires();
+    await getUserProfile();
+    // await fetchQuestionnaires();
+    // await getQuestionnaires();
+  }
+
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('authToken');
+  }
+
+  Future<void> getUserProfile() async {
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+        "/profile", HttpMethod.GET, null, token.toString());
+    var responseData = UserModel.fromJson(jsonDecode(result.body));
+    username.value = responseData.username;
   }
 
   getQuestionnaires() async {
@@ -43,6 +62,7 @@ class QuestionnaireController extends GetxController {
     }
   }
 
+  // TODO: avoid using url directly in the controller
   Future<void> fetchQuestionnaires() async {
     try {
       isLoading.value = true;

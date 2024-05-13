@@ -20,9 +20,10 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Hai, Jody Yuantoro",
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+              Text(
+                "Hai, ${controller.username.value}",
+                style:
+                    const TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 4.0),

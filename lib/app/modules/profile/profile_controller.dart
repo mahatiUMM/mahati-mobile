@@ -75,13 +75,13 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
+    getUserProfile();
     super.onInit();
     // Load stored image path if available
     String? savedImagePath = _storage.read('imagePath');
     if (savedImagePath != null) {
       image.value = File(savedImagePath);
     }
-    getUserProfile();
   }
 
   void logout() {
@@ -155,11 +155,5 @@ class ProfileController extends GetxController {
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('authToken');
-  }
-
-  // print token
-  void printToken() async {
-    final token = await getToken();
-    print("Token: ${token}");
   }
 }
