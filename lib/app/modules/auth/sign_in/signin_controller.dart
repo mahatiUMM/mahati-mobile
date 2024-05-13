@@ -16,12 +16,6 @@ class SignInController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    toggleObscureText();
-  }
-
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
   }

@@ -120,13 +120,13 @@ class ProfileView extends GetView<ProfileController> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      width: Get.width / 2,
-                                      child: Text(
-                                        controller.username.value.isNotEmpty
-                                            ? controller.username.value
-                                            : "Cannot Load username",
-                                        style: StyleText.homeGreeting3,
+                                    Obx(
+                                      () => SizedBox(
+                                        width: Get.width / 2,
+                                        child: Text(
+                                          controller.username.value,
+                                          style: StyleText.homeGreeting3,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(height: 1.h),

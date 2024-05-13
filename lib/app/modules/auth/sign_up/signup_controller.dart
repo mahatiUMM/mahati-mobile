@@ -17,12 +17,6 @@ class SignUpController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-    toggleObscureText();
-  }
-
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
     print("After toggle: ${showPassword.value}");

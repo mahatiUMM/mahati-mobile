@@ -35,8 +35,9 @@ class QuestionnaireController extends GetxController {
   }
 
   getQuestionnaires() async {
-    final result =
-        await restClient.request("/questionnaire", HttpMethod.GET, null);
+    final token = await getToken();
+    final result = await restClient.requestWithToken(
+        "/questionnaire", HttpMethod.GET, null, token.toString());
 
     print(result.body);
 
@@ -45,13 +46,13 @@ class QuestionnaireController extends GetxController {
       final questionnaireResult =
           QuestionnaireResult.fromJson(json.decode(jsonData));
       questionnaires.value = questionnaireResult.questionnaires;
-      print(questionnaires.value);
-      questionnaires.value.forEach((questionnaire) {
-        questionnaire.question.forEach((element) {
+      print(questionnaires);
+      for (var questionnaire in questionnaires) {
+        for (var element in questionnaire.question) {
           print(element.question);
-        });
+        }
         print(questionnaire.title);
-      });
+      }
     } else {
       if (kDebugMode) {
         print('Request failed with status: ${result.statusCode}');

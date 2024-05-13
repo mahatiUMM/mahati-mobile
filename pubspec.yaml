@@ -1,5 +1,5 @@
 name: mahati_mobile
-version: 1.0.0+1
+version: 1.0.0
 publish_to: none
 description: A new Flutter project.
 environment:
@@ -27,6 +27,7 @@ dependencies:
   pinch_zoom: ^2.0.0
   syncfusion_flutter_charts: ^25.2.3+1
   easy_date_timeline: ^1.0.7
+  flutter_local_notifications: ^17.1.2
 
 dev_dependencies:
   mockito: ^5.4.2

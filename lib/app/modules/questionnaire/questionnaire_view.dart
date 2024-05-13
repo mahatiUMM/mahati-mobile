@@ -20,10 +20,12 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Hai, ${controller.username.value}",
-                style:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+              Obx(
+                () => Text(
+                  "Hai, ${controller.username.value}",
+                  style: const TextStyle(
+                      fontSize: 26, fontWeight: FontWeight.w700),
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 4.0),
@@ -84,7 +86,7 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                             return QuestionnaireCard(
                               title: questionnaire.title!,
                               description: questionnaire.description!,
-                              imageUrl: questionnaire.image!,
+                              imageUrl: questionnaire.image ?? "",
                               onPressed: () {
                                 // Get.to(QuestionnaireQuestionView(), arguments: {'questionnaire': questionnaire});
                                 Get.toNamed('/questionnaire_question',
