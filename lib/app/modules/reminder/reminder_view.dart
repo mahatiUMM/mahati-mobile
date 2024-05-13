@@ -59,26 +59,38 @@ class ReminderView extends GetView<ReminderController> {
                   ),
                 ),
                 reminderDate(),
-                SizedBox(
-                  height: null,
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 8,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          print("Card index: $index clicked");
-                          Get.toNamed('/reminder/detail');
-                        },
-                        child: reminderCard(
-                          title: controller.title,
-                          status: controller.status,
-                          strong: controller.strong,
-                          time: controller.time,
-                        ),
-                      );
-                    },
+                Obx(
+                  () => SizedBox(
+                    height: null,
+                    child: controller.reminderList.isEmpty
+                        ? const Center(
+                            child: Text('Data is empty'),
+                          )
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.reminderList.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  print(controller.reminderList[index].id);
+                                  Get.toNamed('/reminder/detail');
+                                },
+                                child: reminderCard(
+                                  title: controller
+                                      .reminderList[index].medicineName,
+                                  status: controller
+                                      .reminderList[index].medicineTaken
+                                      .toString(),
+                                  strong: controller
+                                      .reminderList[index].medicineTotal
+                                      .toString(),
+                                  time: controller.reminderList[index].createdAt
+                                      .toString(),
+                                ),
+                              );
+                            },
+                          ),
                   ),
                 )
               ],

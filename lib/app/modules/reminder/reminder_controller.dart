@@ -12,6 +12,7 @@ class ReminderController extends GetxController {
   @override
   void onInit() {
     getReminder();
+    getUserId();
     super.onInit();
   }
 
@@ -20,25 +21,33 @@ class ReminderController extends GetxController {
     return prefs.getString('authToken');
   }
 
+  Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return int.parse(prefs.getString('userId')!);
+  }
+
   Future<void> getReminder() async {
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder", HttpMethod.GET, null, token.toString());
-    // Map<String, dynamic> responseBody = jsonDecode(result.body);
-    // var successData = responseBody['success'];
-    // var reminderData = responseBody['data'];
-    // print(successData);
-    // print(reminderData);
 
     if (result.statusCode == 200) {
       var reminderModel = ReminderModel.fromMap(jsonDecode(result.body));
+      reminderList.assignAll(reminderModel.data);
+      final userId = await getUserId();
 
-      // use for loop to get the data
-      for (var i = 0; i < reminderModel.data.length; i++) {
-        reminderList.add(reminderModel.data[i]);
+      if (reminderList[0].userId == userId) {
+        // TODO: search algorithm for reminderList, from now just use for loop
+        for (var i = 0; i < reminderList.length; i++) {
+          print(reminderList[i].medicineName);
+          print(reminderList[i].medicineTaken);
+          print(reminderList[i].medicineTotal);
+          print(reminderList[i].amount);
+          print("Id ${reminderList[i].id}");
+        }
+      } else {
+        print("Data tidak ditemukan");
       }
-
-      print(reminderList[0].medicineName);
     } else {
       print('Request failed with status: ${result.statusCode}');
     }
