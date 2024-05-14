@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/widget/reminder_refill_card.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/widget/reminder_refill_form.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderRefillView extends GetView<ReminderRefillController> {
-  const ReminderRefillView({Key? key}) : super(key: key);
+  const ReminderRefillView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,111 +150,55 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                          'Refill Reminder',
+                        Text(
+                          'Tambah Obat',
                           style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: Resources.font.primaryFont,
                           ),
                         ),
+                        reminderRefillForm(),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                          'Vivamus nec nulla sed libero ultrices fermentum. '
-                          'Vivamus nec nulla sed libero ultrices fermentum.',
+                          "Rekomendasi Obat",
                           style: TextStyle(
-                            fontSize: 14,
-                            color: Resources.color.baseColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: Resources.font.primaryFont,
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
-                        const Text(
-                          'Pilih Obat',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
-                        const SizedBox(
-                          height: 10,
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
-                        Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Resources.color.baseColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Icon(
-                                Icons.search,
-                                color: Resources.color.baseColor,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Cari obat',
-                                style: TextStyle(
-                                  color: Resources.color.baseColor,
-                                ),
-                              ),
-                            ],
-                          ),
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
-                        const SizedBox(
-                          height: 20,
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
-                        const Text(
-                          'Pilih Waktu',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Resources.color.baseColor
-                                      .withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Icon(
-                                      Icons.calendar_today,
-                                      color: Resources.color.baseColor,
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Pilih Tanggal',
-                                      style: TextStyle(
-                                        color: Resources.color.baseColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                        reminderRefillCard(
+                          title: "Paxil CR",
+                          left: "Sisa 2 pills",
+                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
                       ],
                     ),
