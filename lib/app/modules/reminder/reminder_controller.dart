@@ -5,12 +5,6 @@ import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum MedicineStrength {
-  weak,
-  medium,
-  strong,
-}
-
 class ReminderController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
@@ -32,14 +26,25 @@ class ReminderController extends GetxController {
     return int.parse(prefs.getString('userId')!);
   }
 
+  String checkStatus(int status) {
+    switch (status) {
+      case 0:
+        return 'Belum Minum Obat';
+      case 1:
+        return 'Sudah Minum Obat';
+      default:
+        return 'Unknown';
+    }
+  }
+
   String capSizeToString(int capSize) {
     switch (capSize) {
       case 1:
-        return MedicineStrength.weak.toString().split('.').last;
+        return "Tidak Kuat";
       case 2:
-        return MedicineStrength.medium.toString().split('.').last;
+        return "Sedang";
       case 3:
-        return MedicineStrength.strong.toString().split('.').last;
+        return "Kuat";
       default:
         return 'Unknown';
     }

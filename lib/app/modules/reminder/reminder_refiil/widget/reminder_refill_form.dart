@@ -1,52 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 Widget reminderRefillForm() {
+  final ReminderRefillController controller = ReminderRefillController();
   return Card(
     elevation: 0,
     color: Resources.color.whiteColor,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          "Nama Obat",
+          style: TextStyle(
+            color: Resources.color.baseColor,
+          ),
+        ),
         TextField(
-          // controller: controller.passwordController,
-          // obscureText: controller.showPassword.value,
+          controller: controller.titleController,
           decoration: InputDecoration(
             filled: true,
             fillColor: Resources.color.textFieldColor,
-            // hintText: TextStrings.authSubtitle1,
-            // hintStyle: StyleText.signInField,
+            hintText: "Masukkan nama obat",
+            hintStyle: TextStyle(
+              color: Resources.color.hintColor,
+            ),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Resources.color.textFieldColor),
                 borderRadius: BorderRadius.circular(15)),
             focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Resources.color.textFieldColor),
                 borderRadius: BorderRadius.circular(15)),
-            // suffixIcon: IconButton(
-            //   icon: Icon(
-            //     controller.showPassword.value
-            //         ? Icons.visibility
-            //         : Icons.visibility_off,
-            //     color: Colors.black54,
-            //   ),
-            //   onPressed: () {
-            //     controller.toggleObscureText();
-            //   },
-            // ),
           ),
         ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Title',
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Status",
+          style: TextStyle(
+            color: Resources.color.baseColor,
           ),
         ),
-        TextFormField(
+        TextField(
+          controller: controller.statusController,
           decoration: InputDecoration(
-            labelText: 'Left',
+            filled: true,
+            fillColor: Resources.color.textFieldColor,
+            hintText: "Masukkan status",
+            hintStyle: TextStyle(
+              color: Resources.color.hintColor,
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Resources.color.textFieldColor),
+                borderRadius: BorderRadius.circular(15)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Resources.color.textFieldColor),
+                borderRadius: BorderRadius.circular(15)),
           ),
         ),
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Refill',
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Waktu",
+          style: TextStyle(
+            color: Resources.color.baseColor,
           ),
         ),
       ],

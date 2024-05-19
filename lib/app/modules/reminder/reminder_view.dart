@@ -80,9 +80,8 @@ class ReminderView extends GetView<ReminderController> {
                                 child: reminderCard(
                                   title: controller
                                       .reminderList[index].medicineName,
-                                  status: controller
-                                      .reminderList[index].medicineTaken
-                                      .toString(),
+                                  status: controller.checkStatus(controller
+                                      .reminderList[index].medicineTaken),
                                   strong: controller.capSizeToString(
                                       controller.reminderList[index].capSize),
                                   time: DateFormat('HH:mm', 'id_ID').format(
