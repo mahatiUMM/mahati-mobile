@@ -158,7 +158,7 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                             fontFamily: Resources.font.primaryFont,
                           ),
                         ),
-                        reminderRefillForm(),
+                        reminderRefillForm(context),
                         const SizedBox(
                           height: 20,
                         ),
