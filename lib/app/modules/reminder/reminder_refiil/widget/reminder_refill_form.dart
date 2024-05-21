@@ -149,6 +149,28 @@ Widget reminderRefillForm(BuildContext context) {
             ),
           ),
         ),
+        const SizedBox(height: 15),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Resources.color.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            minimumSize: const Size(double.infinity, 40),
+          ),
+          onPressed: () {
+            // controller.postReminder();
+          },
+          child: Text(
+            "Simpan",
+            style: TextStyle(
+              color: Resources.color.whiteColor,
+              fontSize: 11.sp,
+              fontFamily: Resources.font.primaryFont,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
       ],
     ),
   );

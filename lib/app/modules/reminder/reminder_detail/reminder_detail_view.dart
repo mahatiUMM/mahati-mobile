@@ -145,51 +145,89 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Card(
-                                  color: Resources.color.whiteColor,
+                                  color: Resources.color.textFieldColor,
+                                  elevation: 0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: SizedBox(
                                     width: 150,
                                     height: 75,
-                                    child: Center(
-                                      child: Text(
-                                        "Jadwal",
-                                        style: TextStyle(
-                                          color: Resources.color.baseColor,
-                                          fontSize: 12,
-                                          fontFamily:
-                                              Resources.font.primaryFont,
-                                          fontWeight: FontWeight.w800,
-                                          height: 0,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Jadwal",
+                                          style: TextStyle(
+                                            color: Resources.color.baseColor,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                Resources.font.primaryFont,
+                                            fontWeight: FontWeight.w800,
+                                            height: 0,
+                                          ),
                                         ),
-                                      ),
+                                        // Text(
+                                        //   controller
+                                        //           .reminder.value!.data.capSize
+                                        //           .toString() ??
+                                        //       "",
+                                        //   style: TextStyle(
+                                        //     color: Resources.color.baseColor,
+                                        //     fontSize: 12,
+                                        //     fontFamily:
+                                        //         Resources.font.primaryFont,
+                                        //     fontWeight: FontWeight.w800,
+                                        //     height: 0,
+                                        //   ),
+                                        // ),
+                                      ],
                                     ),
                                   ),
                                 ),
                                 Card(
-                                  color: Resources.color.whiteColor,
+                                  color: Resources.color.textFieldColor,
+                                  elevation: 0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: SizedBox(
                                     width: 150,
                                     height: 75,
-                                    child: Center(
-                                      child: Text(
-                                        "Kekuatan",
-                                        style: TextStyle(
-                                          color: Resources.color.baseColor,
-                                          fontSize: 12,
-                                          fontFamily:
-                                              Resources.font.primaryFont,
-                                          fontWeight: FontWeight.w800,
-                                          height: 0,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Kekuatan",
+                                          style: TextStyle(
+                                            color: Resources.color.baseColor,
+                                            fontSize: 14,
+                                            fontFamily:
+                                                Resources.font.primaryFont,
+                                            fontWeight: FontWeight.w800,
+                                            height: 0,
+                                          ),
                                         ),
-                                      ),
+                                        // Text(
+                                        //   controller
+                                        //           .reminder.value!.data.capSize
+                                        //           .toString() ??
+                                        //       "",
+                                        //   style: TextStyle(
+                                        //     color: Resources.color.baseColor,
+                                        //     fontSize: 12,
+                                        //     fontFamily:
+                                        //         Resources.font.primaryFont,
+                                        //     fontWeight: FontWeight.w800,
+                                        //     height: 0,
+                                        //   ),
+                                        // ),
+                                      ],
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             )
                           ],

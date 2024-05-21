@@ -5,7 +5,6 @@ import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_date.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_filter.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:intl/intl.dart';
 
 class ReminderView extends GetView<ReminderController> {
   const ReminderView({super.key});
@@ -74,8 +73,11 @@ class ReminderView extends GetView<ReminderController> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  print(controller.reminderList[index].id);
-                                  Get.toNamed('/reminder/detail');
+                                  Get.toNamed(
+                                    '/reminder/detail',
+                                    arguments:
+                                        controller.reminderList[index].id,
+                                  );
                                 },
                                 child: reminderCard(
                                   title: controller
@@ -84,9 +86,11 @@ class ReminderView extends GetView<ReminderController> {
                                       .reminderList[index].medicineTaken),
                                   strong: controller.capSizeToString(
                                       controller.reminderList[index].capSize),
-                                  time: DateFormat('HH:mm', 'id_ID').format(
-                                      controller.reminderList[index].createdAt
-                                          .toLocal()),
+                                  // time: DateFormat('HH:mm', 'id_ID').format(
+                                  //     controller.reminderList[index].createdAt
+                                  //         .toLocal()),
+                                  time: controller
+                                      .reminderList[index].medicineTime,
                                 ),
                               );
                             },

@@ -69,10 +69,4 @@ class ReminderController extends GetxController {
       print('Request failed with status: ${result.statusCode}');
     }
   }
-
-  // dummy data
-  String title = "Paracetamol XL2";
-  String status = "Completed Minum Obat";
-  String strong = "Sangat Kuat";
-  String time = "02.30";
 }

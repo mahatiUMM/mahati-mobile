@@ -1,67 +1,62 @@
-// To parse this JSON data, do
-//
-//     final reminderModel = reminderModelFromMap(jsonString);
-
 import 'dart:convert';
 
-ReminderModel reminderModelFromMap(String str) =>
-    ReminderModel.fromMap(json.decode(str));
+ReminderIdModel reminderIdModelFromMap(String str) =>
+    ReminderIdModel.fromMap(json.decode(str));
 
-String reminderModelToMap(ReminderModel data) => json.encode(data.toMap());
+String reminderIdModelToMap(ReminderIdModel data) => json.encode(data.toMap());
 
-class ReminderModel {
+class ReminderIdModel {
   bool success;
-  List<ReminderData> data;
+  ReminderIdData data;
 
-  ReminderModel({
+  ReminderIdModel({
     required this.success,
     required this.data,
   });
 
-  factory ReminderModel.fromMap(Map<String, dynamic> json) => ReminderModel(
+  factory ReminderIdModel.fromMap(Map<String, dynamic> json) => ReminderIdModel(
         success: json["success"],
-        data: List<ReminderData>.from(
-            json["data"].map((x) => ReminderData.fromMap(x))),
+        data: ReminderIdData.fromMap(json["data"]),
       );
 
   Map<String, dynamic> toMap() => {
         "success": success,
-        "data": List<dynamic>.from(data.map((x) => x.toMap())),
+        "data": data.toMap(),
       };
 }
 
-class ReminderData {
+class ReminderIdData {
   int id;
   int userId;
   String medicineName;
-  String medicineTime;
   int medicineTaken;
   int medicineTotal;
   int amount;
   String cause;
   int capSize;
+  String medicineTime;
   DateTime createdAt;
-  dynamic updatedAt;
+  DateTime? updatedAt;
   User user;
-  List<dynamic>? schedules;
+  List<dynamic> schedules;
 
-  ReminderData({
+  ReminderIdData({
     required this.id,
     required this.userId,
     required this.medicineName,
-    required this.medicineTime,
     required this.medicineTaken,
     required this.medicineTotal,
     required this.amount,
     required this.cause,
     required this.capSize,
+    required this.medicineTime,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.user,
     required this.schedules,
   });
 
-  factory ReminderData.fromMap(Map<String, dynamic> json) => ReminderData(
+  factory ReminderIdData.fromMap(Map<String, dynamic> json) => ReminderIdData(
         id: json["id"],
         userId: json["user_id"],
         medicineName: json["medicine_name"],
@@ -72,25 +67,27 @@ class ReminderData {
         capSize: json["cap_size"],
         medicineTime: json["medicine_time"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"],
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
         user: User.fromMap(json["user"]),
-        schedules: json["schedules"],
+        schedules: List<dynamic>.from(json["schedules"].map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "user_id": userId,
         "medicine_name": medicineName,
-        "medicine_time": medicineTime,
         "medicine_taken": medicineTaken,
         "medicine_total": medicineTotal,
         "amount": amount,
         "cause": cause,
         "cap_size": capSize,
+        "medicine_time": medicineTime,
         "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt,
+        "updated_at": updatedAt?.toIso8601String(),
         "user": user.toMap(),
-        "schedules": List<dynamic>.from(schedules!.map((x) => x)),
+        "schedules": List<dynamic>.from(schedules.map((x) => x)),
       };
 }
 
@@ -100,9 +97,9 @@ class User {
   String email;
   String password;
   String number;
-  String? photo;
+  String photo;
   DateTime createdAt;
-  dynamic updatedAt;
+  DateTime? updatedAt;
 
   User({
     required this.id,
@@ -112,7 +109,7 @@ class User {
     required this.number,
     required this.photo,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
   });
 
   factory User.fromMap(Map<String, dynamic> json) => User(
@@ -123,7 +120,9 @@ class User {
         number: json["number"],
         photo: json["photo"],
         createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"],
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
       );
 
   Map<String, dynamic> toMap() => {
@@ -134,6 +133,6 @@ class User {
         "number": number,
         "photo": photo,
         "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt,
+        "updated_at": updatedAt?.toIso8601String(),
       };
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReminderRefillController extends GetxController {
   final TextEditingController titleController = TextEditingController();
@@ -10,6 +11,12 @@ class ReminderRefillController extends GetxController {
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+
+  @override
+  void onInit() {
+    super.onInit();
+    getUserId();
+  }
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -40,7 +47,19 @@ class ReminderRefillController extends GetxController {
     }
   }
 
-  Future<void> postReminder() async {
+  Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return int.parse(prefs.getString('userId')!);
+  }
+
+  Future<void> postReminder(
+      String user_id,
+      String medicine_name,
+      String medicine_taken,
+      String medicine_total,
+      String amount,
+      String cause,
+      String cap_size) async {
     // Your code here
   }
 }
