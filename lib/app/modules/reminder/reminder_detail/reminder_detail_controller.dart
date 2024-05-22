@@ -7,14 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ReminderDetailController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
-  var reminder = Rxn<ReminderIdModel>();
   final RxInt reminderId = 0.obs;
+  final Rx<ReminderIdModel?> reminderModel = Rx<ReminderIdModel?>(null);
 
   @override
   void onInit() {
-    super.onInit();
     getReminder();
     reminderId.value = Get.arguments;
+    super.onInit();
   }
 
   Future<String?> getToken() async {
@@ -27,19 +27,27 @@ class ReminderDetailController extends GetxController {
     return int.parse(prefs.getString('userId')!);
   }
 
+  String capSizeToString(int capSize) {
+    switch (capSize) {
+      case 1:
+        return "Tidak Kuat";
+      case 2:
+        return "Sedang";
+      case 3:
+        return "Kuat";
+      default:
+        return 'Unknown';
+    }
+  }
+
   Future<void> getReminder() async {
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder/$reminderId", HttpMethod.GET, null, token.toString());
 
-    print("Reminder ID " + Get.arguments.toString());
-
     if (result.statusCode == 200) {
-      print("das");
-      reminder = ReminderIdModel.fromMap(jsonDecode(result.body))
-          as Rxn<ReminderIdModel>;
-      update();
-      print("Data " + reminder.value!.data!.medicineName.toString());
+      reminderModel.value = ReminderIdModel.fromMap(jsonDecode(result.body));
+      print(reminderModel.value!.data);
     } else {
       print('Request failed with status: ${result.statusCode}');
     }

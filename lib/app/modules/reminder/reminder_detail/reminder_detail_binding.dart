@@ -4,6 +4,6 @@ import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_deta
 class ReminderDetailBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ReminderDetailController());
+    Get.put(ReminderDetailController());
   }
 }

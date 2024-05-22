@@ -22,6 +22,9 @@ class AppColors {
   Color tertiaryColor2 = const Color(0xFF73BBE7);
   Color tertiaryColor3 = const Color(0xFFA0D4F0);
 
+  Color orangeColor = const Color(0xFFFBBA6E);
+  Color orangeColor1 = const Color(0xFFE9CC66);
+
   Color baseColor = const Color(0xFF2C3131);
   Color baseColor1 = const Color(0xFF626262);
   Color baseColor2 = const Color(0xFFA9A9A9);

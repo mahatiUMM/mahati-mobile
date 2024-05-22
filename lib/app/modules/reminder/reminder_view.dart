@@ -86,9 +86,6 @@ class ReminderView extends GetView<ReminderController> {
                                       .reminderList[index].medicineTaken),
                                   strong: controller.capSizeToString(
                                       controller.reminderList[index].capSize),
-                                  // time: DateFormat('HH:mm', 'id_ID').format(
-                                  //     controller.reminderList[index].createdAt
-                                  //         .toLocal()),
                                   time: controller
                                       .reminderList[index].medicineTime,
                                 ),
@@ -109,7 +106,6 @@ class ReminderView extends GetView<ReminderController> {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-          print("Add reminder clicked");
           Get.toNamed('/reminder/refill');
         },
         child: Icon(Icons.add, color: Resources.color.baseColor, size: 28),

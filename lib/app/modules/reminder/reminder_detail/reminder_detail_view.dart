@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_controller.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_detail/widget/reminder_detail_card_section.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderDetailView extends GetView<ReminderDetailController> {
@@ -121,6 +122,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
               [
                 Container(
                   color: Resources.color.whiteColor,
+                  height: Get.height,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
@@ -139,99 +141,7 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Card(
-                                  color: Resources.color.textFieldColor,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: SizedBox(
-                                    width: 150,
-                                    height: 75,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Jadwal",
-                                          style: TextStyle(
-                                            color: Resources.color.baseColor,
-                                            fontSize: 14,
-                                            fontFamily:
-                                                Resources.font.primaryFont,
-                                            fontWeight: FontWeight.w800,
-                                            height: 0,
-                                          ),
-                                        ),
-                                        // Text(
-                                        //   controller
-                                        //           .reminder.value!.data.capSize
-                                        //           .toString() ??
-                                        //       "",
-                                        //   style: TextStyle(
-                                        //     color: Resources.color.baseColor,
-                                        //     fontSize: 12,
-                                        //     fontFamily:
-                                        //         Resources.font.primaryFont,
-                                        //     fontWeight: FontWeight.w800,
-                                        //     height: 0,
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Card(
-                                  color: Resources.color.textFieldColor,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: SizedBox(
-                                    width: 150,
-                                    height: 75,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Kekuatan",
-                                          style: TextStyle(
-                                            color: Resources.color.baseColor,
-                                            fontSize: 14,
-                                            fontFamily:
-                                                Resources.font.primaryFont,
-                                            fontWeight: FontWeight.w800,
-                                            height: 0,
-                                          ),
-                                        ),
-                                        // Text(
-                                        //   controller
-                                        //           .reminder.value!.data.capSize
-                                        //           .toString() ??
-                                        //       "",
-                                        //   style: TextStyle(
-                                        //     color: Resources.color.baseColor,
-                                        //     fontSize: 12,
-                                        //     fontFamily:
-                                        //         Resources.font.primaryFont,
-                                        //     fontWeight: FontWeight.w800,
-                                        //     height: 0,
-                                        //   ),
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
+                        buildCardSection(),
                       ],
                     ),
                   ),
