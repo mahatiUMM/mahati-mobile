@@ -23,7 +23,7 @@ Widget reminderRefillForm(BuildContext context) {
           ),
         ),
         TextField(
-          controller: controller.titleController,
+          controller: controller.namaObatController,
           decoration: InputDecoration(
             filled: true,
             fillColor: Resources.color.textFieldColor,
@@ -43,7 +43,7 @@ Widget reminderRefillForm(BuildContext context) {
         ),
         const SizedBox(height: 15),
         Text(
-          "Status",
+          "Obat yang Sudah Diminum",
           style: TextStyle(
             decoration: TextDecoration.none,
             color: Resources.color.subtitleColor,
@@ -53,11 +53,12 @@ Widget reminderRefillForm(BuildContext context) {
           ),
         ),
         TextField(
-          controller: controller.statusController,
+          controller: controller.takenObatController,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
             filled: true,
             fillColor: Resources.color.textFieldColor,
-            hintText: "Masukkan status",
+            hintText: "Masukkan obat yang sudah diminum",
             hintStyle: TextStyle(
               color: Resources.color.hintColor,
             ),
@@ -73,7 +74,7 @@ Widget reminderRefillForm(BuildContext context) {
         ),
         const SizedBox(height: 15),
         Text(
-          "Tanggal",
+          "Total Obat",
           style: TextStyle(
             decoration: TextDecoration.none,
             color: Resources.color.subtitleColor,
@@ -82,37 +83,89 @@ Widget reminderRefillForm(BuildContext context) {
             fontWeight: FontWeight.w500,
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            controller.selectDate(context);
-          },
-          child: AbsorbPointer(
-            child: TextField(
-              controller: controller.dateController,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Resources.color.textFieldColor,
-                hintText: controller.dateController.text.isEmpty
-                    ? "Pilih tanggal"
-                    : controller.dateController.text,
-                hintStyle: TextStyle(
-                  color: Resources.color.hintColor,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Resources.color.textFieldColor),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Resources.color.textFieldColor),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
+        TextField(
+          controller: controller.amountObatController,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Resources.color.textFieldColor,
+            hintText: "Masukkan total obat",
+            hintStyle: TextStyle(
+              color: Resources.color.hintColor,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
             ),
           ),
         ),
         const SizedBox(height: 15),
         Text(
-          "Waktu",
+          "Penyebab Sakit",
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Resources.color.subtitleColor,
+            fontSize: 11.sp,
+            fontFamily: Resources.font.primaryFont,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        TextField(
+          controller: controller.causeObatController,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Resources.color.textFieldColor,
+            hintText: "Masukkan penyebab sakit",
+            hintStyle: TextStyle(
+              color: Resources.color.hintColor,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          "Ukuran Kapsul",
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Resources.color.subtitleColor,
+            fontSize: 11.sp,
+            fontFamily: Resources.font.primaryFont,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        TextField(
+          controller: controller.causeObatController,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Resources.color.textFieldColor,
+            hintText: "Masukkan ukuran kapsul",
+            hintStyle: TextStyle(
+              color: Resources.color.hintColor,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Resources.color.textFieldColor),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          "Waktu Pengingat Obat",
           style: TextStyle(
             decoration: TextDecoration.none,
             color: Resources.color.subtitleColor,
@@ -127,13 +180,13 @@ Widget reminderRefillForm(BuildContext context) {
           },
           child: AbsorbPointer(
             child: TextField(
-              controller: controller.timeController,
+              controller: controller.timeObatController,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Resources.color.textFieldColor,
-                hintText: controller.timeController.text.isEmpty
-                    ? "Pilih waktu"
-                    : controller.timeController.text,
+                hintText: controller.timeObatController.text.isEmpty
+                    ? "Pilih waktu pengingat obat (per hari)"
+                    : controller.timeObatController.text,
                 hintStyle: TextStyle(
                   color: Resources.color.hintColor,
                 ),
@@ -149,17 +202,25 @@ Widget reminderRefillForm(BuildContext context) {
             ),
           ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Resources.color.primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            minimumSize: const Size(double.infinity, 40),
+            minimumSize: const Size(double.infinity, 50),
           ),
           onPressed: () {
-            // controller.postReminder();
+            controller.postReminder(
+              controller.namaObatController.text,
+              controller.takenObatController.text,
+              controller.totalObatController.text,
+              controller.amountObatController.text,
+              controller.causeObatController.text,
+              controller.capSizeObatController.text,
+              controller.timeObatController.text,
+            );
           },
           child: Text(
             "Simpan",
@@ -167,7 +228,7 @@ Widget reminderRefillForm(BuildContext context) {
               color: Resources.color.whiteColor,
               fontSize: 11.sp,
               fontFamily: Resources.font.primaryFont,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
