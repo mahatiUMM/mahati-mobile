@@ -5,7 +5,6 @@ import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class ReminderRefillController extends GetxController {
   final TextEditingController namaObatController = TextEditingController();
@@ -88,13 +87,13 @@ class ReminderRefillController extends GetxController {
       Duration(seconds: 5),
     ));
 
-    NotificationService().scheduleNotification(
-      title: "Reminder",
-      body: "Jangan lupa minum obat",
-      scheduledNotificationDateTime: DateTime.now().add(
-        Duration(seconds: 5),
-      ),
-    );
+    // NotificationService().scheduleNotification(
+    //   title: "Reminder",
+    //   body: "Jangan lupa minum obat",
+    //   scheduledNotificationDateTime: DateTime.now().add(
+    //     Duration(seconds: 5),
+    //   ),
+    // );
 
     if (userId == null ||
         medicineName == "" ||

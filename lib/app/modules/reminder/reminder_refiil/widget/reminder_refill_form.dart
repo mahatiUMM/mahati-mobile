@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
+import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
@@ -212,14 +213,21 @@ Widget reminderRefillForm(BuildContext context) {
             minimumSize: const Size(double.infinity, 50),
           ),
           onPressed: () {
-            controller.postReminder(
-              controller.namaObatController.text,
-              controller.takenObatController.text,
-              controller.totalObatController.text,
-              controller.amountObatController.text,
-              controller.causeObatController.text,
-              controller.capSizeObatController.text,
-              controller.timeObatController.text,
+            // controller.postReminder(
+            //   controller.namaObatController.text,
+            //   controller.takenObatController.text,
+            //   controller.totalObatController.text,
+            //   controller.amountObatController.text,
+            //   controller.causeObatController.text,
+            //   controller.capSizeObatController.text,
+            //   controller.timeObatController.text,
+            // );
+            NotificationService().scheduleNotification(
+              title: "Reminder",
+              body: "Jangan lupa minum obat",
+              scheduledNotificationDateTime: DateTime.now().add(
+                Duration(seconds: 5),
+              ),
             );
           },
           child: Text(
