@@ -14,7 +14,7 @@ void main() async {
   await GetStorage.init();
   await Get.putAsync(() async => await SharedPreferences.getInstance());
   await initializeDateFormatting('id_ID', null);
-  NotificationService().initNotification();
+  await NotificationService().initNotification();
   tz.initializeTimeZones();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.dark,

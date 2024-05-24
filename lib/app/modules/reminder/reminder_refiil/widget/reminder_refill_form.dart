@@ -222,12 +222,21 @@ Widget reminderRefillForm(BuildContext context) {
             //   controller.capSizeObatController.text,
             //   controller.timeObatController.text,
             // );
-            NotificationService().scheduleNotification(
-              title: "Reminder",
-              body: "Jangan lupa minum obat",
-              scheduledNotificationDateTime: DateTime.now().add(
-                Duration(seconds: 5),
-              ),
+
+            // NotificationService().scheduleNotification(
+            //   id: 6,
+            //   title: "Reminder",
+            //   body: "Jangan lupa minum obat",
+            //   payLoad: "Test Payload",
+            //   scheduledNotificationDateTime: DateTime.now().add(
+            //     Duration(seconds: 5),
+            //   ),
+            // );
+
+            NotificationService().showNotification(
+              title: "Test",
+              body: "Test",
+              payLoad: "Test",
             );
           },
           child: Text(

@@ -128,14 +128,17 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Paracetamol XL2",
-                          style: TextStyle(
-                            color: Resources.color.baseColor,
-                            fontSize: 20,
-                            fontFamily: Resources.font.primaryFont,
-                            fontWeight: FontWeight.w800,
-                            height: 0,
+                        Obx(
+                          () => Text(
+                            controller.reminderModel.value?.data.medicineName ??
+                                "Loading...",
+                            style: TextStyle(
+                              color: Resources.color.baseColor,
+                              fontSize: 20,
+                              fontFamily: Resources.font.primaryFont,
+                              fontWeight: FontWeight.w800,
+                              height: 0,
+                            ),
                           ),
                         ),
                         const SizedBox(

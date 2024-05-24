@@ -16,7 +16,7 @@ Widget buildCardSection() {
             value: Obx(
               () => Text(
                 controller.reminderModel.value?.data.medicineTime.toString() ??
-                    "",
+                    "Loading...",
                 style: TextStyle(
                   color: Resources.color.secondaryColor1,
                   fontSize: 12,
@@ -50,11 +50,11 @@ Widget buildCardSection() {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildInfoCard(
-            title: "Tipe",
+            title: "Sudah Diminum",
             value: Obx(
               () => Text(
-                controller.capSizeToString(
-                    controller.reminderModel.value?.data.capSize ?? 0),
+                controller.reminderModel.value?.data.medicineTaken.toString() ??
+                    "Loading...",
                 style: TextStyle(
                   color: Resources.color.orangeColor,
                   fontSize: 12,
@@ -66,11 +66,11 @@ Widget buildCardSection() {
             ),
           ),
           buildInfoCard(
-            title: "Fequency",
+            title: "Total",
             value: Obx(
               () => Text(
-                controller.capSizeToString(
-                    controller.reminderModel.value?.data.capSize ?? 0),
+                controller.reminderModel.value?.data.amount.toString() ??
+                    "Loading...",
                 style: TextStyle(
                   color: Resources.color.primaryColor,
                   fontSize: 12,
@@ -88,13 +88,12 @@ Widget buildCardSection() {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildInfoCard(
-            title: "Durasi",
+            title: "Penyebab",
             value: Obx(
               () => Text(
-                controller.capSizeToString(
-                    controller.reminderModel.value?.data.capSize ?? 0),
+                controller.reminderModel.value?.data.cause ?? "Loading...",
                 style: TextStyle(
-                  color: Resources.color.primaryColor1,
+                  color: Resources.color.primaryColor,
                   fontSize: 12,
                   fontFamily: Resources.font.primaryFont,
                   fontWeight: FontWeight.w800,
@@ -104,11 +103,12 @@ Widget buildCardSection() {
             ),
           ),
           buildInfoCard(
-            title: "Asal Obat",
+            title: "Dibuat Tanggal",
             value: Obx(
               () => Text(
-                controller.capSizeToString(
-                    controller.reminderModel.value?.data.capSize ?? 0),
+                controller.reminderModel.value?.data.createdAt
+                        .toIso8601String() ??
+                    "Loading...",
                 style: TextStyle(
                   color: Resources.color.orangeColor1,
                   fontSize: 12,

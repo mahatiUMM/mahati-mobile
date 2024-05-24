@@ -47,7 +47,6 @@ class ReminderDetailController extends GetxController {
 
     if (result.statusCode == 200) {
       reminderModel.value = ReminderIdModel.fromMap(jsonDecode(result.body));
-      print(reminderModel.value!.data);
     } else {
       print('Request failed with status: ${result.statusCode}');
     }

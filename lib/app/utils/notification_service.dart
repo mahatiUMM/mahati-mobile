@@ -19,6 +19,7 @@ class NotificationService {
 
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
     await notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {});
@@ -38,7 +39,7 @@ class NotificationService {
   }
 
   Future scheduleNotification(
-      {int id = 0,
+      {int id = 6,
       String? title,
       String? body,
       String? payLoad,
