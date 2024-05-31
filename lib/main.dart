@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'app/routes/app_pages.dart';
@@ -14,6 +15,11 @@ void main() async {
   await GetStorage.init();
   await Get.putAsync(() async => await SharedPreferences.getInstance());
   await initializeDateFormatting('id_ID', null);
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   await NotificationService().initNotification();
   tz.initializeTimeZones();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
