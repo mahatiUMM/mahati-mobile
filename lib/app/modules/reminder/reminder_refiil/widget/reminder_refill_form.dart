@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
-import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
 Widget reminderRefillForm(BuildContext context) {
   final ReminderRefillController controller = ReminderRefillController();
+
   return Card(
     elevation: 0,
     color: Resources.color.whiteColor,
@@ -145,12 +145,24 @@ Widget reminderRefillForm(BuildContext context) {
             fontWeight: FontWeight.w500,
           ),
         ),
-        TextField(
-          controller: controller.causeObatController,
+        DropdownButtonFormField<String>(
+          value: controller.selectedCapsuleSize,
+          items: <String>['Tidak Kuat', 'Sedang', 'Kuat'].map((String value) {
+            return DropdownMenuItem<String>(
+              onTap: () {
+                controller.capSizeObatController.text = value;
+              },
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            controller.selectedCapsuleSize = newValue;
+          },
           decoration: InputDecoration(
             filled: true,
             fillColor: Resources.color.textFieldColor,
-            hintText: "Masukkan ukuran kapsul",
+            hintText: "Pilih ukuran kapsul",
             hintStyle: TextStyle(
               color: Resources.color.hintColor,
             ),
@@ -213,24 +225,13 @@ Widget reminderRefillForm(BuildContext context) {
             minimumSize: const Size(double.infinity, 50),
           ),
           onPressed: () {
-            // controller.postReminder(
-            //   controller.namaObatController.text,
-            //   controller.takenObatController.text,
-            //   controller.totalObatController.text,
-            //   controller.amountObatController.text,
-            //   controller.causeObatController.text,
-            //   controller.capSizeObatController.text,
-            //   controller.timeObatController.text,
-            // );
-
-            NotificationService().scheduleNotification(
-              id: 6,
-              title: "Reminder",
-              body: "Jangan lupa minum obat",
-              payLoad: "Test Payload",
-              scheduledNotificationDateTime: DateTime.now().add(
-                Duration(seconds: 5),
-              ),
+            controller.postReminder(
+              controller.namaObatController.text,
+              int.parse(controller.takenObatController.text),
+              int.parse(controller.amountObatController.text),
+              controller.causeObatController.text,
+              controller.capSizeObatController.text,
+              controller.timeObatController.text,
             );
           },
           child: Text(

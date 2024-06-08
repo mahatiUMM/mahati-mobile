@@ -27,13 +27,12 @@ class ReminderController extends GetxController {
   }
 
   String checkStatus(int status) {
-    switch (status) {
-      case 0:
-        return 'Belum Minum Obat';
-      case 1:
-        return 'Sudah Minum Obat';
-      default:
-        return 'Unknown';
+    // TODO: add status on backend and change this logic
+    // right now, status 0 is not taken, status 1 is taken
+    if (status > 0) {
+      return "Sudah Diminum";
+    } else {
+      return "Belum Diminum";
     }
   }
 

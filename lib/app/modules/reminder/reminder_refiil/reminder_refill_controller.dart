@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ReminderRefillController extends GetxController {
   final TextEditingController namaObatController = TextEditingController();
   final TextEditingController takenObatController = TextEditingController();
-  final TextEditingController totalObatController = TextEditingController();
   final TextEditingController amountObatController = TextEditingController();
   final TextEditingController causeObatController = TextEditingController();
   final TextEditingController capSizeObatController = TextEditingController();
@@ -20,6 +19,8 @@ class ReminderRefillController extends GetxController {
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+
+  String? selectedCapsuleSize;
 
   @override
   void onInit() {
@@ -63,37 +64,33 @@ class ReminderRefillController extends GetxController {
 
   Future<void> postReminder(
     String medicineName,
-    String medicineTaken,
-    String? medicineTotal,
-    String amount,
+    int medicineTaken,
+    int amount,
     String cause,
     String capSize,
     String medicineTime,
   ) async {
     final userId = await getUserId();
+    int medicineTotal = amount - medicineTaken;
+
+    if (capSize.toString() == "Tidak Kuat") {
+      capSize = "1";
+    } else if (capSize.toString() == "Sedang") {
+      capSize = "2";
+    } else if (capSize.toString() == "Kuat") {
+      capSize = "3";
+    }
 
     final reminderPostData = {
-      "user_id": userId,
+      "user_id": int.parse(userId.toString()),
       "medicine_name": medicineName,
       "medicine_taken": medicineTaken,
       "medicine_total": medicineTotal,
       "amount": amount,
       "cause": cause,
-      "cap_size": capSize,
+      "cap_size": int.parse(capSize),
       "medicine_time": medicineTime,
     };
-
-    print(DateTime.now().add(
-      Duration(seconds: 5),
-    ));
-
-    // NotificationService().scheduleNotification(
-    //   title: "Reminder",
-    //   body: "Jangan lupa minum obat",
-    //   scheduledNotificationDateTime: DateTime.now().add(
-    //     Duration(seconds: 5),
-    //   ),
-    // );
 
     if (userId == null ||
         medicineName == "" ||
@@ -125,7 +122,15 @@ class ReminderRefillController extends GetxController {
         print(result.body);
 
         if (result.statusCode == 200) {
-          // NotificationService().scheduleNotification(scheduledNotificationDateTime: );
+          NotificationService().scheduleNotification(
+            id: 6,
+            title: "Reminder",
+            body: "Jangan lupa minum obat",
+            payLoad: "Test Payload",
+            scheduledNotificationDateTime: DateTime.now().add(
+              Duration(seconds: 5),
+            ),
+          );
           Get.snackbar(
             'Success',
             'Reminder added successfully',
