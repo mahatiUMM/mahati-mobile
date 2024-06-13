@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/widget/reminder_detail_card_info.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
+import 'package:intl/intl.dart';
 
 Widget buildCardSection() {
   final ReminderDetailController controller = Get.find();
@@ -106,9 +107,10 @@ Widget buildCardSection() {
             title: "Dibuat Tanggal",
             value: Obx(
               () => Text(
-                controller.reminderModel.value?.data.createdAt
-                        .toIso8601String() ??
-                    "Loading...",
+                controller.reminderModel.value?.data.createdAt != null
+                    ? DateFormat('dd MMMM yyyy')
+                        .format(controller.reminderModel.value!.data.createdAt)
+                    : "Loading...",
                 style: TextStyle(
                   color: Resources.color.orangeColor1,
                   fontSize: 12,
