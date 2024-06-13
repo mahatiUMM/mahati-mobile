@@ -38,7 +38,6 @@ class ReminderRefillController extends GetxController {
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
       dateObatController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
-      print(selectedDate);
     }
   }
 
@@ -53,7 +52,6 @@ class ReminderRefillController extends GetxController {
       final selectedDateTime = DateTime(
           now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
       timeObatController.text = DateFormat('HH:mm').format(selectedDateTime);
-      print(timeObatController.text);
     }
   }
 
@@ -64,43 +62,20 @@ class ReminderRefillController extends GetxController {
 
   Future<void> postReminder(
     String medicineName,
-    int medicineTaken,
-    int amount,
+    String? medicineTaken,
+    String? amount,
     String cause,
     String capSize,
-    String medicineTime,
+    String? medicineTime,
   ) async {
     final userId = await getUserId();
-    int medicineTotal = amount - medicineTaken;
 
-    if (capSize.toString() == "Tidak Kuat") {
-      capSize = "1";
-    } else if (capSize.toString() == "Sedang") {
-      capSize = "2";
-    } else if (capSize.toString() == "Kuat") {
-      capSize = "3";
-    }
-
-    final reminderPostData = {
-      "user_id": int.parse(userId.toString()),
-      "medicine_name": medicineName,
-      "medicine_taken": medicineTaken,
-      "medicine_total": medicineTotal,
-      "amount": amount,
-      "cause": cause,
-      "cap_size": int.parse(capSize),
-      "medicine_time": medicineTime,
-    };
-
-    if (userId == null ||
-        medicineName == "" ||
-        medicineTaken == null ||
-        medicineTotal == null ||
+    if (medicineName.isEmpty ||
         amount == null ||
-        cause == "" ||
-        cause == "" ||
-        capSize == null ||
-        medicineTime == "") {
+        medicineTaken == null ||
+        cause.isEmpty ||
+        capSize.isEmpty ||
+        medicineTime == null) {
       Get.snackbar(
         'Gagal menambahkan pengingat obat',
         'Mohon lengkapi semua data yang diperlukan',
@@ -115,58 +90,84 @@ class ReminderRefillController extends GetxController {
         animationDuration: const Duration(milliseconds: 500),
         icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
       );
-    } else {
-      try {
-        final result = await restClient.request(
-            "/reminder", HttpMethod.POST, reminderPostData);
-        print(result.body);
+      return;
+    }
 
-        if (result.statusCode == 200) {
-          NotificationService().scheduleNotification(
-            id: 6,
-            title: "Reminder",
-            body: "Jangan lupa minum obat",
-            payLoad: "Test Payload",
-            scheduledNotificationDateTime: DateTime.now().add(
-              Duration(seconds: 5),
-            ),
-          );
-          Get.snackbar(
-            'Success',
-            'Reminder added successfully',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Resources.color.textFieldColor,
-            colorText: Resources.color.baseColor,
-            leftBarIndicatorColor: Resources.color.primaryColor1,
-            overlayColor: Resources.color.primaryColor,
-            progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
-              Resources.color.secondaryColor,
-            ),
-            animationDuration: const Duration(milliseconds: 500),
-            icon:
-                Icon(Icons.check, color: Resources.color.baseColor, size: 20.0),
-          );
-        } else {
-          Get.snackbar(
-            'Gagal menambahkan pengingat obat',
-            'Mohon lengkapi semua data yang diperlukan',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Resources.color.textFieldColor,
-            colorText: Resources.color.baseColor,
-            leftBarIndicatorColor: Resources.color.secondaryColor1,
-            overlayColor: Resources.color.primaryColor,
-            progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
-              Resources.color.secondaryColor,
-            ),
-            animationDuration: const Duration(milliseconds: 500),
-            icon:
-                Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
-          );
+    final amountInt = int.tryParse(amount) ?? 0;
+    final medicineTakenInt = int.tryParse(medicineTaken) ?? 0;
+    final medicineTotal = amountInt - medicineTakenInt;
+
+    if (capSize == "Tidak Kuat") {
+      capSize = "1";
+    } else if (capSize == "Sedang") {
+      capSize = "2";
+    } else if (capSize == "Kuat") {
+      capSize = "3";
+    } else {
+      capSize = "1";
+    }
+
+    final reminderPostData = {
+      "user_id": userId,
+      "medicine_name": medicineName,
+      "medicine_taken": medicineTakenInt,
+      "medicine_total": medicineTotal,
+      "amount": amountInt,
+      "cause": cause,
+      "cap_size": int.parse(capSize),
+      "medicine_time": medicineTime,
+    };
+
+    print('Reminder Post Data: $reminderPostData');
+
+    try {
+      final result = await restClient.request(
+          "/reminder", HttpMethod.POST, reminderPostData);
+
+      if (result.statusCode == 201) {
+        // Parse the medicineTime into a DateTime object with today's date
+        DateTime now = DateTime.now();
+        DateTime scheduledNotificationDateTime =
+            DateFormat('HH:mm').parse(medicineTime);
+        scheduledNotificationDateTime = DateTime(
+            now.year,
+            now.month,
+            now.day,
+            scheduledNotificationDateTime.hour,
+            scheduledNotificationDateTime.minute);
+
+        // If the scheduled time is in the past, add one day to it
+        if (scheduledNotificationDateTime.isBefore(now)) {
+          scheduledNotificationDateTime =
+              scheduledNotificationDateTime.add(Duration(days: 1));
         }
-      } catch (e) {
+
+        NotificationService().scheduleNotification(
+          id: 6,
+          title: "Reminder",
+          body: "Jangan lupa minum obat",
+          payLoad: "Test Payload",
+          scheduledNotificationDateTime: scheduledNotificationDateTime,
+        );
+
+        Get.snackbar(
+          'Success',
+          'Reminder added successfully',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Resources.color.textFieldColor,
+          colorText: Resources.color.baseColor,
+          leftBarIndicatorColor: Resources.color.primaryColor1,
+          overlayColor: Resources.color.primaryColor,
+          progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+            Resources.color.secondaryColor,
+          ),
+          animationDuration: const Duration(milliseconds: 500),
+          icon: Icon(Icons.check, color: Resources.color.baseColor, size: 20.0),
+        );
+      } else {
         Get.snackbar(
           'Gagal menambahkan pengingat obat',
-          e.toString(),
+          'Terjadi kesalahan saat mengirim data',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Resources.color.textFieldColor,
           colorText: Resources.color.baseColor,
@@ -179,6 +180,21 @@ class ReminderRefillController extends GetxController {
           icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
         );
       }
+    } catch (e) {
+      Get.snackbar(
+        'Gagal menambahkan pengingat obat',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
     }
   }
 }

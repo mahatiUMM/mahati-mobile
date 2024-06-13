@@ -209,8 +209,8 @@ Widget buildSaveButton(ReminderRefillController controller) {
     onPressed: () {
       controller.postReminder(
         controller.namaObatController.text,
-        int.parse(controller.takenObatController.text),
-        int.parse(controller.amountObatController.text),
+        controller.takenObatController.text,
+        controller.amountObatController.text,
         controller.causeObatController.text,
         controller.capSizeObatController.text,
         controller.timeObatController.text,
