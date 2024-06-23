@@ -84,6 +84,9 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                 IconButton(
                   onPressed: () {
                     showMenu(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       context: context,
                       color: Resources.color.whiteColor,
                       shadowColor: Resources.color.whiteColor,
@@ -106,6 +109,63 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                             title: const Text('Edit Pengingat'),
                             onTap: () {
                               Get.toNamed('/reminder/edit');
+                            },
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: ListTile(
+                            leading: const Icon(Icons.delete),
+                            title: const Text("Hapus pengingat"),
+                            onTap: () {
+                              Get.generalDialog(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) {
+                                  return AlertDialog(
+                                    backgroundColor: Resources.color.whiteColor,
+                                    title: Text(
+                                      "Hapus Pengingat",
+                                      style: TextStyle(
+                                        color: Resources.color.baseColor,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    content: Text(
+                                      "Apakah anda yakin ingin menghapus pengingat ini?",
+                                      style: TextStyle(
+                                        color: Resources.color.baseColor,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text(
+                                          "Batal",
+                                          style: TextStyle(
+                                            color: Resources.color.baseColor,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Get.back();
+                                          print("Deleted");
+                                        },
+                                        child: Text(
+                                          "Hapus",
+                                          style: TextStyle(
+                                            color:
+                                                Resources.color.secondaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                           ),
                         ),

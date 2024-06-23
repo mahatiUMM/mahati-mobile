@@ -33,8 +33,6 @@ import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_b
 import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_view.dart';
-import 'package:mahati_mobile/app/modules/reminder/reminder_refill_edit/reminder_refill_edit_binding.dart';
-import 'package:mahati_mobile/app/modules/reminder/reminder_refill_edit/reminder_refill_edit_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_view.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_binding.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_binding.dart';
@@ -155,13 +153,6 @@ class AppPages {
       name: _Paths.reminderRefiil,
       page: () => ReminderRefillView(),
       binding: ReminderRefillBinding(),
-      transition: Transition.cupertino,
-      transitionDuration: const Duration(milliseconds: 300),
-    ),
-    GetPage(
-      name: _Paths.reminderRefillEdit,
-      page: () => ReminderRefillEditView(),
-      binding: ReminderRefillEditBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

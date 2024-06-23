@@ -139,7 +139,7 @@ class ReminderRefillController extends GetxController {
         // If the scheduled time is in the past, add one day to it
         if (scheduledNotificationDateTime.isBefore(now)) {
           scheduledNotificationDateTime =
-              scheduledNotificationDateTime.add(Duration(days: 1));
+              scheduledNotificationDateTime.add(const Duration(days: 1));
         }
 
         NotificationService().scheduleNotification(

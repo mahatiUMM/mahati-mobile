@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
-import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/widget/reminder_refill_card.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/widget/reminder_refill_form.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -82,58 +81,6 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    showMenu(
-                      context: context,
-                      color: Theme.of(context).cardColor,
-                      shadowColor: Theme.of(context).shadowColor,
-                      surfaceTintColor: Theme.of(context).canvasColor,
-                      elevation: 0,
-                      position: const RelativeRect.fromLTRB(100, 100, 0, 100),
-                      items: [
-                        PopupMenuItem(
-                          child: ListTile(
-                            leading: const Icon(Icons.edit),
-                            title: const Text('Edit'),
-                            onTap: () {
-                              Get.toNamed('/reminder/refill/edit');
-                            },
-                          ),
-                        ),
-                        PopupMenuItem(
-                          child: ListTile(
-                            leading: const Icon(Icons.delete),
-                            title: const Text('Hapus'),
-                            onTap: () {
-                              Get.defaultDialog(
-                                backgroundColor: Resources.color.whiteColor,
-                                title: 'Hapus Pengingat',
-                                middleText:
-                                    'Apakah Anda yakin ingin menghapus pengingat ini?',
-                                textConfirm: 'Ya',
-                                buttonColor: Resources.color.baseColor,
-                                cancelTextColor: Resources.color.secondaryColor,
-                                textCancel: 'Tidak',
-                                confirmTextColor: Resources.color.whiteColor,
-                                onConfirm: () {
-                                  Get.back();
-                                },
-                                onCancel: () {
-                                  Get.back();
-                                },
-                                onWillPop: () async {
-                                  return false;
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                  icon: const Icon(Icons.more_vert),
-                ),
               ],
             ),
           ),
@@ -161,44 +108,6 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                         reminderRefillForm(context),
                         const SizedBox(
                           height: 20,
-                        ),
-                        Text(
-                          "Rekomendasi Obat",
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: Resources.font.primaryFont,
-                          ),
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
-                        ),
-                        reminderRefillCard(
-                          title: "Paxil CR",
-                          left: "Sisa 2 pills",
-                          refill: "Isi ulang selanjutnya: Mon, May 28",
                         ),
                       ],
                     ),
