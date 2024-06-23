@@ -24,8 +24,6 @@ import 'package:mahati_mobile/app/modules/profile/profile_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_binding.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_view.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
-import 'package:mahati_mobile/app/modules/reminder/reminder_add/reminder_add_binding.dart';
-import 'package:mahati_mobile/app/modules/reminder/reminder_add/reminder_add_view.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_view.dart';
@@ -125,13 +123,6 @@ class AppPages {
       name: _Paths.reminder,
       page: () => ReminderView(),
       binding: ReminderBinding(),
-      transition: Transition.cupertino,
-      transitionDuration: const Duration(milliseconds: 300),
-    ),
-    GetPage(
-      name: _Paths.reminderAdd,
-      page: () => ReminderAddView(),
-      binding: ReminderAddBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

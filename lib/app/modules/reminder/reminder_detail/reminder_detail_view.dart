@@ -96,15 +96,6 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                       items: [
                         PopupMenuItem(
                           child: ListTile(
-                            leading: const Icon(Icons.add),
-                            title: const Text('Tambah Pengingat'),
-                            onTap: () {
-                              Get.toNamed('/reminder/add');
-                            },
-                          ),
-                        ),
-                        PopupMenuItem(
-                          child: ListTile(
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit Pengingat'),
                             onTap: () {

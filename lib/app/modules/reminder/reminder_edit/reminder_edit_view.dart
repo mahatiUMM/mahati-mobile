@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -28,6 +29,28 @@ class ReminderEditView extends GetView {
                 StretchMode.blurBackground,
                 StretchMode.zoomBackground,
               ],
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(0),
+              child: Container(
+                height: 30,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Resources.color.whiteColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(32.0),
+                    topRight: Radius.circular(32.0),
+                  ),
+                ),
+                child: Container(
+                  width: 40.0,
+                  height: 5.0,
+                  decoration: BoxDecoration(
+                    color: Resources.color.baseColor,
+                    borderRadius: BorderRadius.circular(100.0),
+                  ),
+                ),
+              ),
             ),
           )
         ],

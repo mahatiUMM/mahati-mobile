@@ -15,7 +15,6 @@ abstract class Routes {
   static const setting = _Paths.setting;
   static const pressure = _Paths.pressure;
   static const reminder = _Paths.reminder;
-  static const reminderAdd = _Paths.reminderAdd;
   static const reminderEdit = _Paths.reminderEdit;
   static const reminderDetail = _Paths.reminderDetail;
   static const reminderRefill = _Paths.reminderRefiil;
@@ -42,7 +41,6 @@ abstract class _Paths {
   static const setting = '/setting';
   static const pressure = '/pressure';
   static const reminder = '/reminder';
-  static const reminderAdd = '/reminder/add';
   static const reminderEdit = '/reminder/edit';
   static const reminderDetail = '/reminder/detail';
   static const reminderRefiil = '/reminder/refill';
