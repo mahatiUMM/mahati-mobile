@@ -99,7 +99,9 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                             leading: const Icon(Icons.edit),
                             title: const Text('Edit Pengingat'),
                             onTap: () {
-                              Get.toNamed('/reminder/edit');
+                              Get.toNamed('/reminder/edit',
+                                  arguments:
+                                      controller.reminderModel.value?.data.id);
                             },
                           ),
                         ),

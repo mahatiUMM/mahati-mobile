@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
-class ReminderEditView extends GetView {
+class ReminderEditView extends GetView<ReminderEditController> {
   const ReminderEditView({super.key});
 
   @override
@@ -52,7 +52,98 @@ class ReminderEditView extends GetView {
                 ),
               ),
             ),
-          )
+            leadingWidth: Get.width,
+            leading: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.chevron_left,
+                          color: Resources.color.baseColor,
+                        ),
+                        const Text(
+                          "Kembali",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Container(
+              color: Resources.color.whiteColor,
+              height: Get.height,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Ubah Pengingat",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Nama Obat",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText: controller
+                                  .reminderModel.value?.data.medicineName ??
+                              "",
+                          // hintStyle: StyleText.signInField,
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          errorText:
+                              controller.medicineNameController.text.isEmpty
+                                  ? "Nama Obat tidak boleh kosong"
+                                  : null,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ]))
         ],
       ),
     );
