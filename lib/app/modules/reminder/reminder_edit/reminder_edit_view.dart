@@ -115,14 +115,16 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     Obx(
                       () => TextField(
                         controller: controller.medicineNameController,
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Resources.color.textFieldColor,
                           hintText: controller
                                   .reminderModel.value?.data.medicineName ??
                               "",
-                          // hintStyle: StyleText.signInField,
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Resources.color.textFieldColor),
@@ -132,10 +134,212 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                 color: Resources.color.textFieldColor),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          errorText:
-                              controller.medicineNameController.text.isEmpty
-                                  ? "Nama Obat tidak boleh kosong"
-                                  : null,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Obat yang sudah diminum",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText: controller
+                                  .reminderModel.value?.data.medicineTaken
+                                  .toString() ??
+                              "",
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Total Obat",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText: controller.reminderModel.value?.data.amount
+                                  .toString() ??
+                              "",
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Penyebab",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText:
+                              controller.reminderModel.value?.data.cause ?? "",
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Kekuatan Obat",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText: controller.reminderModel.value?.data.capSize
+                                  .toString() ??
+                              "",
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Waktu Minum Obat",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Resources.color.baseColor,
+                      ),
+                    ),
+                    Obx(
+                      () => TextField(
+                        controller: controller.medicineNameController,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Resources.color.textFieldColor,
+                          hintText: controller
+                                  .reminderModel.value?.data.medicineTime ??
+                              "",
+                          hintStyle: TextStyle(
+                            color: Resources.color.baseColor1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Resources.color.textFieldColor),
+                              borderRadius: BorderRadius.circular(15)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.editReminder();
+                      },
+                      child: Container(
+                        width: Get.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Resources.color.primaryColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Simpan",
+                            style: TextStyle(
+                              color: Resources.color.whiteColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -51,4 +51,8 @@ class ReminderDetailController extends GetxController {
       print('Request failed with status: ${result.statusCode}');
     }
   }
+
+  Future<void> deleteReminder() async {
+    
+  }
 }
