@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_id_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReminderDetailController extends GetxController {
@@ -52,7 +53,24 @@ class ReminderDetailController extends GetxController {
     }
   }
 
-  Future<void> deleteReminder() async {
-    
+  Future<void> deleteReminder(int itemId) async {
+    final token = await getToken();
+    final result = await restClient.requestWithToken(
+        "/reminder/$itemId", HttpMethod.DELETE, null, token.toString());
+
+    if (result.statusCode == 200) {
+      print('Reminder deleted ${result.body}');
+      Get.toNamed('/reminder');
+
+      Get.snackbar(
+        'Success',
+        'Reminder deleted',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.primaryColor,
+        colorText: Resources.color.whiteColor,
+      );
+    } else {
+      print('Request failed with status: ${result.statusCode}');
+    }
   }
 }

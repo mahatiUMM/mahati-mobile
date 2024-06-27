@@ -144,8 +144,8 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          print(
-                                              "Deleted ID: ${controller.reminderModel.value?.data.id}");
+                                          controller.deleteReminder(controller
+                                              .reminderModel.value!.data.id);
                                         },
                                         child: Text(
                                           "Hapus",
