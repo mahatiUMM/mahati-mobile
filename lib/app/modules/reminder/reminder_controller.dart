@@ -11,9 +11,9 @@ class ReminderController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     getReminder();
     getUserId();
-    super.onInit();
   }
 
   Future<String?> getToken() async {

@@ -9,6 +9,10 @@ import 'package:mahati_mobile/app/utils/resources.dart';
 class ReminderView extends GetView<ReminderController> {
   const ReminderView({super.key});
 
+  Future<void> _refreshReminders() async {
+    await Get.find<ReminderController>().getReminder();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,64 +44,70 @@ class ReminderView extends GetView<ReminderController> {
           ],
         ),
       ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Pengingat",
-                  style: TextStyle(
-                    color: Resources.color.baseColor,
-                    fontSize: 20,
-                    fontFamily: Resources.font.primaryFont,
-                    fontWeight: FontWeight.w800,
-                    height: 0,
-                  ),
-                ),
-                reminderDate(),
-                Obx(
-                  () => SizedBox(
-                    height: null,
-                    child: controller.reminderList.isEmpty
-                        ? const Center(
-                            child: Text('Data is empty'),
-                          )
-                        : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: controller.reminderList.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(
-                                    '/reminder/detail',
-                                    arguments:
-                                        controller.reminderList[index].id,
+      body: RefreshIndicator(
+        onRefresh: _refreshReminders,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Pengingat",
+                      style: TextStyle(
+                        color: Resources.color.baseColor,
+                        fontSize: 20,
+                        fontFamily: Resources.font.primaryFont,
+                        fontWeight: FontWeight.w800,
+                        height: 0,
+                      ),
+                    ),
+                    reminderDate(),
+                    Obx(
+                      () => SizedBox(
+                        height: null,
+                        child: controller.reminderList.isEmpty
+                            ? const Center(
+                                child: Text('Data is empty'),
+                              )
+                            : ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.reminderList.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        '/reminder/detail',
+                                        arguments:
+                                            controller.reminderList[index].id,
+                                      );
+                                    },
+                                    child: reminderCard(
+                                      title: controller
+                                          .reminderList[index].medicineName,
+                                      status: controller.checkStatus(controller
+                                          .reminderList[index].medicineTaken),
+                                      strong: controller.capSizeToString(
+                                          controller
+                                              .reminderList[index].capSize),
+                                      time: controller
+                                          .reminderList[index].medicineTime,
+                                    ),
                                   );
                                 },
-                                child: reminderCard(
-                                  title: controller
-                                      .reminderList[index].medicineName,
-                                  status: controller.checkStatus(controller
-                                      .reminderList[index].medicineTaken),
-                                  strong: controller.capSizeToString(
-                                      controller.reminderList[index].capSize),
-                                  time: controller
-                                      .reminderList[index].medicineTime,
-                                ),
-                              );
-                            },
-                          ),
-                  ),
-                )
-              ],
-            ),
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Resources.color.whiteColor,
