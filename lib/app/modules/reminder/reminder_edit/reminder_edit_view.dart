@@ -150,7 +150,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     ),
                     Obx(
                       () => TextField(
-                        controller: controller.medicineNameController,
+                        controller: controller.medicineTakenController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
@@ -187,7 +187,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     ),
                     Obx(
                       () => TextField(
-                        controller: controller.medicineNameController,
+                        controller: controller.amountController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
@@ -223,7 +223,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     ),
                     Obx(
                       () => TextField(
-                        controller: controller.medicineNameController,
+                        controller: controller.causeController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
@@ -258,7 +258,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     ),
                     Obx(
                       () => TextField(
-                        controller: controller.medicineNameController,
+                        controller: controller.capSizeController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,
@@ -294,7 +294,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                     ),
                     Obx(
                       () => TextField(
-                        controller: controller.medicineNameController,
+                        controller: controller.medicineTimeController,
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
                           filled: true,

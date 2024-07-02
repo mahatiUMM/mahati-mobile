@@ -48,5 +48,17 @@ class ReminderEditController extends GetxController {
     }
   }
 
-  Future<void> editReminder() async {}
+  Future<void> editReminder() async {
+    print("Medicine Name: " + medicineNameController.value.text);
+    print("Medicine Taken: " + medicineTakenController.value.text);
+    print("Medicine Total: " + medicineTotalController.value.text);
+    print("Amount: " + amountController.value.text);
+    print("Cause: " + causeController.value.text);
+    print("Cap size: " + capSizeController.value.text);
+    print("Medicine Time: " + medicineTimeController.value.text);
+
+    final token = await getToken();
+    final result = await restClient.requestWithToken(
+        "/reminder/$reminderId", HttpMethod.PUT, null, token.toString());
+  }
 }
