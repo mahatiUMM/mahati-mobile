@@ -21,7 +21,7 @@ class ReminderView extends GetView<ReminderController> {
         leading: IconButton(
           icon: const Icon(Icons.chevron_left),
           onPressed: () {
-            Get.back();
+            Get.toNamed("/layout");
           },
         ),
         title: Row(

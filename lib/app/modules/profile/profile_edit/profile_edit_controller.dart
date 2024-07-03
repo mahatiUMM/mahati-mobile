@@ -55,6 +55,12 @@ class ProfileEditController extends GetxController {
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.PUT, data, token.toString());
 
-    print(result.body);
+    if (result.statusCode == 200) {
+      print('Profile updated');
+      print(result.body);
+    } else {
+      print('Request failed with status: ${result.statusCode}');
+      print(result.body);
+    }
   }
 }

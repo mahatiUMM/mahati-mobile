@@ -123,7 +123,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                   .reminderModel.value?.data.medicineName ??
                               "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -160,7 +160,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                   .toString() ??
                               "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -196,7 +196,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                   .toString() ??
                               "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -231,7 +231,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                           hintText:
                               controller.reminderModel.value?.data.cause ?? "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -267,7 +267,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                   .toString() ??
                               "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -303,7 +303,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                                   .reminderModel.value?.data.medicineTime ??
                               "",
                           hintStyle: TextStyle(
-                            color: Resources.color.baseColor1,
+                            color: Resources.color.baseColor2,
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_id_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReminderEditController extends GetxController {
@@ -49,16 +50,44 @@ class ReminderEditController extends GetxController {
   }
 
   Future<void> editReminder() async {
-    print("Medicine Name: " + medicineNameController.value.text);
-    print("Medicine Taken: " + medicineTakenController.value.text);
-    print("Medicine Total: " + medicineTotalController.value.text);
-    print("Amount: " + amountController.value.text);
-    print("Cause: " + causeController.value.text);
-    print("Cap size: " + capSizeController.value.text);
-    print("Medicine Time: " + medicineTimeController.value.text);
+    final userId = await getUserId();
+    final data = {
+      "user_id": userId,
+      "medicine_name": (medicineNameController.value.text.isEmpty
+          ? reminderModel.value?.data.medicineName
+          : medicineNameController.value.text),
+      "medicine_taken": (medicineTakenController.value.text.isEmpty
+          ? reminderModel.value?.data.medicineTaken
+          : medicineTakenController.value.text),
+      "medicine_total": (medicineTotalController.value.text.isEmpty
+          ? reminderModel.value?.data.medicineTotal
+          : medicineTotalController.value.text),
+      "amount": (amountController.value.text.isEmpty
+          ? reminderModel.value?.data.amount
+          : amountController.value.text),
+      "cause": (causeController.value.text.isEmpty
+          ? reminderModel.value?.data.cause
+          : causeController.value.text),
+      "cap_size": (capSizeController.value.text.isEmpty
+          ? reminderModel.value?.data.capSize
+          : capSizeController.value.text),
+      "medicine_time": (medicineTimeController.value.text.isEmpty
+          ? reminderModel.value?.data.medicineTime
+          : medicineTimeController.value.text)
+    };
+
+    // print(data);
 
     final token = await getToken();
     final result = await restClient.requestWithToken(
-        "/reminder/$reminderId", HttpMethod.PUT, null, token.toString());
+        "/reminder/$reminderId", HttpMethod.PUT, data, token.toString());
+
+    print(result.body);
+
+    if (result.statusCode == 200) {
+      print("Reminder edited");
+    } else {
+      print('Request failed with status: ${result.statusCode}');
+    }
   }
 }

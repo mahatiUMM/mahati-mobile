@@ -94,9 +94,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                             label: 'Username',
                             value: controller.username.value),
                     LabelField(label: 'Email', value: controller.email.value),
-                    // TODO: must decrypt password to see the real password
-                    LabelField(
-                        label: 'Password', value: controller.password.value),
+                    const LabelField(label: 'Password', value: "**********"),
                     LabelField(
                         label: 'Nomor Handphone',
                         value: controller.number.value),
@@ -107,7 +105,12 @@ class ProfileEditView extends GetView<ProfileEditController> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    print("Save Changes");
+                    controller.updateProfile(
+                      controller.username.value,
+                      controller.email.value,
+                      controller.password.value,
+                      controller.number.value,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Resources.color.primaryColor,

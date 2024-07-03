@@ -58,9 +58,11 @@ class ReminderDetailController extends GetxController {
     final result = await restClient.requestWithToken(
         "/reminder/$itemId", HttpMethod.DELETE, null, token.toString());
 
+    print(result.body);
+
     if (result.statusCode == 200) {
       print('Reminder deleted ${result.body}');
-      Get.toNamed('/reminder');
+      Get.toNamed('/layout');
 
       Get.snackbar(
         'Success',
