@@ -52,42 +52,68 @@ class ReminderEditController extends GetxController {
   Future<void> editReminder() async {
     final userId = await getUserId();
     final data = {
-      "user_id": userId,
+      "user_id": userId?.toInt(),
       "medicine_name": (medicineNameController.value.text.isEmpty
           ? reminderModel.value?.data.medicineName
           : medicineNameController.value.text),
       "medicine_taken": (medicineTakenController.value.text.isEmpty
           ? reminderModel.value?.data.medicineTaken
-          : medicineTakenController.value.text),
+          : int.parse(medicineTakenController.value.text)),
       "medicine_total": (medicineTotalController.value.text.isEmpty
           ? reminderModel.value?.data.medicineTotal
-          : medicineTotalController.value.text),
+          : int.parse(medicineTotalController.value.text)),
       "amount": (amountController.value.text.isEmpty
           ? reminderModel.value?.data.amount
-          : amountController.value.text),
+          : int.parse(amountController.value.text)),
       "cause": (causeController.value.text.isEmpty
           ? reminderModel.value?.data.cause
           : causeController.value.text),
       "cap_size": (capSizeController.value.text.isEmpty
           ? reminderModel.value?.data.capSize
-          : capSizeController.value.text),
+          : int.parse(capSizeController.value.text)),
       "medicine_time": (medicineTimeController.value.text.isEmpty
           ? reminderModel.value?.data.medicineTime
           : medicineTimeController.value.text)
     };
 
-    // print(data);
-
     final token = await getToken();
     final result = await restClient.requestWithToken(
-        "/reminder/$reminderId", HttpMethod.PUT, data, token.toString());
-
-    print(result.body);
+        "/reminder/$reminderId", HttpMethod.PATCH, data, token.toString());
 
     if (result.statusCode == 200) {
-      print("Reminder edited");
+      Get.toNamed('/layout');
+      Get.snackbar(
+        'Berhasil mengedit pengingat obat',
+        'Data anda sudah berhasil diubah',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.primaryColor,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
     } else {
       print('Request failed with status: ${result.statusCode}');
+      Get.snackbar(
+        'Gagal mengedit pengingat obat',
+        'Mohon lengkapi semua data yang diperlukan',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
     }
   }
 }
