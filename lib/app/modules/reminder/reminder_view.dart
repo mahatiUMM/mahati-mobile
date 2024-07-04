@@ -11,6 +11,21 @@ class ReminderView extends GetView<ReminderController> {
 
   Future<void> _refreshReminders() async {
     await Get.find<ReminderController>().getReminder();
+    Get.snackbar(
+      'Berhasil mengambil data',
+      'Data pengingat berhasil diperbarui',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Resources.color.textFieldColor,
+      colorText: Resources.color.baseColor,
+      leftBarIndicatorColor: Resources.color.primaryColor,
+      overlayColor: Resources.color.primaryColor,
+      progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+        Resources.color.secondaryColor,
+      ),
+      animationDuration: const Duration(milliseconds: 500),
+      icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+    );
+    return;
   }
 
   @override
@@ -45,6 +60,7 @@ class ReminderView extends GetView<ReminderController> {
         ),
       ),
       body: RefreshIndicator(
+        color: Resources.color.primaryColor,
         onRefresh: _refreshReminders,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),

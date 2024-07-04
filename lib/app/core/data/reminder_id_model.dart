@@ -62,10 +62,10 @@ class ReminderIdData {
         medicineName: json["medicine_name"],
         medicineTaken: json["medicine_taken"],
         medicineTotal: json["medicine_total"],
-        amount: json["amount"],
-        cause: json["cause"],
+        amount: json["amount"] ?? 0,
+        cause: json["cause"] ?? "",
         capSize: json["cap_size"],
-        medicineTime: json["medicine_time"],
+        medicineTime: json["medicine_time"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] != null
             ? DateTime.parse(json["updated_at"])
