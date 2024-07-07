@@ -11,9 +11,9 @@ class ReminderController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     getReminder();
     getUserId();
-    super.onInit();
   }
 
   Future<String?> getToken() async {
@@ -57,13 +57,9 @@ class ReminderController extends GetxController {
     if (result.statusCode == 200) {
       var reminderModel = ReminderModel.fromMap(jsonDecode(result.body));
       final userId = await getUserId();
-      reminderList.assignAll(reminderModel.data);
 
-      if (reminderList[0].userId == userId) {
-        print("Data ditemukan");
-      } else {
-        print("Data tidak ditemukan");
-      }
+      reminderModel.data.removeWhere((element) => element.userId != userId);
+      reminderList.assignAll(reminderModel.data);
     } else {
       print('Request failed with status: ${result.statusCode}');
     }

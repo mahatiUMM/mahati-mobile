@@ -76,7 +76,6 @@ class SignUpController extends GetxController {
         ERROR: Data Type Is NULL but the body is STRING
       */
       print(e);
-      showErrorMessage('Registration failed. $e');
     }
   }
 }
