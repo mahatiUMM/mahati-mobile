@@ -8,12 +8,31 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ReminderController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() {
     super.onInit();
     getReminder();
     getUserId();
+    ever(
+      Get.currentRoute.obs,
+      (callback) => {
+        if (callback == '/reminder') {getReminder()}
+      },
+    );
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    getReminder();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    reminderList.clear();
   }
 
   Future<String?> getToken() async {
@@ -50,6 +69,7 @@ class ReminderController extends GetxController {
   }
 
   Future<void> getReminder() async {
+    isLoading.value = true;
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder", HttpMethod.GET, null, token.toString());
@@ -63,5 +83,6 @@ class ReminderController extends GetxController {
     } else {
       print('Request failed with status: ${result.statusCode}');
     }
+    isLoading.value = false;
   }
 }

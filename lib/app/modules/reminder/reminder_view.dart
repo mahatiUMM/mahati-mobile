@@ -59,72 +59,84 @@ class ReminderView extends GetView<ReminderController> {
           ],
         ),
       ),
-      body: RefreshIndicator(
-        color: Resources.color.primaryColor,
-        onRefresh: _refreshReminders,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Pengingat",
-                      style: TextStyle(
-                        color: Resources.color.baseColor,
-                        fontSize: 20,
-                        fontFamily: Resources.font.primaryFont,
-                        fontWeight: FontWeight.w800,
-                        height: 0,
-                      ),
-                    ),
-                    reminderDate(),
-                    Obx(
-                      () => SizedBox(
-                        height: null,
-                        child: controller.reminderList.isEmpty
-                            ? const Center(
-                                child: Text('Data is empty'),
-                              )
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.reminderList.length,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(
-                                        '/reminder/detail',
-                                        arguments:
-                                            controller.reminderList[index].id,
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+              child: CircularProgressIndicator(
+            valueColor:
+                AlwaysStoppedAnimation<Color>(Resources.color.primaryColor),
+          ));
+        } else {
+          return RefreshIndicator(
+            color: Resources.color.primaryColor,
+            onRefresh: _refreshReminders,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Pengingat",
+                          style: TextStyle(
+                            color: Resources.color.baseColor,
+                            fontSize: 20,
+                            fontFamily: Resources.font.primaryFont,
+                            fontWeight: FontWeight.w800,
+                            height: 0,
+                          ),
+                        ),
+                        reminderDate(),
+                        Obx(
+                          () => SizedBox(
+                            height: null,
+                            child: controller.reminderList.isEmpty
+                                ? const Center(
+                                    child: Text('Data is empty'),
+                                  )
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: controller.reminderList.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(
+                                            '/reminder/detail',
+                                            arguments: controller
+                                                .reminderList[index].id,
+                                          );
+                                        },
+                                        child: reminderCard(
+                                          title: controller
+                                              .reminderList[index].medicineName,
+                                          status: controller.checkStatus(
+                                              controller.reminderList[index]
+                                                  .medicineTaken),
+                                          strong: controller.capSizeToString(
+                                              controller
+                                                  .reminderList[index].capSize),
+                                          time: controller
+                                              .reminderList[index].medicineTime,
+                                        ),
                                       );
                                     },
-                                    child: reminderCard(
-                                      title: controller
-                                          .reminderList[index].medicineName,
-                                      status: controller.checkStatus(controller
-                                          .reminderList[index].medicineTaken),
-                                      strong: controller.capSizeToString(
-                                          controller
-                                              .reminderList[index].capSize),
-                                      time: controller
-                                          .reminderList[index].medicineTime,
-                                    ),
-                                  );
-                                },
-                              ),
-                      ),
+                                  ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Resources.color.whiteColor,
         tooltip: 'Increment',
