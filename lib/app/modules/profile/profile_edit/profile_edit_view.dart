@@ -89,15 +89,26 @@ class ProfileEditView extends GetView<ProfileEditController> {
                 () => Column(
                   children: [
                     (controller.username.value == "")
-                        ? const Center(child: CircularProgressIndicator())
+                        ? Center(
+                            child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Resources.color.primaryColor),
+                          ))
                         : LabelField(
                             label: 'Username',
-                            value: controller.username.value),
-                    LabelField(label: 'Email', value: controller.email.value),
-                    const LabelField(label: 'Password', value: "**********"),
+                            value: controller.username.value,
+                            isNumber: false,
+                          ),
                     LabelField(
-                        label: 'Nomor Handphone',
-                        value: controller.number.value),
+                      label: 'Email',
+                      value: controller.email.value,
+                      isNumber: false,
+                    ),
+                    LabelField(
+                      label: 'Nomor Handphone',
+                      value: controller.number.value,
+                      isNumber: true,
+                    ),
                   ],
                 ),
               ),
@@ -105,12 +116,12 @@ class ProfileEditView extends GetView<ProfileEditController> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.updateProfile(
-                      controller.username.value,
-                      controller.email.value,
-                      controller.password.value,
-                      controller.number.value,
-                    );
+                    // controller.updateProfile(
+                    //   controller.username.value,
+                    //   controller.email.value,
+                    //   controller.number.value,
+                    // );
+                    print('Update profile');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Resources.color.primaryColor,

@@ -10,7 +10,6 @@ class ProfileEditController extends GetxController {
   Rx<File?> image = Rx<File?>(null);
   var username = Rx<String>('');
   var email = Rx<String>('');
-  var password = Rx<String>('');
   var number = Rx<String>('');
 
   @override
@@ -24,6 +23,11 @@ class ProfileEditController extends GetxController {
     return prefs.getString('authToken');
   }
 
+  Future<int> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return int.parse(prefs.getString('userId')!);
+  }
+
   Future<void> getProfileData() async {
     final token = await getToken();
     final restClient = Get.find<RestClient>();
@@ -35,29 +39,27 @@ class ProfileEditController extends GetxController {
 
     username.value = responseData.username;
     email.value = responseData.email;
-    password.value = responseData.password;
     number.value = responseData.number;
   }
 
-  // working on this
-  Future<void> updateProfile(
-      String name, String email, String password, String number) async {
+  Future<void> updateProfile(String name, String email, String number) async {
     final token = await getToken();
     final restClient = Get.find<RestClient>();
+    final userId = await getUserId();
 
     final data = {
+      "id": userId,
       "username": name,
       "email": email,
-      "password": password,
       "number": number,
+      "photo": ""
     };
 
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.PUT, data, token.toString());
 
     if (result.statusCode == 200) {
-      print('Profile updated');
-      print(result.body);
+      print('Profile updated: ${result.body}');
     } else {
       print('Request failed with status: ${result.statusCode}');
       print(result.body);

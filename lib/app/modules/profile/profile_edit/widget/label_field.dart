@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class LabelField extends GetView {
-  const LabelField({Key? key, required this.label, required this.value})
-      : super(key: key);
+  const LabelField(
+      {super.key,
+      required this.label,
+      required this.value,
+      required this.isNumber});
 
   final String label;
   final String value;
+  final bool isNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,7 @@ class LabelField extends GetView {
         ),
         const SizedBox(height: 5),
         TextField(
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
           cursorColor: Resources.color.baseColor,
           decoration: InputDecoration(
             fillColor: Colors.grey[100],
@@ -30,7 +35,7 @@ class LabelField extends GetView {
             hintText: value,
             hintStyle: TextStyle(
               fontSize: 16,
-              color: Resources.color.baseColor,
+              color: Resources.color.hintColor,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
