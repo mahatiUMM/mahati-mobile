@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
-import 'package:mahati_mobile/app/modules/reminder/widget/reminder_date.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_filter.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -89,7 +89,34 @@ class ReminderView extends GetView<ReminderController> {
                             height: 0,
                           ),
                         ),
-                        reminderDate(),
+                        EasyDateTimeLine(
+                          initialDate: DateTime.now(),
+                          onDateChange: (selectedDate) {
+                            var date = selectedDate.toString().substring(0, 10);
+                            controller.filterRemindersByDate(date);
+                          },
+                          activeColor: Resources.color.primaryColor,
+                          headerProps: const EasyHeaderProps(
+                            dateFormatter: DateFormatter.monthOnly(),
+                          ),
+                          dayProps: const EasyDayProps(
+                            height: 56.0,
+                            width: 56.0,
+                            dayStructure: DayStructure.dayNumDayStr,
+                            inactiveDayStyle: DayStyle(
+                              borderRadius: 48.0,
+                              dayNumStyle: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            activeDayStyle: DayStyle(
+                              dayNumStyle: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                         Obx(
                           () => SizedBox(
                             height: null,
@@ -111,17 +138,28 @@ class ReminderView extends GetView<ReminderController> {
                                                 .reminderList[index].id,
                                           );
                                         },
-                                        child: reminderCard(
-                                          title: controller
-                                              .reminderList[index].medicineName,
-                                          status: controller.checkStatus(
-                                              controller.reminderList[index]
-                                                  .medicineTaken),
-                                          strong: controller.capSizeToString(
-                                              controller
-                                                  .reminderList[index].capSize),
-                                          time: controller
-                                              .reminderList[index].medicineTime,
+                                        child: Column(
+                                          children: [
+                                            reminderCard(
+                                              title: controller
+                                                  .reminderList[index]
+                                                  .medicineName,
+                                              status: controller.checkStatus(
+                                                  controller.reminderList[index]
+                                                      .medicineTaken),
+                                              strong: controller
+                                                  .capSizeToString(controller
+                                                      .reminderList[index]
+                                                      .capSize),
+                                              time: controller
+                                                  .reminderList[index]
+                                                  .medicineTime,
+                                            ),
+                                            Text(controller
+                                                .reminderList[index].createdAt
+                                                .toLocal()
+                                                .toString())
+                                          ],
                                         ),
                                       );
                                     },
