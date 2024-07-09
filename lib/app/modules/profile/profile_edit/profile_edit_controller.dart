@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -11,6 +12,10 @@ class ProfileEditController extends GetxController {
   var username = Rx<String>('');
   var email = Rx<String>('');
   var number = Rx<String>('');
+
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
 
   @override
   void onInit() {
@@ -40,6 +45,10 @@ class ProfileEditController extends GetxController {
     username.value = responseData.username;
     email.value = responseData.email;
     number.value = responseData.number;
+
+    usernameController.text = responseData.username;
+    emailController.text = responseData.email;
+    numberController.text = responseData.number;
   }
 
   Future<void> updateProfile(String name, String email, String number) async {

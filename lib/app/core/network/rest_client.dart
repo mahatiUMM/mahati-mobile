@@ -97,10 +97,10 @@ class RestClient extends GetxService {
         response =
             await http.delete(uri, headers: headerWithToken(accessToken));
       } else if (method == HttpMethod.PUT) {
-        response = await http.patch(
+        response = await http.put(
           uri,
           body: jsonEncode(params),
-          headers: header(),
+          headers: headerWithToken(accessToken),
         );
       } else {
         response = await http.get(uri, headers: headerWithToken(accessToken));
