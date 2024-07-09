@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PressureData {
   final int sistol;
@@ -39,10 +40,20 @@ class PressureHistoryController extends GetxController
     super.onClose();
   }
 
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('authToken');
+  }
+
   Future<void> getUserPressureHistory() async {
+    final token = await getToken();
     final restClient = Get.find<RestClient>();
-    final result =
-        await restClient.request("/blood_pressure", HttpMethod.GET, null);
+    final result = await restClient.requestWithToken(
+      "/blood_pressure",
+      HttpMethod.GET,
+      null,
+      token.toString(),
+    );
 
     Map<String, dynamic> parsedJson = json.decode(result.body);
     List<dynamic> dataList = parsedJson['data'];

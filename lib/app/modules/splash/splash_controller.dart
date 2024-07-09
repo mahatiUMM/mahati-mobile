@@ -22,6 +22,7 @@ class SplashController extends GetxController {
 
   _navigateToOnboardScreen() async {
     final token = await getToken();
+    printInfo(info: token.toString());
     final restClient = Get.find<RestClient>();
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.GET, null, token.toString());
