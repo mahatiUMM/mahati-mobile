@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ReminderController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
+  RxList<ReminderData> filteredReminders = <ReminderData>[].obs;
   RxBool isLoading = true.obs;
 
   @override
@@ -27,12 +28,6 @@ class ReminderController extends GetxController {
   void onReady() {
     super.onReady();
     getReminder();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    reminderList.clear();
   }
 
   Future<String?> getToken() async {
@@ -80,9 +75,19 @@ class ReminderController extends GetxController {
 
       reminderModel.data.removeWhere((element) => element.userId != userId);
       reminderList.assignAll(reminderModel.data);
+      filterRemindersByDate(DateTime.now().toIso8601String().substring(0, 10));
     } else {
       print('Request failed with status: ${result.statusCode}');
     }
     isLoading.value = false;
+  }
+
+  void filterRemindersByDate(String date) {
+    print("Date now: ${date}");
+    filteredReminders.assignAll(reminderList
+        .where((element) =>
+            element.medicineTime.length >= 10 &&
+            element.medicineTime.substring(0, 10) == date)
+        .toList());
   }
 }

@@ -97,16 +97,19 @@ class ProfileEditView extends GetView<ProfileEditController> {
                         : LabelField(
                             label: 'Username',
                             value: controller.username.value,
+                            controller: controller.usernameController,
                             isNumber: false,
                           ),
                     LabelField(
                       label: 'Email',
                       value: controller.email.value,
+                      controller: controller.emailController,
                       isNumber: false,
                     ),
                     LabelField(
                       label: 'Nomor Handphone',
                       value: controller.number.value,
+                      controller: controller.numberController,
                       isNumber: true,
                     ),
                   ],
@@ -116,12 +119,11 @@ class ProfileEditView extends GetView<ProfileEditController> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // controller.updateProfile(
-                    //   controller.username.value,
-                    //   controller.email.value,
-                    //   controller.number.value,
-                    // );
-                    print('Update profile');
+                    controller.updateProfile(
+                      controller.usernameController.text,
+                      controller.emailController.text,
+                      controller.numberController.text,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Resources.color.primaryColor,

@@ -83,16 +83,37 @@ Widget settingAction() {
       const SizedBox(height: 10),
       ElevatedButton(
         onPressed: () {
-          Get.defaultDialog(
-            title: "Keluar Akun",
-            middleText: "Apakah anda yakin ingin keluar akun?",
-            textConfirm: "Ya",
-            textCancel: "Tidak",
-            confirmTextColor: Resources.color.baseColor,
-            cancelTextColor: Resources.color.baseColor,
-            onConfirm: () {
-              controller.removeToken();
-            },
+          Get.dialog(
+            AlertDialog(
+              title: const Text("Keluar Akun"),
+              content: const Text("Apakah anda yakin ingin keluar akun?"),
+              backgroundColor: Resources.color.whiteColor,
+              elevation: 0,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    "Tidak",
+                    style: TextStyle(
+                      color: Resources.color.baseColor,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    controller.removeToken();
+                  },
+                  child: Text(
+                    "Ya",
+                    style: TextStyle(
+                      color: Resources.color.baseColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
         style: ElevatedButton.styleFrom(
