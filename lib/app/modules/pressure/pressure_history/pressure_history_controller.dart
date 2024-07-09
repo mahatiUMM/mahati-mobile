@@ -17,15 +17,13 @@ class PressureData {
 class PressureHistoryController extends GetxController
     with SingleGetTickerProviderMixin {
   final List<Tab> myTabs = <Tab>[
-    const Tab(text: 'Tekanan Darah'),
-    const Tab(text: 'Detak Jantung'),
+    const Tab(text: 'Data Tekanan Darah'),
+    const Tab(text: 'Statistik Tekanan Darah'),
   ];
 
   late TabController tabController;
   var pressureHistory = Rx<List<dynamic>>([]);
-  // var currentSistoleHistory = Rx(String);
-  // var currentDiastoleHistory = Rx(String);
-  // var currentHeartbeatHistory = Rx(String);
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() {
@@ -46,6 +44,7 @@ class PressureHistoryController extends GetxController
   }
 
   Future<void> getUserPressureHistory() async {
+    isLoading.value = true;
     final token = await getToken();
     final restClient = Get.find<RestClient>();
     final result = await restClient.requestWithToken(
@@ -59,5 +58,6 @@ class PressureHistoryController extends GetxController
     List<dynamic> dataList = parsedJson['data'];
     dataList.sort((a, b) => b['created_at'].compareTo(a['created_at']));
     pressureHistory.value = dataList;
+    isLoading.value = false;
   }
 }
