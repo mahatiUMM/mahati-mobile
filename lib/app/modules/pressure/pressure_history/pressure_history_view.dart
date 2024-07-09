@@ -122,7 +122,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                       ),
                                       Text(
                                         controller.pressureHistory.value
-                                            .last['sistol']
+                                            .first['sistol']
                                             .toString(),
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(
@@ -158,7 +158,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                       ),
                                       Text(
                                         controller.pressureHistory.value
-                                            .last['diastole']
+                                            .first['diastole']
                                             .toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -196,7 +196,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                       ),
                                       Text(
                                         controller.pressureHistory.value
-                                            .last['heartbeat']
+                                            .first['heartbeat']
                                             .toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
