@@ -277,6 +277,40 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                                   .pressureHistory
                                                   .value[index]['created_at'])))
                                         ]),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: SizedBox(
+                                        width: 3,
+                                        height: 80,
+                                        child: Container(
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              color: controller.pressureHistory.value[index]
+                                                              ['sistol'] >=
+                                                          120 &&
+                                                      controller.pressureHistory
+                                                                  .value[index]
+                                                              ['sistol'] <=
+                                                          130
+                                                  ? Colors.yellow
+                                                  : controller.pressureHistory.value[index]
+                                                                  ['sistol'] >=
+                                                              130 &&
+                                                          controller.pressureHistory.value[index]
+                                                                  ['sistol'] <=
+                                                              140
+                                                      ? Colors.orange
+                                                      : controller.pressureHistory.value[index]['sistol'] >= 140 &&
+                                                              controller.pressureHistory.value[index]['sistol'] <= 180
+                                                          ? Colors.deepOrange.shade700
+                                                          : controller.pressureHistory.value[index]['sistol'] >= 180
+                                                              ? Colors.red.shade900
+                                                              : Colors.green,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            )),
+                                      ),
+                                    ),
                                     Expanded(
                                       child: Row(
                                         crossAxisAlignment:
@@ -547,9 +581,8 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                 ],
                               ),
                               const Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child:
-                                    const Text("Classification ACC/AHA 2017"),
+                                padding: EdgeInsets.all(8.0),
+                                child: Text("Classification ACC/AHA 2017"),
                               )
                             ],
                           ),
