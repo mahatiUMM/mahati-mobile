@@ -1,9 +1,13 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:mahati_mobile/app/core/network/rest_client.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
+import 'package:mahati_mobile/app/utils/resources.dart';
 
 class PressureData {
   final int sistol;
@@ -15,7 +19,9 @@ class PressureData {
 }
 
 class PressureHistoryController extends GetxController
-    with SingleGetTickerProviderMixin {
+    with
+        // ignore: deprecated_member_use
+        SingleGetTickerProviderMixin {
   final List<Tab> myTabs = <Tab>[
     const Tab(text: 'Data Tekanan Darah'),
     const Tab(text: 'Statistik Tekanan Darah'),
@@ -59,5 +65,30 @@ class PressureHistoryController extends GetxController
     dataList.sort((a, b) => b['created_at'].compareTo(a['created_at']));
     pressureHistory.value = dataList;
     isLoading.value = false;
+  }
+
+  Future<void> exportUserPressureHistory() async {
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+      "/export/blood_pressure",
+      HttpMethod.GET,
+      null,
+      token.toString(),
+    );
+    final directory = Directory("/storage/emulated/0/Download");
+    if (!await directory.exists()) {
+      await directory.create(recursive: true);
+    }
+
+    final filePath = path.join(directory.path, "blood_pressure.xlsx");
+    final file = File(filePath);
+    await file.writeAsBytes(result.bodyBytes);
+    Get.snackbar(
+      "Export Data Tekanan Darah",
+      "Berhasil, file tersimpan di Download",
+      backgroundColor: Resources.color.primaryColor,
+      colorText: Resources.color.whiteColor,
+    );
   }
 }
