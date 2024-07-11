@@ -75,19 +75,22 @@ class ReminderController extends GetxController {
 
       reminderModel.data.removeWhere((element) => element.userId != userId);
       reminderList.assignAll(reminderModel.data);
-      filterRemindersByDate(DateTime.now().toIso8601String().substring(0, 10));
+      print(reminderList.map((element) => element.createdAt));
+      filterRemindersByDate(DateTime.now());
     } else {
       print('Request failed with status: ${result.statusCode}');
     }
     isLoading.value = false;
   }
 
-  void filterRemindersByDate(String date) {
+  void filterRemindersByDate(DateTime date) {
     print("Date now: ${date}");
     filteredReminders.assignAll(reminderList
         .where((element) =>
-            element.medicineTime.length >= 10 &&
-            element.medicineTime.substring(0, 10) == date)
+            element.createdAt.toLocal().toString().substring(0, 10) ==
+            date.toLocal().toString().substring(0, 10))
         .toList());
+
+    print("Filtered reminders: ${filteredReminders.length}");
   }
 }

@@ -92,8 +92,8 @@ class ReminderView extends GetView<ReminderController> {
                         EasyDateTimeLine(
                           initialDate: DateTime.now(),
                           onDateChange: (selectedDate) {
-                            var date = selectedDate.toString().substring(0, 10);
-                            controller.filterRemindersByDate(date);
+                            controller
+                                .filterRemindersByDate(selectedDate.toLocal());
                           },
                           activeColor: Resources.color.primaryColor,
                           headerProps: const EasyHeaderProps(
@@ -118,53 +118,49 @@ class ReminderView extends GetView<ReminderController> {
                           ),
                         ),
                         Obx(
-                          () => SizedBox(
-                            height: null,
-                            child: controller.reminderList.isEmpty
-                                ? const Center(
-                                    child: Text('Data is empty'),
-                                  )
-                                : ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: controller.reminderList.length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed(
-                                            '/reminder/detail',
-                                            arguments: controller
-                                                .reminderList[index].id,
-                                          );
-                                        },
-                                        child: Column(
-                                          children: [
-                                            reminderCard(
-                                              title: controller
-                                                  .reminderList[index]
-                                                  .medicineName,
-                                              status: controller.checkStatus(
-                                                  controller.reminderList[index]
-                                                      .medicineTaken),
-                                              strong: controller
-                                                  .capSizeToString(controller
-                                                      .reminderList[index]
-                                                      .capSize),
-                                              time: controller
-                                                  .reminderList[index]
-                                                  .medicineTime,
-                                            ),
-                                            Text(controller
-                                                .reminderList[index].createdAt
-                                                .toLocal()
-                                                .toString())
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                          ),
+                          () {
+                            final reminders =
+                                controller.filteredReminders.isEmpty
+                                    ? controller.reminderList
+                                    : controller.filteredReminders;
+                            return SizedBox(
+                              height: null,
+                              child: reminders.isEmpty
+                                  ? const Center(
+                                      child: Text('Search your reminder'),
+                                    )
+                                  : ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: reminders.length,
+                                      itemBuilder: (context, index) {
+                                        final reminder = reminders[index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Get.toNamed(
+                                              '/reminder/detail',
+                                              arguments: reminder.id,
+                                            );
+                                          },
+                                          child: Column(
+                                            children: [
+                                              reminderCard(
+                                                title: reminder.medicineName,
+                                                status: controller.checkStatus(
+                                                    reminder.medicineTaken),
+                                                strong:
+                                                    controller.capSizeToString(
+                                                        reminder.capSize),
+                                                time: reminder.medicineTime,
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                            );
+                          },
                         ),
                       ],
                     ),
