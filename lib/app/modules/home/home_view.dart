@@ -41,7 +41,7 @@ class HomeView extends GetView<HomeController> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  SliderWidget(),
+                  const SliderWidget(),
                   const SizedBox(height: 20),
                   const TabBox(),
                   const Padding(
