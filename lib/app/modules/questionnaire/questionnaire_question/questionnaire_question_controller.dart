@@ -27,6 +27,11 @@ class QuestionnaireQuestionController extends GetxController {
     await getQuestionnaires();
   }
 
+  Future<int> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return int.parse(prefs.getString('userId')!);
+  }
+
   void updatePageIndicator(int index) => currentPageIndex.value = index;
 
   Future<String?> getToken() async {
@@ -86,7 +91,8 @@ class QuestionnaireQuestionController extends GetxController {
     }
   }
 
-  void sendData() {
+  Future<void> sendData() async {
+    final userId = await getUserId();
     final answerData = selectedAnswer.map((answer) {
       return {
         'questionnaireQuestionId': answer[1],
@@ -94,11 +100,16 @@ class QuestionnaireQuestionController extends GetxController {
       };
     }).toList();
 
-    final data = jsonEncode({
-      'questionnaireId': Get.arguments['id'],
-      'answers': answerData,
-    });
+    QuestioinnaireAnswer questioinnaireAnswer = QuestioinnaireAnswer(
+      user_id: userId,
+      questionnaireQuestionId: Get.arguments['id'],
+      answers: answerData,
+    );
 
-    showSuccessMessage("Survey Berhasil di Submit", data.toString());
+    restClient.request('/questionnaire_question_answer', HttpMethod.POST,
+        questioinnaireAnswer.toJson());
+    showSuccessMessage(
+        "Survey Berhasil di Submit", questioinnaireAnswer.toJson().toString());
+    Get.toNamed('/questionnaire');
   }
 }

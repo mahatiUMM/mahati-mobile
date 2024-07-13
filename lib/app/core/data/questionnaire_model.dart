@@ -47,6 +47,24 @@ class Questionnaire {
       );
 }
 
+class QuestioinnaireAnswer {
+  int user_id;
+  int? questionnaireQuestionId;
+  List answers;
+
+  QuestioinnaireAnswer({
+    required this.user_id,
+    required this.questionnaireQuestionId,
+    required this.answers,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "user_id": user_id,
+        "questionnaireQuestionId": questionnaireQuestionId,
+        "answers": answers,
+      };
+}
+
 class AvailableAnswer {
   int? id;
   int? questionnaireQuestionId;
