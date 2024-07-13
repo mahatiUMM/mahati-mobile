@@ -1,11 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ReminderController extends GetxController {
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
+import 'package:mahati_mobile/app/utils/resources.dart';
+
+class ReminderController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
   RxList<ReminderData> filteredReminders = <ReminderData>[].obs;
@@ -81,6 +87,32 @@ class ReminderController extends GetxController {
       print('Request failed with status: ${result.statusCode}');
     }
     isLoading.value = false;
+  }
+
+  Future<void> exportUserReminder() async {
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+      "/export/reminder",
+      HttpMethod.GET,
+      null,
+      token.toString(),
+    );
+    final directory = Directory("/storage/emulated/0/Download");
+    if (!await directory.exists()) {
+      await directory.create(recursive: true);
+    }
+
+    final filePath = path.join(directory.path, "reminder.xlsx");
+    final file = File(filePath);
+    await file.writeAsBytes(result.bodyBytes);
+    Get.snackbar(
+      "Export Data Pengingat",
+      "Berhasil, file tersimpan di Download",
+      backgroundColor: Resources.color.primaryColor,
+      colorText: Resources.color.whiteColor,
+      duration: const Duration(seconds: 5),
+    );
   }
 
   void filterRemindersByDate(DateTime date) {

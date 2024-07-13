@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 void reminderFilter() {
+  final controller = Get.find<ReminderController>();
+
   Get.bottomSheet(
     Container(
       height: 420,
@@ -38,6 +41,7 @@ void reminderFilter() {
                 GestureDetector(
                   onTap: () {
                     print("Export clicked");
+                    controller.exportUserReminder();
                   },
                   child: Container(
                     width: 60,
