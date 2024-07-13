@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
@@ -7,8 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
+  final PageController pageController = PageController();
 
-  RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);
+  final RxInt pageLength = 0.obs;
+  final RxInt currentPageIndex = 0.obs;
+  RxList<QuestionnaireQuestion> questionnaireQuestion =
+      RxList<QuestionnaireQuestion>([]);
+  RxList<AvailableAnswer> availableAnswer = RxList<AvailableAnswer>([]);
+  RxList selectedAnswer = [].obs;
+
   RxBool isLoading = false.obs;
 
   @override
@@ -16,6 +24,8 @@ class QuestionnaireQuestionController extends GetxController {
     super.onInit();
     await getQuestionnaires();
   }
+
+  void updatePageIndicator(int index) => currentPageIndex.value = index;
 
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
@@ -25,26 +35,47 @@ class QuestionnaireQuestionController extends GetxController {
   getQuestionnaires() async {
     final token = await getToken();
     final result = await restClient.requestWithToken(
-        "/questionnaire", HttpMethod.GET, null, token.toString());
-
-    print(result.body);
+        '/questionnaire/${Get.arguments['id']}',
+        HttpMethod.GET,
+        null,
+        token.toString());
 
     if (result.statusCode == 200) {
       final jsonData = result.body;
       final questionnaireResult =
-          QuestionnaireResult.fromJson(json.decode(jsonData));
-      questionnaires.value = questionnaireResult.questionnaires;
-      print(questionnaires);
-      for (var questionnaire in questionnaires) {
-        for (var element in questionnaire.question) {
-          print(element.question);
-        }
-        print(questionnaire.title);
-      }
+          Questionnaire.fromJson(json.decode(jsonData)['data']);
+
+      questionnaireQuestion.assignAll(questionnaireResult.question);
+      pageLength.value = questionnaireResult.question.length;
     } else {
       if (kDebugMode) {
         print('Request failed with status: ${result.statusCode}');
       }
     }
+  }
+
+  void nextPage() {
+    int pageIndex = currentPageIndex.value + 1;
+    pageController.jumpToPage(pageIndex);
+  }
+
+  void setSelectedAnswer(int answerId) {
+    // Get the current value of currentPageIndex
+    int index = currentPageIndex.value;
+
+    // Check if there's already an answer for the currentPageIndex
+    int existingIndex =
+        selectedAnswer.indexWhere((element) => element[0] == index);
+
+    if (existingIndex != -1) {
+      // Keep the value from another index
+      selectedAnswer[existingIndex] = [index, answerId];
+    } else {
+      // Add new state
+      selectedAnswer.add([index, answerId]);
+    }
+
+    // Print or handle selectedAnswer as needed
+    print(selectedAnswer);
   }
 }

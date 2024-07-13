@@ -38,20 +38,11 @@ class QuestionnaireController extends GetxController {
     final result = await restClient.requestWithToken(
         "/questionnaire", HttpMethod.GET, null, token.toString());
 
-    print(result.body);
-
     if (result.statusCode == 200) {
       final jsonData = result.body;
       final questionnaireResult =
           QuestionnaireResult.fromJson(json.decode(jsonData));
       questionnaires.value = questionnaireResult.questionnaires;
-      print(questionnaires);
-      for (var questionnaire in questionnaires) {
-        for (var element in questionnaire.question) {
-          print(element.question);
-        }
-        print(questionnaire.title);
-      }
     } else {
       if (kDebugMode) {
         print('Request failed with status: ${result.statusCode}');

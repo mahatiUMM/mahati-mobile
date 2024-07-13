@@ -88,12 +88,10 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                               description: questionnaire.description!,
                               imageUrl: questionnaire.image ?? "",
                               onPressed: () {
-                                // Get.to(QuestionnaireQuestionView(), arguments: {'questionnaire': questionnaire});
                                 Get.toNamed('/questionnaire_question',
                                     arguments: {
-                                      'questionnaire': questionnaire,
-                                      'questionnaire_questions':
-                                          questionnaire.question
+                                      'id': questionnaire.id,
+                                      'image': questionnaire.image ?? '',
                                     });
                               },
                             );
