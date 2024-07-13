@@ -8,17 +8,28 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 0.65,
-      right: 25.0,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF40D99E),
-          foregroundColor: Colors.white,
-        ),
-        onPressed: controller.nextPage,
-        child: const Icon(Icons.arrow_forward),
-      ),
-    );
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Obx(() => Positioned(
+          left: (screenWidth - (Get.width - 42)) / 2,
+          bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 0.65,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(Get.width - 42, 24),
+              backgroundColor: const Color(0xFF40D99E),
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              if (controller.isLastPage.value) {
+                controller.sendData();
+              } else {
+                controller.nextPage();
+              }
+            },
+            child: controller.isLastPage.value
+                ? const Text("Submit Survey")
+                : const Icon(Icons.arrow_forward),
+          ),
+        ));
   }
 }

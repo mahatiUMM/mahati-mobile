@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionnaireQuestionController extends GetxController {
@@ -18,6 +19,7 @@ class QuestionnaireQuestionController extends GetxController {
   RxList selectedAnswer = [].obs;
 
   RxBool isLoading = false.obs;
+  RxBool isLastPage = false.obs;
 
   @override
   onInit() async {
@@ -57,25 +59,46 @@ class QuestionnaireQuestionController extends GetxController {
   void nextPage() {
     int pageIndex = currentPageIndex.value + 1;
     pageController.jumpToPage(pageIndex);
+    isLastPageCheck();
   }
 
-  void setSelectedAnswer(int answerId) {
-    // Get the current value of currentPageIndex
+  void setSelectedAnswer(int questionnaireQuestionId, int answerId) {
     int index = currentPageIndex.value;
-
-    // Check if there's already an answer for the currentPageIndex
     int existingIndex =
         selectedAnswer.indexWhere((element) => element[0] == index);
 
     if (existingIndex != -1) {
-      // Keep the value from another index
-      selectedAnswer[existingIndex] = [index, answerId];
+      selectedAnswer[existingIndex] = [
+        index,
+        questionnaireQuestionId,
+        answerId,
+      ];
     } else {
-      // Add new state
-      selectedAnswer.add([index, answerId]);
+      selectedAnswer.add([index, questionnaireQuestionId, answerId]);
     }
+  }
 
-    // Print or handle selectedAnswer as needed
-    print(selectedAnswer);
+  void isLastPageCheck() {
+    if (currentPageIndex.value == pageLength.value - 1) {
+      isLastPage.value = true;
+    } else {
+      isLastPage.value = false;
+    }
+  }
+
+  void sendData() {
+    final answerData = selectedAnswer.map((answer) {
+      return {
+        'questionnaireQuestionId': answer[1],
+        'answerId': answer[2],
+      };
+    }).toList();
+
+    final data = jsonEncode({
+      'questionnaireId': Get.arguments['id'],
+      'answers': answerData,
+    });
+
+    showSuccessMessage("Survey Berhasil di Submit", data.toString());
   }
 }
