@@ -150,7 +150,7 @@ class ReminderRefillController extends GetxController {
           scheduledNotificationDateTime: scheduledNotificationDateTime,
         );
 
-        Get.offAndToNamed('/layout');
+        Get.offAllNamed("/layout");
 
         Get.snackbar(
           'Success',

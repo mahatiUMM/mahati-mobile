@@ -50,12 +50,6 @@ class BrochureDetailView extends GetView<BrochureDetailController> {
                   width: Get.width,
                   child: PinchZoom(
                     maxScale: 2.5,
-                    onZoomStart: () {
-                      print('Start zooming dog');
-                    },
-                    onZoomEnd: () {
-                      print('Stop zooming dog');
-                    },
                     child: Image.network(
                       i,
                     ),

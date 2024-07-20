@@ -1,4 +1,3 @@
-// print(controller.diastoleController.text);
 class BloodPressureModel {
   int user_id;
   String image;

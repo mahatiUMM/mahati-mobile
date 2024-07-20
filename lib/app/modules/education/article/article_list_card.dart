@@ -18,7 +18,6 @@ class ArticleListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("go");
         Get.toNamed("/article/detail");
       },
       child: Card(

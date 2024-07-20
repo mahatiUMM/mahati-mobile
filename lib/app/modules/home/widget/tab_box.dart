@@ -79,7 +79,7 @@ class TabBox extends StatelessWidget {
               color: Colors.white,
             ),
             onClick: () {
-              Get.offAndToNamed('/reminder');
+              Get.toNamed('/reminder');
             },
           ),
           const SizedBox(width: 23),

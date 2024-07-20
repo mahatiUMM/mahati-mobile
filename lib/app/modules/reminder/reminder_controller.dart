@@ -65,7 +65,6 @@ class ReminderController extends GetxController
 
   Future<void> getReminder() async {
     isLoading.value = true;
-    print("fetching");
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder", HttpMethod.GET, null, token.toString());
@@ -109,13 +108,11 @@ class ReminderController extends GetxController
   }
 
   void filterRemindersByDate(DateTime date) {
-    print("Date now: ${date}");
     filteredReminders.assignAll(reminderList
         .where((element) =>
             element.createdAt.toLocal().toString().substring(0, 10) ==
             date.toLocal().toString().substring(0, 10))
         .toList());
 
-    print("Filtered reminders: ${filteredReminders.length}");
   }
 }

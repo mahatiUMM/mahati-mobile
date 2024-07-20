@@ -43,7 +43,6 @@ class InboxView extends GetView<InboxController> {
                     ),
                     InkWell(
                       onTap: () {
-                        print("Baca Semua Pesan");
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

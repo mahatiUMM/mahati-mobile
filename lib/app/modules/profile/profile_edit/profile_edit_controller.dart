@@ -68,10 +68,8 @@ class ProfileEditController extends GetxController {
         "/profile", HttpMethod.PUT, data, token.toString());
 
     if (result.statusCode == 200) {
-      print('Profile updated: ${result.body}');
     } else {
       print('Request failed with status: ${result.statusCode}');
-      print(result.body);
     }
   }
 }

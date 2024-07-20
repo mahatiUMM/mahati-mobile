@@ -156,7 +156,6 @@ class BodySignIn extends GetView<SignInController> {
                           shape: BoxShape.circle, color: Colors.red),
                       child: IconButton(
                           onPressed: () async {
-                            print("google clicked");
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.google,
@@ -169,7 +168,6 @@ class BodySignIn extends GetView<SignInController> {
                           shape: BoxShape.circle, color: Colors.black),
                       child: IconButton(
                           onPressed: () async {
-                            print("apple clicked");
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.apple,
@@ -182,7 +180,6 @@ class BodySignIn extends GetView<SignInController> {
                           shape: BoxShape.circle, color: Colors.blue),
                       child: IconButton(
                           onPressed: () async {
-                            print("facebook clicked");
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.facebook,

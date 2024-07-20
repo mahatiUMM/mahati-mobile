@@ -19,7 +19,6 @@ class SignUpController extends GetxController {
 
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
-    print("After toggle: ${showPassword.value}");
   }
 
   registerAccount({
@@ -55,7 +54,6 @@ class SignUpController extends GetxController {
         signUpModel.toJson(),
       );
 
-      print(result.body);
       var responseData = jsonDecode(result.body);
 
       if (responseData["success"] == true) {
