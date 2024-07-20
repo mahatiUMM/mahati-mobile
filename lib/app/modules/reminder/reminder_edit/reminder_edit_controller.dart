@@ -44,8 +44,6 @@ class ReminderEditController extends GetxController {
 
     if (result.statusCode == 200) {
       reminderModel.value = ReminderIdModel.fromMap(jsonDecode(result.body));
-    } else {
-      print('Request failed with status: ${result.statusCode}');
     }
   }
 
@@ -78,7 +76,7 @@ class ReminderEditController extends GetxController {
 
     final token = await getToken();
     final result = await restClient.requestWithToken(
-        "/reminder/$reminderId", HttpMethod.PATCH, data, token.toString());
+        "/reminder/$reminderId", HttpMethod.PUT, data, token.toString());
 
     if (result.statusCode == 200) {
       Get.offAllNamed("/layout");
@@ -98,7 +96,6 @@ class ReminderEditController extends GetxController {
       );
       return;
     } else {
-      print('Request failed with status: ${result.statusCode}');
       Get.snackbar(
         'Gagal mengedit pengingat obat',
         'Mohon lengkapi semua data yang diperlukan',
