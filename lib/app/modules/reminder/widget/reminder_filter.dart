@@ -40,7 +40,6 @@ void reminderFilter() {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print("Export clicked");
                     controller.exportUserReminder();
                   },
                   child: Container(
