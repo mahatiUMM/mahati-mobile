@@ -36,7 +36,7 @@ class ReminderView extends GetView<ReminderController> {
         leading: IconButton(
           icon: const Icon(Icons.chevron_left),
           onPressed: () {
-            Get.toNamed("/layout");
+            Get.offAndToNamed("/layout");
           },
         ),
         title: Row(
@@ -178,7 +178,7 @@ class ReminderView extends GetView<ReminderController> {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-          Get.toNamed('/reminder/refill');
+          Get.offAndToNamed('/reminder/refill');
         },
         child: Icon(Icons.add, color: Resources.color.baseColor, size: 28),
       ),

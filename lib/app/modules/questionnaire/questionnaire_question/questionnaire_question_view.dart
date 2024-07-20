@@ -66,7 +66,7 @@ class QuestionnaireQuestionView
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed('/questionnaire');
+                    Get.offAndToNamed('/questionnaire');
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -117,6 +117,7 @@ class QuestionnaireQuestionView
                                       children: [
                                         Text(
                                           question.question ?? "",
+                                          textAlign: TextAlign.center,
                                           style: const TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.w900),

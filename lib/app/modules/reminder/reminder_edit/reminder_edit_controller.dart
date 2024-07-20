@@ -81,7 +81,7 @@ class ReminderEditController extends GetxController {
         "/reminder/$reminderId", HttpMethod.PATCH, data, token.toString());
 
     if (result.statusCode == 200) {
-      Get.toNamed('/layout');
+      Get.offAndToNamed('/reminder');
       Get.snackbar(
         'Berhasil mengedit pengingat obat',
         'Data anda sudah berhasil diubah',

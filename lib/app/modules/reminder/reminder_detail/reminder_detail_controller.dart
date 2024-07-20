@@ -62,7 +62,7 @@ class ReminderDetailController extends GetxController {
 
     if (result.statusCode == 200) {
       print('Reminder deleted ${result.body}');
-      Get.toNamed('/layout');
+      Get.offAndToNamed('/layout');
 
       Get.snackbar(
         'Success',

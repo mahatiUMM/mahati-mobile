@@ -19,7 +19,6 @@ class ReminderController extends GetxController
 
   @override
   void onInit() {
-    super.onInit();
     getReminder();
     getUserId();
     ever(
@@ -28,12 +27,7 @@ class ReminderController extends GetxController
         if (callback == '/reminder') {getReminder()}
       },
     );
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    getReminder();
+    super.onInit();
   }
 
   Future<String?> getToken() async {
@@ -71,6 +65,7 @@ class ReminderController extends GetxController
 
   Future<void> getReminder() async {
     isLoading.value = true;
+    print("fetching");
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder", HttpMethod.GET, null, token.toString());
@@ -81,10 +76,8 @@ class ReminderController extends GetxController
 
       reminderModel.data.removeWhere((element) => element.userId != userId);
       reminderList.assignAll(reminderModel.data);
-      print(reminderList.map((element) => element.createdAt));
       filterRemindersByDate(DateTime.now());
     } else {
-      print('Request failed with status: ${result.statusCode}');
     }
     isLoading.value = false;
   }

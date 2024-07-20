@@ -60,7 +60,7 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed('/reminder');
+                    Get.offAndToNamed('/reminder');
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),

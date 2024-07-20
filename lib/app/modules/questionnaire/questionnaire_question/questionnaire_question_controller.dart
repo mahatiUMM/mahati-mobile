@@ -110,6 +110,6 @@ class QuestionnaireQuestionController extends GetxController {
         questioinnaireAnswer.toJson());
     showSuccessMessage(
         "Survey Berhasil di Submit", questioinnaireAnswer.toJson().toString());
-    Get.toNamed('/questionnaire');
+    Get.offAndToNamed('/questionnaire');
   }
 }
