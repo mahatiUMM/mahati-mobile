@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-import 'package:mahati_mobile/app/modules/reminder/widget/reminder_filter.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderView extends GetView<ReminderController> {
@@ -50,9 +49,33 @@ class ReminderView extends GetView<ReminderController> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.filter_alt_outlined),
+              icon: const Icon(Icons.download_outlined),
               onPressed: () {
-                reminderFilter();
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Download Reminder'),
+                      content: const Text(
+                          'Apakah anda ingin mendownload pengingat obat anda?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text('Tidak'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Get.back();
+                            controller.exportUserReminder();
+                          },
+                          child: const Text('Ya'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

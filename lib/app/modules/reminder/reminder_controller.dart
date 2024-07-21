@@ -53,11 +53,11 @@ class ReminderController extends GetxController
   String capSizeToString(int capSize) {
     switch (capSize) {
       case 1:
-        return "Tidak Kuat";
+        return "Terbatas";
       case 2:
-        return "Sedang";
+        return "Bebas Keras";
       case 3:
-        return "Kuat";
+        return "Keras";
       default:
         return 'Unknown';
     }
@@ -76,8 +76,7 @@ class ReminderController extends GetxController
       reminderModel.data.removeWhere((element) => element.userId != userId);
       reminderList.assignAll(reminderModel.data);
       filterRemindersByDate(DateTime.now());
-    } else {
-    }
+    } else {}
     isLoading.value = false;
   }
 
@@ -113,6 +112,5 @@ class ReminderController extends GetxController
             element.createdAt.toLocal().toString().substring(0, 10) ==
             date.toLocal().toString().substring(0, 10))
         .toList());
-
   }
 }

@@ -6,7 +6,7 @@ import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class PressureHistoryView extends GetView<PressureHistoryController> {
-  const PressureHistoryView({Key? key}) : super(key: key);
+  const PressureHistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
           actions: [
             IconButton(
               icon: const Icon(
-                Icons.more_vert,
+                Icons.download_outlined,
               ),
               onPressed: () {
                 controller.exportUserPressureHistory();
