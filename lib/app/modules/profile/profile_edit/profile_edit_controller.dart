@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileEditController extends GetxController {
@@ -68,8 +69,38 @@ class ProfileEditController extends GetxController {
         "/profile", HttpMethod.PUT, data, token.toString());
 
     if (result.statusCode == 200) {
+      Get.offAllNamed("/layout");
+      Get.snackbar(
+        'Berhasil mengedit profil anda',
+        'Data anda sudah berhasil diubah',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.primaryColor,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
     } else {
-      print('Request failed with status: ${result.statusCode}');
+      Get.snackbar(
+        'Gagal mengedit profil anda',
+        'Mohon lengkapi semua data yang diperlukan',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
     }
   }
 }
