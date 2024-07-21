@@ -94,7 +94,8 @@ class ReminderController extends GetxController
       await directory.create(recursive: true);
     }
 
-    final filePath = path.join(directory.path, "reminder.xlsx");
+    final filePath = path.join(directory.path,
+        "reminder-${DateTime.now().millisecondsSinceEpoch}.xlsx");
     final file = File(filePath);
     await file.writeAsBytes(result.bodyBytes);
     Get.snackbar(

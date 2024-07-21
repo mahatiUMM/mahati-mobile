@@ -7,7 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path/path.dart' as path;
 
 class ProfileController extends GetxController {
   static ProfileController profileController = Get.find();
@@ -89,6 +91,11 @@ class ProfileController extends GetxController {
     Get.offAllNamed(Routes.signin);
   }
 
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('authToken');
+  }
+
   Future<void> getUserProfile() async {
     final token = await getToken();
     final restClient = Get.find<RestClient>();
@@ -96,11 +103,37 @@ class ProfileController extends GetxController {
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.GET, null, token.toString());
 
-    print(result.body);
     var responseData = UserModel.fromJson(jsonDecode(result.body));
-    print(responseData.username);
-
     username.value = responseData.username;
+  }
+
+  Future<void> exportUserVideos() async {
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+      "/export/video",
+      HttpMethod.GET,
+      null,
+      token.toString(),
+    );
+
+    final directory = Directory("/storage/emulated/0/Download");
+    if (!await directory.exists()) {
+      await directory.create(recursive: true);
+    }
+
+    final filePath = path.join(
+      directory.path,
+      "exported_videos-${DateTime.now().millisecondsSinceEpoch}.xlsx",
+    );
+    final file = File(filePath);
+    await file.writeAsBytes(result.bodyBytes);
+    Get.snackbar(
+      "Export Data Video",
+      "Berhasil, file tersimpan di Download",
+      backgroundColor: Resources.color.primaryColor,
+      colorText: Resources.color.whiteColor,
+    );
   }
 
   addNewProfile(String name, String bio) async {
@@ -151,9 +184,4 @@ class ProfileController extends GetxController {
   //     Get.snackbar("Profile Image", "anda tidak memilih gambar!");
   //   }
   // }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
 }

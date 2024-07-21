@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -69,37 +68,30 @@ class PressureHistoryController extends GetxController
   }
 
   Future<void> exportUserPressureHistory() async {
-    final status = await Permission.storage.status;
-    if (status.isGranted) {
-      final token = await getToken();
-      final restClient = Get.find<RestClient>();
-      final result = await restClient.requestWithToken(
-        "/export/blood_pressure",
-        HttpMethod.GET,
-        null,
-        token.toString(),
-      );
-      final directory = Directory("/storage/emulated/0/Download");
-      if (!await directory.exists()) {
-        await directory.create(recursive: true);
-      }
-
-      final filePath = path.join(directory.path, "blood_pressure.xlsx");
-      final file = File(filePath);
-      await file.writeAsBytes(result.bodyBytes);
-      Get.snackbar(
-        "Export Data Tekanan Darah",
-        "Berhasil, file tersimpan di Download",
-        backgroundColor: Resources.color.primaryColor,
-        colorText: Resources.color.whiteColor,
-      );
-    } else {
-      Get.snackbar(
-        "Export Data Tekanan Darah",
-        "Gagal, izin penyimpanan ditolak",
-        backgroundColor: Resources.color.secondaryColor,
-        colorText: Resources.color.whiteColor,
-      );
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+      "/export/blood_pressure",
+      HttpMethod.GET,
+      null,
+      token.toString(),
+    );
+    final directory = Directory("/storage/emulated/0/Download");
+    if (!await directory.exists()) {
+      await directory.create(recursive: true);
     }
+
+    final filePath = path.join(
+      directory.path,
+      "blood_pressure-${DateTime.now().millisecondsSinceEpoch}.xlsx",
+    );
+    final file = File(filePath);
+    await file.writeAsBytes(result.bodyBytes);
+    Get.snackbar(
+      "Export Data Tekanan Darah",
+      "Berhasil, file tersimpan di Download",
+      backgroundColor: Resources.color.primaryColor,
+      colorText: Resources.color.whiteColor,
+    );
   }
 }

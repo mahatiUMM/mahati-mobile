@@ -190,7 +190,7 @@ class ProfileView extends GetView<ProfileController> {
                                 ),
                               ),
                               onPressed: () {
-                                print('export');
+                                controller.exportUserVideos();
                               },
                               child: Text(
                                 "Export",
