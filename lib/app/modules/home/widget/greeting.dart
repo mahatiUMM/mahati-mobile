@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 
@@ -18,9 +20,12 @@ class GreetingWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Hai, $username',
-              style: StyleText.homeGreeting1,
+            GestureDetector(
+              onTap: () => Get.toNamed('/reminder/action'),
+              child: Text(
+                'Hai, $username',
+                style: StyleText.homeGreeting1,
+              ),
             ),
             Text(
               TextStrings.homeGreeting,

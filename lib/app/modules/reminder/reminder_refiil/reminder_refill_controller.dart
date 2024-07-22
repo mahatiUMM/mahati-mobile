@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
@@ -143,10 +144,9 @@ class ReminderRefillController extends GetxController {
         }
 
         NotificationService().scheduleNotification(
-          id: 6,
           title: "Pengingat Obat",
           body: "Jangan lupa minum ${medicineName.toString()}",
-          payLoad: jsonEncode(reminderPostData),
+          payLoad: result.body,
           scheduledNotificationDateTime: scheduledNotificationDateTime,
         );
 

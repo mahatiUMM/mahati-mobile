@@ -18,6 +18,7 @@ abstract class Routes {
   static const reminderEdit = _Paths.reminderEdit;
   static const reminderDetail = _Paths.reminderDetail;
   static const reminderRefill = _Paths.reminderRefiil;
+  static const reminderAction = _Paths.reminderAction;
   static const pressureHistory = _Paths.pressureHistory;
   static const education = _Paths.education;
   static const articleDetail = _Paths.articleDetail;
@@ -44,6 +45,7 @@ abstract class _Paths {
   static const reminderEdit = '/reminder/edit';
   static const reminderDetail = '/reminder/detail';
   static const reminderRefiil = '/reminder/refill';
+  static const reminderAction = '/reminder/action';
   static const pressureHistory = '/pressure/history';
   static const education = '/education';
   static const articleDetail = '/article/detail';

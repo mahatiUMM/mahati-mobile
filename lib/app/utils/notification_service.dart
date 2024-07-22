@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:get/get.dart';
 
 class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
@@ -23,11 +24,8 @@ class NotificationService {
       initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
-        print("notiff");
         final String? payload = notificationResponse.payload;
-        if (notificationResponse.payload != null) {
-          print('notification payload: $payload');
-        }
+        Get.toNamed('/reminder/action', arguments: {'data': payload});
       },
     );
   }
@@ -38,16 +36,6 @@ class NotificationService {
           'channelId',
           'channelName',
           importance: Importance.max,
-          actions: [
-            AndroidNotificationAction(
-              'action_yes',
-              'Yes',
-            ),
-            AndroidNotificationAction(
-              'action_no',
-              'No',
-            ),
-          ],
         ),
         iOS: DarwinNotificationDetails());
   }
