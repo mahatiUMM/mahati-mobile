@@ -126,16 +126,16 @@ class ReminderRefillController extends GetxController {
           "/reminder", HttpMethod.POST, reminderPostData);
 
       if (result.statusCode == 201) {
-        // Parse the medicineTime into a DateTime object with today's date
         DateTime now = DateTime.now();
         DateTime scheduledNotificationDateTime =
             DateFormat('HH:mm').parse(medicineTime);
         scheduledNotificationDateTime = DateTime(
-            now.year,
-            now.month,
-            now.day,
-            scheduledNotificationDateTime.hour,
-            scheduledNotificationDateTime.minute);
+          now.year,
+          now.month,
+          now.day,
+          scheduledNotificationDateTime.hour,
+          scheduledNotificationDateTime.minute,
+        );
 
         // If the scheduled time is in the past, add one day to it
         if (scheduledNotificationDateTime.isBefore(now)) {
@@ -148,6 +148,7 @@ class ReminderRefillController extends GetxController {
           body: "Jangan lupa minum ${medicineName.toString()}",
           payLoad: result.body,
           scheduledNotificationDateTime: scheduledNotificationDateTime,
+          numberOfDays: medicineTotal,
         );
 
         Get.offAllNamed("/layout");

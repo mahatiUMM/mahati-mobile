@@ -3,7 +3,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:get/get.dart';
 
 class NotificationService {
-  final FlutterLocalNotificationsPlugin notificationsPlugin =
+  static final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   Future<void> initNotification() async {
@@ -46,24 +46,81 @@ class NotificationService {
         id, title, body, await notificationDetails());
   }
 
-  Future scheduleNotification(
-      {int id = 6,
-      String? title,
-      String? body,
-      String? payLoad,
-      required DateTime scheduledNotificationDateTime}) async {
-    return notificationsPlugin.zonedSchedule(
-        id,
+  Future periodicNotifications({
+    required String title,
+    required String body,
+    required String payload,
+  }) async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      'channel 2',
+      'your channel name',
+      channelDescription: 'your channel description',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+    await notificationsPlugin.periodicallyShow(
+      1,
+      title,
+      body,
+      RepeatInterval.daily,
+      notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      payload: payload,
+    );
+  }
+
+  Future scheduleDailyNotifications({
+    required String title,
+    required String body,
+    required String payload,
+    required DateTime scheduledNotificationDateTime,
+    required int numberOfDays,
+  }) async {
+    for (int i = 0; i < numberOfDays; i++) {
+      final scheduledDate =
+          scheduledNotificationDateTime.add(Duration(days: i));
+      print(payload);
+      await notificationsPlugin.zonedSchedule(
+        i,
         title,
         body,
         tz.TZDateTime.from(
-          scheduledNotificationDateTime,
+          scheduledDate,
           tz.local,
         ),
         await notificationDetails(),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
-        payload: payLoad);
+        payload: payload,
+      );
+    }
+  }
+
+  Future scheduleNotification({
+    int id = 6,
+    String? title,
+    String? body,
+    String? payLoad,
+    required DateTime scheduledNotificationDateTime,
+  }) async {
+    return notificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.from(
+        scheduledNotificationDateTime,
+        tz.local,
+      ),
+      await notificationDetails(),
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      payload: payLoad,
+    );
   }
 }
