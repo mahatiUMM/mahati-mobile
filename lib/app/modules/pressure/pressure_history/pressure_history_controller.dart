@@ -81,7 +81,10 @@ class PressureHistoryController extends GetxController
       await directory.create(recursive: true);
     }
 
-    final filePath = path.join(directory.path, "blood_pressure.xlsx");
+    final filePath = path.join(
+      directory.path,
+      "blood_pressure-${DateTime.now().millisecondsSinceEpoch}.xlsx",
+    );
     final file = File(filePath);
     await file.writeAsBytes(result.bodyBytes);
     Get.snackbar(

@@ -32,11 +32,11 @@ class ReminderDetailController extends GetxController {
   String capSizeToString(int capSize) {
     switch (capSize) {
       case 1:
-        return "Tidak Kuat";
+        return "Obat Terbatas";
       case 2:
-        return "Sedang";
+        return "Obat Bebas Keras";
       case 3:
-        return "Kuat";
+        return "Obat Keras";
       default:
         return 'Unknown';
     }
@@ -58,7 +58,6 @@ class ReminderDetailController extends GetxController {
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/reminder/$itemId", HttpMethod.DELETE, null, token.toString());
-
 
     if (result.statusCode == 200) {
       Get.snackbar(

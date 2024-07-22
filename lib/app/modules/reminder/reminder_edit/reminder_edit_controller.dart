@@ -20,6 +20,8 @@ class ReminderEditController extends GetxController {
   TextEditingController capSizeController = TextEditingController();
   TextEditingController medicineTimeController = TextEditingController();
 
+  String? selectedCapsuleSize;
+
   @override
   void onInit() {
     reminderId.value = Get.arguments;
@@ -44,6 +46,20 @@ class ReminderEditController extends GetxController {
 
     if (result.statusCode == 200) {
       reminderModel.value = ReminderIdModel.fromMap(jsonDecode(result.body));
+    }
+  }
+
+  // convert capSize into string
+  String convertCapSize(int capSize) {
+    switch (capSize) {
+      case 1:
+        return "Obat Terbatas";
+      case 2:
+        return "Obat Bebas Keras";
+      case 3:
+        return "Obat Keras";
+      default:
+        return "Obat Terbatas";
     }
   }
 

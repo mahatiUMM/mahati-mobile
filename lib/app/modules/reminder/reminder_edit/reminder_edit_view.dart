@@ -257,22 +257,46 @@ class ReminderEditView extends GetView<ReminderEditController> {
                       ),
                     ),
                     Obx(
-                      () => TextField(
-                        controller: controller.capSizeController,
-                        keyboardType: TextInputType.text,
+                      () => DropdownButtonFormField<String>(
+                        dropdownColor: Resources.color.whiteColor,
+                        elevation: 1,
+                        value: controller.selectedCapsuleSize,
+                        items: [
+                          'Obat Terbatas',
+                          'Obat Bebas Keras',
+                          'Obat Keras'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          controller.selectedCapsuleSize = newValue!;
+                          int id = 0;
+                          if (newValue == 'Obat Terbatas') {
+                            id = 1;
+                          } else if (newValue == 'Obat Bebas Keras') {
+                            id = 2;
+                          } else if (newValue == 'Obat Keras') {
+                            id = 3;
+                          }
+                          controller.capSizeController.text = id.toString();
+                          print(controller.capSizeController.text);
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Resources.color.textFieldColor,
-                          hintText: controller.reminderModel.value?.data.capSize
-                                  .toString() ??
-                              "",
-                          hintStyle: TextStyle(
-                            color: Resources.color.baseColor2,
-                          ),
+                          hintText: controller.convertCapSize(
+                              controller.reminderModel.value?.data.capSize ??
+                                  0),
+                          hintStyle:
+                              TextStyle(color: Resources.color.hintColor),
                           enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Resources.color.textFieldColor),
-                              borderRadius: BorderRadius.circular(15)),
+                            borderSide: BorderSide(
+                                color: Resources.color.textFieldColor),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Resources.color.textFieldColor),

@@ -99,11 +99,11 @@ class ReminderRefillController extends GetxController {
     final medicineTakenInt = int.tryParse(medicineTaken) ?? 0;
     final medicineTotal = amountInt - medicineTakenInt;
 
-    if (capSize == "Tidak Kuat") {
+    if (capSize == "Obat Terbatas") {
       capSize = "1";
-    } else if (capSize == "Sedang") {
+    } else if (capSize == "Obat Bebas Keras") {
       capSize = "2";
-    } else if (capSize == "Kuat") {
+    } else if (capSize == "Obat Keras") {
       capSize = "3";
     } else {
       capSize = "1";

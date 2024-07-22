@@ -41,7 +41,7 @@ Widget reminderRefillForm(BuildContext context) {
         const SizedBox(height: 15),
         buildDropdown(
           label: "Ukuran Kapsul",
-          items: ['Tidak Kuat', 'Sedang', 'Kuat'],
+          items: ['Obat Terbatas', 'Obat Bebas Keras', 'Obat Keras'],
           selectedValue: controller.selectedCapsuleSize,
           onChanged: (newValue) {
             controller.selectedCapsuleSize = newValue!;
@@ -123,6 +123,8 @@ Widget buildDropdown({
         ),
       ),
       DropdownButtonFormField<String>(
+        dropdownColor: Resources.color.whiteColor,
+        elevation: 1,
         value: selectedValue,
         items: items.map((String value) {
           return DropdownMenuItem<String>(

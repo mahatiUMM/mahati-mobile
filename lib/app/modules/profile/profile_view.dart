@@ -37,8 +37,9 @@ class ProfileView extends GetView<ProfileController> {
                       color: Resources.color.whiteColor,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(32),
-                            bottomRight: Radius.circular(32)),
+                          bottomLeft: Radius.circular(32),
+                          bottomRight: Radius.circular(32),
+                        ),
                       ),
                     ),
                     child: Padding(
@@ -68,13 +69,14 @@ class ProfileView extends GetView<ProfileController> {
                               SizedBox(
                                 height: Get.height / 18,
                                 child: IconButton(
-                                    onPressed: () {
-                                      Get.toNamed("/setting");
-                                    },
-                                    icon: Icon(
-                                      Icons.settings_outlined,
-                                      color: Resources.color.baseColor,
-                                    )),
+                                  onPressed: () {
+                                    Get.toNamed("/setting");
+                                  },
+                                  icon: Icon(
+                                    Icons.settings_outlined,
+                                    color: Resources.color.baseColor,
+                                  ),
+                                ),
                               )
                             ],
                           ),
@@ -101,7 +103,9 @@ class ProfileView extends GetView<ProfileController> {
                                         right: -10,
                                         child: Padding(
                                           padding: const EdgeInsets.only(
-                                              top: 8.0, right: 5.0),
+                                            top: 8.0,
+                                            right: 5.0,
+                                          ),
                                           child: IconButton(
                                             icon: const Icon(
                                               Icons.camera,
@@ -155,7 +159,7 @@ class ProfileView extends GetView<ProfileController> {
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -170,57 +174,61 @@ class ProfileView extends GetView<ProfileController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Video Yang disimpan: ",
-                                style: StyleText.homeGreeting1),
+                            Text(
+                              "Video Yang disimpan: ",
+                              style: StyleText.homeGreeting1,
+                            ),
                             ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Color(0xFF2C3131)),
-                                  shape: MaterialStatePropertyAll(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5))),
+                              style: ButtonStyle(
+                                backgroundColor: const MaterialStatePropertyAll(
+                                  Color(0xFF2C3131),
                                 ),
-                                onPressed: () {
-                                  print('export');
-                                },
-                                child: Text(
-                                  "Export",
-                                  style: TextStyle(
-                                    color: Resources.color.whiteColor,
+                                shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                ))
+                                ),
+                              ),
+                              onPressed: () {
+                                controller.exportUserVideos();
+                              },
+                              child: Text(
+                                "Export",
+                                style: TextStyle(
+                                  color: Resources.color.whiteColor,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
+                        SizedBox(height: 1.h),
                         SizedBox(
-                          height: 1.h,
-                        ),
-                        SizedBox(
-                            height: Get.height / 2.06,
-                            child: GridView.builder(
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 12.0,
-                                      mainAxisSpacing: 12.0),
-                              itemCount: controller.gridMap.length,
-                              itemBuilder: (_, index) {
-                                return Card(
-                                  elevation: 0,
-                                  color: Resources.color.whiteColor,
-                                  child: Center(
-                                    child: Stack(children: [
+                          height: Get.height / 2.06,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 2.w,
+                              mainAxisSpacing: 2.h,
+                              childAspectRatio:
+                                  (Get.width / 2) / (Get.height / 4.5),
+                            ),
+                            itemCount: controller.gridMap.length,
+                            itemBuilder: (_, index) {
+                              return Card(
+                                elevation: 0,
+                                color: Resources.color.whiteColor,
+                                child: Center(
+                                  child: Stack(
+                                    children: [
                                       const Positioned(
                                         right: 0,
                                         child: Icon(Icons.bookmark),
                                       ),
                                       Column(
                                         children: [
-                                          SizedBox(
-                                            height: 4.h,
-                                          ),
+                                          SizedBox(height: 4.h),
                                           SizedBox(
                                             width: 32.w,
                                             height: 48,
@@ -230,25 +238,25 @@ class ProfileView extends GetView<ProfileController> {
                                               maxLines: 2,
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          ),
+                                          SizedBox(height: 1.h),
                                           SizedBox(
                                             width: 32.w,
-                                            height: 80,
+                                            height: 5.h,
                                             child: Text(
                                               '${controller.gridMap.elementAt(index)['subtitle']}',
                                               style: StyleText.cardSubTitle1,
                                               maxLines: 3,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
-                                    ]),
+                                    ],
                                   ),
-                                );
-                              },
-                            ))
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
