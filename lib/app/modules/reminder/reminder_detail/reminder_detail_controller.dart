@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ReminderDetailController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final RxInt reminderId = 0.obs;
+  final RxInt medicineLeft = 0.obs;
   final Rx<ReminderIdModel?> reminderModel = Rx<ReminderIdModel?>(null);
 
   @override

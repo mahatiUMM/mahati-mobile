@@ -51,10 +51,10 @@ Widget buildCardSection() {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           buildInfoCard(
-            title: "Sudah Diminum",
+            title: "Sisa Obat",
             value: Obx(
               () => Text(
-                controller.reminderModel.value?.data.medicineTaken.toString() ??
+                controller.reminderModel.value?.data.medicineTotal.toString() ??
                     "Loading...",
                 style: TextStyle(
                   color: Resources.color.orangeColor,

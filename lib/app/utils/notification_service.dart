@@ -1,5 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
@@ -20,15 +19,36 @@ class NotificationService {
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    await notificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+    await notificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) async {
+        print("notiff");
+        final String? payload = notificationResponse.payload;
+        if (notificationResponse.payload != null) {
+          print('notification payload: $payload');
+        }
+      },
+    );
   }
 
   notificationDetails() {
     return const NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName',
-            importance: Importance.max),
+        android: AndroidNotificationDetails(
+          'channelId',
+          'channelName',
+          importance: Importance.max,
+          actions: [
+            AndroidNotificationAction(
+              'action_yes',
+              'Yes',
+            ),
+            AndroidNotificationAction(
+              'action_no',
+              'No',
+            ),
+          ],
+        ),
         iOS: DarwinNotificationDetails());
   }
 
@@ -55,6 +75,7 @@ class NotificationService {
         await notificationDetails(),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime,
+        payload: payLoad);
   }
 }

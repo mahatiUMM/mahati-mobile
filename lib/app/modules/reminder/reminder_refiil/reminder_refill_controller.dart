@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -118,8 +120,6 @@ class ReminderRefillController extends GetxController {
       "medicine_time": medicineTime,
     };
 
-    print('Reminder Post Data: $reminderPostData');
-
     try {
       final result = await restClient.request(
           "/reminder", HttpMethod.POST, reminderPostData);
@@ -144,9 +144,9 @@ class ReminderRefillController extends GetxController {
 
         NotificationService().scheduleNotification(
           id: 6,
-          title: "Reminder",
-          body: "Jangan lupa minum obat",
-          payLoad: "Test Payload",
+          title: "Pengingat Obat",
+          body: "Jangan lupa minum ${medicineName.toString()}",
+          payLoad: jsonEncode(reminderPostData),
           scheduledNotificationDateTime: scheduledNotificationDateTime,
         );
 
