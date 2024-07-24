@@ -99,7 +99,7 @@ class QuestionnaireQuestionView
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: Get.height - 285,
+                        height: Get.height - 320,
                         child: Stack(
                           children: [
                             Obx(() {
@@ -109,60 +109,62 @@ class QuestionnaireQuestionView
                                 physics: const NeverScrollableScrollPhysics(),
                                 children: controller.questionnaireQuestion
                                     .map((question) {
-                                  return Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          question.question ?? "",
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w900),
-                                        ),
-                                        const SizedBox(height: 42.0),
-                                        Column(
-                                          children: question.availableAnswers
-                                              .map((answer) {
-                                            bool isSelected = controller
-                                                .selectedAnswer
-                                                .any((element) =>
-                                                    element[2] == answer.id);
-                                            return ElevatedButton(
-                                                onPressed: () {
-                                                  controller.setSelectedAnswer(
-                                                      answer.questionnaireQuestionId ??
-                                                          0,
-                                                      answer.id ?? 0);
-                                                },
-                                                style: ButtonStyle(
-                                                  backgroundColor: isSelected
-                                                      ? MaterialStateProperty
-                                                          .all<Color>(Resources
-                                                              .color
-                                                              .primaryColor) // Change color if selected
-                                                      : MaterialStateProperty
-                                                          .all<Color>(
-                                                              Colors.white),
-                                                ),
-                                                child: Text(
-                                                  answer.answerText ?? "",
-                                                  style: TextStyle(
-                                                      color: isSelected
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                      fontSize: 18),
-                                                ));
-                                          }).toList(),
-                                        ),
-                                      ]);
+                                  return Padding(
+                                    padding: const EdgeInsets.fromLTRB(18, 0, 18, 92),
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            question.question ?? "",
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w900),
+                                          ),
+                                          const SizedBox(height: 42.0),
+                                          Column(
+                                            children: question.availableAnswers
+                                                .map((answer) {
+                                              bool isSelected = controller
+                                                  .selectedAnswer
+                                                  .any((element) =>
+                                                      element[2] == answer.id);
+                                              return ElevatedButton(
+                                                  onPressed: () {
+                                                    controller.setSelectedAnswer(
+                                                        answer.questionnaireQuestionId ??
+                                                            0,
+                                                        answer.id ?? 0);
+                                                  },
+                                                  style: ButtonStyle(
+                                                    backgroundColor: isSelected
+                                                        ? MaterialStateProperty
+                                                            .all<Color>(Resources
+                                                                .color
+                                                                .primaryColor) // Change color if selected
+                                                        : MaterialStateProperty
+                                                            .all<Color>(
+                                                                Colors.white),
+                                                  ),
+                                                  child: Text(
+                                                    answer.answerText ?? "",
+                                                    style: TextStyle(
+                                                        color: isSelected
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: 18),
+                                                  ));
+                                            }).toList(),
+                                          ),
+                                        ]),
+                                  );
                                 }).toList(),
                               );
                             }),
                             const QuestionnaireNextButton(),
-                            // const QuestionnairePageIndicator()
                           ],
                         ),
                       )

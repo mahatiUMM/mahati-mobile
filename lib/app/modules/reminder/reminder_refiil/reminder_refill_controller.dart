@@ -143,11 +143,19 @@ class ReminderRefillController extends GetxController {
               scheduledNotificationDateTime.add(const Duration(days: 1));
         }
 
-        NotificationService().scheduleNotification(
-          title: "Pengingat Obat",
-          body: "Jangan lupa minum ${medicineName.toString()}",
-          payLoad: result.body,
-          scheduledNotificationDateTime: scheduledNotificationDateTime,
+        // NotificationService().scheduleNotification(
+        //   title: "Pengingat Obat",
+        //   body: "Jangan lupa minum ${medicineName.toString()}",
+        //   payLoad: result.body,
+        //   scheduledNotificationDateTime: scheduledNotificationDateTime,
+        //   numberOfDays: medicineTotal,
+        // );
+
+        NotificationService().scheduleDailyNotifications(
+          title: "Pengingat Obat", 
+          body: "Jangan lupa minum ${medicineName.toString()}", 
+          payload: result.body, 
+          scheduledNotificationDateTime: scheduledNotificationDateTime, 
           numberOfDays: medicineTotal,
         );
 
