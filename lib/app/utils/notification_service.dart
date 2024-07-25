@@ -83,7 +83,6 @@ class NotificationService {
     for (int i = 0; i < numberOfDays; i++) {
       final scheduledDate =
           scheduledNotificationDateTime.add(Duration(days: i));
-      print(payload);
       await notificationsPlugin.zonedSchedule(
         i,
         title,
@@ -106,6 +105,7 @@ class NotificationService {
     String? title,
     String? body,
     String? payLoad,
+    int? numberOfDays,
     required DateTime scheduledNotificationDateTime,
   }) async {
     return notificationsPlugin.zonedSchedule(

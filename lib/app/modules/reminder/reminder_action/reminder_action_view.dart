@@ -31,6 +31,11 @@ class ReminderActionView extends GetView<ReminderActionController> {
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const Text("Pengingat Obat",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w500)),
                   Text(
                     controller.reminderName.value,
                     style: const TextStyle(
@@ -45,17 +50,25 @@ class ReminderActionView extends GetView<ReminderActionController> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                          onPressed: () => print("Tidak Minum"),
-                          child: const Text(
-                            "Tidak Minum",
-                            style: TextStyle(fontSize: 18),
-                          )),
-                      ElevatedButton(
                           onPressed: () => controller.postAcceptReminder(),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Resources.color.primaryColorOnGradient),
+                          ),
                           child: const Text(
                             "Minum Obat",
-                            style: TextStyle(fontSize: 18),
-                          ))
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          )),
+                      ElevatedButton(
+                          onPressed: () => Get.offAllNamed('/layout'),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.red.shade50),
+                          ),
+                          child: const Text(
+                            "Tidak Minum",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          )),
                     ],
                   )
                 ],
