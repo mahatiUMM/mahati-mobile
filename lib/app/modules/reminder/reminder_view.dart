@@ -93,7 +93,7 @@ class ReminderView extends GetView<ReminderController> {
             color: Resources.color.primaryColor,
             onRefresh: _refreshReminders,
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: [
                   Padding(
