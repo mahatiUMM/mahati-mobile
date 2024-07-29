@@ -95,9 +95,9 @@ class PressureView extends GetView<PressureController> {
             ElevatedButton(
               onPressed: () async {
                 await controller.postBloodPressure(
-                    sistol: int.parse(controller.sistolController.text),
-                    diastole: int.parse(controller.diastoleController.text),
-                    heartbeat: int.parse(controller.heartbeatController.text));
+                    sistol: controller.sistolController.text,
+                    diastole: controller.diastoleController.text,
+                    heartbeat: controller.heartbeatController.text);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Resources.color.primaryColor,

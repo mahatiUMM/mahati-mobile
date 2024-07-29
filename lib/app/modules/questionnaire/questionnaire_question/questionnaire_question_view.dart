@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_next_button.dart';
-import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_page_indicator.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireQuestionView
@@ -110,7 +109,8 @@ class QuestionnaireQuestionView
                                 children: controller.questionnaireQuestion
                                     .map((question) {
                                   return Padding(
-                                    padding: const EdgeInsets.fromLTRB(18, 0, 18, 92),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        18, 0, 18, 92),
                                     child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,

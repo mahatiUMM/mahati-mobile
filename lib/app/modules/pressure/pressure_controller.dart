@@ -1,9 +1,11 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/modules/pressure/widget/pressure_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PressureController extends GetxController {
@@ -13,6 +15,8 @@ class PressureController extends GetxController {
   final TextEditingController sistolController = TextEditingController();
   final TextEditingController diastoleController = TextEditingController();
   final TextEditingController heartbeatController = TextEditingController();
+
+  final assetsAudioPlayer = AssetsAudioPlayer();
 
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
@@ -25,27 +29,37 @@ class PressureController extends GetxController {
   }
 
   postBloodPressure(
-      {required int sistol,
-      required int diastole,
-      required int heartbeat}) async {
+      {required String sistol,
+      required String diastole,
+      required String heartbeat}) async {
     try {
+      if (diastole.isEmpty || sistol.isEmpty || heartbeat.isEmpty) {
+        Get.snackbar(
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            "Cek Tekanan Darah",
+            "Mohon isi semua data Systolic, Diastolic, dan Pulse.");
+        return;
+      }
+
       final userId = await getUserId();
       final restClient = Get.find<RestClient>();
 
       BloodPressureModel bloodPressureModel = BloodPressureModel(
           user_id: userId,
           image: pressureImage,
-          sistol: sistol,
-          diastole: diastole,
-          heartbeat: heartbeat);
+          sistol: int.parse(sistol),
+          diastole: int.parse(diastole),
+          heartbeat: int.parse(heartbeat));
 
       await restClient.request(
           "/blood_pressure", HttpMethod.POST, bloodPressureModel.toJson());
+      openPressureResult();
       Get.snackbar(
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          "Success",
-          "Record was successfully saved.");
+          "Cek Tekanan Darah",
+          "Riwayat cek berhasil disimpan.");
     } catch (e) {
       Get.snackbar(
           backgroundColor: Colors.red,
@@ -53,6 +67,17 @@ class PressureController extends GetxController {
           "Failed",
           e.toString());
     }
+  }
+
+  void openPressureResult() {
+    Get.bottomSheet(pressureBottomSheet(
+        diastolic: diastoleController.value.text,
+        pulse: heartbeatController.value.text,
+        systolic: sistolController.value.text));
+    assetsAudioPlayer.open(
+      Audio("assets/audios/tekanan_darah_normal.mp3"),
+    );
+    assetsAudioPlayer.stop();
   }
 
   Future<void> takeBloodPressureImage(ImageSource source) async {
