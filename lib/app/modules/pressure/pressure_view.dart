@@ -73,7 +73,7 @@ class PressureView extends GetView<PressureController> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Media',
+              'Input Otomatis',
               style: TextStyle(
                 color: Resources.color.baseColor,
                 fontSize: 20,
@@ -85,9 +85,9 @@ class PressureView extends GetView<PressureController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildMediaOption('Open Camera', Icons.camera_alt),
+                _buildMediaOption('Buka Kamera', Icons.camera_alt),
                 const SizedBox(height: 10),
-                _buildMediaOption('Upload File', Icons.file_upload),
+                _buildMediaOption('Upload Gambar', Icons.file_upload),
                 const SizedBox(height: 20),
               ],
             ),

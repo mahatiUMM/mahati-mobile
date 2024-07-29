@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -81,38 +84,57 @@ class PressureController extends GetxController {
   }
 
   Future<void> takeBloodPressureImage(ImageSource source) async {
+    final model = GenerativeModel(
+      model: 'gemini-1.5-flash-latest',
+      apiKey: 'AIzaSyBgcQbcxtkvJkmqUm-bMXQLNiu9NaH2TUs',
+    );
+
     final pickedImage =
         await imagePicker.pickImage(source: source, imageQuality: 100);
 
-    if (pickedImage == null) {
-      return;
-    } else {
-      final res = await FlutterTesseractOcr.extractText(pickedImage.path,
-          language: 'ssd',
-          args: {
-            "psm": "4",
-            "preserve_interword_spaces": "1",
-          });
+    try {
+      if (pickedImage == null) {
+        return;
+      } else {
+        String result;
+        final imgBytes = await pickedImage.readAsBytes();
+        final content = [
+          Content.multi([
+            TextPart(
+                "What is the systolic, diastolic, and heartbeat? give me in json object { systolic, diastolic, heartbeat } and format just in oneline without any neccessary text"),
+            DataPart('image/jpeg', imgBytes),
+          ])
+        ];
+        var response = await model.generateContent(content);
+        result = response.text ?? '';
+        if (result.isNotEmpty) {
+          Map<String, dynamic> resultData = jsonDecode(result);
 
-      final List<String> resultList = res.split('\n');
-      if (resultList.length < 3) {
-        Get.snackbar(
-            backgroundColor: Colors.red,
+          pressureImage = pickedImage.path;
+          sistolController.text = resultData['systolic'].toString();
+          diastoleController.text = resultData['diastolic'].toString();
+          heartbeatController.text = resultData['heartbeat'].toString();
+
+          Get.snackbar(
+            backgroundColor: Colors.green,
             colorText: Colors.white,
             "AI Blood Pressure",
-            "Failed to get result, please try again.");
-      } else {
-        Get.snackbar(
-          backgroundColor: Colors.green,
+            "Data tekanan darah berhasil diambil",
+          );
+        } else {
+          Get.snackbar(
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+              "AI Blood Pressure",
+              "Data tekanan darah gagal diambil, Mohon Coba Lagi.");
+        }
+      }
+    } catch (e) {
+      Get.snackbar(
+          backgroundColor: Colors.red,
           colorText: Colors.white,
           "AI Blood Pressure",
-          "Systolic: ${resultList[0].split(' ')[0]}\nDiastolic: ${resultList[1].split(' ')[0]}\nHeartbeat: ${resultList[2].split(' ')[0]}",
-        );
-        pressureImage = pickedImage.path;
-        sistolController.text = resultList[0].split(' ')[0];
-        diastoleController.text = resultList[1].split(' ')[0];
-        heartbeatController.text = resultList[2].split(' ')[0];
-      }
+          e.toString());
     }
   }
 }
