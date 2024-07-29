@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +20,9 @@ class PressureController extends GetxController {
 
   final assetsAudioPlayer = AssetsAudioPlayer();
 
+  RxBool aiLoading = false.obs;
+  RxBool postLoading = false.obs;
+
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('authToken');
@@ -36,6 +38,7 @@ class PressureController extends GetxController {
       required String diastole,
       required String heartbeat}) async {
     try {
+      postLoading.value = true;
       if (diastole.isEmpty || sistol.isEmpty || heartbeat.isEmpty) {
         Get.snackbar(
             backgroundColor: Colors.red,
@@ -69,6 +72,8 @@ class PressureController extends GetxController {
           colorText: Colors.white,
           "Failed",
           e.toString());
+    } finally {
+      postLoading.value = false;
     }
   }
 
@@ -96,12 +101,13 @@ class PressureController extends GetxController {
       if (pickedImage == null) {
         return;
       } else {
+        aiLoading.value = true;
         String result;
         final imgBytes = await pickedImage.readAsBytes();
         final content = [
           Content.multi([
             TextPart(
-                "What is the systolic, diastolic, and heartbeat? give me in json object { systolic, diastolic, heartbeat } and format just in oneline without any neccessary text"),
+                "What is the systolic, diastolic, and heartbeat? give it in json object { systolic, diastolic, heartbeat } and format just in oneline without any neccessary text, return null in all object if the image is not valid, and clear any recent memory in this conversation"),
             DataPart('image/jpeg', imgBytes),
           ])
         ];
@@ -109,6 +115,21 @@ class PressureController extends GetxController {
         result = response.text ?? '';
         if (result.isNotEmpty) {
           Map<String, dynamic> resultData = jsonDecode(result);
+
+          if (resultData['systolic'].toString() == 'null' ||
+              resultData['diastolic'].toString() == 'null' ||
+              resultData['heartbeat'].toString() == 'null') {
+            Get.snackbar(
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+              "AI Blood Pressure",
+              "Data tekanan darah tidak ditemukan, Mohon Coba Lagi.",
+            );
+            sistolController.text = "0";
+            diastoleController.text = "0";
+            heartbeatController.text = "0";
+            return;
+          }
 
           pressureImage = pickedImage.path;
           sistolController.text = resultData['systolic'].toString();
@@ -135,6 +156,8 @@ class PressureController extends GetxController {
           colorText: Colors.white,
           "AI Blood Pressure",
           e.toString());
+    } finally {
+      aiLoading.value = false;
     }
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/modules/pressure/pressure_controller.dart';
+import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
+import 'package:lottie/lottie.dart';
 
 class PressureView extends GetView<PressureController> {
   const PressureView({Key? key}) : super(key: key);
@@ -31,112 +33,143 @@ class PressureView extends GetView<PressureController> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Cek Tekanan Darah',
-              style: TextStyle(
-                color: Color(0xFF2C3131),
-                fontSize: 24,
-                fontFamily: Resources.font.primaryFont,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image:
-                        AssetImage("assets/images/pressure_illustration.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildPressureReading(
-                    'Systolic', '(mmHg),', controller.sistolController),
-                const SizedBox(width: 10),
-                _buildPressureReading(
-                    'Diastolic', '(mmHg)', controller.diastoleController),
-                const SizedBox(width: 10),
-                _buildPressureReading(
-                    'Pulse', '(BMP)', controller.heartbeatController),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Input Otomatis',
-              style: TextStyle(
-                color: Resources.color.baseColor,
-                fontSize: 20,
-                fontFamily: Resources.font.primaryFont,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildMediaOption('Buka Kamera', Icons.camera_alt),
-                const SizedBox(height: 10),
-                _buildMediaOption('Upload Gambar', Icons.file_upload),
-                const SizedBox(height: 20),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                await controller.postBloodPressure(
-                    sistol: controller.sistolController.text,
-                    diastole: controller.diastoleController.text,
-                    heartbeat: controller.heartbeatController.text);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Resources.color.primaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child: SizedBox(
-                width: Get.width,
-                height: 50,
-                child: Center(
-                  child: Text(
-                    'Simpan',
-                    style: TextStyle(
-                      color: Resources.color.whiteColor,
-                      fontSize: 16,
-                      fontFamily: Resources.font.primaryFont,
-                      fontWeight: FontWeight.w700,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Obx(
+            () {
+              if (controller.aiLoading.value) {
+                return SizedBox(
+                  height: Get.height - 150,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.asset(AnimationUrls.aiLensAnimation,
+                            repeat: true, width: 240),
+                        Text(
+                          "Sedang mengambil data...",
+                          style: TextStyle(
+                              fontFamily: Resources.font.primaryFont,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
                     ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 18),
-              child: SizedBox(
-                width: Get.width,
-                child: GestureDetector(
-                  onTap: () => Get.toNamed('/pressure/history'),
-                  child: const Text(
-                    "Riwayat Tekanan Darah",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+                );
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Cek Tekanan Darah',
+                      style: TextStyle(
+                        color: Color(0xFF2C3131),
+                        fontSize: 24,
+                        fontFamily: Resources.font.primaryFont,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/pressure_illustration.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildPressureReading(
+                            'Systolic', '(mmHg),', controller.sistolController),
+                        const SizedBox(width: 10),
+                        _buildPressureReading('Diastolic', '(mmHg)',
+                            controller.diastoleController),
+                        const SizedBox(width: 10),
+                        _buildPressureReading(
+                            'Pulse', '(BMP)', controller.heartbeatController),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Input Otomatis',
+                      style: TextStyle(
+                        color: Resources.color.baseColor,
+                        fontSize: 20,
+                        fontFamily: Resources.font.primaryFont,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildMediaOption('Buka Kamera', Icons.camera_alt),
+                        const SizedBox(height: 10),
+                        _buildMediaOption('Upload Gambar', Icons.file_upload),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () async {
+                        await controller.postBloodPressure(
+                            sistol: controller.sistolController.text,
+                            diastole: controller.diastoleController.text,
+                            heartbeat: controller.heartbeatController.text);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Resources.color.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: SizedBox(
+                        width: Get.width,
+                        height: 50,
+                        child: Center(child: Obx(() {
+                          if (controller.postLoading.value) {
+                            return CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Resources.color.whiteColor),
+                            );
+                          } else {
+                            return Text(
+                              'Simpan',
+                              style: TextStyle(
+                                color: Resources.color.whiteColor,
+                                fontSize: 16,
+                                fontFamily: Resources.font.primaryFont,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            );
+                          }
+                        })),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 18),
+                      child: SizedBox(
+                        width: Get.width,
+                        child: GestureDetector(
+                          onTap: () => Get.toNamed('/pressure/history'),
+                          child: const Text(
+                            "Riwayat Tekanan Darah",
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              }
+            },
+          )),
     );
   }
 

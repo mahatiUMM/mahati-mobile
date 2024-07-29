@@ -6,7 +6,7 @@ class Resources {
 }
 
 class AppColors {
-  Color primaryColor = const Color(0xFF40D99E);
+  Color primaryColor = Color(0xFF40D99E);
   Color primaryColor1 = const Color(0xFF6CE9B4);
   Color primaryColor2 = const Color(0xFFA6F4CE);
   Color primaryColor3 = const Color(0xFFD0FBE4);
