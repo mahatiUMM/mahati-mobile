@@ -217,7 +217,7 @@ class PressureView extends GetView<PressureController> {
       ),
       child: TextButton.icon(
         onPressed: () {
-          if (title == 'Open Camera') {
+          if (title == 'Buka Kamera') {
             controller.takeBloodPressureImage(ImageSource.camera);
           } else {
             controller.takeBloodPressureImage(ImageSource.gallery);
