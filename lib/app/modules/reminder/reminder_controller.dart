@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
@@ -14,8 +15,8 @@ class ReminderController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
-  RxList<ReminderData> filteredReminders = <ReminderData>[].obs;
   RxBool isLoading = true.obs;
+  RxString selectedDate = DateTime.now().toString().obs;
 
   @override
   void onInit() {
@@ -40,14 +41,23 @@ class ReminderController extends GetxController
     return int.parse(prefs.getString('userId')!);
   }
 
-  String checkStatus(int status) {
-    // TODO: add status on backend and change this logic
-    // right now, status 0 is not taken, status 1 is taken
-    if (status > 0) {
-      return "Sudah Diminum";
-    } else {
-      return "Belum Diminum";
+  bool checkStatus(List<dynamic>? schedules, String time) {
+    DateTime selectedDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(time);
+
+    if (schedules != null) {
+      for (var schedule in schedules) {
+        // Assuming each schedule has a 'dateTime' property in the same format as 'time'
+        DateTime scheduleDate = DateTime.parse(schedule['time']);
+
+        if (scheduleDate.year == selectedDate.year &&
+            scheduleDate.month == selectedDate.month &&
+            scheduleDate.day == selectedDate.day) {
+          return true;
+        }
+      }
     }
+
+    return false;
   }
 
   String capSizeToString(int capSize) {
@@ -71,11 +81,7 @@ class ReminderController extends GetxController
 
     if (result.statusCode == 200) {
       var reminderModel = ReminderModel.fromMap(jsonDecode(result.body));
-      final userId = await getUserId();
-
-      reminderModel.data.removeWhere((element) => element.userId != userId);
       reminderList.assignAll(reminderModel.data);
-      filterRemindersByDate(DateTime.now());
     } else {}
     isLoading.value = false;
   }
@@ -105,13 +111,5 @@ class ReminderController extends GetxController
       colorText: Resources.color.whiteColor,
       duration: const Duration(seconds: 5),
     );
-  }
-
-  void filterRemindersByDate(DateTime date) {
-    filteredReminders.assignAll(reminderList
-        .where((element) =>
-            element.createdAt.toLocal().toString().substring(0, 10) ==
-            date.toLocal().toString().substring(0, 10))
-        .toList());
   }
 }

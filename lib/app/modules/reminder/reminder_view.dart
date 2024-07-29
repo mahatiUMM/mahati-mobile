@@ -112,10 +112,11 @@ class ReminderView extends GetView<ReminderController> {
                           ),
                         ),
                         EasyDateTimeLine(
-                          initialDate: DateTime.now(),
+                          initialDate:
+                              DateTime.parse(controller.selectedDate.value),
                           onDateChange: (selectedDate) {
-                            controller
-                                .filterRemindersByDate(selectedDate.toLocal());
+                            controller.selectedDate.value =
+                                selectedDate.toString();
                           },
                           activeColor: Resources.color.primaryColor,
                           headerProps: const EasyHeaderProps(
@@ -141,10 +142,7 @@ class ReminderView extends GetView<ReminderController> {
                         ),
                         Obx(
                           () {
-                            final reminders =
-                                controller.filteredReminders.isEmpty
-                                    ? controller.reminderList
-                                    : controller.filteredReminders;
+                            final reminders = controller.reminderList;
                             return SizedBox(
                               height: null,
                               child: reminders.isEmpty
@@ -170,7 +168,9 @@ class ReminderView extends GetView<ReminderController> {
                                               reminderCard(
                                                 title: reminder.medicineName,
                                                 status: controller.checkStatus(
-                                                    reminder.medicineTaken),
+                                                    reminder.schedules,
+                                                    controller
+                                                        .selectedDate.value),
                                                 strong:
                                                     controller.capSizeToString(
                                                         reminder.capSize),

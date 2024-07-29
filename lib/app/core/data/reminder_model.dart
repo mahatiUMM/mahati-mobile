@@ -42,7 +42,6 @@ class ReminderData {
   int capSize;
   DateTime createdAt;
   dynamic updatedAt;
-  User user;
   List<dynamic>? schedules;
 
   ReminderData({
@@ -57,7 +56,6 @@ class ReminderData {
     required this.capSize,
     required this.createdAt,
     required this.updatedAt,
-    required this.user,
     required this.schedules,
   });
 
@@ -73,7 +71,6 @@ class ReminderData {
         medicineTime: json["medicine_time"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] ?? "",
-        user: User.fromMap(json["user"]),
         schedules: json["schedules"],
       );
 
@@ -89,7 +86,6 @@ class ReminderData {
         "cap_size": capSize,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
-        "user": user.toMap(),
         "schedules": List<dynamic>.from(schedules!.map((x) => x)),
       };
 }

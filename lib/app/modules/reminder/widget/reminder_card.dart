@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 Widget reminderCard(
-    {String? title, String? status, String? strong, String? time}) {
+    {String? title,
+    bool? status,
+    String? strong,
+    List<dynamic>? schedule,
+    String? time,
+    String? selectedDate}) {
   return Card(
     color: Resources.color.whiteColor,
     margin: const EdgeInsets.only(top: 20),
@@ -48,14 +53,16 @@ Widget reminderCard(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xff4ECB71),
+                      color: status ?? true
+                          ? const Color(0xff4ECB71)
+                          : const Color.fromARGB(255, 203, 78, 78),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     width: 210,
                     height: 25,
                     child: Center(
                       child: Text(
-                        status ?? "",
+                        status ?? false ? "Sudah Diminum" : "Belum Diminum",
                         style: TextStyle(
                           color: Resources.color.whiteColor,
                           fontSize: 12,

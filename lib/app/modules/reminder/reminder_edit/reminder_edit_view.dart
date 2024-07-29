@@ -282,7 +282,6 @@ class ReminderEditView extends GetView<ReminderEditController> {
                             id = 3;
                           }
                           controller.capSizeController.text = id.toString();
-                          print(controller.capSizeController.text);
                         },
                         decoration: InputDecoration(
                           filled: true,
