@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_id_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -60,6 +61,7 @@ class ReminderDetailController extends GetxController {
         "/reminder/$itemId", HttpMethod.DELETE, null, token.toString());
 
     if (result.statusCode == 200) {
+      NotificationService.deleteScheduleDailyNotification(itemId);
       Get.snackbar(
         'Success',
         'Reminder deleted',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:mahati_mobile/app/core/data/reminder_action_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
@@ -123,6 +124,7 @@ class ReminderRefillController extends GetxController {
           "/reminder", HttpMethod.POST, reminderPostData);
 
       if (result.statusCode == 201) {
+        final responseData = ReminderAction.fromRawJson(result.body);
         DateTime now = DateTime.now();
         DateTime scheduledNotificationDateTime =
             DateFormat('HH:mm').parse(medicineTime);
@@ -140,15 +142,8 @@ class ReminderRefillController extends GetxController {
               scheduledNotificationDateTime.add(const Duration(days: 1));
         }
 
-        // NotificationService().scheduleNotification(
-        //   title: "Pengingat Obat",
-        //   body: "Jangan lupa minum ${medicineName.toString()}",
-        //   payLoad: result.body,
-        //   scheduledNotificationDateTime: scheduledNotificationDateTime,
-        //   numberOfDays: medicineTotal,
-        // );
-
         NotificationService().scheduleDailyNotifications(
+          id: responseData.data.id,
           title: "Pengingat Obat",
           body: "Jangan lupa minum ${medicineName.toString()}",
           payload: result.body,

@@ -40,40 +40,8 @@ class NotificationService {
         iOS: DarwinNotificationDetails());
   }
 
-  Future showNotification(
-      {int id = 0, String? title, String? body, String? payLoad}) async {
-    return notificationsPlugin.show(
-        id, title, body, await notificationDetails());
-  }
-
-  Future periodicNotifications({
-    required String title,
-    required String body,
-    required String payload,
-  }) async {
-    const AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails(
-      'channel 2',
-      'your channel name',
-      channelDescription: 'your channel description',
-      importance: Importance.max,
-      priority: Priority.high,
-      ticker: 'ticker',
-    );
-    const NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
-    await notificationsPlugin.periodicallyShow(
-      1,
-      title,
-      body,
-      RepeatInterval.daily,
-      notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      payload: payload,
-    );
-  }
-
   Future scheduleDailyNotifications({
+    required int id,
     required String title,
     required String body,
     required String payload,
@@ -84,7 +52,7 @@ class NotificationService {
       final scheduledDate =
           scheduledNotificationDateTime.add(Duration(days: i));
       await notificationsPlugin.zonedSchedule(
-        i,
+        id,
         title,
         body,
         tz.TZDateTime.from(
@@ -100,27 +68,7 @@ class NotificationService {
     }
   }
 
-  Future scheduleNotification({
-    int id = 6,
-    String? title,
-    String? body,
-    String? payLoad,
-    int? numberOfDays,
-    required DateTime scheduledNotificationDateTime,
-  }) async {
-    return notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(
-        scheduledNotificationDateTime,
-        tz.local,
-      ),
-      await notificationDetails(),
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      payload: payLoad,
-    );
+  static Future deleteScheduleDailyNotification(int id) async {
+    await notificationsPlugin.cancel(id);
   }
 }
