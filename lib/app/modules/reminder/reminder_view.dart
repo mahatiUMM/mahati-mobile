@@ -169,14 +169,15 @@ class ReminderView extends GetView<ReminderController> {
                                                 .parse(controller
                                                     .selectedDate.value);
 
-                                        if (scheduleDate
-                                                .isBefore(selectedDate) ||
-                                            DateTime(
-                                                    scheduleDate.year,
-                                                    scheduleDate.month,
-                                                    scheduleDate.day)
-                                                .isAtSameMomentAs(
-                                                    selectedDate)) {
+                                        final DateTime reminderDate = DateTime(
+                                            scheduleDate.year,
+                                            scheduleDate.month,
+                                            scheduleDate.day);
+
+                                        if (selectedDate
+                                                .isAfter(reminderDate) ||
+                                            reminderDate.isAtSameMomentAs(
+                                                selectedDate)) {
                                           return GestureDetector(
                                             onTap: () {
                                               Get.toNamed(

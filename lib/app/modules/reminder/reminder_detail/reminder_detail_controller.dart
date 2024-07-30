@@ -71,7 +71,7 @@ class ReminderDetailController extends GetxController {
         token.toString());
     if (result.statusCode == 200) {
       incrementEatLoading.value = false;
-      Get.back();
+      Get.offAllNamed('/layout');
       Get.snackbar(
         'Berhasil minum obat',
         'Data anda sudah berhasil diubah',
@@ -88,7 +88,7 @@ class ReminderDetailController extends GetxController {
       );
     } else {
       incrementEatLoading.value = false;
-      Get.back();
+      Get.offAllNamed('/layout');
       Get.snackbar(
           backgroundColor: Colors.red,
           colorText: Colors.white,

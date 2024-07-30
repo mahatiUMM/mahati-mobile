@@ -17,29 +17,18 @@ class ReminderController extends GetxController
   final RestClient restClient = Get.find<RestClient>();
   RxList<ReminderData> reminderList = <ReminderData>[].obs;
   RxBool isLoading = true.obs;
-  RxString selectedDate = DateTime.now().toString().obs;
+  RxString selectedDate = "".obs;
 
   @override
   void onInit() {
+    selectedDate.value = DateTime.now().toString();
     getReminder();
-    getUserId();
-    ever(
-      Get.currentRoute.obs,
-      (callback) => {
-        if (callback == '/reminder') {getReminder()}
-      },
-    );
     super.onInit();
   }
 
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('authToken');
-  }
-
-  Future<int?> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
   }
 
   bool checkStatus(List<dynamic>? schedules, DateTime time) {
