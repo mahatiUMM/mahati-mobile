@@ -181,7 +181,15 @@ class ReminderView extends GetView<ReminderController> {
                                             onTap: () {
                                               Get.toNamed(
                                                 '/reminder/detail',
-                                                arguments: reminder.id,
+                                                arguments: {
+                                                  "id": reminder.id,
+                                                  "status":
+                                                      controller.checkStatus(
+                                                          reminder.schedules,
+                                                          selectedDate),
+                                                  "selectedDate": controller
+                                                      .selectedDate.value
+                                                },
                                               );
                                             },
                                             child: Column(

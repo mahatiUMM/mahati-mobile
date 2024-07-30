@@ -198,6 +198,73 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
                           height: 20,
                         ),
                         buildCardSection(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (!DateTime.now().isBefore(DateTime.parse(
+                                controller.selectedDate.value))) {
+                              if (!controller.reminderStatus.value) {
+                                controller.postAcceptReminder();
+                              }
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: controller.reminderStatus.value ||
+                                    DateTime.now().isBefore(DateTime.parse(
+                                        controller.selectedDate.value))
+                                ? Colors.grey.shade300
+                                : Resources.color.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: SizedBox(
+                            width: Get.width,
+                            height: 50,
+                            child: Center(child: Obx(() {
+                              if (controller.incrementEatLoading.value) {
+                                return CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Resources.color.whiteColor),
+                                );
+                              }
+                              if (controller.reminderStatus.value) {
+                                return Text(
+                                  'Obat Telah Diminum',
+                                  style: TextStyle(
+                                    color: Resources.color.whiteColor,
+                                    fontSize: 16,
+                                    fontFamily: Resources.font.primaryFont,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                );
+                              } else if (DateTime.now().isBefore(DateTime.parse(
+                                  controller.selectedDate.value))) {
+                                return Text(
+                                  'Belum Waktu Minum Obat',
+                                  style: TextStyle(
+                                    color: Resources.color.whiteColor,
+                                    fontSize: 16,
+                                    fontFamily: Resources.font.primaryFont,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                );
+                              } else {
+                                return Text(
+                                  'Minum Obat Sekarang',
+                                  style: TextStyle(
+                                    color: Resources.color.whiteColor,
+                                    fontSize: 16,
+                                    fontFamily: Resources.font.primaryFont,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                );
+                              }
+                            })),
+                          ),
+                        ),
                       ],
                     ),
                   ),
