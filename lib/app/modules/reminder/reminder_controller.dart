@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 import 'package:timezone/standalone.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -43,17 +42,15 @@ class ReminderController extends GetxController
     return int.parse(prefs.getString('userId')!);
   }
 
-  bool checkStatus(List<dynamic>? schedules, String time) {
-    DateTime selectedDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(time);
-
+  bool checkStatus(List<dynamic>? schedules, DateTime time) {
     if (schedules != null) {
       for (var schedule in schedules) {
         final scheduleDate = tz.TZDateTime.from(
             DateTime.parse(schedule['time']), getLocation('Asia/Jakarta'));
 
-        if (scheduleDate.year == selectedDate.year &&
-            scheduleDate.month == selectedDate.month &&
-            scheduleDate.day == selectedDate.day) {
+        if (scheduleDate.year == time.year &&
+            scheduleDate.month == time.month &&
+            scheduleDate.day == time.day) {
           return true;
         }
       }

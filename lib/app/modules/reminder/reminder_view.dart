@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:timezone/standalone.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:intl/intl.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderView extends GetView<ReminderController> {
@@ -156,29 +159,50 @@ class ReminderView extends GetView<ReminderController> {
                                       itemCount: reminders.length,
                                       itemBuilder: (context, index) {
                                         final reminder = reminders[index];
-                                        return GestureDetector(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              '/reminder/detail',
-                                              arguments: reminder.id,
-                                            );
-                                          },
-                                          child: Column(
-                                            children: [
-                                              reminderCard(
-                                                title: reminder.medicineName,
-                                                status: controller.checkStatus(
-                                                    reminder.schedules,
-                                                    controller
-                                                        .selectedDate.value),
-                                                strong:
-                                                    controller.capSizeToString(
-                                                        reminder.capSize),
-                                                time: reminder.medicineTime,
-                                              ),
-                                            ],
-                                          ),
-                                        );
+
+                                        final scheduleDate = tz.TZDateTime.from(
+                                            reminder.createdAt,
+                                            getLocation('Asia/Jakarta'));
+
+                                        final DateTime selectedDate =
+                                            DateFormat("yyyy-MM-dd HH:mm:ss")
+                                                .parse(controller
+                                                    .selectedDate.value);
+
+                                        if (scheduleDate
+                                                .isBefore(selectedDate) ||
+                                            DateTime(
+                                                    scheduleDate.year,
+                                                    scheduleDate.month,
+                                                    scheduleDate.day)
+                                                .isAtSameMomentAs(
+                                                    selectedDate)) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                '/reminder/detail',
+                                                arguments: reminder.id,
+                                              );
+                                            },
+                                            child: Column(
+                                              children: [
+                                                reminderCard(
+                                                  title: reminder.medicineName,
+                                                  status:
+                                                      controller.checkStatus(
+                                                          reminder.schedules,
+                                                          selectedDate),
+                                                  strong: controller
+                                                      .capSizeToString(
+                                                          reminder.capSize),
+                                                  time: reminder.medicineTime,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        } else {
+                                          return null;
+                                        }
                                       },
                                     ),
                             );
