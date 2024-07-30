@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/data/user_dashboard_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeController extends GetxController {
   var tabIndex = 0;
   var username = Rx<String>('');
+
+  RxBool isDashboardLoading = false.obs;
+
+  RxList<LowerMedicine> lowerMedicine = <LowerMedicine>[].obs;
+  RxString recentSystolic = ''.obs;
+  RxString recentDiastole = ''.obs;
+  RxString recentPulse = ''.obs;
+  // var latestBloodPressure = Rx<RecentBloodPressure?>(null);
 
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -20,8 +29,9 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getUserProfile();
+    getUserDashboard();
+    super.onInit();
   }
 
   void changeTabIndex(int index) {
@@ -32,6 +42,26 @@ class HomeController extends GetxController {
   Future<String?> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('authToken');
+  }
+
+  Future<void> getUserDashboard() async {
+    isDashboardLoading.value = true;
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+        "/dashboard", HttpMethod.GET, null, token.toString());
+
+    if (result.statusCode == 200) {
+      var responseData = UserDashboard.fromJson(jsonDecode(result.body));
+      lowerMedicine.value = responseData.data.lowerMedicine;
+      recentSystolic.value =
+          responseData.data.recentBloodPressure.sistol.toString();
+      recentDiastole.value =
+          responseData.data.recentBloodPressure.diastole.toString();
+      recentPulse.value =
+          responseData.data.recentBloodPressure.heartbeat.toString();
+    }
+    isDashboardLoading.value = false;
   }
 
   Future<void> getUserProfile() async {

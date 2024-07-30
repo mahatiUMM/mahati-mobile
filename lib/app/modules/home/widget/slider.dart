@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mahati_mobile/app/modules/home/widget/blood_pressure_dashboard.dart';
+import 'package:mahati_mobile/app/modules/home/widget/reminder_dashboard.dart';
 import 'package:sizer/sizer.dart';
 
 class SliderWidget extends StatelessWidget {
@@ -16,23 +19,13 @@ class SliderWidget extends StatelessWidget {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                      height: 200,
-                      enableInfiniteScroll: false,
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      scrollPhysics: const BouncingScrollPhysics(),
+                      height: null,
+                      enableInfiniteScroll: true,
                       viewportFraction: 1),
-                  items: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                          fit: BoxFit.cover,
-                          "https://rsjpparamarta.com/images/artikel-mencegah-komplikasi-diabetes-melitus.jpg"),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                          fit: BoxFit.cover,
-                          "https://mysiloam-api.siloamhospitals.com/storage-down/website-cms/website-cms-16982211031288331.webp"),
-                    ),
-                  ],
+                  items: [bloodPressureDashboard(), reminderDashboard()],
                 ),
               ],
             ));
