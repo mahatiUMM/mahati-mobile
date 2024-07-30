@@ -6,6 +6,8 @@ import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/standalone.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
@@ -46,8 +48,8 @@ class ReminderController extends GetxController
 
     if (schedules != null) {
       for (var schedule in schedules) {
-        // Assuming each schedule has a 'dateTime' property in the same format as 'time'
-        DateTime scheduleDate = DateTime.parse(schedule['time']);
+        final scheduleDate = tz.TZDateTime.from(
+            DateTime.parse(schedule['time']), getLocation('Asia/Jakarta'));
 
         if (scheduleDate.year == selectedDate.year &&
             scheduleDate.month == selectedDate.month &&

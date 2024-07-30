@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/pressure/widget/pressure_bottom_sheet.dart';
+import 'package:mahati_mobile/app/utils/constants/prompt_gemini.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PressureController extends GetxController {
@@ -106,8 +107,7 @@ class PressureController extends GetxController {
         final imgBytes = await pickedImage.readAsBytes();
         final content = [
           Content.multi([
-            TextPart(
-                "What is the systolic, diastolic, and heartbeat? give it in json object { systolic, diastolic, heartbeat } and format just in oneline without any neccessary text, return null in all object if the image is not valid, and clear any recent memory in this conversation"),
+            TextPart(PromptGemini.pressureAILens),
             DataPart('image/jpeg', imgBytes),
           ])
         ];
@@ -123,7 +123,7 @@ class PressureController extends GetxController {
               backgroundColor: Colors.red,
               colorText: Colors.white,
               "AI Blood Pressure",
-              "Data tekanan darah tidak ditemukan, Mohon Coba Lagi.",
+              "Data Tidak Valid, ${resultData['msg'].toString()}",
             );
             sistolController.text = "0";
             diastoleController.text = "0";
