@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final reminderModel = reminderModelFromMap(jsonString);
-
 import 'dart:convert';
 
 ReminderModel reminderModelFromMap(String str) =>
@@ -40,6 +36,7 @@ class ReminderData {
   int amount;
   String cause;
   int capSize;
+  DateTime expiredAt;
   DateTime createdAt;
   dynamic updatedAt;
   List<dynamic>? schedules;
@@ -54,6 +51,7 @@ class ReminderData {
     required this.amount,
     required this.cause,
     required this.capSize,
+    required this.expiredAt,
     required this.createdAt,
     required this.updatedAt,
     required this.schedules,
@@ -69,6 +67,7 @@ class ReminderData {
         cause: json["cause"] ?? "",
         capSize: json["cap_size"],
         medicineTime: json["medicine_time"] ?? "",
+        expiredAt: DateTime.parse(json["expired_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] ?? "",
         schedules: json["schedules"],
@@ -84,52 +83,9 @@ class ReminderData {
         "amount": amount,
         "cause": cause,
         "cap_size": capSize,
+        "expired_at": expiredAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
         "schedules": List<dynamic>.from(schedules!.map((x) => x)),
-      };
-}
-
-class User {
-  int id;
-  String username;
-  String email;
-  String password;
-  String number;
-  String? photo;
-  DateTime createdAt;
-  dynamic updatedAt;
-
-  User({
-    required this.id,
-    required this.username,
-    required this.email,
-    required this.password,
-    required this.number,
-    required this.photo,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  factory User.fromMap(Map<String, dynamic> json) => User(
-        id: json["id"],
-        username: json["username"],
-        email: json["email"],
-        password: json["password"],
-        number: json["number"],
-        photo: json["photo"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "username": username,
-        "email": email,
-        "password": password,
-        "number": number,
-        "photo": photo,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt,
       };
 }

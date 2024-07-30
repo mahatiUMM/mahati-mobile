@@ -52,7 +52,7 @@ class NotificationService {
       final scheduledDate =
           scheduledNotificationDateTime.add(Duration(days: i));
       await notificationsPlugin.zonedSchedule(
-        id,
+        i,
         title,
         body,
         tz.TZDateTime.from(

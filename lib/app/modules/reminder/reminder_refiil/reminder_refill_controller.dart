@@ -108,6 +108,17 @@ class ReminderRefillController extends GetxController {
       capSize = "1";
     }
 
+    final DateTime now = DateTime.now();
+    DateTime scheduledNotificationDateTime =
+        DateFormat('HH:mm').parse(medicineTime);
+    scheduledNotificationDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      scheduledNotificationDateTime.hour,
+      scheduledNotificationDateTime.minute,
+    );
+
     final reminderPostData = {
       "user_id": userId,
       "medicine_name": medicineName,
@@ -117,6 +128,9 @@ class ReminderRefillController extends GetxController {
       "cause": cause,
       "cap_size": int.parse(capSize),
       "medicine_time": medicineTime,
+      "expired_at": scheduledNotificationDateTime
+          .add(Duration(days: medicineTotal))
+          .toIso8601String(),
     };
 
     try {
@@ -125,16 +139,6 @@ class ReminderRefillController extends GetxController {
 
       if (result.statusCode == 201) {
         final responseData = ReminderAction.fromRawJson(result.body);
-        DateTime now = DateTime.now();
-        DateTime scheduledNotificationDateTime =
-            DateFormat('HH:mm').parse(medicineTime);
-        scheduledNotificationDateTime = DateTime(
-          now.year,
-          now.month,
-          now.day,
-          scheduledNotificationDateTime.hour,
-          scheduledNotificationDateTime.minute,
-        );
 
         // If the scheduled time is in the past, add one day to it
         if (scheduledNotificationDateTime.isBefore(now)) {
