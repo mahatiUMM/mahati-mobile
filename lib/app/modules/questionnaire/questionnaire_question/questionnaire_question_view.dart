@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,10 @@ class QuestionnaireQuestionView
             elevation: 0,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                Get.arguments['image'],
+              background: CachedNetworkImage(
+                imageUrl: Get.arguments['image'],
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
               stretchModes: const [
                 StretchMode.blurBackground,

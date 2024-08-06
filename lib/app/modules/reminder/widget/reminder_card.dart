@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -21,17 +22,25 @@ Widget reminderCard(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: 100,
+        CachedNetworkImage(
+          imageUrl:
+              "https://www.fairobserver.com/wp-content/uploads/2020/07/bespoke-medicine-2.jpg",
           height: 100,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.horizontal(left: Radius.circular(30)),
-            image: DecorationImage(
-              image: NetworkImage(
-                  "https://www.fairobserver.com/wp-content/uploads/2020/07/bespoke-medicine-2.jpg"),
-              fit: BoxFit.cover,
+          width: 100,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
+          placeholder: (context, url) => LinearProgressIndicator(
+            color: Resources.color.primaryColor.withAlpha(100),
+            backgroundColor: Resources.color.primaryColor.withAlpha(30),
+          ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20),

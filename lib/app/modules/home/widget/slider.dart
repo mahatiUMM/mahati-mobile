@@ -19,7 +19,6 @@ class SliderWidget extends StatelessWidget {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                      autoPlay: true,
                       enlargeCenterPage: true,
                       scrollPhysics: const BouncingScrollPhysics(),
                       height: null,

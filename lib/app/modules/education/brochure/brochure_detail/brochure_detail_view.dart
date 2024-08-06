@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -50,8 +51,12 @@ class BrochureDetailView extends GetView<BrochureDetailController> {
                   width: Get.width,
                   child: PinchZoom(
                     maxScale: 2.5,
-                    child: Image.network(
-                      i,
+                    child: CachedNetworkImage(
+                      imageUrl: 'https://mahati.xyzuan.my.id/$i',
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 );

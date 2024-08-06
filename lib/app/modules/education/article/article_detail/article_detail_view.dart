@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -17,18 +18,24 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
             clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: <Widget>[
-              Container(
-                width: Get.width,
+              CachedNetworkImage(
+                imageUrl:
+                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
                 height: 376,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
+                width: Get.width,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
                   ),
                 ),
+                placeholder: (context, url) => LinearProgressIndicator(
+                  color: Resources.color.primaryColor.withAlpha(100),
+                  backgroundColor: Resources.color.primaryColor.withAlpha(30),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
               Positioned(
                 top: 320,

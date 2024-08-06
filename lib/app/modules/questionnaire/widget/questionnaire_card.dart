@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class QuestionnaireCard extends StatelessWidget {
@@ -26,8 +27,8 @@ class QuestionnaireCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image.network(
-            imageUrl,
+          CachedNetworkImage(
+            imageUrl: imageUrl,
             height: 140,
             width: double.infinity,
             fit: BoxFit.cover,

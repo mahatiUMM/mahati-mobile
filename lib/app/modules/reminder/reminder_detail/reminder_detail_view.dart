@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,9 +23,24 @@ class ReminderDetailView extends GetView<ReminderDetailController> {
             elevation: 0,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/reminder_detail.png",
-                fit: BoxFit.cover,
+              background: CachedNetworkImage(
+                imageUrl:
+                    "https://www.fairobserver.com/wp-content/uploads/2020/07/bespoke-medicine-2.jpg",
+                height: 150,
+                width: double.infinity,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => LinearProgressIndicator(
+                  color: Resources.color.primaryColor.withAlpha(100),
+                  backgroundColor: Resources.color.primaryColor.withAlpha(30),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
               stretchModes: const [
                 StretchMode.blurBackground,

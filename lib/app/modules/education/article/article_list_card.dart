@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
@@ -28,16 +29,24 @@ class ArticleListCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
+            CachedNetworkImage(
+              imageUrl: thumbnailUrl,
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                image: DecorationImage(
-                  image: NetworkImage(thumbnailUrl),
-                  fit: BoxFit.cover,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+              placeholder: (context, url) => LinearProgressIndicator(
+                color: Resources.color.primaryColor.withAlpha(100),
+                backgroundColor: Resources.color.primaryColor.withAlpha(30),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             Expanded(
               child: Padding(
