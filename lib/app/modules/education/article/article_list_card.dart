@@ -1,25 +1,32 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_binding.dart';
+import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ArticleListCard extends StatelessWidget {
-  final String thumbnailUrl;
   final String title;
   final String summary;
+  final String file;
 
   const ArticleListCard({
-    Key? key,
-    required this.thumbnailUrl,
+    super.key,
     required this.title,
     required this.summary,
-  }) : super(key: key);
+    required this.file,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed("/article/detail");
+        Get.to(
+          () => const ArticleDetailView(),
+          binding: ArticleDetailBinding(title: title, file: file),
+        );
       },
       child: Card(
         color: Resources.color.whiteColor,
@@ -27,46 +34,44 @@ class ArticleListCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        child: Row(
+        child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl: thumbnailUrl,
-              width: 100,
-              height: 100,
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
+            SizedBox(
+              height: 180,
+              child: const PDF(
+                pageFling: false,
+                enableSwipe: false,
+                pageSnap: false,
+                defaultPage: 1,
+                preventLinkNavigation: true,
+              ).cachedFromUrl(
+                'https://mahati.xyzuan.my.id/$file',
+                placeholder: (progress) => Center(
+                  child: LinearProgressIndicator(
+                    color: Resources.color.primaryColor.withAlpha(100),
+                    backgroundColor: Resources.color.primaryColor.withAlpha(30),
                   ),
                 ),
+                errorWidget: (error) => Center(child: Text(error.toString())),
               ),
-              placeholder: (context, url) => LinearProgressIndicator(
-                color: Resources.color.primaryColor.withAlpha(100),
-                backgroundColor: Resources.color.primaryColor.withAlpha(30),
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      summary,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
+                  ),
+                  Text(
+                    summary,
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ],
               ),
             ),
           ],

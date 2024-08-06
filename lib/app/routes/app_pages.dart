@@ -180,7 +180,6 @@ class AppPages {
     GetPage(
       name: _Paths.articleDetail,
       page: () => ArticleDetailView(),
-      binding: ArticleDetailBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

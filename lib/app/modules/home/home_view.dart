@@ -62,21 +62,6 @@ class HomeView extends GetView<HomeController> {
                                     fontWeight: FontWeight.bold,
                                   )),
                             ),
-                            ArticleListCard(
-                                thumbnailUrl:
-                                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                title: "Diabetes",
-                                summary: "Gejala, Diagnosis & Cara Pengobatan"),
-                            ArticleListCard(
-                                thumbnailUrl:
-                                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                title: "Diabetes",
-                                summary: "Gejala, Diagnosis & Cara Pengobatan"),
-                            ArticleListCard(
-                                thumbnailUrl:
-                                    "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                title: "Diabetes",
-                                summary: "Gejala, Diagnosis & Cara Pengobatan"),
                           ]),
                     ),
                   ],

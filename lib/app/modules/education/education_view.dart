@@ -77,8 +77,9 @@ class EducationView extends GetView<EducationController> {
               SizedBox(
                 height: null,
                 child: Obx(() {
-                  final videos = controller.educationVideo;
-                  final brochures = controller.brochures;
+                  final videos = controller.educationVideos;
+                  final articles = controller.educationArticles;
+                  final brochures = controller.educationBrochures;
 
                   return Column(children: [
                     SizedBox(
@@ -90,7 +91,7 @@ class EducationView extends GetView<EducationController> {
                             child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.educationVideo.length,
+                                itemCount: videos.length,
                                 itemBuilder: (context, index) {
                                   final video = videos[index];
                                   return VideoListCard(
@@ -101,47 +102,25 @@ class EducationView extends GetView<EducationController> {
                                 }),
                           ),
                           SizedBox(
-                            child: Column(
-                              children: [
-                                ArticleListCard(
-                                    thumbnailUrl:
-                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                    title: "Diabetes",
-                                    summary:
-                                        "Gejala, Diagnosis & Cara Pengobatan"),
-                                ArticleListCard(
-                                    thumbnailUrl:
-                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                    title: "Diabetes",
-                                    summary:
-                                        "Gejala, Diagnosis & Cara Pengobatan"),
-                                ArticleListCard(
-                                    thumbnailUrl:
-                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                    title: "Diabetes",
-                                    summary:
-                                        "Gejala, Diagnosis & Cara Pengobatan"),
-                                ArticleListCard(
-                                    thumbnailUrl:
-                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                    title: "Diabetes",
-                                    summary:
-                                        "Gejala, Diagnosis & Cara Pengobatan"),
-                                ArticleListCard(
-                                    thumbnailUrl:
-                                        "https://img-cdn.medkomtek.com/gI3-RXYeVSRgdvop2RYA_KWWIho=/0x0/smart/filters:quality(100):format(webp)/article/0FJ_hujLjhAi-JVfStt3w/original/xtqwarxi81g1f9z4eti38wq5ba28z0gc.png",
-                                    title: "Diabetes",
-                                    summary:
-                                        "Gejala, Diagnosis & Cara Pengobatan"),
-                              ],
-                            ),
+                            height: null,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: articles.length,
+                                itemBuilder: (context, index) {
+                                  final article = articles[index];
+                                  return ArticleListCard(
+                                      title: article.title,
+                                      summary: article.description,
+                                      file: article.file);
+                                }),
                           ),
                           SizedBox(
                             height: null,
                             child: ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: controller.brochures.length,
+                                itemCount: videos.length,
                                 itemBuilder: (context, index) {
                                   final brochure = brochures[index];
                                   return BrochureThumbCard(

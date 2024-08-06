@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/data/education_article_model.dart';
 import 'package:mahati_mobile/app/core/data/education_brochure_model.dart';
 import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -8,8 +9,9 @@ class EducationController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   RxInt selectedIndex = 0.obs;
 
-  RxList<VideoModel> educationVideo = <VideoModel>[].obs;
-  RxList<BrochureImage> brochures = RxList<BrochureImage>([]);
+  RxList<VideoModel> educationVideos = <VideoModel>[].obs;
+  RxList<ArticleData> educationArticles = <ArticleData>[].obs;
+  RxList<BrochureImage> educationBrochures = <BrochureImage>[].obs;
 
   var listIndex = 0;
 
@@ -39,22 +41,36 @@ class EducationController extends GetxController {
     final token = await getToken();
     final videos = await restClient.requestWithToken(
         "/video", HttpMethod.GET, null, token.toString());
+    final article = await restClient.requestWithToken(
+        "/article", HttpMethod.GET, null, token.toString());
     final brochure = await restClient.requestWithToken(
         "/brochure", HttpMethod.GET, null, token.toString());
 
     if (videos.statusCode == 200) {
-      var videoModel = EducationVideo.fromRawJson(videos.body);
-      educationVideo.assignAll(videoModel.data);
-    } else {}
+      try {
+        var videoModel = EducationVideo.fromRawJson(videos.body);
+        educationVideos.assignAll(videoModel.data);
+      } catch (e) {
+        print("Error loading video: $e");
+      }
+    }
 
     if (brochure.statusCode == 200) {
       try {
         var brochureModel = Brochure.fromRawJson(brochure.body);
-
-        brochures.assignAll(brochureModel.data);
+        educationBrochures.assignAll(brochureModel.data);
       } catch (e) {
         print("Error loading brochure: $e");
       }
-    } else {}
+    }
+
+    if (article.statusCode == 200) {
+      try {
+        var articleModel = Article.fromRawJson(article.body);
+        educationArticles.assignAll(articleModel.data);
+      } catch (e) {
+        print("Error loading article: $e");
+      }
+    }
   }
 }
