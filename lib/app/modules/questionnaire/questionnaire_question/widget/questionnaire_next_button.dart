@@ -16,7 +16,6 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
           bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 0.65,
           child: Column(
             children: [
-              const QuestionnairePageIndicator(),
               const SizedBox(height: 18),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(

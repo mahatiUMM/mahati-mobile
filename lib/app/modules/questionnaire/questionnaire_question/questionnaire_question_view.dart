@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_next_button.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_page_indicator.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireQuestionView
@@ -12,10 +13,6 @@ class QuestionnaireQuestionView
 
   @override
   Widget build(BuildContext context) {
-    // final Questionnaire questionnaire = Get.arguments['questionnaire'];
-    // final List<QuestionnaireQuestion> questionnaireQuestionList =
-    //     Get.arguments['questionnaire_questions'];
-    // Now you can use the questionnaire object to access its properties
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -100,7 +97,7 @@ class QuestionnaireQuestionView
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: Get.height - 320,
+                        height: Get.height - 300,
                         child: Stack(
                           children: [
                             Obx(() {
@@ -166,6 +163,7 @@ class QuestionnaireQuestionView
                                 }).toList(),
                               );
                             }),
+                            const QuestionnairePageIndicator(),
                             const QuestionnaireNextButton(),
                           ],
                         ),

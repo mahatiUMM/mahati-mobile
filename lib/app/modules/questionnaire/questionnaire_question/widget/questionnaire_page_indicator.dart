@@ -11,16 +11,17 @@ class QuestionnairePageIndicator
   @override
   Widget build(BuildContext context) {
     return Obx(() => Positioned(
-          left: (Get.width - 180) /
-              2, // Adjusted to center the SmoothPageIndicator
-          bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 3.4,
+          left: (Get.width - 180) / 2,
+          bottom: ScreenDimensions.bottomNavigationBarHeight(context) * 2,
           child: SmoothPageIndicator(
             controller: controller.pageController,
             effect: const ExpandingDotsEffect(
               dotHeight: 7,
               activeDotColor: Color(0xFF40D99E),
             ),
-            count: controller.questionnaireQuestion.length,
+            count: controller.questionnaireQuestion.isEmpty
+                ? 1
+                : controller.questionnaireQuestion.length,
           ),
         ));
   }
