@@ -1,22 +1,25 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/data/user_dashboard_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
+  final RestClient restClient = Get.find<RestClient>();
   var tabIndex = 0;
   var username = Rx<String>('');
 
   RxBool isDashboardLoading = false.obs;
+  RxBool isEducationLoading = false.obs;
 
+  RxList<VideoModel> educationVideos = <VideoModel>[].obs;
   RxList<LowerMedicine> lowerMedicine = <LowerMedicine>[].obs;
   RxString recentSystolic = ''.obs;
   RxString recentDiastole = ''.obs;
   RxString recentPulse = ''.obs;
-  // var latestBloodPressure = Rx<RecentBloodPressure?>(null);
 
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -29,9 +32,14 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    getAllDashboard();
+    super.onInit();
+  }
+
+  Future<void> getAllDashboard() async {
     getUserProfile();
     getUserDashboard();
-    super.onInit();
+    getRecentEducation();
   }
 
   void changeTabIndex(int index) {
@@ -60,6 +68,23 @@ class HomeController extends GetxController {
           responseData.data.recentBloodPressure.diastole.toString();
       recentPulse.value =
           responseData.data.recentBloodPressure.heartbeat.toString();
+    }
+    isDashboardLoading.value = false;
+  }
+
+  Future<void> getRecentEducation() async {
+    isDashboardLoading.value = true;
+    final token = await getToken();
+    final videos = await restClient.requestWithToken(
+        "/video", HttpMethod.GET, null, token.toString());
+
+    if (videos.statusCode == 200) {
+      try {
+        var videoModel = EducationVideo.fromRawJson(videos.body);
+        educationVideos.assignAll(videoModel.data);
+      } catch (e) {
+        print("Error loading video: $e");
+      }
     }
     isDashboardLoading.value = false;
   }

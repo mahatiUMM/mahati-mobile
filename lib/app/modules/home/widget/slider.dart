@@ -7,7 +7,7 @@ import 'package:mahati_mobile/app/modules/home/widget/reminder_dashboard.dart';
 import 'package:sizer/sizer.dart';
 
 class SliderWidget extends StatelessWidget {
-  const SliderWidget({Key? key}) : super(key: key);
+  const SliderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
