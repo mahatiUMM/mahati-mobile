@@ -67,6 +67,34 @@ class PressureHistoryController extends GetxController
     isLoading.value = false;
   }
 
+  Future<void> deleteUserPressureHistory(int id) async {
+    final token = await getToken();
+    final restClient = Get.find<RestClient>();
+    final result = await restClient.requestWithToken(
+      "/blood_pressure/$id",
+      HttpMethod.DELETE,
+      null,
+      token.toString(),
+    );
+
+    if (result.statusCode == 200) {
+      Get.snackbar(
+        "Hapus Data Tekanan Darah",
+        "Berhasil menghapus data tekanan darah",
+        backgroundColor: Resources.color.primaryColor,
+        colorText: Resources.color.whiteColor,
+      );
+      getUserPressureHistory();
+    } else {
+      Get.snackbar(
+        "Hapus Data Tekanan Darah",
+        "Gagal menghapus data tekanan darah",
+        backgroundColor: Resources.color.primaryColor,
+        colorText: Resources.color.whiteColor,
+      );
+    }
+  }
+
   Future<void> exportUserPressureHistory() async {
     final token = await getToken();
     final restClient = Get.find<RestClient>();
