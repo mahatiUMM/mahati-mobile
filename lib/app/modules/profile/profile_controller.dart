@@ -40,10 +40,13 @@ class ProfileController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
+  Future<void> fetchProfile() async {
     getUserProfile();
     getBookmarkVideo();
+  }
+
+  @override
+  void onInit() {
     super.onInit();
     // Load stored image path if available
     String? savedImagePath = _storage.read('imagePath');
@@ -66,10 +69,12 @@ class ProfileController extends GetxController {
     try {
       final token = await getToken();
       final response = await restClient.requestWithToken(
-          "/video", HttpMethod.GET, null, token.toString());
+          "/video_bookmarked", HttpMethod.GET, null, token.toString());
 
       if (response.statusCode == 200) {
         try {
+          print(response.body);
+
           var videoModel = EducationVideo.fromRawJson(response.body);
           educationVideos.assignAll(videoModel.data);
         } catch (e) {

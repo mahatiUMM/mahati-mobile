@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:mahati_mobile/app/modules/education/video/widget/video_list_card.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/home/widget/greeting.dart';
 import 'package:mahati_mobile/app/modules/home/widget/slider.dart';

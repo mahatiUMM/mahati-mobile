@@ -41,8 +41,8 @@ class EducationController extends GetxController {
   }
 
   Future<void> postBookmarkVideo(int id) async {
+    final token = await getToken();
     try {
-      final token = await getToken();
       await restClient.requestWithToken(
           "/bookmark", HttpMethod.POST, {"video_id": id}, token.toString());
     } catch (e) {
@@ -53,8 +53,8 @@ class EducationController extends GetxController {
   }
 
   Future<void> deleteBookmarkVideo(int id) async {
+    final token = await getToken();
     try {
-      final token = await getToken();
       await restClient.requestWithToken(
           "/bookmark/$id", HttpMethod.DELETE, null, token.toString());
     } catch (e) {
