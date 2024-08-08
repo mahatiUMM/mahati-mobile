@@ -202,61 +202,67 @@ class ProfileView extends GetView<ProfileController> {
                           ],
                         ),
                         SizedBox(height: 1.h),
-                        SizedBox(
-                          height: Get.height / 2.06,
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2.w,
-                              mainAxisSpacing: 2.h,
-                              childAspectRatio:
-                                  (Get.width / 2) / (Get.height / 4.5),
-                            ),
-                            itemCount: controller.gridMap.length,
-                            itemBuilder: (_, index) {
-                              return Card(
-                                elevation: 0,
-                                color: Resources.color.whiteColor,
-                                child: Center(
-                                  child: Stack(
-                                    children: [
-                                      const Positioned(
-                                        right: 0,
-                                        child: Icon(Icons.bookmark),
-                                      ),
-                                      Column(
-                                        children: [
-                                          SizedBox(height: 4.h),
-                                          SizedBox(
-                                            width: 32.w,
-                                            height: 48,
-                                            child: Text(
-                                              '${controller.gridMap.elementAt(index)['title']}',
-                                              style: StyleText.cardTitle1,
-                                              maxLines: 2,
+                        Obx(
+                          () => SizedBox(
+                            height: Get.height / 2.06,
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 2.w,
+                                mainAxisSpacing: 2.h,
+                                childAspectRatio:
+                                    (Get.width / 2) / (Get.height / 4.5),
+                              ),
+                              itemCount: controller.educationVideos.length,
+                              itemBuilder: (_, index) {
+                                return Card(
+                                  elevation: 0,
+                                  color: Resources.color.whiteColor,
+                                  child: Center(
+                                    child: Stack(
+                                      children: [
+                                        const Positioned(
+                                          right: 0,
+                                          child: Icon(Icons.bookmark),
+                                        ),
+                                        Column(
+                                          children: [
+                                            SizedBox(height: 4.h),
+                                            SizedBox(
+                                              width: 32.w,
+                                              height: 48,
+                                              child: Text(
+                                                controller
+                                                    .educationVideos[index]
+                                                    .title,
+                                                style: StyleText.cardTitle1,
+                                                maxLines: 2,
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(height: 1.h),
-                                          SizedBox(
-                                            width: 32.w,
-                                            height: 5.h,
-                                            child: Text(
-                                              '${controller.gridMap.elementAt(index)['subtitle']}',
-                                              style: StyleText.cardSubTitle1,
-                                              maxLines: 3,
+                                            SizedBox(height: 1.h),
+                                            SizedBox(
+                                              width: 32.w,
+                                              height: 5.h,
+                                              child: Text(
+                                                controller
+                                                    .educationVideos[index]
+                                                    .authorName,
+                                                style: StyleText.cardSubTitle1,
+                                                maxLines: 3,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),

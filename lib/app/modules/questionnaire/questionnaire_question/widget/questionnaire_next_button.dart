@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
-import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_page_indicator.dart';
 import 'package:mahati_mobile/app/utils/dimensions/screen_dimensions.dart';
 
 class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
