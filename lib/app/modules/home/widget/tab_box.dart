@@ -10,12 +10,12 @@ class TabItem extends StatelessWidget {
   final VoidCallback? onClick;
 
   const TabItem({
-    Key? key,
+    super.key,
     required this.title,
     required this.color,
     required this.icon,
     this.onClick,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

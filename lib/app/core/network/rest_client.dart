@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 // ignore: constant_identifier_names
 enum HttpMethod { POST, GET, PUT, DELETE, PATCH }
@@ -30,8 +31,9 @@ class RestClient extends GetxService {
   Future<http.Response> request(
     String url,
     HttpMethod method,
-    Map<String, dynamic>? params,
-  ) async {
+    Map<String, dynamic>? params, {
+    File? imageFile,
+  }) async {
     try {
       Uri uri = Uri.parse(BASE_URL + url);
       late http.Response response;
@@ -39,11 +41,29 @@ class RestClient extends GetxService {
       params ??= {};
 
       if (method == HttpMethod.POST) {
-        response = await http.post(
-          uri,
-          body: jsonEncode(params),
-          headers: header(),
-        );
+        if (imageFile != null) {
+          var request = http.MultipartRequest('POST', uri);
+          request.headers.addAll(header());
+
+          params.forEach((key, value) {
+            request.fields[key] = value.toString();
+          });
+
+          request.files.add(await http.MultipartFile.fromPath(
+            'image',
+            imageFile.path,
+            contentType: MediaType('image', 'jpeg'),
+          ));
+
+          var streamedResponse = await request.send();
+          response = await http.Response.fromStream(streamedResponse);
+        } else {
+          response = await http.post(
+            uri,
+            body: jsonEncode(params),
+            headers: header(),
+          );
+        }
       } else if (method == HttpMethod.DELETE) {
         response = await http.delete(uri, headers: header());
       } else if (method == HttpMethod.PUT) {
@@ -79,8 +99,9 @@ class RestClient extends GetxService {
     String url,
     HttpMethod method,
     Map<String, dynamic>? params,
-    String accessToken,
-  ) async {
+    String accessToken, {
+    File? imageFile,
+  }) async {
     try {
       Uri uri = Uri.parse(BASE_URL + url);
       late http.Response response;
@@ -88,11 +109,29 @@ class RestClient extends GetxService {
       params ??= {};
 
       if (method == HttpMethod.POST) {
-        response = await http.post(
-          uri,
-          body: jsonEncode(params),
-          headers: headerWithToken(accessToken),
-        );
+        if (imageFile != null) {
+          var request = http.MultipartRequest('POST', uri);
+          request.headers.addAll(headerWithToken(accessToken));
+
+          params.forEach((key, value) {
+            request.fields[key] = value.toString();
+          });
+
+          request.files.add(await http.MultipartFile.fromPath(
+            'image',
+            imageFile.path,
+            contentType: MediaType('image', 'jpeg'),
+          ));
+
+          var streamedResponse = await request.send();
+          response = await http.Response.fromStream(streamedResponse);
+        } else {
+          response = await http.post(
+            uri,
+            body: jsonEncode(params),
+            headers: headerWithToken(accessToken),
+          );
+        }
       } else if (method == HttpMethod.DELETE) {
         response =
             await http.delete(uri, headers: headerWithToken(accessToken));

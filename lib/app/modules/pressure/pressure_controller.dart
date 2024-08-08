@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,6 @@ class PressureController extends GetxController {
     return prefs.getString('authToken');
   }
 
-  Future<int> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
-  }
-
   postBloodPressure(
       {required String sistol,
       required String diastole,
@@ -49,24 +45,28 @@ class PressureController extends GetxController {
         return;
       }
 
-      final userId = await getUserId();
       final restClient = Get.find<RestClient>();
+      final token = await getToken();
+      final request = await restClient.requestWithToken(
+          "/blood_pressure",
+          HttpMethod.POST,
+          BloodPressureModel(
+                  image: null,
+                  sistol: int.parse(sistol),
+                  diastole: int.parse(diastole),
+                  heartbeat: int.parse(heartbeat))
+              .toJson(),
+          token.toString(),
+          imageFile: File(pressureImage));
 
-      BloodPressureModel bloodPressureModel = BloodPressureModel(
-          user_id: userId,
-          image: pressureImage,
-          sistol: int.parse(sistol),
-          diastole: int.parse(diastole),
-          heartbeat: int.parse(heartbeat));
-
-      await restClient.request(
-          "/blood_pressure", HttpMethod.POST, bloodPressureModel.toJson());
-      openPressureResult();
-      Get.snackbar(
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          "Cek Tekanan Darah",
-          "Riwayat cek berhasil disimpan.");
+      if (request.statusCode == 201) {
+        openPressureResult();
+        Get.snackbar(
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+            "Cek Tekanan Darah",
+            "Riwayat cek berhasil disimpan.");
+      }
     } catch (e) {
       Get.snackbar(
           backgroundColor: Colors.red,

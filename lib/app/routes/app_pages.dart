@@ -3,7 +3,6 @@ import 'package:mahati_mobile/app/modules/auth/sign_in/signin_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_view.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
-import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/education_binding.dart';
@@ -102,63 +101,63 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.profile,
-      page: () => ProfileView(),
+      page: () => const ProfileView(),
       binding: ProfileBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.profileEdit,
-      page: () => ProfileEditView(),
+      page: () => const ProfileEditView(),
       binding: ProfileEditBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.setting,
-      page: () => SettingView(),
+      page: () => const SettingView(),
       binding: SettingBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.reminder,
-      page: () => ReminderView(),
+      page: () => const ReminderView(),
       binding: ReminderBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.reminderEdit,
-      page: () => ReminderEditView(),
+      page: () => const ReminderEditView(),
       binding: ReminderEditBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.reminderDetail,
-      page: () => ReminderDetailView(),
+      page: () => const ReminderDetailView(),
       binding: ReminderDetailBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.reminderRefiil,
-      page: () => ReminderRefillView(),
+      page: () => const ReminderRefillView(),
       binding: ReminderRefillBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.reminderAction,
-      page: () => ReminderActionView(),
+      page: () => const ReminderActionView(),
       binding: ReminderActionBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.pressure,
-      page: () => PressureView(),
+      page: () => const PressureView(),
       binding: PressureBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
@@ -172,20 +171,20 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.education,
-      page: () => EducationView(),
+      page: () => const EducationView(),
       binding: EducationBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.articleDetail,
-      page: () => ArticleDetailView(),
+      page: () => const ArticleDetailView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
       name: _Paths.brochureDetail,
-      page: () => BrochureDetailView(),
+      page: () => const BrochureDetailView(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
@@ -193,6 +192,7 @@ class AppPages {
       name: _Paths.questionnaire,
       page: () => const QuestionnaireView(),
       binding: QuestionnaireBinding(),
+      transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
