@@ -237,6 +237,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                     motion: const DrawerMotion(),
                                     children: [
                                       SlidableAction(
+                                        label: 'Delete History',
                                         autoClose: true,
                                         borderRadius: BorderRadius.circular(15),
                                         onPressed: (context) => controller

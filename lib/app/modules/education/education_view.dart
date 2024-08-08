@@ -8,7 +8,7 @@ import 'package:mahati_mobile/app/modules/education/widget/education_tab.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class EducationView extends GetView<EducationController> {
-  const EducationView({Key? key}) : super(key: key);
+  const EducationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +100,12 @@ class EducationView extends GetView<EducationController> {
                                   itemBuilder: (context, index) {
                                     final video = videos[index];
                                     return VideoListCard(
+                                        id: video.id,
                                         thumbnailUrl: video.thumbnailUrl,
                                         title: video.title,
                                         summary: video.authorName,
-                                        youtubeUrl: video.link);
+                                        youtubeUrl: video.link,
+                                        isBookmarked: video.isBookmarked);
                                   }),
                             ),
                             SizedBox(

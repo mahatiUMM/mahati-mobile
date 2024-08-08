@@ -96,11 +96,12 @@ class HomeView extends GetView<HomeController> {
                                         itemBuilder: (context, index) {
                                           final video =
                                               controller.educationVideos[index];
-                                          return VideoListCard(
-                                              thumbnailUrl: video.thumbnailUrl,
-                                              title: video.title,
-                                              summary: video.authorName,
-                                              youtubeUrl: video.link);
+                                          // return VideoListCard(
+                                          //     id: video.id,
+                                          //     thumbnailUrl: video.thumbnailUrl,
+                                          //     title: video.title,
+                                          //     summary: video.authorName,
+                                          //     youtubeUrl: video.link);
                                         }),
                                   );
                                 }

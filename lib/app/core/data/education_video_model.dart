@@ -34,6 +34,7 @@ class VideoModel {
   String authorName;
   String authorUrl;
   String thumbnailUrl;
+  bool isBookmarked;
   DateTime createdAt;
   dynamic updatedAt;
 
@@ -45,6 +46,7 @@ class VideoModel {
     required this.authorName,
     required this.authorUrl,
     required this.thumbnailUrl,
+    required this.isBookmarked,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -62,6 +64,7 @@ class VideoModel {
         authorName: json["author_name"],
         authorUrl: json["author_url"],
         thumbnailUrl: json["thumbnail_url"],
+        isBookmarked: json["is_bookmarked"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
       );
@@ -74,6 +77,7 @@ class VideoModel {
         "author_name": authorName,
         "author_url": authorUrl,
         "thumbnail_url": thumbnailUrl,
+        "is_bookmarked": isBookmarked,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
       };

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/education_article_model.dart';
 import 'package:mahati_mobile/app/core/data/education_brochure_model.dart';
@@ -36,6 +38,30 @@ class EducationController extends GetxController {
   void handleTabSelection(int index) {
     selectedIndex.value = index;
     listIndex = index;
+  }
+
+  Future<void> postBookmarkVideo(int id) async {
+    try {
+      final token = await getToken();
+      await restClient.requestWithToken(
+          "/bookmark", HttpMethod.POST, {"video_id": id}, token.toString());
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      getEducation();
+    }
+  }
+
+  Future<void> deleteBookmarkVideo(int id) async {
+    try {
+      final token = await getToken();
+      await restClient.requestWithToken(
+          "/bookmark/$id", HttpMethod.DELETE, null, token.toString());
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      getEducation();
+    }
   }
 
   Future<void> getEducation() async {
