@@ -77,63 +77,69 @@ class EducationView extends GetView<EducationController> {
               SizedBox(
                 height: null,
                 child: Obx(() {
-                  final videos = controller.educationVideos;
-                  final articles = controller.educationArticles;
-                  final brochures = controller.educationBrochures;
+                  if (controller.isLoading.isTrue) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    final videos = controller.educationVideos;
+                    final articles = controller.educationArticles;
+                    final brochures = controller.educationBrochures;
 
-                  return Column(children: [
-                    SizedBox(
-                      child: IndexedStack(
-                        index: controller.selectedIndex.toInt(),
-                        children: [
-                          SizedBox(
-                            height: null,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: videos.length,
-                                itemBuilder: (context, index) {
-                                  final video = videos[index];
-                                  return VideoListCard(
-                                      thumbnailUrl: video.thumbnailUrl,
-                                      title: video.title,
-                                      summary: video.authorName,
-                                      youtubeUrl: video.link);
-                                }),
-                          ),
-                          SizedBox(
-                            height: null,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: articles.length,
-                                itemBuilder: (context, index) {
-                                  final article = articles[index];
-                                  return ArticleListCard(
-                                      title: article.title,
-                                      summary: article.description,
-                                      file: article.file);
-                                }),
-                          ),
-                          SizedBox(
-                            height: null,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: videos.length,
-                                itemBuilder: (context, index) {
-                                  final brochure = brochures[index];
-                                  return BrochureThumbCard(
-                                      title: brochure.title,
-                                      imageUrl: brochure.images
-                                          .map((e) => e.imagePath)
-                                          .toList());
-                                }),
-                          )
-                        ],
+                    return Column(children: [
+                      SizedBox(
+                        child: IndexedStack(
+                          index: controller.selectedIndex.toInt(),
+                          children: [
+                            SizedBox(
+                              height: null,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: videos.length,
+                                  itemBuilder: (context, index) {
+                                    final video = videos[index];
+                                    return VideoListCard(
+                                        thumbnailUrl: video.thumbnailUrl,
+                                        title: video.title,
+                                        summary: video.authorName,
+                                        youtubeUrl: video.link);
+                                  }),
+                            ),
+                            SizedBox(
+                              height: null,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: articles.length,
+                                  itemBuilder: (context, index) {
+                                    final article = articles[index];
+                                    return ArticleListCard(
+                                        title: article.title,
+                                        summary: article.description,
+                                        file: article.file);
+                                  }),
+                            ),
+                            SizedBox(
+                              height: null,
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: brochures.length,
+                                  itemBuilder: (context, index) {
+                                    final brochure = brochures[index];
+                                    return BrochureThumbCard(
+                                        title: brochure.title,
+                                        imageUrl: brochure.images
+                                            .map((e) => e.imagePath)
+                                            .toList());
+                                  }),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ]);
+                    ]);
+                  }
                 }),
               )
             ],

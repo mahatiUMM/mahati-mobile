@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class EducationController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   RxInt selectedIndex = 0.obs;
+  RxBool isLoading = false.obs;
 
   RxList<VideoModel> educationVideos = <VideoModel>[].obs;
   RxList<ArticleData> educationArticles = <ArticleData>[].obs;
@@ -38,6 +39,7 @@ class EducationController extends GetxController {
   }
 
   Future<void> getEducation() async {
+    isLoading.value = true;
     final token = await getToken();
     final videos = await restClient.requestWithToken(
         "/video", HttpMethod.GET, null, token.toString());
@@ -72,5 +74,6 @@ class EducationController extends GetxController {
         print("Error loading article: $e");
       }
     }
+    isLoading.value = false;
   }
 }
