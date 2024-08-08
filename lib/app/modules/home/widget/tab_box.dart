@@ -68,7 +68,7 @@ class TabBox extends StatelessWidget {
       height: 98,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TabItem(
@@ -82,7 +82,6 @@ class TabBox extends StatelessWidget {
               Get.toNamed('/reminder');
             },
           ),
-          const SizedBox(width: 23),
           TabItem(
             title: 'Tekanan Darah',
             color: const Color(0xFFE87E6E),
@@ -94,7 +93,6 @@ class TabBox extends StatelessWidget {
               Get.toNamed('/pressure');
             },
           ),
-          const SizedBox(width: 23),
           TabItem(
             title: 'Edukasi',
             color: const Color(0xFF4A87D8),
@@ -106,7 +104,6 @@ class TabBox extends StatelessWidget {
               Get.toNamed('/education');
             },
           ),
-          const SizedBox(width: 23),
           TabItem(
             title: 'Kuesioner',
             color: const Color(0xFF40D99E),

@@ -50,6 +50,8 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 20),
                     SmoothPageIndicator(
                       controller: controller.pageController,
+                      onDotClicked: (index) =>
+                          controller.dotNavigatorClick(index),
                       effect: const ScrollingDotsEffect(
                         dotHeight: 4,
                         activeDotColor: Color(0xFF40D99E),
