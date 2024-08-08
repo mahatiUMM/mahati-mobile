@@ -42,7 +42,7 @@ Widget reminderDashboard() {
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "7",
+                          homeController.remainingMedicine.value,
                           textAlign: TextAlign.end,
                           style: TextStyle(
                               color: Colors.red.shade900,

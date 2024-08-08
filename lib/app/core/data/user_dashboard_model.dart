@@ -26,10 +26,12 @@ class UserDashboard {
 }
 
 class Data {
+  int remainingMedicine;
   List<LowerMedicine> lowerMedicine;
   RecentBloodPressure recentBloodPressure;
 
   Data({
+    required this.remainingMedicine,
     required this.lowerMedicine,
     required this.recentBloodPressure,
   });
@@ -39,6 +41,7 @@ class Data {
   String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
+        remainingMedicine: json["remaining_reminder"],
         lowerMedicine: List<LowerMedicine>.from(
             json["lower_medicine"].map((x) => LowerMedicine.fromJson(x))),
         recentBloodPressure:
@@ -46,6 +49,7 @@ class Data {
       );
 
   Map<String, dynamic> toJson() => {
+        "remaining_reminder": remainingMedicine,
         "lower_medicine":
             List<dynamic>.from(lowerMedicine.map((x) => x.toJson())),
         "recent_blood_pressure": recentBloodPressure.toJson(),

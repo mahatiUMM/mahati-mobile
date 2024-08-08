@@ -17,6 +17,7 @@ class HomeController extends GetxController {
 
   RxList<VideoModel> educationVideos = <VideoModel>[].obs;
   RxList<LowerMedicine> lowerMedicine = <LowerMedicine>[].obs;
+  RxString remainingMedicine = ''.obs;
   RxString recentSystolic = ''.obs;
   RxString recentDiastole = ''.obs;
   RxString recentPulse = ''.obs;
@@ -61,6 +62,7 @@ class HomeController extends GetxController {
 
     if (result.statusCode == 200) {
       var responseData = UserDashboard.fromJson(jsonDecode(result.body));
+      remainingMedicine.value = responseData.data.remainingMedicine.toString();
       lowerMedicine.value = responseData.data.lowerMedicine;
       recentSystolic.value =
           responseData.data.recentBloodPressure.sistol.toString();
