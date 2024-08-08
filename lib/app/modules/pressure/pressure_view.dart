@@ -8,14 +8,14 @@ import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:lottie/lottie.dart';
 
 class PressureView extends GetView<PressureController> {
-  const PressureView({Key? key}) : super(key: key);
+  const PressureView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundHome,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundHome,
         elevation: 0,
         leadingWidth: 20,
         leading: IconButton(
@@ -70,16 +70,12 @@ class PressureView extends GetView<PressureController> {
                     ),
                     const SizedBox(height: 20),
                     Center(
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                "assets/images/pressure_illustration.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      child: Lottie.asset(
+                        AnimationUrls.heartDashboardAnimation,
+                        height: 290,
+                        width: 290,
+                        repeat: false,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     Row(
@@ -181,9 +177,16 @@ class PressureView extends GetView<PressureController> {
           width: 94,
           height: 145,
           decoration: BoxDecoration(
-            color: Color(0xFFF5F6F8),
-            borderRadius: BorderRadius.circular(15),
-          ),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.10), // Shadow color
+                  spreadRadius: 8, // Spread radius
+                  blurRadius: 12, // Blur radius
+                  offset: const Offset(0, 3), // Offset
+                ),
+              ]),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -242,12 +245,19 @@ class PressureView extends GetView<PressureController> {
 
   Widget _buildMediaOption(String title, IconData icon) {
     return Container(
-      width: Get.width * 0.4,
+      width: Get.width / 2 - 28,
       height: 47,
       decoration: BoxDecoration(
-        color: Color(0xFFF5F6F8),
-        borderRadius: BorderRadius.circular(10),
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.10), // Shadow color
+              spreadRadius: 8, // Spread radius
+              blurRadius: 12, // Blur radius
+              offset: const Offset(0, 3), // Offset
+            ),
+          ]),
       child: TextButton.icon(
         onPressed: () {
           if (title == 'Buka Kamera') {

@@ -230,134 +230,137 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: controller.pressureHistory.value.length,
                             itemBuilder: (context, index) {
-                              return Slidable(
-                                endActionPane: ActionPane(
-                                  motion: const DrawerMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      autoClose: true,
-                                      borderRadius: BorderRadius.circular(15),
-                                      onPressed: (context) => controller
-                                          .deleteUserPressureHistory(controller
-                                              .pressureHistory
-                                              .value[index]['id']),
-                                      backgroundColor: const Color(0xFFFE4A49),
-                                      foregroundColor: Colors.white,
-                                      icon: Icons.delete,
-                                    ),
-                                  ],
-                                ),
-                                child: Container(
-                                  margin: const EdgeInsets.only(bottom: 8),
-                                  padding: const EdgeInsets.all(18),
-                                  decoration: ShapeDecoration(
-                                    color: Colors.white,
-                                    shadows: [
-                                      BoxShadow(
-                                        color: Colors.grey
-                                            .withOpacity(0.15), // Shadow color
-                                        spreadRadius: 8, // Spread radius
-                                        blurRadius: 12, // Blur radius
-                                        offset: const Offset(0, 3), // Offset
-                                      ),
-                                    ],
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                  ),
-                                  child: Row(
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: const DrawerMotion(),
                                     children: [
-                                      Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            Text(DateFormat('EEE').format(
-                                                DateTime.parse(controller
-                                                        .pressureHistory
-                                                        .value[index]
-                                                    ['created_at']))),
-                                            Text(
-                                                DateFormat('MMM dd').format(
-                                                    DateTime.parse(controller
-                                                            .pressureHistory
-                                                            .value[index]
-                                                        ['created_at'])),
-                                                style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            Text(DateFormat('yyyy').format(
-                                                DateTime.parse(controller
-                                                        .pressureHistory
-                                                        .value[index]
-                                                    ['created_at']))),
-                                            Text(DateFormat('h:mm a').format(
-                                                DateTime.parse(controller
-                                                        .pressureHistory
-                                                        .value[index]
-                                                    ['created_at'])))
-                                          ]),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: SizedBox(
-                                          width: 3,
-                                          height: 80,
-                                          child: Container(
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                color: controller.pressureHistory
-                                                                    .value[index]
-                                                                ['sistol'] >=
-                                                            120 &&
-                                                        controller.pressureHistory
-                                                                    .value[index]
-                                                                ['sistol'] <=
-                                                            130
-                                                    ? Colors.yellow
-                                                    : controller.pressureHistory.value[index]['sistol'] >= 130 &&
-                                                            controller.pressureHistory.value[index]['sistol'] <=
-                                                                140
-                                                        ? Colors.orange
-                                                        : controller.pressureHistory.value[index]
-                                                                        ['sistol'] >=
-                                                                    140 &&
-                                                                controller.pressureHistory.value[index]['sistol'] <= 180
-                                                            ? Colors.deepOrange.shade700
-                                                            : controller.pressureHistory.value[index]['sistol'] >= 180
-                                                                ? Colors.red.shade900
-                                                                : Colors.green,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              )),
-                                        ),
+                                      SlidableAction(
+                                        autoClose: true,
+                                        borderRadius: BorderRadius.circular(15),
+                                        onPressed: (context) => controller
+                                            .deleteUserPressureHistory(
+                                                controller.pressureHistory
+                                                    .value[index]['id']),
+                                        backgroundColor:
+                                            const Color(0xFFFE4A49),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.delete,
                                       ),
-                                      Expanded(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              '${controller.pressureHistory.value[index]['sistol']}/${controller.pressureHistory.value[index]['diastole']}',
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            const Text(
-                                              ' mmHg',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                            textAlign: TextAlign.center,
-                                            '${controller.pressureHistory.value[index]['heartbeat']} BPM'),
-                                      )
                                     ],
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(18),
+                                    decoration: ShapeDecoration(
+                                      color: Colors.white,
+                                      shadows: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(
+                                              0.15), // Shadow color
+                                          spreadRadius: 8, // Spread radius
+                                          blurRadius: 12, // Blur radius
+                                          offset: const Offset(0, 3), // Offset
+                                        ),
+                                      ],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(DateFormat('EEE').format(
+                                                  DateTime.parse(controller
+                                                          .pressureHistory
+                                                          .value[index]
+                                                      ['created_at']))),
+                                              Text(
+                                                  DateFormat('MMM dd').format(
+                                                      DateTime.parse(controller
+                                                              .pressureHistory
+                                                              .value[index]
+                                                          ['created_at'])),
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Text(DateFormat('yyyy').format(
+                                                  DateTime.parse(controller
+                                                          .pressureHistory
+                                                          .value[index]
+                                                      ['created_at']))),
+                                              Text(DateFormat('h:mm a').format(
+                                                  DateTime.parse(controller
+                                                          .pressureHistory
+                                                          .value[index]
+                                                      ['created_at'])))
+                                            ]),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: SizedBox(
+                                            width: 3,
+                                            height: 80,
+                                            child: Container(
+                                                height: 20,
+                                                decoration: BoxDecoration(
+                                                  color: controller.pressureHistory
+                                                                      .value[index]
+                                                                  ['sistol'] >=
+                                                              120 &&
+                                                          controller.pressureHistory
+                                                                      .value[index]
+                                                                  ['sistol'] <=
+                                                              130
+                                                      ? Colors.yellow
+                                                      : controller.pressureHistory.value[index]['sistol'] >=
+                                                                  130 &&
+                                                              controller.pressureHistory.value[index]['sistol'] <=
+                                                                  140
+                                                          ? Colors.orange
+                                                          : controller.pressureHistory.value[index]['sistol'] >=
+                                                                      140 &&
+                                                                  controller.pressureHistory.value[index]['sistol'] <= 180
+                                                              ? Colors.deepOrange.shade700
+                                                              : controller.pressureHistory.value[index]['sistol'] >= 180
+                                                                  ? Colors.red.shade900
+                                                                  : Colors.green,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                )),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                '${controller.pressureHistory.value[index]['sistol']}/${controller.pressureHistory.value[index]['diastole']}',
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              const Text(
+                                                ' mmHg',
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                              textAlign: TextAlign.center,
+                                              '${controller.pressureHistory.value[index]['heartbeat']} BPM'),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
