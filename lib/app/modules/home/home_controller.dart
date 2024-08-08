@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/data/user_dashboard_model.dart';
@@ -9,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
+  final PageController pageController = PageController();
+  final RxInt currentPageIndex = 0.obs;
+
   var tabIndex = 0;
   var username = Rx<String>('');
 
@@ -35,6 +39,13 @@ class HomeController extends GetxController {
   void onInit() {
     getAllDashboard();
     super.onInit();
+  }
+
+  void updatePageIndicator(int index) => currentPageIndex.value = index;
+
+  void dotNavigatorClick(int index) {
+    currentPageIndex.value = index;
+    pageController.jumpToPage(index);
   }
 
   Future<void> getAllDashboard() async {

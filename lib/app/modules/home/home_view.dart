@@ -8,6 +8,7 @@ import 'package:mahati_mobile/app/modules/home/widget/slider.dart';
 import 'package:mahati_mobile/app/modules/home/widget/tab_box.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -45,7 +46,16 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const SliderWidget(),
+                    SliderWidget(),
+                    const SizedBox(height: 20),
+                    SmoothPageIndicator(
+                      controller: controller.pageController,
+                      effect: const ScrollingDotsEffect(
+                        dotHeight: 4,
+                        activeDotColor: Color(0xFF40D99E),
+                      ),
+                      count: 2,
+                    ),
                     const SizedBox(height: 20),
                     const TabBox(),
                     Padding(
