@@ -40,7 +40,6 @@ class LayoutView extends GetView<LayoutController> {
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Resources.color.whiteColor,
                   landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
                   selectedLabelStyle: TextStyle(
                     fontSize: 12,

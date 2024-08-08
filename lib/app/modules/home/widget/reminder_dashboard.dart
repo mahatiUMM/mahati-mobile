@@ -60,70 +60,80 @@ Widget reminderDashboard() {
                 const SizedBox(
                   width: 10,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                        "Sisa Obat Anda",
-                        style: TextStyle(
-                            fontFamily: Resources.font.primaryFont,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Container(
-                      width: 45.w,
-                      decoration: BoxDecoration(
-                        color: Resources.color.tertiaryColor3,
-                        borderRadius: BorderRadius.circular(100.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: null,
-                              child: ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      homeController.lowerMedicine.length,
-                                  itemBuilder: ((context, index) {
-                                    final medicine =
-                                        homeController.lowerMedicine[index];
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              medicine.medicineName,
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: Resources
-                                                      .font.primaryFont,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            const Spacer(),
-                                            Text(medicine.medicineTotal
-                                                .toString())
-                                          ],
-                                        )
-                                      ],
-                                    );
-                                  })),
-                            )
-                          ],
-                        ),
-                      ), // Expanded should be outside Container
-                    ),
-                  ],
-                ),
+                Obx(
+                  () {
+                    if (homeController.lowerMedicine.isNotEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Text(
+                              "Sisa Obat Anda",
+                              style: TextStyle(
+                                  fontFamily: Resources.font.primaryFont,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Container(
+                            width: 45.w,
+                            decoration: BoxDecoration(
+                              color: Resources.color.tertiaryColor3,
+                              borderRadius: BorderRadius.circular(100.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(18),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: null,
+                                    child: ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            homeController.lowerMedicine.length,
+                                        itemBuilder: ((context, index) {
+                                          final medicine = homeController
+                                              .lowerMedicine[index];
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    medicine.medicineName,
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontFamily: Resources
+                                                            .font.primaryFont,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                  const Spacer(),
+                                                  Text(medicine.medicineTotal
+                                                      .toString())
+                                                ],
+                                              )
+                                            ],
+                                          );
+                                        })),
+                                  )
+                                ],
+                              ),
+                            ), // Expanded should be outside Container
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                )
               ],
             ),
           ),
