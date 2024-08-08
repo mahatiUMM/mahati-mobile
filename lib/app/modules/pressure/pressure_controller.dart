@@ -57,7 +57,7 @@ class PressureController extends GetxController {
                   heartbeat: int.parse(heartbeat))
               .toJson(),
           token.toString(),
-          imageFile: File(pressureImage));
+          imageFile: pressureImage != "" ? File(pressureImage) : null);
 
       if (request.statusCode == 201) {
         openPressureResult();
@@ -66,6 +66,12 @@ class PressureController extends GetxController {
             colorText: Colors.white,
             "Cek Tekanan Darah",
             "Riwayat cek berhasil disimpan.");
+      } else {
+        Get.snackbar(
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            "Cek Tekanan Darah",
+            request.body);
       }
     } catch (e) {
       Get.snackbar(

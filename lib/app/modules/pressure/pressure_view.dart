@@ -13,9 +13,9 @@ class PressureView extends GetView<PressureController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundHome,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundHome,
+        backgroundColor: Colors.white,
         elevation: 0,
         leadingWidth: 20,
         leading: IconButton(
