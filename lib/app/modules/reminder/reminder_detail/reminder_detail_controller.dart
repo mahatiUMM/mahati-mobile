@@ -93,7 +93,7 @@ class ReminderDetailController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
           "Gagal minum obat",
-          "Obat telah diminum");
+          jsonDecode(result.body)['message']);
     }
   }
 

@@ -62,7 +62,6 @@ class LowerMedicine {
   String cause;
   int capSize;
   String medicineTime;
-  DateTime expiredAt;
   DateTime createdAt;
   dynamic updatedAt;
 
@@ -76,7 +75,6 @@ class LowerMedicine {
     required this.cause,
     required this.capSize,
     required this.medicineTime,
-    required this.expiredAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -96,7 +94,6 @@ class LowerMedicine {
         cause: json["cause"],
         capSize: json["cap_size"],
         medicineTime: json["medicine_time"],
-        expiredAt: DateTime.parse(json["expired_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
       );
@@ -111,7 +108,6 @@ class LowerMedicine {
         "cause": cause,
         "cap_size": capSize,
         "medicine_time": medicineTime,
-        "expired_at": expiredAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
       };

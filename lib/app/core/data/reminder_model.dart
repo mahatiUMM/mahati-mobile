@@ -36,7 +36,6 @@ class ReminderData {
   int amount;
   String cause;
   int capSize;
-  DateTime expiredAt;
   DateTime createdAt;
   dynamic updatedAt;
   List<dynamic>? schedules;
@@ -51,7 +50,6 @@ class ReminderData {
     required this.amount,
     required this.cause,
     required this.capSize,
-    required this.expiredAt,
     required this.createdAt,
     required this.updatedAt,
     required this.schedules,
@@ -67,7 +65,6 @@ class ReminderData {
         cause: json["cause"] ?? "",
         capSize: json["cap_size"],
         medicineTime: json["medicine_time"] ?? "",
-        expiredAt: DateTime.parse(json["expired_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] ?? "",
         schedules: json["schedules"],
@@ -83,7 +80,6 @@ class ReminderData {
         "amount": amount,
         "cause": cause,
         "cap_size": capSize,
-        "expired_at": expiredAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
         "schedules": List<dynamic>.from(schedules!.map((x) => x)),

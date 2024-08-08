@@ -128,9 +128,6 @@ class ReminderRefillController extends GetxController {
       "cause": cause,
       "cap_size": int.parse(capSize),
       "medicine_time": medicineTime,
-      "expired_at": scheduledNotificationDateTime
-          .add(Duration(days: medicineTotal))
-          .toIso8601String(),
     };
 
     try {
