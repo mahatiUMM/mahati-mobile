@@ -60,14 +60,18 @@ class ArticleListCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      fontFamily: Resources.font.primaryFont,
                     ),
                   ),
                   Text(
                     summary,
-                    style: const TextStyle(fontSize: 14),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: Resources.font.primaryFont,
+                    ),
                   ),
                 ],
               ),

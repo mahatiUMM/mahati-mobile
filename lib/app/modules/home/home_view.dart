@@ -64,13 +64,14 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 12),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
                               child: Text("Edukasi Terbaru",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
+                                    fontFamily: Resources.font.primaryFont,
                                   )),
                             ),
                             Obx(

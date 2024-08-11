@@ -109,9 +109,13 @@ Widget pressureDetailBottomSheet({
               backgroundColor: MaterialStateProperty.all<Color>(
                   Resources.color.primaryColor),
             ),
-            child: const Text(
+            child: Text(
               "Kembali",
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontFamily: Resources.font.primaryFont,
+              ),
             )),
       ],
     ),

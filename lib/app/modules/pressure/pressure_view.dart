@@ -24,11 +24,15 @@ class PressureView extends GetView<PressureController> {
             Get.back();
           },
         ),
-        title: const Text(
-          'Kembali',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+        title: GestureDetector(
+          onTap: () => Get.back(),
+          child: Text(
+            'Kembali',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              fontFamily: Resources.font.primaryFont,
+            ),
           ),
         ),
       ),

@@ -10,10 +10,10 @@ class BrochureThumbCard extends StatelessWidget {
   final List<String> imageUrl;
 
   const BrochureThumbCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +58,7 @@ class BrochureThumbCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  fontFamily: Resources.font.primaryFont,
                 ),
               ),
             ),

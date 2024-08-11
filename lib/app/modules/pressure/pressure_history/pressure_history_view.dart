@@ -34,11 +34,12 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
               Get.back();
             },
           ),
-          title: const Text(
+          title: Text(
             'Lacak Tekanan Darah',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
+              fontFamily: Resources.font.primaryFont,
             ),
           ),
           bottom: TabBar(
@@ -293,32 +294,52 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Text(DateFormat('EEE').format(
-                                                    DateTime.parse(controller
-                                                            .pressureHistory
-                                                            .value[index]
-                                                        ['created_at']))),
+                                                Text(
+                                                  DateFormat('EEE').format(
+                                                      DateTime.parse(controller
+                                                              .pressureHistory
+                                                              .value[index]
+                                                          ['created_at'])),
+                                                  style: TextStyle(
+                                                    fontFamily: Resources
+                                                        .font.primaryFont,
+                                                  ),
+                                                ),
                                                 Text(
                                                     DateFormat('MMM dd').format(
                                                         DateTime.parse(controller
                                                                 .pressureHistory
                                                                 .value[index]
                                                             ['created_at'])),
-                                                    style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                Text(DateFormat('yyyy').format(
-                                                    DateTime.parse(controller
-                                                            .pressureHistory
-                                                            .value[index]
-                                                        ['created_at']))),
-                                                Text(DateFormat('h:mm a')
-                                                    .format(DateTime.parse(
-                                                        controller
-                                                                .pressureHistory
-                                                                .value[index]
-                                                            ['created_at'])))
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                    )),
+                                                Text(
+                                                  DateFormat('yyyy').format(
+                                                      DateTime.parse(controller
+                                                              .pressureHistory
+                                                              .value[index]
+                                                          ['created_at'])),
+                                                  style: TextStyle(
+                                                    fontFamily: Resources
+                                                        .font.primaryFont,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  DateFormat('h:mm a').format(
+                                                      DateTime.parse(controller
+                                                              .pressureHistory
+                                                              .value[index]
+                                                          ['created_at'])),
+                                                  style: TextStyle(
+                                                    fontFamily: Resources
+                                                        .font.primaryFont,
+                                                  ),
+                                                )
                                               ]),
                                           Padding(
                                             padding: const EdgeInsets.only(
@@ -366,21 +387,32 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                               children: [
                                                 Text(
                                                   '${controller.pressureHistory.value[index]['sistol']}/${controller.pressureHistory.value[index]['diastole']}',
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
+                                                    fontFamily: Resources
+                                                        .font.primaryFont,
                                                   ),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   ' mmHg',
+                                                  style: TextStyle(
+                                                    fontFamily: Resources
+                                                        .font.primaryFont,
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                           Expanded(
                                             child: Text(
-                                                textAlign: TextAlign.center,
-                                                '${controller.pressureHistory.value[index]['heartbeat']} BPM'),
+                                              textAlign: TextAlign.center,
+                                              '${controller.pressureHistory.value[index]['heartbeat']} BPM',
+                                              style: TextStyle(
+                                                fontFamily:
+                                                    Resources.font.primaryFont,
+                                              ),
+                                            ),
                                           )
                                         ],
                                       ),

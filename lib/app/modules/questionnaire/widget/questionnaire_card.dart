@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireCard extends StatelessWidget {
   final String title;
@@ -8,18 +9,17 @@ class QuestionnaireCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const QuestionnaireCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xFFFFFFFF),
-      elevation: 2,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -46,14 +46,15 @@ class QuestionnaireCard extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
+                          fontFamily: Resources.font.primaryFont,
                           fontWeight: FontWeight.w600),
                     ),
                     Text(
                       description,
                       style: TextStyle(
                           fontSize: 15,
-                          color: Colors.grey[700],
-                          fontWeight: FontWeight.w600),
+                          fontFamily: Resources.font.primaryFont,
+                          color: Colors.grey[700]),
                     ),
                   ],
                 ),
@@ -62,6 +63,7 @@ class QuestionnaireCard extends StatelessWidget {
                   style: TextButton.styleFrom(
                     backgroundColor: const Color(0xFF40D99E),
                   ),
+                  onPressed: onPressed,
                   child: const Text(
                     "Mulai",
                     style: TextStyle(
@@ -69,7 +71,6 @@ class QuestionnaireCard extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  onPressed: onPressed,
                 ),
               ],
             ),

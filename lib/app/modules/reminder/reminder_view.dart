@@ -34,6 +34,7 @@ class ReminderView extends GetView<ReminderController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Resources.color.backgroundHome2,
         leadingWidth: 20,
         leading: IconButton(
           icon: const Icon(Icons.chevron_left),
@@ -44,11 +45,15 @@ class ReminderView extends GetView<ReminderController> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Kembali',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+            GestureDetector(
+              onTap: () => Get.back(),
+              child: Text(
+                'Kembali',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: Resources.font.primaryFont,
+                ),
               ),
             ),
             IconButton(

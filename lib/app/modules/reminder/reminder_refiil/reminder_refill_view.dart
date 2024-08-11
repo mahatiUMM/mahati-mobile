@@ -70,11 +70,12 @@ class ReminderRefillView extends GetView<ReminderRefillController> {
                           Icons.chevron_left,
                           color: Resources.color.baseColor,
                         ),
-                        const Text(
+                        Text(
                           'Kembali',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            fontFamily: Resources.font.primaryFont,
                           ),
                         ),
                       ],

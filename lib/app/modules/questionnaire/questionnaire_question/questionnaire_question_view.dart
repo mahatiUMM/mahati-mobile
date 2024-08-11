@@ -64,7 +64,7 @@ class QuestionnaireQuestionView
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.offAndToNamed('/questionnaire');
+                    Get.back();
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -74,11 +74,12 @@ class QuestionnaireQuestionView
                           Icons.chevron_left,
                           color: Resources.color.baseColor,
                         ),
-                        const Text(
+                        Text(
                           'Kembali',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            fontFamily: Resources.font.primaryFont,
                           ),
                         ),
                       ],
