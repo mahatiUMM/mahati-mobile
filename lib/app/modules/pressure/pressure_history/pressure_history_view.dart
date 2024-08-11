@@ -6,6 +6,8 @@ import 'package:mahati_mobile/app/modules/pressure/pressure_history/pressure_his
 import 'package:mahati_mobile/app/modules/pressure/widget/pressure_detail_bottom_sheet.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:timezone/standalone.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class PressureHistoryView extends GetView<PressureHistoryController> {
   const PressureHistoryView({super.key});
@@ -295,7 +297,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                                   CrossAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  DateFormat('EEE').format(
+                                                  DateFormat('EEEE', 'id').format(
                                                       DateTime.parse(controller
                                                               .pressureHistory
                                                               .value[index]
@@ -306,11 +308,13 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                                   ),
                                                 ),
                                                 Text(
-                                                    DateFormat('MMM dd').format(
-                                                        DateTime.parse(controller
-                                                                .pressureHistory
-                                                                .value[index]
-                                                            ['created_at'])),
+                                                    DateFormat('MMM dd', 'id')
+                                                        .format(DateTime.parse(
+                                                            controller
+                                                                    .pressureHistory
+                                                                    .value[index]
+                                                                [
+                                                                'created_at'])),
                                                     style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
@@ -319,7 +323,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                                           .font.primaryFont,
                                                     )),
                                                 Text(
-                                                  DateFormat('yyyy').format(
+                                                  DateFormat('yyyy', 'id').format(
                                                       DateTime.parse(controller
                                                               .pressureHistory
                                                               .value[index]
@@ -330,11 +334,14 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  DateFormat('h:mm a').format(
-                                                      DateTime.parse(controller
-                                                              .pressureHistory
-                                                              .value[index]
-                                                          ['created_at'])),
+                                                  DateFormat('h:mm a', 'id')
+                                                      .format(tz.TZDateTime.from(
+                                                          DateTime.parse(controller
+                                                                  .pressureHistory
+                                                                  .value[index]
+                                                              ['created_at']),
+                                                          getLocation(
+                                                              'Asia/Jakarta'))),
                                                   style: TextStyle(
                                                     fontFamily: Resources
                                                         .font.primaryFont,
