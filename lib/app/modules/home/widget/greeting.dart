@@ -41,7 +41,7 @@ class GreetingWidget extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () => controller.changeTabIndex(1),
+            onTap: () => controller.changeTabIndex(2),
             child: CircleAvatar(
               radius: 24,
               backgroundColor: Colors.grey[200],

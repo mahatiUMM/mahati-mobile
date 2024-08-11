@@ -29,7 +29,7 @@ class HomeView extends GetView<HomeController> {
           backgroundColor: AppColors.backgroundHome,
           body: RefreshIndicator(
             color: Resources.color.primaryColor,
-            onRefresh: controller.getAllDashboard,
+            onRefresh: controller.getUserDashboard,
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
@@ -39,8 +39,8 @@ class HomeView extends GetView<HomeController> {
                     Obx(
                       () => GreetingWidget(
                         controller: controller.layoutController,
-                        username: controller.username.value,
-                        image: controller.image.value,
+                        username: controller.profileController.username.value,
+                        image: controller.profileController.photo.value,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -76,7 +76,8 @@ class HomeView extends GetView<HomeController> {
                             ),
                             Obx(
                               () {
-                                if (controller.isEducationLoading.value) {
+                                if (controller
+                                    .educationController.isLoading.value) {
                                   return Center(
                                     child: CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -90,11 +91,14 @@ class HomeView extends GetView<HomeController> {
                                         shrinkWrap: true,
                                         physics:
                                             const NeverScrollableScrollPhysics(),
-                                        itemCount:
-                                            controller.educationVideos.length,
+                                        itemCount: controller
+                                            .educationController
+                                            .educationVideos
+                                            .length,
                                         itemBuilder: (context, index) {
-                                          final video =
-                                              controller.educationVideos[index];
+                                          final video = controller
+                                              .educationController
+                                              .educationVideos[index];
                                           return VideoListCard(
                                             id: video.id,
                                             thumbnailUrl: video.thumbnailUrl,

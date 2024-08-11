@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
@@ -155,14 +154,18 @@ class ProfileView extends GetView<ProfileController> {
                                       SizedBox(height: 1.h),
                                       ElevatedButton(
                                         style: ButtonStyle(
+                                          elevation:
+                                              const MaterialStatePropertyAll(0),
                                           backgroundColor:
-                                              const MaterialStatePropertyAll(
-                                            Color.fromARGB(255, 255, 255, 255),
+                                              MaterialStatePropertyAll(
+                                            Resources.color.backgroundHome2,
                                           ),
                                           shape: MaterialStatePropertyAll(
                                             RoundedRectangleBorder(
-                                              side: const BorderSide(
-                                                color: Colors.black,
+                                              side: BorderSide(
+                                                color:
+                                                    Resources.color.baseColor,
+                                                width: 1,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(99),
@@ -172,10 +175,12 @@ class ProfileView extends GetView<ProfileController> {
                                         onPressed: () {
                                           Get.toNamed("/profile/edit");
                                         },
-                                        child: const Text(
+                                        child: Text(
                                           "Edit Profil",
                                           style: TextStyle(
                                             color: Colors.black,
+                                            fontFamily:
+                                                Resources.font.primaryFont,
                                           ),
                                         ),
                                       ),
@@ -218,6 +223,7 @@ class ProfileView extends GetView<ProfileController> {
                                   "Export",
                                   style: TextStyle(
                                     color: Resources.color.whiteColor,
+                                    fontFamily: Resources.font.primaryFont,
                                   ),
                                 ),
                               ),

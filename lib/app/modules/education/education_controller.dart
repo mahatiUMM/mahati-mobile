@@ -5,10 +5,12 @@ import 'package:mahati_mobile/app/core/data/education_article_model.dart';
 import 'package:mahati_mobile/app/core/data/education_brochure_model.dart';
 import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EducationController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
+  final ProfileController profileController = Get.find<ProfileController>();
   RxInt selectedIndex = 0.obs;
   RxBool isLoading = false.obs;
 
@@ -49,6 +51,7 @@ class EducationController extends GetxController {
       Get.snackbar("Error", e.toString());
     } finally {
       getEducation();
+      profileController.getBookmarkVideo();
     }
   }
 
@@ -61,6 +64,7 @@ class EducationController extends GetxController {
       Get.snackbar("Error", e.toString());
     } finally {
       getEducation();
+      profileController.getBookmarkVideo();
     }
   }
 
