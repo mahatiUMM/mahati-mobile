@@ -136,11 +136,29 @@ class RestClient extends GetxService {
         response =
             await http.delete(uri, headers: headerWithToken(accessToken));
       } else if (method == HttpMethod.PUT) {
-        response = await http.put(
-          uri,
-          body: jsonEncode(params),
-          headers: headerWithToken(accessToken),
-        );
+        if (imageFile != null) {
+          var request = http.MultipartRequest('PUT', uri);
+          request.headers.addAll(headerWithToken(accessToken));
+
+          params.forEach((key, value) {
+            request.fields[key] = value.toString();
+          });
+
+          request.files.add(await http.MultipartFile.fromPath(
+            'image',
+            imageFile.path,
+            contentType: MediaType('image', 'jpeg'),
+          ));
+
+          var streamedResponse = await request.send();
+          response = await http.Response.fromStream(streamedResponse);
+        } else {
+          response = await http.put(
+            uri,
+            body: jsonEncode(params),
+            headers: headerWithToken(accessToken),
+          );
+        }
       } else {
         response = await http.get(uri, headers: headerWithToken(accessToken));
       }

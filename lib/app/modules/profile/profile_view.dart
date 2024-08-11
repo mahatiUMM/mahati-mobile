@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
-import 'package:mahati_mobile/app/modules/profile/widget/image_picker.dart';
 import 'package:mahati_mobile/app/utils/constants/text_style.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
@@ -36,15 +37,10 @@ class ProfileView extends GetView<ProfileController> {
                   children: [
                     Container(
                       width: Get.width,
-                      height: Get.height / 3,
                       decoration: ShapeDecoration(
                         color: Resources.color.whiteColor,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(32),
-                            bottomRight: Radius.circular(32),
-                          ),
-                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32)),
                       ),
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -52,117 +48,134 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: Get.height / 18,
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 10.w),
-                                      child: Text(
-                                        'Profil Saya',
-                                        textAlign: TextAlign.center,
-                                        style: StyleText.homeGreeting1,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: Get.height / 18,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Get.toNamed("/setting");
-                                    },
-                                    icon: Icon(
-                                      Icons.settings_outlined,
-                                      color: Resources.color.baseColor,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(5.w, 1.h, 5.w, 0),
-                              width: Get.width,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Obx(() {
-                                    return Stack(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 70,
+                                  Expanded(
+                                    child: Container(
+                                      height: Get.height / 18,
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 10.w),
+                                        child: Text(
+                                          'Profil Saya',
+                                          textAlign: TextAlign.center,
+                                          style: StyleText.homeGreeting1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height / 18,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Get.toNamed("/setting");
+                                      },
+                                      icon: Icon(
+                                        Icons.settings_outlined,
+                                        color: Resources.color.baseColor,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(bottom: 24),
+                              width: Get.width,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(18.0),
+                                    child: Obx(() => CircleAvatar(
+                                          radius: 62,
                                           backgroundColor: Colors.grey[200],
-                                          backgroundImage:
-                                              controller.image.value != null
-                                                  ? FileImage(
-                                                      controller.image.value!)
-                                                  : null,
-                                        ),
-                                        Positioned(
-                                          bottom: 0,
-                                          right: -10,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 8.0,
-                                              right: 5.0,
-                                            ),
-                                            child: IconButton(
-                                              icon: const Icon(
-                                                Icons.camera,
-                                                size: 36,
-                                              ),
-                                              onPressed: () => showImagePicker(
-                                                context,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
+                                          child: controller
+                                                  .photo.value.isNotEmpty
+                                              ? CachedNetworkImage(
+                                                  imageUrl:
+                                                      'https://mahati.xyzuan.my.id/${controller.photo.value}',
+                                                  placeholder: (context, url) =>
+                                                      const CircularProgressIndicator(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          const Icon(
+                                                    Icons.error,
+                                                    color: Colors.red,
+                                                    size: 40,
+                                                  ),
+                                                  imageBuilder: (context,
+                                                          imageProvider) =>
+                                                      CircleAvatar(
+                                                    radius: 70,
+                                                    backgroundColor:
+                                                        Colors.grey[200],
+                                                    backgroundImage:
+                                                        imageProvider,
+                                                  ),
+                                                )
+                                              : CircleAvatar(
+                                                  radius: 70,
+                                                  backgroundColor:
+                                                      Colors.grey[200],
+                                                ),
+                                        )),
+                                  ),
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Obx(
                                         () => SizedBox(
                                           width: Get.width / 2,
                                           child: Text(
                                             controller.username.value,
+                                            textAlign: TextAlign.center,
                                             style: StyleText.homeGreeting3,
                                           ),
                                         ),
                                       ),
                                       SizedBox(height: 1.h),
-                                      SizedBox(
-                                        width: Get.width / 2,
-                                        child: Text(
-                                          "Designer",
-                                          style: StyleText.homeGreeting4,
+                                      Obx(
+                                        () => SizedBox(
+                                          width: Get.width / 2,
+                                          child: Text(
+                                            controller.email.value,
+                                            textAlign: TextAlign.center,
+                                            style: StyleText.homeGreeting4,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(height: 1.h),
-                                      GestureDetector(
-                                        onTap: () {
+                                      ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              const MaterialStatePropertyAll(
+                                            Color.fromARGB(255, 255, 255, 255),
+                                          ),
+                                          shape: MaterialStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                color: Colors.black,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(99),
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
                                           Get.toNamed("/profile/edit");
                                         },
-                                        child: Text(
-                                          "Edit Profile",
+                                        child: const Text(
+                                          "Edit Profil",
                                           style: TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color:
-                                                Resources.color.subtitleColor,
-                                            fontSize: 12.sp,
-                                            fontFamily:
-                                                Resources.font.primaryFont,
-                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ),
@@ -194,7 +207,7 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
                                   shape: MaterialStatePropertyAll(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5),
+                                      borderRadius: BorderRadius.circular(99),
                                     ),
                                   ),
                                 ),

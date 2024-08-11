@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
+import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_controller.dart';
 
 void showImagePicker(BuildContext context) {
-  final controller = Get.find<ProfileController>();
+  final controller = Get.find<ProfileEditController>();
   showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,
