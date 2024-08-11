@@ -62,7 +62,7 @@ class PressureView extends GetView<PressureController> {
                     Text(
                       'Cek Tekanan Darah',
                       style: TextStyle(
-                        color: Color(0xFF2C3131),
+                        color: const Color(0xFF2C3131),
                         fontSize: 24,
                         fontFamily: Resources.font.primaryFont,
                         fontWeight: FontWeight.w600,
@@ -72,8 +72,8 @@ class PressureView extends GetView<PressureController> {
                     Center(
                       child: Lottie.asset(
                         AnimationUrls.heartDashboardAnimation,
-                        height: 290,
-                        width: 290,
+                        height: 260,
+                        width: 260,
                         repeat: false,
                         fit: BoxFit.contain,
                       ),
@@ -193,7 +193,7 @@ class PressureView extends GetView<PressureController> {
               Text(
                 title,
                 style: TextStyle(
-                  color: Color(0xFF2C3131),
+                  color: const Color(0xFF2C3131),
                   fontSize: 14,
                   fontFamily: Resources.font.primaryFont,
                   fontWeight: FontWeight.w500,
@@ -211,7 +211,7 @@ class PressureView extends GetView<PressureController> {
                   border: InputBorder.none,
                   hintText: "0",
                   hintStyle: TextStyle(
-                    color: Color(0xFF2C3131),
+                    color: const Color(0xFF2C3131),
                     fontSize: 36,
                     // Assuming Resources class has font property
                     fontFamily: Resources.font.primaryFont,
@@ -219,7 +219,7 @@ class PressureView extends GetView<PressureController> {
                   ),
                 ),
                 style: TextStyle(
-                  color: Color(0xFF2C3131),
+                  color: const Color(0xFF2C3131),
                   fontSize: 36,
                   // Assuming Resources class has font property
                   fontFamily: Resources.font.primaryFont,
@@ -273,7 +273,7 @@ class PressureView extends GetView<PressureController> {
         label: Text(
           title,
           style: TextStyle(
-            color: Color(0xFF2C3131),
+            color: const Color(0xFF2C3131),
             fontSize: 12,
             fontFamily: Resources.font.primaryFont,
             fontWeight: FontWeight.w400,

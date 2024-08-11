@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/education/video/widget/video_list_card.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/home/widget/greeting.dart';
 import 'package:mahati_mobile/app/modules/home/widget/slider.dart';
@@ -67,7 +68,7 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             const Padding(
                               padding: EdgeInsets.only(bottom: 12),
-                              child: Text("Recent Education",
+                              child: Text("Edukasi Terbaru",
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: 16,
@@ -95,12 +96,14 @@ class HomeView extends GetView<HomeController> {
                                         itemBuilder: (context, index) {
                                           final video =
                                               controller.educationVideos[index];
-                                          // return VideoListCard(
-                                          //     id: video.id,
-                                          //     thumbnailUrl: video.thumbnailUrl,
-                                          //     title: video.title,
-                                          //     summary: video.authorName,
-                                          //     youtubeUrl: video.link);
+                                          return VideoListCard(
+                                            id: video.id,
+                                            thumbnailUrl: video.thumbnailUrl,
+                                            title: video.title,
+                                            summary: video.authorName,
+                                            youtubeUrl: video.link,
+                                            isBookmarked: video.isBookmarked,
+                                          );
                                         }),
                                   );
                                 }

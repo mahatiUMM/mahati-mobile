@@ -254,18 +254,20 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                   ),
                                   child: GestureDetector(
                                     onTap: () => Get.bottomSheet(
-                                        pressureDetailBottomSheet(
-                                            systolic: controller.pressureHistory
-                                                .value[index]['sistol']
-                                                .toString(),
-                                            diastolic: controller
-                                                .pressureHistory
-                                                .value[index]['diastole']
-                                                .toString(),
-                                            pulse: controller.pressureHistory
-                                                .value[index]['heartbeat']
-                                                .toString(),
-                                            image: controller.pressureHistory.value[index]['image']),),
+                                      pressureDetailBottomSheet(
+                                          systolic: controller.pressureHistory
+                                              .value[index]['sistol']
+                                              .toString(),
+                                          diastolic: controller.pressureHistory
+                                              .value[index]['diastole']
+                                              .toString(),
+                                          pulse: controller.pressureHistory
+                                              .value[index]['heartbeat']
+                                              .toString(),
+                                          image: controller.pressureHistory
+                                              .value[index]['image']),
+                                      isScrollControlled: true,
+                                    ),
                                     child: Container(
                                       padding: const EdgeInsets.all(18),
                                       decoration: ShapeDecoration(

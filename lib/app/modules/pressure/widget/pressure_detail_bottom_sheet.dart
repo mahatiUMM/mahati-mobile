@@ -59,13 +59,45 @@ Widget pressureDetailBottomSheet({
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  'https://mahati.xyzuan.my.id/$image',
-                ),
-                fit: BoxFit.cover,
-              ),
             ),
+            child: image.isNotEmpty
+                ? CachedNetworkImage(
+                    imageUrl: 'https://mahati.xyzuan.my.id/$image',
+                    fit: BoxFit.cover,
+                    errorWidget: (context, url, error) => const Center(
+                      child: Text(
+                        "Image Not Available",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Resources.color.primaryColor),
+                      ),
+                    ),
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  )
+                : (const Center(
+                    child: Text(
+                      "Image Not Available",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      ),
+                    ),
+                  )),
           ),
         ),
         ElevatedButton(
