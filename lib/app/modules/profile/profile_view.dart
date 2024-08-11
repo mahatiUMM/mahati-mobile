@@ -15,7 +15,7 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Resources.color.whiteColor,
+        statusBarColor: Resources.color.backgroundHome2,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
@@ -196,7 +196,7 @@ class ProfileView extends GetView<ProfileController> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Video Yang disimpan: ",
+                                "Video yang disimpan",
                                 style: StyleText.homeGreeting1,
                               ),
                               ElevatedButton(
@@ -226,9 +226,10 @@ class ProfileView extends GetView<ProfileController> {
                           SizedBox(height: 1.h),
                           Obx(
                             () => SizedBox(
-                              height: Get.height / 2.06,
+                              height: null,
                               child: GridView.builder(
                                 shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
