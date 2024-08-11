@@ -36,14 +36,12 @@ class HomeView extends GetView<HomeController> {
                 width: Get.width,
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Obx(
-                          () => GreetingWidget(
-                            username: controller.username.value,
-                          ),
-                        ),
-                      ],
+                    Obx(
+                      () => GreetingWidget(
+                        controller: controller.layoutController,
+                        username: controller.username.value,
+                        image: controller.image.value,
+                      ),
                     ),
                     const SizedBox(height: 20),
                     SliderWidget(),

@@ -197,7 +197,7 @@ class ProfileView extends GetView<ProfileController> {
                             children: [
                               Text(
                                 "Video yang disimpan",
-                                style: StyleText.homeGreeting1,
+                                style: StyleText.homeGreeting3,
                               ),
                               ElevatedButton(
                                 style: ButtonStyle(

@@ -6,15 +6,18 @@ import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/data/user_dashboard_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
+import 'package:mahati_mobile/app/modules/layout/layout_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final PageController pageController = PageController();
+  final LayoutController layoutController = LayoutController();
   final RxInt currentPageIndex = 0.obs;
 
   var tabIndex = 0;
   var username = Rx<String>('');
+  var image = Rx<String>('');
 
   RxBool isDashboardLoading = false.obs;
   RxBool isEducationLoading = false.obs;
@@ -108,6 +111,8 @@ class HomeController extends GetxController {
     final result = await restClient.requestWithToken(
         "/profile", HttpMethod.GET, null, token.toString());
     var responseData = UserModel.fromJson(jsonDecode(result.body));
+
     username.value = responseData.username;
+    image.value = responseData.photo;
   }
 }
