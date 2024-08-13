@@ -8,6 +8,7 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/pressure/widget/pressure_bottom_sheet.dart';
 import 'package:mahati_mobile/app/utils/constants/prompt_gemini.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PressureController extends GetxController {
   ImagePicker imagePicker = ImagePicker();
   String pressureImage = "";
+
+  final restClient = Get.find<RestClient>();
+  final HomeController homeController = Get.find<HomeController>();
 
   final TextEditingController sistolController = TextEditingController();
   final TextEditingController diastoleController = TextEditingController();
@@ -45,7 +49,6 @@ class PressureController extends GetxController {
         return;
       }
 
-      final restClient = Get.find<RestClient>();
       final token = await getToken();
       final request = await restClient.requestWithToken(
           "/blood_pressure",
@@ -60,6 +63,7 @@ class PressureController extends GetxController {
           imageFile: pressureImage != "" ? File(pressureImage) : null);
 
       if (request.statusCode == 201) {
+        homeController.getUserDashboard();
         openPressureResult();
         Get.snackbar(
             backgroundColor: Colors.green,
