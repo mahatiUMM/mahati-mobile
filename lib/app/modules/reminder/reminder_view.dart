@@ -150,7 +150,14 @@ class ReminderView extends GetView<ReminderController> {
                               ),
                             ),
                             activeDayStyle: DayStyle(
+                              dayStrStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: Resources.font.primaryFont,
+                              ),
                               dayNumStyle: TextStyle(
+                                color: Colors.white,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: Resources.font.primaryFont,
