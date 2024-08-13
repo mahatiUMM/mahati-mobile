@@ -120,6 +120,7 @@ class ReminderView extends GetView<ReminderController> {
                           ),
                         ),
                         EasyDateTimeLine(
+                          locale: "in_ID",
                           initialDate:
                               DateTime.parse(controller.selectedDate.value),
                           onDateChange: (selectedDate) {
@@ -127,10 +128,17 @@ class ReminderView extends GetView<ReminderController> {
                                 selectedDate.toString();
                           },
                           activeColor: Resources.color.primaryColor,
-                          headerProps: const EasyHeaderProps(
-                            dateFormatter: DateFormatter.monthOnly(),
+                          headerProps: EasyHeaderProps(
+                            dateFormatter:
+                                const DateFormatter.fullDateMonthAsStrDY(),
+                            padding: const EdgeInsets.all(0),
+                            selectedDateStyle: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: Resources.font.primaryFont,
+                            ),
                           ),
-                          dayProps: const EasyDayProps(
+                          dayProps: EasyDayProps(
                             height: 56.0,
                             width: 56.0,
                             dayStructure: DayStructure.dayNumDayStr,
@@ -138,12 +146,14 @@ class ReminderView extends GetView<ReminderController> {
                               borderRadius: 48.0,
                               dayNumStyle: TextStyle(
                                 fontSize: 18.0,
+                                fontFamily: Resources.font.primaryFont,
                               ),
                             ),
                             activeDayStyle: DayStyle(
                               dayNumStyle: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
+                                fontFamily: Resources.font.primaryFont,
                               ),
                             ),
                           ),
