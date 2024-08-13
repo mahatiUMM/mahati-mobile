@@ -86,7 +86,7 @@ class PressureView extends GetView<PressureController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _buildPressureReading(
-                            'Systolic', '(mmHg),', controller.sistolController),
+                            'Systolic', '(mmHg)', controller.sistolController),
                         const SizedBox(width: 10),
                         _buildPressureReading('Diastolic', '(mmHg)',
                             controller.diastoleController),

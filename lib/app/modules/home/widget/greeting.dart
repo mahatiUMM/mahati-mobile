@@ -24,21 +24,27 @@ class GreetingWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () => Get.toNamed('/reminder/action'),
-                child: Text(
-                  'Hai, $username',
-                  style: StyleText.homeGreeting1,
-                ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () => Get.toNamed('/reminder/action'),
+                    child: Text(
+                      'Hai, $username',
+                      overflow: TextOverflow.ellipsis,
+                      style: StyleText.homeGreeting1,
+                    ),
+                  ),
+                  Text(
+                    TextStrings.homeGreeting,
+                    style: StyleText.homeGreeting2,
+                  ),
+                ],
               ),
-              Text(
-                TextStrings.homeGreeting,
-                style: StyleText.homeGreeting2,
-              ),
-            ],
+            ),
           ),
           GestureDetector(
             onTap: () => controller.changeTabIndex(2),
