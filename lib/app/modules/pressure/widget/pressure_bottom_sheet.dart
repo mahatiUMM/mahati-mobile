@@ -6,6 +6,8 @@ Widget pressureBottomSheet({
   required String systolic,
   required String diastolic,
   required String pulse,
+  required bool
+      isNormal, // New parameter to indicate if the pressure is normal or not
 }) {
   return Container(
     padding: const EdgeInsets.all(16.0),
@@ -22,10 +24,13 @@ Widget pressureBottomSheet({
         Container(
           padding: const EdgeInsets.all(18),
           decoration: ShapeDecoration(
-            color: Colors.green,
+            color: isNormal
+                ? Colors.green
+                : Colors.red, // Change color based on normal or abnormal
             shadows: [
               BoxShadow(
-                color: Colors.green.withOpacity(0.2), // Shadow color
+                color: (isNormal ? Colors.green : Colors.red)
+                    .withOpacity(0.2), // Shadow color
                 spreadRadius: 8,
                 blurRadius: 12,
                 offset: const Offset(0, 3),
@@ -41,26 +46,35 @@ Widget pressureBottomSheet({
             children: [
               Padding(
                 padding: const EdgeInsets.all(24.0),
-                child: Text("Selamat Tekanan Darah Anda Normal",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 21,
-                      fontFamily: Resources.font.primaryFont,
-                      fontWeight: FontWeight.w700,
-                    )),
+                child: Text(
+                  isNormal
+                      ? "Selamat Tekanan Darah Anda Normal"
+                      : "Perhatian! Tekanan Darah Anda Tidak Normal", // Different text for abnormal pressure
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 21,
+                    fontFamily: Resources.font.primaryFont,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
               ElevatedButton(
-                  onPressed: () => Get.offAndToNamed('/pressure/history'),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
+                onPressed: () => Get.offAndToNamed('/pressure/history'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                ),
+                child: Text(
+                  "Lihat Riwayat Tekanan Darah",
+                  style: TextStyle(
+                    color: isNormal
+                        ? Colors.green.shade800
+                        : Colors.red.shade800, // Text color changes
+                    fontSize: 12,
                   ),
-                  child: Text(
-                    "Lihat Riwayat Tekanan Darah",
-                    style:
-                        TextStyle(color: Colors.green.shade800, fontSize: 12),
-                  )),
+                ),
+              ),
             ],
           ),
         ),

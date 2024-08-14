@@ -89,13 +89,23 @@ class PressureController extends GetxController {
   }
 
   void openPressureResult() {
+    final int systolic = int.tryParse(sistolController.value.text) ?? 0;
+    final int diastolic = int.tryParse(diastoleController.value.text) ?? 0;
+
+    bool isNormal = systolic < 120 && diastolic < 80;
+
     Get.bottomSheet(pressureBottomSheet(
-        diastolic: diastoleController.value.text,
-        pulse: heartbeatController.value.text,
-        systolic: sistolController.value.text));
-    assetsAudioPlayer.open(
-      Audio("assets/audios/tekanan_darah_normal.mp3"),
-    );
+      diastolic: diastoleController.value.text,
+      pulse: heartbeatController.value.text,
+      systolic: sistolController.value.text,
+      isNormal: isNormal, // Pass the condition here
+    ));
+
+    String audioFile = isNormal
+        ? "assets/audios/tekanan_darah_normal.mp3"
+        : "assets/audios/tekanan_darah_tidak_normal.mp3";
+
+    assetsAudioPlayer.open(Audio(audioFile));
     assetsAudioPlayer.stop();
   }
 
