@@ -7,11 +7,20 @@ import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'app/routes/app_pages.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:firebase_core/firebase_core.dart';
+
+import 'firebase_options.dart';
+import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await GetStorage.init();
   await Get.putAsync(() async => await SharedPreferences.getInstance());
   await initializeDateFormatting('id_ID', null);
@@ -21,7 +30,11 @@ void main() async {
     }
   });
   await NotificationService().initNotification();
-  tz.initializeTimeZones();
+
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("2c504865-7ffc-4ea5-9c67-895b885fbb93");
+  OneSignal.Notifications.requestPermission(true);
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,
