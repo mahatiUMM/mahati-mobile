@@ -55,384 +55,395 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
           ),
         ),
         body: TabBarView(controller: controller.tabController, children: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Obx(() {
-                  if (controller.pressureHistory.value.isEmpty) {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                          Resources.color.primaryColor),
-                    ));
-                  } else {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8.0, 18.0, 0, 8.0),
-                          child: Text("Data Terbaru",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: Resources.font.primaryFont,
-                                fontWeight: FontWeight.w600,
-                              )),
-                        ),
-                        Container(
-                            width: Get.width,
-                            decoration: ShapeDecoration(
-                              color: Colors.white,
-                              shadows: [
-                                BoxShadow(
-                                  color: Colors.grey
-                                      .withOpacity(0.15), // Shadow color
-                                  spreadRadius: 8, // Spread radius
-                                  blurRadius: 12, // Blur radius
-                                  offset: const Offset(0, 3), // Offset
-                                ),
-                              ],
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            "Systolic",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontFamily:
-                                                  Resources.font.primaryFont,
-                                              fontWeight: FontWeight.w500,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          const Text("(mmHg)")
-                                        ],
-                                      ),
-                                      Text(
-                                        controller.pressureHistory.value
-                                            .first['sistol']
-                                            .toString(),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          color: Color(0xFFE9CC66),
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w700,
-                                          height: 0.03,
-                                          letterSpacing: 0.06,
-                                        ),
-                                      )
-                                    ],
+          RefreshIndicator(
+            color: Resources.color.primaryColor,
+            onRefresh: controller.getUserPressureHistory,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx(() {
+                    if (controller.pressureHistory.value.isEmpty) {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Resources.color.primaryColor),
+                      ));
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(8.0, 18.0, 0, 8.0),
+                            child: Text("Data Terbaru",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: Resources.font.primaryFont,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+                          Container(
+                              width: Get.width,
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shadows: [
+                                  BoxShadow(
+                                    color: Colors.grey
+                                        .withOpacity(0.15), // Shadow color
+                                    spreadRadius: 8, // Spread radius
+                                    blurRadius: 12, // Blur radius
+                                    offset: const Offset(0, 3), // Offset
                                   ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            "diastole",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontFamily:
-                                                  Resources.font.primaryFont,
-                                              fontWeight: FontWeight.w500,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          const Text("(mmHg)")
-                                        ],
-                                      ),
-                                      Text(
-                                        controller.pressureHistory.value
-                                            .first['diastole']
-                                            .toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Resources.color.tertiaryColor,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w700,
-                                          height: 0.03,
-                                          letterSpacing: 0.06,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                            "Pulse",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontFamily:
-                                                  Resources.font.primaryFont,
-                                              fontWeight: FontWeight.w500,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          const Text(
-                                            "(BMP)",
-                                          )
-                                        ],
-                                      ),
-                                      Text(
-                                        controller.pressureHistory.value
-                                            .first['heartbeat']
-                                            .toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Resources.color.primaryColor,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w700,
-                                          height: 0.03,
-                                          letterSpacing: 0.06,
-                                        ),
-                                      )
-                                    ],
-                                  )
                                 ],
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                               ),
-                            )),
-                        const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 8.0),
-                          child: Text("Riwayat Pengecekan",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: Resources.font.primaryFont,
-                                fontWeight: FontWeight.w600,
-                              )),
-                        ),
-                        SingleChildScrollView(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.pressureHistory.value.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Slidable(
-                                  endActionPane: ActionPane(
-                                    motion: const DrawerMotion(),
-                                    children: [
-                                      SlidableAction(
-                                        label: 'Delete History',
-                                        autoClose: true,
-                                        borderRadius: BorderRadius.circular(15),
-                                        onPressed: (context) => controller
-                                            .deleteUserPressureHistory(
-                                                controller.pressureHistory
-                                                    .value[index]['id']),
-                                        backgroundColor:
-                                            const Color(0xFFFE4A49),
-                                        foregroundColor: Colors.white,
-                                        icon: Icons.delete,
-                                      ),
-                                    ],
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () => Get.bottomSheet(
-                                      pressureDetailBottomSheet(
-                                          systolic: controller.pressureHistory
-                                              .value[index]['sistol']
+                              child: Padding(
+                                padding: const EdgeInsets.all(18),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Systolic",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily:
+                                                    Resources.font.primaryFont,
+                                                fontWeight: FontWeight.w500,
+                                                height: 0,
+                                              ),
+                                            ),
+                                            const Text("(mmHg)")
+                                          ],
+                                        ),
+                                        Text(
+                                          controller.pressureHistory.value
+                                              .first['sistol']
                                               .toString(),
-                                          diastolic: controller.pressureHistory
-                                              .value[index]['diastole']
-                                              .toString(),
-                                          pulse: controller.pressureHistory
-                                              .value[index]['heartbeat']
-                                              .toString(),
-                                          image: controller.pressureHistory
-                                              .value[index]['image']),
-                                      isScrollControlled: true,
-                                    ),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(18),
-                                      decoration: ShapeDecoration(
-                                        color: Colors.white,
-                                        shadows: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(
-                                                0.15), // Shadow color
-                                            spreadRadius: 8, // Spread radius
-                                            blurRadius: 12, // Blur radius
-                                            offset:
-                                                const Offset(0, 3), // Offset
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: Color(0xFFE9CC66),
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w700,
+                                            height: 0.03,
+                                            letterSpacing: 0.06,
                                           ),
-                                        ],
-                                        shape: RoundedRectangleBorder(
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "diastole",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily:
+                                                    Resources.font.primaryFont,
+                                                fontWeight: FontWeight.w500,
+                                                height: 0,
+                                              ),
+                                            ),
+                                            const Text("(mmHg)")
+                                          ],
+                                        ),
+                                        Text(
+                                          controller.pressureHistory.value
+                                              .first['diastole']
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color:
+                                                Resources.color.tertiaryColor,
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w700,
+                                            height: 0.03,
+                                            letterSpacing: 0.06,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Pulse",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily:
+                                                    Resources.font.primaryFont,
+                                                fontWeight: FontWeight.w500,
+                                                height: 0,
+                                              ),
+                                            ),
+                                            const Text(
+                                              "(BMP)",
+                                            )
+                                          ],
+                                        ),
+                                        Text(
+                                          controller.pressureHistory.value
+                                              .first['heartbeat']
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Resources.color.primaryColor,
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w700,
+                                            height: 0.03,
+                                            letterSpacing: 0.06,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
+                          const SizedBox(height: 30),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 8.0),
+                            child: Text("Riwayat Pengecekan",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: Resources.font.primaryFont,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  controller.pressureHistory.value.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: Slidable(
+                                    endActionPane: ActionPane(
+                                      motion: const DrawerMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          label: 'Delete History',
+                                          autoClose: true,
                                           borderRadius:
                                               BorderRadius.circular(15),
+                                          onPressed: (context) => controller
+                                              .deleteUserPressureHistory(
+                                                  controller.pressureHistory
+                                                      .value[index]['id']),
+                                          backgroundColor:
+                                              const Color(0xFFFE4A49),
+                                          foregroundColor: Colors.white,
+                                          icon: Icons.delete,
                                         ),
+                                      ],
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () => Get.bottomSheet(
+                                        pressureDetailBottomSheet(
+                                            systolic: controller.pressureHistory
+                                                .value[index]['sistol']
+                                                .toString(),
+                                            diastolic: controller
+                                                .pressureHistory
+                                                .value[index]['diastole']
+                                                .toString(),
+                                            pulse: controller.pressureHistory
+                                                .value[index]['heartbeat']
+                                                .toString(),
+                                            image: controller.pressureHistory
+                                                .value[index]['image']),
+                                        isScrollControlled: true,
                                       ),
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  DateFormat('EEEE', 'id').format(
-                                                      DateTime.parse(controller
-                                                              .pressureHistory
-                                                              .value[index]
-                                                          ['created_at'])),
-                                                  style: TextStyle(
-                                                    fontFamily: Resources
-                                                        .font.primaryFont,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(18),
+                                        decoration: ShapeDecoration(
+                                          color: Colors.white,
+                                          shadows: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(
+                                                  0.15), // Shadow color
+                                              spreadRadius: 8, // Spread radius
+                                              blurRadius: 12, // Blur radius
+                                              offset:
+                                                  const Offset(0, 3), // Offset
+                                            ),
+                                          ],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    DateFormat('EEEE', 'id').format(
+                                                        DateTime.parse(controller
+                                                                .pressureHistory
+                                                                .value[index]
+                                                            ['created_at'])),
+                                                    style: TextStyle(
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                    DateFormat('MMM dd', 'id')
-                                                        .format(DateTime.parse(
-                                                            controller
+                                                  Text(
+                                                      DateFormat('MMM dd', 'id')
+                                                          .format(DateTime
+                                                              .parse(controller
+                                                                      .pressureHistory
+                                                                      .value[index]
+                                                                  [
+                                                                  'created_at'])),
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily: Resources
+                                                            .font.primaryFont,
+                                                      )),
+                                                  Text(
+                                                    DateFormat('yyyy', 'id').format(
+                                                        DateTime.parse(controller
+                                                                .pressureHistory
+                                                                .value[index]
+                                                            ['created_at'])),
+                                                    style: TextStyle(
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    DateFormat('h:mm a', 'id')
+                                                        .format(tz.TZDateTime.from(
+                                                            DateTime.parse(controller
                                                                     .pressureHistory
                                                                     .value[index]
-                                                                [
-                                                                'created_at'])),
+                                                                ['created_at']),
+                                                            getLocation(
+                                                                'Asia/Jakarta'))),
+                                                    style: TextStyle(
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                    ),
+                                                  )
+                                                ]),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0),
+                                              child: SizedBox(
+                                                  width: 3,
+                                                  height: 80,
+                                                  child: Container(
+                                                    height: 20,
+                                                    decoration: BoxDecoration(
+                                                      color: (controller.pressureHistory.value[index]['sistol'] >=
+                                                                  180 ||
+                                                              controller.pressureHistory.value[index][
+                                                                      'diastole'] >=
+                                                                  120)
+                                                          ? Colors.red
+                                                              .shade900 // Hypertensive Crisis
+                                                          : (controller.pressureHistory.value[index]['sistol'] >=
+                                                                      140 ||
+                                                                  controller.pressureHistory.value[index]['diastole'] >=
+                                                                      90)
+                                                              ? Colors
+                                                                  .deepOrange
+                                                                  .shade700 // Stage 2 Hypertension
+                                                              : (controller.pressureHistory.value[index]['sistol'] >=
+                                                                          130 ||
+                                                                      controller.pressureHistory.value[index]['diastole'] >= 80)
+                                                                  ? Colors.orange // Stage 1 Hypertension
+                                                                  : (controller.pressureHistory.value[index]['sistol'] >= 120 || controller.pressureHistory.value[index]['diastole'] >= 80)
+                                                                      ? Colors.yellow // Elevated Blood Pressure
+                                                                      : Colors.green, // Normal Blood Pressure
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                  )),
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    '${controller.pressureHistory.value[index]['sistol']}/${controller.pressureHistory.value[index]['diastole']}',
                                                     style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontFamily: Resources
                                                           .font.primaryFont,
-                                                    )),
-                                                Text(
-                                                  DateFormat('yyyy', 'id').format(
-                                                      DateTime.parse(controller
-                                                              .pressureHistory
-                                                              .value[index]
-                                                          ['created_at'])),
-                                                  style: TextStyle(
-                                                    fontFamily: Resources
-                                                        .font.primaryFont,
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  DateFormat('h:mm a', 'id')
-                                                      .format(tz.TZDateTime.from(
-                                                          DateTime.parse(controller
-                                                                  .pressureHistory
-                                                                  .value[index]
-                                                              ['created_at']),
-                                                          getLocation(
-                                                              'Asia/Jakarta'))),
-                                                  style: TextStyle(
-                                                    fontFamily: Resources
-                                                        .font.primaryFont,
+                                                  Text(
+                                                    ' mmHg',
+                                                    style: TextStyle(
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                    ),
                                                   ),
-                                                )
-                                              ]),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: SizedBox(
-                                                width: 3,
-                                                height: 80,
-                                                child: Container(
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
-                                                    color: (controller.pressureHistory.value[index]['sistol'] >= 180 ||
-                                                            controller.pressureHistory
-                                                                        .value[index][
-                                                                    'diastole'] >=
-                                                                120)
-                                                        ? Colors.red
-                                                            .shade900 // Hypertensive Crisis
-                                                        : (controller.pressureHistory.value[index]['sistol'] >=
-                                                                    140 ||
-                                                                controller.pressureHistory.value[index]['diastole'] >=
-                                                                    90)
-                                                            ? Colors.deepOrange
-                                                                .shade700 // Stage 2 Hypertension
-                                                            : (controller.pressureHistory.value[index]['sistol'] >=
-                                                                        130 ||
-                                                                    controller.pressureHistory.value[index]['diastole'] >= 80)
-                                                                ? Colors.orange // Stage 1 Hypertension
-                                                                : (controller.pressureHistory.value[index]['sistol'] >= 120 || controller.pressureHistory.value[index]['diastole'] >= 80)
-                                                                    ? Colors.yellow // Elevated Blood Pressure
-                                                                    : Colors.green, // Normal Blood Pressure
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                )),
-                                          ),
-                                          Expanded(
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  '${controller.pressureHistory.value[index]['sistol']}/${controller.pressureHistory.value[index]['diastole']}',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: Resources
-                                                        .font.primaryFont,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  ' mmHg',
-                                                  style: TextStyle(
-                                                    fontFamily: Resources
-                                                        .font.primaryFont,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              textAlign: TextAlign.center,
-                                              '${controller.pressureHistory.value[index]['heartbeat']} BPM',
-                                              style: TextStyle(
-                                                fontFamily:
-                                                    Resources.font.primaryFont,
+                                                ],
                                               ),
                                             ),
-                                          )
-                                        ],
+                                            Expanded(
+                                              child: Text(
+                                                textAlign: TextAlign.center,
+                                                '${controller.pressureHistory.value[index]['heartbeat']} BPM',
+                                                style: TextStyle(
+                                                  fontFamily: Resources
+                                                      .font.primaryFont,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        )
-                      ],
-                    );
-                  }
-                }),
-              ],
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      );
+                    }
+                  }),
+                ],
+              ),
             ),
           ),
           SingleChildScrollView(

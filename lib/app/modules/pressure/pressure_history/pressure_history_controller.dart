@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -28,6 +29,7 @@ class PressureHistoryController extends GetxController
   ];
 
   late TabController tabController;
+  final HomeController homeController = Get.find<HomeController>();
   var pressureHistory = Rx<List<dynamic>>([]);
   RxBool isLoading = true.obs;
 
@@ -85,6 +87,7 @@ class PressureHistoryController extends GetxController
         colorText: Resources.color.whiteColor,
       );
       getUserPressureHistory();
+      homeController.getUserDashboard();
     } else {
       Get.snackbar(
         "Hapus Data Tekanan Darah",
