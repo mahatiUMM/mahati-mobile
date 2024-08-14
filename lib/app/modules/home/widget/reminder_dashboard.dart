@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
@@ -105,18 +106,34 @@ Widget reminderDashboard() {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    medicine.medicineName,
-                                                    style: TextStyle(
+                                                  Flexible(
+                                                    child: Text(
+                                                      medicine.medicineName,
+                                                      style: TextStyle(
                                                         fontSize: 16,
                                                         fontFamily: Resources
                                                             .font.primaryFont,
                                                         fontWeight:
-                                                            FontWeight.w600),
+                                                            FontWeight.w600,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
                                                   ),
-                                                  const Spacer(),
-                                                  Text(medicine.medicineTotal
-                                                      .toString())
+                                                  const Spacer(
+                                                    flex: 1,
+                                                  ),
+                                                  Text(
+                                                    medicine.medicineTotal
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontFamily: Resources
+                                                          .font.primaryFont,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
                                                 ],
                                               )
                                             ],
