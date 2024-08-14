@@ -147,7 +147,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                       Column(
                                         children: [
                                           Text(
-                                            "Diastolic",
+                                            "diastole",
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
@@ -352,38 +352,36 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                             padding: const EdgeInsets.only(
                                                 left: 8.0),
                                             child: SizedBox(
-                                              width: 3,
-                                              height: 80,
-                                              child: Container(
+                                                width: 3,
+                                                height: 80,
+                                                child: Container(
                                                   height: 20,
                                                   decoration: BoxDecoration(
-                                                    color: controller.pressureHistory.value[index]['sistol'] >=
-                                                                120 &&
-                                                            controller.pressureHistory.value[index]['sistol'] <=
-                                                                130
-                                                        ? Colors.yellow
-                                                        : controller.pressureHistory.value[index]['sistol'] >=
-                                                                    130 &&
-                                                                controller.pressureHistory.value[index]['sistol'] <=
-                                                                    140
-                                                            ? Colors.orange
-                                                            : controller.pressureHistory.value[index]['sistol'] >=
-                                                                        140 &&
-                                                                    controller.pressureHistory.value[index]['sistol'] <=
-                                                                        180
-                                                                ? Colors
-                                                                    .deepOrange
-                                                                    .shade700
-                                                                : controller.pressureHistory.value[index]
-                                                                            ['sistol'] >=
-                                                                        180
-                                                                    ? Colors.red.shade900
-                                                                    : Colors.green,
+                                                    color: (controller.pressureHistory.value[index]['sistol'] >= 180 ||
+                                                            controller.pressureHistory
+                                                                        .value[index][
+                                                                    'diastole'] >=
+                                                                120)
+                                                        ? Colors.red
+                                                            .shade900 // Hypertensive Crisis
+                                                        : (controller.pressureHistory.value[index]['sistol'] >=
+                                                                    140 ||
+                                                                controller.pressureHistory.value[index]['diastole'] >=
+                                                                    90)
+                                                            ? Colors.deepOrange
+                                                                .shade700 // Stage 2 Hypertension
+                                                            : (controller.pressureHistory.value[index]['sistol'] >=
+                                                                        130 ||
+                                                                    controller.pressureHistory.value[index]['diastole'] >= 80)
+                                                                ? Colors.orange // Stage 1 Hypertension
+                                                                : (controller.pressureHistory.value[index]['sistol'] >= 120 || controller.pressureHistory.value[index]['diastole'] >= 80)
+                                                                    ? Colors.yellow // Elevated Blood Pressure
+                                                                    : Colors.green, // Normal Blood Pressure
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5),
-                                                  )),
-                                            ),
+                                                  ),
+                                                )),
                                           ),
                                           Expanded(
                                             child: Row(
@@ -519,7 +517,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                                         pressure.datetime,
                                     yValueMapper: (PressureData pressure, _) =>
                                         pressure.diastole,
-                                    name: 'Diastole',
+                                    name: 'diastole',
                                   ),
                                   LineSeries<PressureData, DateTime>(
                                     color: Resources.color.primaryColor,
@@ -567,7 +565,7 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
                               SfCartesianChart(
                                 primaryXAxis: NumericAxis(
                                     title: const AxisTitle(
-                                        text: 'Diastolic (mmHg)'),
+                                        text: 'diastole (mmHg)'),
                                     minimum: 40,
                                     maximum: 130,
                                     interval: 10,

@@ -20,53 +20,64 @@ Widget bloodPressureDashboard() {
         );
       } else {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
           child: SizedBox(
-            width: double.infinity, // Ensures the SizedBox takes the full width
+            width: double.infinity,
             child: Row(
               children: [
                 Expanded(
-                  // Ensures the container takes up available width
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(42.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Stack(
-                        children: [
-                          Lottie.asset(
-                            AnimationUrls.heartAnimation,
-                            height: 220,
-                            width: 220,
-                            repeat: true,
-                          ),
-                          Positioned(
-                            bottom:
-                                20, // Adjust this value as needed for your padding
-                            left: 0,
-                            right: 0,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal:
-                                      20), // Horizontal padding if needed
-                              child: Text(
-                                "Tekanan Darah Normal",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: Resources.font.primaryFont,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                    // Ensures the container takes up available width
+                    child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(42.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: homeController.recentIsNormal.value
+                            ? Colors.green.withOpacity(0.0)
+                            : Colors.red.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 8,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Stack(
+                      children: [
+                        Lottie.asset(
+                          AnimationUrls.heartAnimation,
+                          height: 220,
+                          width: 220,
+                          repeat: true,
+                        ),
+                        Positioned(
+                          bottom:
+                              20, // Adjust this value as needed for your padding
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20), // Horizontal padding if needed
+                            child: Text(
+                              homeController.recentIsNormal.value
+                                  ? "Tekanan Darah Normal"
+                                  : "Tekanan Darah Tidak Normal", // Conditional text
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: Resources.font.primaryFont,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black, // Conditional text color
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
+                )),
                 const SizedBox(
                   width: 10,
                 ),
@@ -88,7 +99,8 @@ Widget bloodPressureDashboard() {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(18),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 17),
                               child: Row(
                                 children: [
                                   Text(
@@ -119,7 +131,8 @@ Widget bloodPressureDashboard() {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(18),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 17),
                               child: Row(
                                 children: [
                                   Text(
@@ -150,7 +163,8 @@ Widget bloodPressureDashboard() {
                               borderRadius: BorderRadius.circular(100.0),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(18),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 18, vertical: 17),
                               child: Row(
                                 children: [
                                   Text(

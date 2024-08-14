@@ -21,6 +21,7 @@ class HomeController extends GetxController {
 
   RxList<LowerMedicine> lowerMedicine = <LowerMedicine>[].obs;
   RxBool isDashboardLoading = false.obs;
+  RxBool recentIsNormal = false.obs;
   RxString remainingMedicine = ''.obs;
   RxString recentSystolic = ''.obs;
   RxString recentDiastole = ''.obs;
@@ -67,6 +68,9 @@ class HomeController extends GetxController {
           responseData.data.recentBloodPressure.diastole.toString();
       recentPulse.value =
           responseData.data.recentBloodPressure.heartbeat.toString();
+      recentIsNormal.value =
+          responseData.data.recentBloodPressure.sistol < 120 &&
+              responseData.data.recentBloodPressure.diastole < 80;
     }
     isDashboardLoading.value = false;
   }
