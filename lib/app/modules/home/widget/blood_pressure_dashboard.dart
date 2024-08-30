@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
-import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
+import 'package:mahati_mobile/app/constants/animation_urls.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 

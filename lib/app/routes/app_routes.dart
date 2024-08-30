@@ -9,6 +9,8 @@ abstract class Routes {
   static const signup = _Paths.signup;
   static const layout = _Paths.layout;
   static const home = _Paths.home;
+  static const watch = _Paths.watch;
+  static const watchDashboard = _Paths.watchDashboard;
   static const inbox = _Paths.inbox;
   static const profile = _Paths.profile;
   static const profileEdit = _Paths.profileEdit;
@@ -36,6 +38,8 @@ abstract class _Paths {
   static const signup = '/signup';
   static const layout = '/layout';
   static const home = '/home';
+  static const watch = '/watch';
+  static const watchDashboard = '/watch/dashboard';
   static const inbox = '/inbox';
   static const profile = '/profile';
   static const profileEdit = '/profile/edit';

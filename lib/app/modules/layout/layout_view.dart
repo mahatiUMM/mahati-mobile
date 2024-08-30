@@ -5,6 +5,7 @@ import 'package:mahati_mobile/app/modules/inbox/inbox_view.dart';
 import 'package:mahati_mobile/app/modules/layout/layout_controller.dart';
 import 'package:mahati_mobile/app/modules/layout/widget/bottom_navbar.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_view.dart';
+import 'package:mahati_mobile/app/modules/watch/watch_view.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class LayoutView extends GetView<LayoutController> {
@@ -20,6 +21,7 @@ class LayoutView extends GetView<LayoutController> {
               index: controller.tabIndex,
               children: const [
                 HomeView(),
+                WatchView(),
                 InboxView(),
                 ProfileView(),
               ],
@@ -51,6 +53,10 @@ class LayoutView extends GetView<LayoutController> {
                     bottomNavbar(
                       icon: Icons.home,
                       label: 'Home',
+                    ),
+                    bottomNavbar(
+                      icon: Icons.watch_rounded,
+                      label: 'Watch',
                     ),
                     bottomNavbar(
                       icon: Icons.inbox,

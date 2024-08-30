@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/constants/text_style.dart';
 
 class TextStrings {
   // onboarding title

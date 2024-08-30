@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
-import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/constants/text_style.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 

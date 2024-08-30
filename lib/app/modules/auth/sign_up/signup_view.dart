@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/widget/body_signup.dart';
-import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
-import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/constants/text_strings.dart';
+import 'package:mahati_mobile/app/constants/text_style.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 

@@ -5,8 +5,8 @@ import 'package:mahati_mobile/app/modules/onboard/widget/dot_navigation.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/next_button.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/lottie_onboard.dart';
 import 'package:mahati_mobile/app/modules/onboard/widget/skip_button.dart';
-import 'package:mahati_mobile/app/utils/constants/animation_urls.dart';
-import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
+import 'package:mahati_mobile/app/constants/animation_urls.dart';
+import 'package:mahati_mobile/app/constants/text_strings.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 

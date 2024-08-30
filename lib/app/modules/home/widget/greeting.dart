@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/layout/layout_controller.dart';
-import 'package:mahati_mobile/app/utils/constants/text_strings.dart';
-import 'package:mahati_mobile/app/utils/constants/text_style.dart';
+import 'package:mahati_mobile/app/constants/text_strings.dart';
+import 'package:mahati_mobile/app/constants/text_style.dart';
 
 class GreetingWidget extends StatelessWidget {
   final LayoutController controller;

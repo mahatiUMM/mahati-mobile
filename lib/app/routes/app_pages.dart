@@ -41,6 +41,8 @@ import 'package:mahati_mobile/app/modules/setting/setting_binding.dart';
 import 'package:mahati_mobile/app/modules/setting/setting_view.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_binding.dart';
 import 'package:mahati_mobile/app/modules/splash/splash_view.dart';
+import 'package:mahati_mobile/app/modules/watch/watch_binding.dart';
+import 'package:mahati_mobile/app/modules/watch/watch_view.dart';
 
 part 'app_routes.dart';
 
@@ -89,6 +91,13 @@ class AppPages {
       name: _Paths.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.watch,
+      page: () => const WatchView(),
+      binding: WatchBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),

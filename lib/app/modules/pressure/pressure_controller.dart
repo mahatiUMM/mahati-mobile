@@ -10,7 +10,7 @@ import 'package:mahati_mobile/app/core/data/blood_pressure_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/pressure/widget/pressure_bottom_sheet.dart';
-import 'package:mahati_mobile/app/utils/constants/prompt_gemini.dart';
+import 'package:mahati_mobile/app/constants/prompt_gemini.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PressureController extends GetxController {
