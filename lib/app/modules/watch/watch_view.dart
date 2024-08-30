@@ -66,12 +66,10 @@ class WatchView extends GetView<WatchController> {
                     ),
                     SizedBox(
                       height: Get.height - 170,
-                      child: Expanded(
-                        child: ListView.builder(
-                          itemCount: controller.devices.length,
-                          itemBuilder: (context, index) => getListItem(
-                              controller.devices[index], context, controller),
-                        ),
+                      child: ListView.builder(
+                        itemCount: controller.devices.length,
+                        itemBuilder: (context, index) => getListItem(
+                            controller.devices[index], context, controller),
                       ),
                     ),
                   ],
