@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_action_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class ReminderActionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -11,15 +11,12 @@ class ReminderActionController extends GetxController {
   final RxBool isLoading = true.obs;
   final localData = ReminderAction.fromRawJson(Get.arguments['data']);
 
+  final token = getToken();
+
   @override
   void onInit() {
     getLatestReminder();
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   Future<void> getLatestReminder() async {

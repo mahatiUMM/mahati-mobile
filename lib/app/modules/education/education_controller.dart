@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/education_article_model.dart';
 import 'package:mahati_mobile/app/core/data/education_brochure_model.dart';
 import 'package:mahati_mobile/app/core/data/education_video_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class EducationController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -20,6 +18,8 @@ class EducationController extends GetxController {
 
   var listIndex = 0;
 
+  final token = getToken();
+
   List<String> educationTab = [
     "Video",
     "Artikel",
@@ -30,11 +30,6 @@ class EducationController extends GetxController {
   void onInit() {
     getEducation();
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   void handleTabSelection(int index) {

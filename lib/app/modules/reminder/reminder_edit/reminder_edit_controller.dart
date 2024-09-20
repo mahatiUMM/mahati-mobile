@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_id_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class ReminderEditController extends GetxController {
   final RestClient restClient = Get.find();
@@ -22,21 +22,13 @@ class ReminderEditController extends GetxController {
 
   String? selectedCapsuleSize;
 
+  final token = getToken();
+
   @override
   void onInit() {
     reminderId.value = Get.arguments;
     getReminder();
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
-
-  Future<int?> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
   }
 
   Future<void> getReminder() async {
@@ -66,7 +58,7 @@ class ReminderEditController extends GetxController {
   Future<void> editReminder() async {
     final userId = await getUserId();
     final data = {
-      "user_id": userId?.toInt(),
+      "user_id": userId.toInt(),
       "medicine_name": (medicineNameController.value.text.isEmpty
           ? reminderModel.value?.data.medicineName
           : medicineNameController.value.text),

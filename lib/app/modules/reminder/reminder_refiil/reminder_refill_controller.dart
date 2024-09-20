@@ -5,7 +5,7 @@ import 'package:mahati_mobile/app/core/data/reminder_action_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class ReminderRefillController extends GetxController {
   final TextEditingController namaObatController = TextEditingController();
@@ -22,6 +22,8 @@ class ReminderRefillController extends GetxController {
   TimeOfDay selectedTime = TimeOfDay.now();
 
   String? selectedCapsuleSize;
+
+  final token = getToken();
 
   @override
   void onInit() {
@@ -54,11 +56,6 @@ class ReminderRefillController extends GetxController {
           now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
       timeObatController.text = DateFormat('HH:mm').format(selectedDateTime);
     }
-  }
-
-  Future<int?> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
   }
 
   Future<void> postReminder(
