@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class ProfileEditController extends GetxController {
   Rx<File?> image = Rx<File?>(null);
@@ -17,15 +17,12 @@ class ProfileEditController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController numberController = TextEditingController();
 
+  final token = getToken();
+
   @override
   void onInit() {
     getProfileData();
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   Future<void> getProfileData() async {

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 // ignore: depend_on_referenced_packages
@@ -33,6 +33,8 @@ class PressureHistoryController extends GetxController
   var pressureHistory = Rx<List<dynamic>>([]);
   RxBool isLoading = true.obs;
 
+  final token = getToken();
+
   @override
   void onInit() {
     super.onInit();
@@ -44,11 +46,6 @@ class PressureHistoryController extends GetxController
   void onClose() {
     tabController.dispose();
     super.onClose();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   Future<void> getUserPressureHistory() async {

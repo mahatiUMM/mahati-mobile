@@ -7,6 +7,7 @@ import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
@@ -22,6 +23,8 @@ class ProfileController extends GetxController {
   RxString photo = ''.obs;
 
   late UserModel profileModelObj;
+
+  final token = getToken();
 
   @override
   void onInit() {
@@ -98,10 +101,5 @@ class ProfileController extends GetxController {
   void logout() {
     _prefs.remove('user_token');
     Get.offAllNamed(Routes.signin);
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 }

@@ -11,7 +11,7 @@ import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/home/home_controller.dart';
 import 'package:mahati_mobile/app/modules/pressure/widget/pressure_bottom_sheet.dart';
 import 'package:mahati_mobile/app/constants/prompt_gemini.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class PressureController extends GetxController {
   ImagePicker imagePicker = ImagePicker();
@@ -29,10 +29,7 @@ class PressureController extends GetxController {
   RxBool aiLoading = false.obs;
   RxBool postLoading = false.obs;
 
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
+  final token = getToken();
 
   postBloodPressure(
       {required String sistol,

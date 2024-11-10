@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/reminder_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 import 'package:timezone/standalone.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -19,16 +19,13 @@ class ReminderController extends GetxController
   RxBool isLoading = true.obs;
   RxString selectedDate = "".obs;
 
+  final token = getToken();
+
   @override
   void onInit() {
     selectedDate.value = DateTime.now().toString();
     getReminder();
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   bool checkStatus(List<dynamic>? schedules, DateTime time) {

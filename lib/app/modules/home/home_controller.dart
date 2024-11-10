@@ -7,7 +7,7 @@ import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/modules/education/education_controller.dart';
 import 'package:mahati_mobile/app/modules/layout/layout_controller.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class HomeController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -27,6 +27,8 @@ class HomeController extends GetxController {
   RxString recentDiastole = ''.obs;
   RxString recentPulse = ''.obs;
 
+  final token = getToken();
+
   @override
   void onInit() {
     getUserDashboard();
@@ -43,11 +45,6 @@ class HomeController extends GetxController {
   void changeTabIndex(int index) {
     tabIndex = index;
     update();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   Future<void> getUserDashboard() async {

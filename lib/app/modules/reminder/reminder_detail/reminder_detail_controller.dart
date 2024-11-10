@@ -6,7 +6,7 @@ import 'package:mahati_mobile/app/core/data/reminder_id_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class ReminderDetailController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -17,6 +17,8 @@ class ReminderDetailController extends GetxController {
   final Rx<ReminderIdModel?> reminderModel = Rx<ReminderIdModel?>(null);
   final RxBool incrementEatLoading = false.obs;
 
+  final token = getToken();
+
   @override
   void onInit() {
     getReminder();
@@ -24,16 +26,6 @@ class ReminderDetailController extends GetxController {
     reminderStatus.value = Get.arguments['status'];
     selectedDate.value = Get.arguments['selectedDate'];
     super.onInit();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
-
-  Future<int?> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
   }
 
   String capSizeToString(int capSize) {

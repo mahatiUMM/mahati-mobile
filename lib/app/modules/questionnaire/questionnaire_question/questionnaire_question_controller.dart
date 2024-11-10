@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -21,23 +21,15 @@ class QuestionnaireQuestionController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isLastPage = false.obs;
 
+  final token = getToken();
+
   @override
   onInit() async {
     super.onInit();
     await getQuestionnaires();
   }
 
-  Future<int> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    return int.parse(prefs.getString('userId')!);
-  }
-
   void updatePageIndicator(int index) => currentPageIndex.value = index;
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
-  }
 
   getQuestionnaires() async {
     final token = await getToken();

@@ -30,36 +30,28 @@ class SplashView extends GetView<SplashController> {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "mahati.\n",
-                      style: TextStyle(
-                        color: Resources.color.baseColor,
-                        fontFamily: Resources.font.primaryFont,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 32,
-                      ),
-                    ),
-                    const WidgetSpan(
-                      child: SizedBox(height: 30.0),
-                    ),
-                    TextSpan(
-                      text: "Mobile Aplikasi Sahabat\nHipertensi",
-                      style: TextStyle(
-                        color: Resources.color.baseColor,
-                        fontFamily: Resources.font.primaryFont,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
+            const SizedBox(height: 20),
+            Text(
+              "mahati.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Resources.color.baseColor,
+                fontFamily: Resources.font.primaryFont,
+                fontWeight: FontWeight.w700,
+                fontSize: 32,
               ),
-            )
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "Mobile Aplikasi Sahabat\nHipertensi",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Resources.color.baseColor,
+                fontFamily: Resources.font.primaryFont,
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
+            ),
           ],
         ),
       ),

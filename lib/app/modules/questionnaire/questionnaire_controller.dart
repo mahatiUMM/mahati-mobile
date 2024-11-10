@@ -4,7 +4,7 @@ import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
@@ -13,16 +13,13 @@ class QuestionnaireController extends GetxController {
   RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);
   RxBool isLoading = false.obs;
 
+  final token = getToken();
+
   @override
   void onInit() async {
     super.onInit();
     await getUserProfile();
     await getQuestionnaires();
-  }
-
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('authToken');
   }
 
   Future<void> getUserProfile() async {
