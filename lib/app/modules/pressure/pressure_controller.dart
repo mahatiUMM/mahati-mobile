@@ -109,7 +109,7 @@ class PressureController extends GetxController {
   Future<void> takeBloodPressureImage(ImageSource source) async {
     final model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
-      apiKey: 'AIzaSyBgcQbcxtkvJkmqUm-bMXQLNiu9NaH2TUs',
+      apiKey: 'AIzaSyAya0s1Jc0RraJTQ5Ooh3xidk99jcbiZb4',
     );
 
     final pickedImage =
