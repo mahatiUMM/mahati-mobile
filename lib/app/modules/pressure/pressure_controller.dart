@@ -131,7 +131,8 @@ class PressureController extends GetxController {
         var response = await model.generateContent(content);
         result = response.text ?? '';
         if (result.isNotEmpty) {
-          Map<String, dynamic> resultData = jsonDecode(result);
+          Map<String, dynamic> resultData = jsonDecode(
+              result.replaceAll('```json', '').replaceAll('```', '').trim());
 
           if (resultData['systolic'].toString() == 'null' ||
               resultData['diastolic'].toString() == 'null' ||
