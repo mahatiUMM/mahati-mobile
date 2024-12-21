@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -18,6 +19,7 @@ class HomeController extends GetxController {
   final PageController pageController = PageController();
   final RxInt currentPageIndex = 0.obs;
   var tabIndex = 0;
+  late Timer _timer;
 
   RxList<LowerMedicine> lowerMedicine = <LowerMedicine>[].obs;
   RxBool isDashboardLoading = false.obs;
@@ -32,7 +34,25 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getUserDashboard();
+    _timer = Timer.periodic(const Duration(seconds: 6), (timer) {
+      if (currentPageIndex.value < 1) {
+        currentPageIndex.value++;
+      } else {
+        currentPageIndex.value--;
+      }
+      pageController.animateToPage(
+        currentPageIndex.value,
+        duration: const Duration(milliseconds: 500), // Durasi animasi
+        curve: Curves.easeInOut, // Kurva animasi
+      );
+    });
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    _timer.cancel();
+    super.onClose();
   }
 
   void updatePageIndicator(int index) => currentPageIndex.value = index;
@@ -66,8 +86,8 @@ class HomeController extends GetxController {
       recentPulse.value =
           responseData.data.recentBloodPressure.heartbeat.toString();
       recentIsNormal.value =
-          responseData.data.recentBloodPressure.sistol < 120 &&
-              responseData.data.recentBloodPressure.diastole < 80;
+          responseData.data.recentBloodPressure.sistol <= 120 &&
+              responseData.data.recentBloodPressure.diastole <= 80;
     }
     isDashboardLoading.value = false;
   }
