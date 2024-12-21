@@ -41,19 +41,6 @@ class ReminderEditController extends GetxController {
     }
   }
 
-  // convert capSize into string
-  String convertCapSize(int capSize) {
-    switch (capSize) {
-      case 1:
-        return "Obat Terbatas";
-      case 2:
-        return "Obat Bebas Keras";
-      case 3:
-        return "Obat Keras";
-      default:
-        return "Obat Terbatas";
-    }
-  }
 
   Future<void> editReminder() async {
     final userId = await getUserId();

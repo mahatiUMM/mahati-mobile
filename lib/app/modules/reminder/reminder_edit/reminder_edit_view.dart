@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_edit/reminder_edit_controller.dart';
+import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class ReminderEditView extends GetView<ReminderEditController> {
@@ -287,7 +288,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Resources.color.textFieldColor,
-                          hintText: controller.convertCapSize(
+                          hintText: CapUtils().capSizeToString(
                               controller.reminderModel.value?.data.capSize ??
                                   0),
                           hintStyle:

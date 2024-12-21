@@ -28,19 +28,6 @@ class ReminderDetailController extends GetxController {
     super.onInit();
   }
 
-  String capSizeToString(int capSize) {
-    switch (capSize) {
-      case 1:
-        return "Obat Terbatas";
-      case 2:
-        return "Obat Bebas Keras";
-      case 3:
-        return "Obat Keras";
-      default:
-        return 'Unknown';
-    }
-  }
-
   Future<void> getReminder() async {
     final token = await getToken();
     final result = await restClient.requestWithToken(

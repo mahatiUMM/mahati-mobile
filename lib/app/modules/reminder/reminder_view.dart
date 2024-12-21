@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/widget/reminder_card.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:timezone/standalone.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
@@ -223,7 +224,7 @@ class ReminderView extends GetView<ReminderController> {
                                                       controller.checkStatus(
                                                           reminder.schedules,
                                                           selectedDate),
-                                                  strong: controller
+                                                  strong: CapUtils()
                                                       .capSizeToString(
                                                           reminder.capSize),
                                                   time: reminder.medicineTime,

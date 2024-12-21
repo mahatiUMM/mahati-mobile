@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mahati_mobile/app/core/data/reminder_action_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:mahati_mobile/app/utils/token_utils.dart';
@@ -95,15 +96,7 @@ class ReminderRefillController extends GetxController {
     final medicineTakenInt = int.tryParse(medicineTaken) ?? 0;
     final medicineTotal = amountInt - medicineTakenInt;
 
-    if (capSize == "Obat Terbatas") {
-      capSize = "1";
-    } else if (capSize == "Obat Bebas Keras") {
-      capSize = "2";
-    } else if (capSize == "Obat Keras") {
-      capSize = "3";
-    } else {
-      capSize = "1";
-    }
+    CapUtils().capSizeToString(capSize as int);
 
     final DateTime now = DateTime.now();
     DateTime scheduledNotificationDateTime =

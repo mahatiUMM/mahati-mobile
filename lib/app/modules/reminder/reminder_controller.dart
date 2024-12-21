@@ -45,19 +45,6 @@ class ReminderController extends GetxController
     return false;
   }
 
-  String capSizeToString(int capSize) {
-    switch (capSize) {
-      case 1:
-        return "Terbatas";
-      case 2:
-        return "Bebas Keras";
-      case 3:
-        return "Keras";
-      default:
-        return 'Unknown';
-    }
-  }
-
   Future<void> getReminder() async {
     isLoading.value = true;
     final token = await getToken();

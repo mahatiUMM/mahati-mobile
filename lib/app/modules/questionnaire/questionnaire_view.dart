@@ -47,7 +47,7 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                   "Hai, ${controller.username.value}",
                   style: TextStyle(
                       fontFamily: Resources.font.primaryFont,
-                      fontSize: 26,
+                      fontSize: 18,
                       fontWeight: FontWeight.w700),
                 ),
               ),
@@ -92,7 +92,9 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                           return QuestionnaireCard(
                             title: questionnaire.title!,
                             description: questionnaire.description!,
-                            imageUrl: questionnaire.image ?? "",
+                            imageUrl: questionnaire.image?.isNotEmpty == true
+                                ? questionnaire.image!
+                                : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                             onPressed: () {
                               Get.toNamed('/questionnaire_question',
                                   arguments: {

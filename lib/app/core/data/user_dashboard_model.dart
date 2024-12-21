@@ -40,12 +40,28 @@ class Data {
 
   String toRawJson() => json.encode(toJson());
 
+  ///
+  /// recentBloodPressure has a default value of an empty instance of RecentBloodPressure
+  ///
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        remainingMedicine: json["remaining_reminder"],
-        lowerMedicine: List<LowerMedicine>.from(
-            json["lower_medicine"].map((x) => LowerMedicine.fromJson(x))),
-        recentBloodPressure:
-            RecentBloodPressure.fromJson(json["recent_blood_pressure"]),
+        remainingMedicine:
+            json["remaining_reminder"] ?? 0, // Default to 0 if null
+        lowerMedicine: json["lower_medicine"] == null
+            ? [] // Default to an empty list if null
+            : List<LowerMedicine>.from(
+                json["lower_medicine"].map((x) => LowerMedicine.fromJson(x))),
+        recentBloodPressure: json["recent_blood_pressure"] == null
+            ? RecentBloodPressure(
+                id: 0,
+                userId: 0,
+                image: '',
+                sistol: 0,
+                diastole: 0,
+                heartbeat: 0,
+                createdAt: DateTime.now(),
+                updatedAt: null,
+              ) // Provide a default instance
+            : RecentBloodPressure.fromJson(json["recent_blood_pressure"]),
       );
 
   Map<String, dynamic> toJson() => {

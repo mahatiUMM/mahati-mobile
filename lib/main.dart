@@ -49,7 +49,7 @@ void main() async {
       theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFF9F9F9),
           primaryColor: Resources.color.primaryColor),
-      title: "mahati",
+      title: "mahati.",
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
     ),

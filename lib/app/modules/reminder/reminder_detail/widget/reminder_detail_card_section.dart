@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/reminder_detail_controller.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_detail/widget/reminder_detail_card_info.dart';
+import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:intl/intl.dart';
 
@@ -32,7 +33,7 @@ Widget buildCardSection() {
             title: "Kekuatan",
             value: Obx(
               () => Text(
-                controller.capSizeToString(
+                CapUtils().capSizeToString(
                     controller.reminderModel.value?.data.capSize ?? 0),
                 style: TextStyle(
                   color: Resources.color.tertiaryColor1,

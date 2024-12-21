@@ -36,12 +36,15 @@ class PressureHistoryView extends GetView<PressureHistoryController> {
               Get.back();
             },
           ),
-          title: Text(
-            'Lacak Tekanan Darah',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              fontFamily: Resources.font.primaryFont,
+          title: GestureDetector(
+            onTap: () => Get.back(),
+            child: Text(
+              'Lacak Tekanan Darah',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                fontFamily: Resources.font.primaryFont,
+              ),
             ),
           ),
           bottom: TabBar(
