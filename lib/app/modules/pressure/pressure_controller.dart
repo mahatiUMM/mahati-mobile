@@ -89,7 +89,7 @@ class PressureController extends GetxController {
     final int systolic = int.tryParse(sistolController.value.text) ?? 0;
     final int diastolic = int.tryParse(diastoleController.value.text) ?? 0;
 
-    bool isNormal = systolic < 120 && diastolic < 80;
+    bool isNormal = systolic <= 120 && diastolic <= 80;
 
     Get.bottomSheet(pressureBottomSheet(
       diastolic: diastoleController.value.text,
