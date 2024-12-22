@@ -263,11 +263,8 @@ class ReminderEditView extends GetView<ReminderEditController> {
                         dropdownColor: Resources.color.whiteColor,
                         elevation: 1,
                         value: controller.selectedCapsuleSize,
-                        items: [
-                          'Obat Terbatas',
-                          'Obat Bebas Keras',
-                          'Obat Keras'
-                        ].map<DropdownMenuItem<String>>((String value) {
+                        items: ['Obat Terbatas', 'Obat Bebas', 'Obat Keras']
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -278,7 +275,7 @@ class ReminderEditView extends GetView<ReminderEditController> {
                           int id = 0;
                           if (newValue == 'Obat Terbatas') {
                             id = 1;
-                          } else if (newValue == 'Obat Bebas Keras') {
+                          } else if (newValue == 'Obat Bebas') {
                             id = 2;
                           } else if (newValue == 'Obat Keras') {
                             id = 3;

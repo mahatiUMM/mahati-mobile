@@ -11,4 +11,17 @@ class CapUtils {
         return 'Unknown';
     }
   }
+
+  int capSizeFromString(String capSize) {
+    switch (capSize) {
+      case "Obat Terbatas":
+        return 1;
+      case "Obat Bebas":
+        return 2;
+      case "Obat Keras":
+        return 3;
+      default:
+        throw ArgumentError("Unknown capsule size: $capSize");
+    }
+  }
 }

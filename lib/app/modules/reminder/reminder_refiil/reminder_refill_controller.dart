@@ -92,11 +92,82 @@ class ReminderRefillController extends GetxController {
       return;
     }
 
-    final amountInt = int.tryParse(amount) ?? 0;
-    final medicineTakenInt = int.tryParse(medicineTaken) ?? 0;
-    final medicineTotal = amountInt - medicineTakenInt;
+    var amountInt = int.tryParse(amount) ?? 0;
+    var medicineTakenInt = int.tryParse(medicineTaken) ?? 0;
 
-    CapUtils().capSizeToString(capSize as int);
+    print("medicineTakenInt: $medicineTakenInt");
+    print("amountInt: $amountInt");
+
+    // check if amount and medicine taken is not a number
+    if (amount.isNumericOnly == false || medicineTaken.isNumericOnly == false) {
+      Get.snackbar(
+        'Gagal menambahkan pengingat obat',
+        'Jumlah obat harus berupa angka, bukan huruf, angka negatif atau simbol',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
+    }
+
+    // check if the medicine taken is more than the amount
+    if (medicineTakenInt > amountInt) {
+      Get.snackbar(
+        'Gagal menambahkan pengingat obat',
+        'Jumlah obat yang diminum tidak boleh lebih dari jumlah obat',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
+    }
+
+    // check if the medicine taken is 0
+    if (amountInt == 0) {
+      Get.snackbar(
+        'Gagal menambahkan pengingat obat',
+        'Total obat tidak boleh 0',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Resources.color.textFieldColor,
+        colorText: Resources.color.baseColor,
+        leftBarIndicatorColor: Resources.color.secondaryColor1,
+        overlayColor: Resources.color.primaryColor,
+        progressIndicatorValueColor: AlwaysStoppedAnimation<Color>(
+          Resources.color.secondaryColor,
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        icon: Icon(Icons.error, color: Resources.color.baseColor, size: 20.0),
+      );
+      return;
+    }
+
+    /// if the amount is 0, set it to 1 and increment the medicine taken
+    /// due to backend logic, it will be set to 1 if the amount is 0
+    /// might be refactor in the future xoxo
+    if (medicineTakenInt == 0) {
+      medicineTakenInt = 1;
+      amountInt++;
+    }
+
+    print("After check");
+    print("medicineTakenInt: $medicineTakenInt");
+    print("amountInt: $amountInt");
+
+    final medicineTotal = amountInt - medicineTakenInt;
 
     final DateTime now = DateTime.now();
     DateTime scheduledNotificationDateTime =
@@ -159,6 +230,7 @@ class ReminderRefillController extends GetxController {
           icon: Icon(Icons.check, color: Resources.color.baseColor, size: 20.0),
         );
       } else {
+        print(result.body);
         Get.snackbar(
           'Gagal menambahkan pengingat obat',
           'Terjadi kesalahan saat mengirim data',

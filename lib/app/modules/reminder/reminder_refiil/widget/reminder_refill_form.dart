@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/reminder/reminder_refiil/reminder_refill_controller.dart';
+import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:sizer/sizer.dart';
 
@@ -41,11 +42,13 @@ Widget reminderRefillForm(BuildContext context) {
         const SizedBox(height: 15),
         buildDropdown(
           label: "Ukuran Kapsul",
-          items: ['Obat Terbatas', 'Obat Bebas Keras', 'Obat Keras'],
+          items: ['Obat Terbatas', 'Obat Bebas', 'Obat Keras'],
           selectedValue: controller.selectedCapsuleSize,
           onChanged: (newValue) {
             controller.selectedCapsuleSize = newValue!;
-            controller.capSizeObatController.text = newValue;
+            // controller.capSizeObatController.text = newValue;
+            controller.capSizeObatController.text =
+                CapUtils().capSizeFromString(newValue).toString();
           },
         ),
         const SizedBox(height: 15),
