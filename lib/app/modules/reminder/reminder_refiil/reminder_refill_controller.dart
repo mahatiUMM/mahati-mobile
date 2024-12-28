@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mahati_mobile/app/core/data/reminder_action_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
-import 'package:mahati_mobile/app/utils/cap_utils.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:mahati_mobile/app/utils/token_utils.dart';
@@ -155,18 +154,7 @@ class ReminderRefillController extends GetxController {
       return;
     }
 
-    /// if the amount is 0, set it to 1 and increment the medicine taken
-    /// due to backend logic, it will be set to 1 if the amount is 0
-    /// might be refactor in the future xoxo
-    if (medicineTakenInt == 0) {
-      medicineTakenInt = 1;
-      amountInt++;
-    }
-
-    print("After check");
-    print("medicineTakenInt: $medicineTakenInt");
-    print("amountInt: $amountInt");
-
+    // total dari obat yang sudah diminum dan total obat yang diberi
     final medicineTotal = amountInt - medicineTakenInt;
 
     final DateTime now = DateTime.now();

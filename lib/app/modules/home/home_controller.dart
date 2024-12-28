@@ -34,18 +34,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getUserDashboard();
-    // _timer = Timer.periodic(const Duration(seconds: 6), (timer) {
-    //   if (currentPageIndex.value < 1) {
-    //     currentPageIndex.value++;
-    //   } else {
-    //     currentPageIndex.value--;
-    //   }
-    //   pageController.animateToPage(
-    //     currentPageIndex.value,
-    //     duration: const Duration(milliseconds: 500), // Durasi animasi
-    //     curve: Curves.easeInOut, // Kurva animasi
-    //   );
-    // });
     super.onInit();
   }
 
