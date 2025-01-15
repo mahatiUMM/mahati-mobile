@@ -59,7 +59,7 @@ class LayoutView extends GetView<LayoutController> {
                       label: 'Watch',
                     ),
                     bottomNavbar(
-                      icon: Icons.inbox,
+                      icon: Icons.question_answer_rounded,
                       label: 'Inbox',
                     ),
                     bottomNavbar(

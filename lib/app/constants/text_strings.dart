@@ -57,4 +57,17 @@ class TextStrings {
 
   // Home greeting
   static const String homeGreeting = "Selamat Datang!";
+
+
+  // Frequently asked questions
+  static const String appName = 'MAHATI';
+  static const String faqHeader0 = "Hubungi kami";
+  static const String faqHeader1 = "Apa itu MAHATI?";
+  static const String faqContent1 = "adalah aplikasi mobile kesehatan yang dirancang untuk membantu pasien hipertensi memantau kesehatan jantung, menjadi asisten pengingat obat, serta memberikan edukasi terkait kesehatan.";
+  static const String faqHeader2 = "Apa saja fitur utama yang ditawarkan oleh MAHATI?";
+  static const String faqContent2 = "1) Pemantauan Kesehatan Jantung: Membantu pengguna mencatat dan menganalisis tekanan darah serta detak jantung. \n2) Pengingat Obat: Mengatur jadwal pengingat agar tidak lupa mengonsumsi obat. \n3) Edukasi Kesehatan: Menyediakan artikel, tips, dan panduan terkait hipertensi dan kesehatan jantung. \n 4) Riwayat Kesehatan: Menyimpan data kesehatan pengguna untuk memudahkan konsultasi dengan dokter.";
+  static const String faqHeader3 = "Apakah MAHATI dapat memberikan diagnosa kesehatan?";
+  static const String faqContent3 = "MAHATI tidak menggantikan peran dokter. Aplikasi ini membantu mencatat data kesehatan Anda, yang dapat digunakan sebagai referensi saat berkonsultasi dengan tenaga medis.";
+  static const String faqHeader4 = "Apakah data kesehatan saya aman di MAHATI?";
+  static const String faqContent4 = "Kami menjamin keamanan data Anda dengan menerapkan protokol keamanan yang ketat, seperti enkripsi data. Informasi Anda tidak akan dibagikan kepada pihak ketiga tanpa persetujuan Anda.";  
 }
