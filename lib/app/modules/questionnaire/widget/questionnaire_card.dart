@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireCard extends StatelessWidget {
@@ -41,20 +44,24 @@ class QuestionnaireCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontFamily: Resources.font.primaryFont,
-                          fontWeight: FontWeight.w600),
+                    SizedBox(width: Get.width * 0.6,
+                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 2,
+                        title,
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontFamily: Resources.font.primaryFont,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
-                    Text(
-                      description,
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: Resources.font.primaryFont,
-                          color: Colors.grey[700]),
+                    SizedBox(width: Get.width * 0.6,
+                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 6,
+                        description,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: Resources.font.primaryFont,
+                            color: Colors.grey[700]),
+                      ),
                     ),
                   ],
                 ),
