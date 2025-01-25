@@ -3,6 +3,8 @@ import 'package:mahati_mobile/app/modules/auth/sign_in/signin_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_view.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_view.dart';
+import 'package:mahati_mobile/app/modules/auth/vertification_otp/verification_email_binding.dart';
+import 'package:mahati_mobile/app/modules/auth/vertification_otp/verification_email_view.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
 import 'package:mahati_mobile/app/modules/education/education_binding.dart';
@@ -210,5 +212,11 @@ class AppPages {
       binding: QuestionnaireQuestionBinding(),
       transitionDuration: const Duration(milliseconds: 300),
     ),
+    GetPage(
+        name: _Paths.verification_otp,
+        page: () => VerificationEmailView(),
+        arguments: Get.arguments,
+        binding: VerificationEmailBinding(),
+        transitionDuration: const Duration(milliseconds: 300))
   ];
 }

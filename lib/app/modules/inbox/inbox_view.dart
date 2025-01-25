@@ -84,7 +84,7 @@ class InboxView extends GetView<InboxController> {
                               const link = WhatsAppUnilink(
                                 phoneNumber: '+62 813-3461-1144',
                                 text:
-                                    "Halo! untuk segala pertanyaan silahkan hubungi saya.",
+                                    "Permisi, saya ingin menanyakan terkait: .",
                               );
                               await launchUrlString('$link');
                             },

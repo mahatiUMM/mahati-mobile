@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mahati_mobile/app/core/network/smpt_email.dart';
 import 'package:mahati_mobile/app/utils/notification_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +37,12 @@ void main() async {
   OneSignal.initialize("2c504865-7ffc-4ea5-9c67-895b885fbb93");
   OneSignal.Notifications.requestPermission(true);
 
+  await dotenv.load(fileName: ".env");
+
+  EmailVerification().emailSetup(
+      dotenv.get('HOST'), dotenv.get('USERNAME'), dotenv.get('PASSWORD'));
+  EmailVerification().emailConfig(dotenv.get('USERNAME'));
+  
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.dark,

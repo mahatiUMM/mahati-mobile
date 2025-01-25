@@ -1,5 +1,7 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/core/network/smpt_email.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
 import 'package:mahati_mobile/app/constants/text_strings.dart';
@@ -174,12 +176,20 @@ class BodySignUp extends GetView<SignUpController> {
                       ),
                     ),
                     onPressed: () async {
-                      await controller.registerAccount(
-                        username: controller.usernameController.text,
-                        email: controller.emailController.text,
-                        password: controller.passwordController.text,
-                        number: controller.phoneController.text,
-                      );
+                      EmailVerification().emailTemplate(controller.usernameController.text);
+                      EmailOTP.sendOTP(email: controller.emailController.text);
+                      Get.toNamed(Routes.verification_otp, arguments: {
+                        'username': controller.usernameController.text,
+                        'email': controller.emailController.text,
+                        'password': controller.passwordController.text,
+                        'number': controller.phoneController.text
+                      });
+                      // await controller.registerAccount(
+                      //   username: controller.usernameController.text,
+                      //   email: controller.emailController.text,
+                      //   password: controller.passwordController.text,
+                      //   number: controller.phoneController.text,
+                      // );
                     },
                     child: Text(
                       TextStrings.signUpTitle2,
