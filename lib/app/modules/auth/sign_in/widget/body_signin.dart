@@ -101,7 +101,9 @@ class BodySignIn extends GetView<SignInController> {
                 alignment: Alignment.centerRight,
                 width: 100.w,
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.sendEmailOTP);
+                    },
                     child: Text(
                       TextStrings.signInSubtitle1,
                       textAlign: TextAlign.right,

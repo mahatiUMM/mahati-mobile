@@ -178,18 +178,13 @@ class BodySignUp extends GetView<SignUpController> {
                     onPressed: () async {
                       EmailVerification().emailTemplate(controller.usernameController.text);
                       EmailOTP.sendOTP(email: controller.emailController.text);
-                      Get.toNamed(Routes.verification_otp, arguments: {
+                      Get.toNamed(Routes.verificationOTP, arguments: {
                         'username': controller.usernameController.text,
                         'email': controller.emailController.text,
                         'password': controller.passwordController.text,
-                        'number': controller.phoneController.text
+                        'number': controller.phoneController.text,
+                        'otp_for': 'signup'
                       });
-                      // await controller.registerAccount(
-                      //   username: controller.usernameController.text,
-                      //   email: controller.emailController.text,
-                      //   password: controller.passwordController.text,
-                      //   number: controller.phoneController.text,
-                      // );
                     },
                     child: Text(
                       TextStrings.signUpTitle2,

@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:mahati_mobile/app/modules/auth/forget_password/forget_password_binding.dart';
+import 'package:mahati_mobile/app/modules/auth/forget_password/forget_password_view.dart';
+import 'package:mahati_mobile/app/modules/auth/forget_password/send_email_view.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_binding.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_in/signin_view.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_binding.dart';
@@ -210,13 +213,31 @@ class AppPages {
       name: _Paths.questionnaireQuestion,
       page: () => const QuestionnaireQuestionView(),
       binding: QuestionnaireQuestionBinding(),
+      transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
     ),
     GetPage(
-        name: _Paths.verification_otp,
-        page: () => VerificationEmailView(),
+        name: _Paths.verificationOTP,
+        page: () => const VerificationEmailView(),
         arguments: Get.arguments,
         binding: VerificationEmailBinding(),
+        transition: Transition.cupertino,
+        transitionDuration: const Duration(milliseconds: 300)),
+    GetPage(
+        name: _Paths.sendEmailOTP,
+        page: () => const SendEmailView(),
+        binding: ForgetPasswordBinding(),
+        bindings: [
+          SignUpBinding(),
+        ],
+        transition: Transition.cupertino,
+        transitionDuration: const Duration(microseconds: 300)),
+    GetPage(
+        name: _Paths.forgetPassword,
+        page: () => const ForgetPasswordView(),
+        binding: ForgetPasswordBinding(),
+        arguments: Get.arguments,
+        transition: Transition.cupertino,
         transitionDuration: const Duration(milliseconds: 300))
   ];
 }

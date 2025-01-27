@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -9,7 +10,7 @@ enum HttpMethod { POST, GET, PUT, DELETE, PATCH }
 
 class RestClient extends GetxService {
   // ignore: constant_identifier_names
-  static const BASE_URL = "https://mahati.xyzuan.my.id/api";
+  String BASE_URL = dotenv.get('BASE_URL');
 
   Map<String, String> header() {
     return {
@@ -67,6 +68,12 @@ class RestClient extends GetxService {
       } else if (method == HttpMethod.DELETE) {
         response = await http.delete(uri, headers: header());
       } else if (method == HttpMethod.PUT) {
+        response = await http.put(
+          uri,
+          body: jsonEncode(params),
+          headers: header(),
+        );
+      } else if (method == HttpMethod.PATCH) {
         response = await http.patch(
           uri,
           body: jsonEncode(params),

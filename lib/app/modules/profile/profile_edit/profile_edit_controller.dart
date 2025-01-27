@@ -40,7 +40,7 @@ class ProfileEditController extends GetxController {
       final File imageFile = File(pickedFile.path);
       final result = await restClient.requestWithToken(
         "/profile",
-        HttpMethod.PUT,
+        HttpMethod.PATCH,
         null,
         token.toString(),
         imageFile: imageFile,
@@ -95,7 +95,7 @@ class ProfileEditController extends GetxController {
     };
 
     final result = await restClient.requestWithToken(
-        "/profile", HttpMethod.PUT, data, token.toString());
+        "/profile", HttpMethod.PATCH, data, token.toString());
 
     if (result.statusCode == 200) {
       Get.offAllNamed("/layout");

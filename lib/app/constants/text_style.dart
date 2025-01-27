@@ -15,7 +15,7 @@ class StyleText {
   static TextStyle authTitle2 = TextStyle(
     decoration: TextDecoration.none,
     color: Resources.color.subtitleColor,
-    fontSize: 12.sp,
+    fontSize: 11.sp,
     fontFamily: Resources.font.primaryFont,
     fontWeight: FontWeight.w500,
   );

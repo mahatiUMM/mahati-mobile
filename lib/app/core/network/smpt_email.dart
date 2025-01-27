@@ -15,7 +15,7 @@ class EmailVerification {
       appEmail: emailName,
       otpType: OTPType.numeric,
       otpLength: 5,
-      expiry: 30000
+      expiry: 180000
       );
 
   void emailTemplate(String userName) => EmailOTP.setTemplate(

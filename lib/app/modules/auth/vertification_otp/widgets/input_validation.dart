@@ -48,11 +48,12 @@ class InputValidation extends StatelessWidget {
             focusNode: controller.focusNode,
             defaultPinTheme: defaultPinTheme,
             separatorBuilder: (index) => const SizedBox(width: 8),
+            hapticFeedbackType: HapticFeedbackType.lightImpact,
             validator: (value) {
               // controller.formKey.currentState!.validate();
               return EmailOTP.verifyOTP(otp: value!) ? null : "Invalid OTP";
             },
-            hapticFeedbackType: HapticFeedbackType.lightImpact,
+            onTap: () => controller.focusNode.requestFocus(),
             onCompleted: (pin) {
               debugPrint('onCompleted: $pin');
               controller.pin.value = pin;

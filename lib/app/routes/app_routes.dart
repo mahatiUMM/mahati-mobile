@@ -27,7 +27,9 @@ abstract class Routes {
   static const brochureDetail = _Paths.brochureDetail;
   static const questionnaire = _Paths.questionnaire;
   static const questionnaireQuestion = _Paths.questionnaireQuestion;
-  static const verification_otp = _Paths.verification_otp;
+  static const verificationOTP = _Paths.verificationOTP;
+  static const sendEmailOTP = _Paths.sendEmailOTP;
+  static const forgetPassword = _Paths.forgetPassword;
 }
 
 abstract class _Paths {
@@ -57,5 +59,7 @@ abstract class _Paths {
   static const brochureDetail = '/brochure/detail';
   static const questionnaire = '/questionnaire';
   static const questionnaireQuestion = '/questionnaire_question';
-  static const verification_otp = '/verification_otp';
+  static const verificationOTP = '/verification_otp';
+  static const sendEmailOTP = '/send_email_otp';
+  static const forgetPassword = '/forget_password';
 }

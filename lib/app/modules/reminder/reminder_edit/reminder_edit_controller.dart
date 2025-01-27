@@ -71,7 +71,7 @@ class ReminderEditController extends GetxController {
 
     final token = await getToken();
     final result = await restClient.requestWithToken(
-        "/reminder/$reminderId", HttpMethod.PUT, data, token.toString());
+        "/reminder/$reminderId", HttpMethod.PATCH, data, token.toString());
 
     if (result.statusCode == 200) {
       Get.offAllNamed("/layout");
