@@ -125,10 +125,9 @@ class QuestionnaireQuestionController extends GetxController {
       answers: answerData,
     );
 
-    restClient.request('/questionnaire_question_answer', HttpMethod.POST,
+    await restClient.request('/questionnaire_question_answer', HttpMethod.POST,
         questioinnaireAnswer.toJson());
-    showSuccessMessage(
-        "Survey Berhasil di Submit", questioinnaireAnswer.toJson().toString());
+    showSuccessMessage("Survey Berhasil di Submit", "Terima kasih");
     Get.offAndToNamed('/questionnaire');
   }
 
