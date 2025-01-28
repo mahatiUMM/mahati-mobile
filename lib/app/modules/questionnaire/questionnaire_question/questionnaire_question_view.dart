@@ -19,6 +19,7 @@ class QuestionnaireQuestionView
   ];
   @override
   Widget build(BuildContext context) {
+    debugPrint(Get.arguments['desc']);
     return Scaffold(
       appBar: AppBar(
         foregroundColor: AppColors.backgroundHome,
@@ -87,7 +88,11 @@ class QuestionnaireQuestionView
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
-                child: QuestionnaireAnswerOption(controller: controller),
+                child: QuestionnaireAnswerOption(
+                  controller: controller,
+                  title: Get.arguments['title'],
+                  desc: Get.arguments['desc'],
+                ),
               ),
             ),
           ),

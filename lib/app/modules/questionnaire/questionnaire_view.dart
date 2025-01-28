@@ -100,6 +100,8 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                                   arguments: {
                                     'id': questionnaire.id,
                                     'image': questionnaire.image ?? '',
+                                    'title': questionnaire.title ?? '',
+                                    'desc' : questionnaire.description ?? ''
                                   });
                             },
                           );

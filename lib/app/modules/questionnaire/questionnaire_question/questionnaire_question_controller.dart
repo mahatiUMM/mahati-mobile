@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -25,6 +24,7 @@ class QuestionnaireQuestionController extends GetxController {
   RxBool isAnswerd = false.obs;
   RxBool isLoading = false.obs;
   RxBool isLastPage = false.obs;
+  RxBool isStart = true.obs;
 
   final token = getToken();
 
@@ -39,7 +39,20 @@ class QuestionnaireQuestionController extends GetxController {
   void dispose() {
     // TODO: implement dispose
     focusNode.dispose();
+    pageController.dispose();
+    indicatorScrollController.dispose();
     super.dispose();
+  }
+
+  void startPage(){
+    pageController.jumpToPage(0);
+  }
+
+  void nextPage() {
+    int pageIndex = currentPageIndex.value + 1;
+    pageController.jumpToPage(pageIndex);
+    isAnswerd.value = false;
+    isLastPageCheck();
   }
 
   void updatePageIndicator(int index) {
@@ -78,12 +91,6 @@ class QuestionnaireQuestionController extends GetxController {
         print('Request failed with status: ${result.statusCode}');
       }
     }
-  }
-
-  void nextPage() {
-    int pageIndex = currentPageIndex.value + 1;
-    pageController.jumpToPage(pageIndex);
-    isLastPageCheck();
   }
 
   void setSelectedAnswer(int questionnaireQuestionId, int answerId) {

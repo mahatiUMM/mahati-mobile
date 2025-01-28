@@ -19,7 +19,8 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(Get.width - 42, 24),
-                  backgroundColor: controller.isAnswerd.isFalse
+                  backgroundColor: controller.isAnswerd.isFalse &&
+                          controller.isStart.isFalse
                       ? const Color(0x4D6CE9B4)
                       : Resources.color.primaryColor,
                   foregroundColor: Colors.white,
@@ -27,16 +28,22 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
                 onPressed: () {
                   if (controller.isLastPage.value) {
                     controller.sendData();
+                  } else if (controller.isStart.isTrue) {
+                    // controller.isAnswerd.value = true;
+                    controller.isStart.value = false;
+                    debugPrint("Clicked");
+                    controller.startPage();
                   } else if (controller.isAnswerd.isFalse) {
                     null;
                   } else {
                     controller.isAnswerd.value = false;
+                    debugPrint("terjawab : " +controller.isAnswerd.value.toString());
                     controller.nextPage();
                   }
                 },
                 child: controller.isLastPage.value
                     ? const Text("Submit Survey")
-                    : const Icon(Icons.arrow_forward),
+                    : controller.isStart.isTrue ? const Text("Mulai") : const Icon(Icons.arrow_forward),
               ),
             ],
           ),
