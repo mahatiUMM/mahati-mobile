@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
@@ -10,6 +11,9 @@ import 'package:mahati_mobile/app/utils/token_utils.dart';
 class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final PageController pageController = PageController();
+  final ScrollController indicatorScrollController = ScrollController();
+
+  late final FocusNode focusNode;
 
   final RxInt pageLength = 0.obs;
   final RxInt currentPageIndex = 0.obs;
@@ -18,6 +22,7 @@ class QuestionnaireQuestionController extends GetxController {
   RxList<AvailableAnswer> availableAnswer = RxList<AvailableAnswer>([]);
   RxList selectedAnswer = [].obs;
 
+  RxBool isAnswerd = false.obs;
   RxBool isLoading = false.obs;
   RxBool isLastPage = false.obs;
 
@@ -25,11 +30,33 @@ class QuestionnaireQuestionController extends GetxController {
 
   @override
   onInit() async {
-    super.onInit();
     await getQuestionnaires();
+    focusNode = FocusNode();
+    super.onInit();
   }
 
-  void updatePageIndicator(int index) => currentPageIndex.value = index;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  void updatePageIndicator(int index) {
+    const double dotWidth = 15.0; // Same as in the view
+    final double scrollTo =
+        (index * dotWidth) - (Get.width * 0.5 - dotWidth * 7.5);
+    if (indicatorScrollController.hasClients) {
+      if (index > 6 && index < pageLength.value - 4) {
+        indicatorScrollController.animateTo(
+          scrollTo,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      } else {}
+      currentPageIndex.value = index;
+    }
+  }
 
   getQuestionnaires() async {
     final token = await getToken();
@@ -103,5 +130,20 @@ class QuestionnaireQuestionController extends GetxController {
     showSuccessMessage(
         "Survey Berhasil di Submit", questioinnaireAnswer.toJson().toString());
     Get.offAndToNamed('/questionnaire');
+  }
+
+  var selectedOption = RxnInt();
+
+  void setSelectedOption(int? value) {
+    selectedOption.value = value;
+  }
+
+  void handleNext() {
+    // Handle next action here
+    if (selectedOption.value != null) {
+      // Process the answer
+      print('Selected option: ${selectedOption.value}');
+      // Navigate to next question or submit
+    }
   }
 }

@@ -58,10 +58,10 @@ class SignUpController extends GetxController {
 
       if (responseData["success"] == true) {
         Get.offAllNamed('/signin');
+        showSuccessMessage(
+            'Authentication successful', 'Berhasil mendaftar');
         var responseData = SignUpModel.fromJson(jsonDecode(result.body));
         signUp.add(responseData);
-        showSuccessMessage(
-            'Registration successful', 'Redirecting to login...');
       } else {
         showErrorMessage(responseData["message"]);
       }

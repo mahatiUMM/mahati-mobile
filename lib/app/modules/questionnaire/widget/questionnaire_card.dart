@@ -55,7 +55,7 @@ class QuestionnaireCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: Get.width * 0.6,
-                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 6,
+                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 3, textAlign: TextAlign.justify,
                         description,
                         style: TextStyle(
                             fontSize: 15,

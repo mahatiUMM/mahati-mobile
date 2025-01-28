@@ -180,14 +180,14 @@ class VerificationEmailView extends GetView<VerificationEmailController> {
                                 break;
                               case "signup":
                                 controller.formKey.currentState!.validate()
-                                    ? Get.snackbar("Success", "Berhasil daftar")
+                                    ? await controller.signUpController
+                                        .registerAccount(
+                                            username: controller.username.value,
+                                            email: controller.email.value,
+                                            password: controller.password.value,
+                                            number: controller.number.value)
                                     : Get.snackbar("Failed", "gagal daftar");
-                                await controller.signUpController
-                                    .registerAccount(
-                                        username: controller.username.value,
-                                        email: controller.email.value,
-                                        password: controller.password.value,
-                                        number: controller.number.value);
+
                                 print(
                                     "ini formkey validator: ${controller.formKey.currentState!.validate()}");
                                 break;

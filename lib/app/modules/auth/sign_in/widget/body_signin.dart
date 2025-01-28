@@ -35,11 +35,13 @@ class BodySignIn extends GetView<SignInController> {
                 height: 2.h,
               ),
               SizedBox(
-                height: Get.height / 16,
+                height: Get.height * 0.07,
                 width: Get.width,
                 child: TextField(
                   controller: controller.emailController,
                   decoration: InputDecoration(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       filled: true,
                       fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
@@ -63,13 +65,15 @@ class BodySignIn extends GetView<SignInController> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: Get.height / 16,
+                height: Get.height * 0.08,
                 width: Get.width,
                 child: Obx(
                   () => TextField(
                     controller: controller.passwordController,
                     obscureText: controller.showPassword.value,
                     decoration: InputDecoration(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       filled: true,
                       fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle1,

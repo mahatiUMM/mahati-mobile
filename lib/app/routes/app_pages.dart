@@ -211,7 +211,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.questionnaireQuestion,
-      page: () => const QuestionnaireQuestionView(),
+      page: () => QuestionnaireQuestionView(),
       binding: QuestionnaireQuestionBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 300),
