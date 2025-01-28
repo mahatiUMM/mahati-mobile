@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
@@ -64,7 +65,7 @@ class QuestionnaireQuestionView
                     bottomRight: Radius.circular(24)),
                 child: CachedNetworkImage(
                   imageUrl: Get.arguments['image'].isNotEmpty == true
-                      ? Get.arguments['image']
+                      ?  dotenv.get('IMAGE_URL')+Get.arguments['image']
                       : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                   fit: BoxFit.cover,
                   width: Get.width,
