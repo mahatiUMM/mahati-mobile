@@ -73,6 +73,7 @@ class SignUpController extends GetxController {
       /*
         ERROR: Data Type Is NULL but the body is STRING
       */
+      // ignore: avoid_print
       print(e);
     }
   }

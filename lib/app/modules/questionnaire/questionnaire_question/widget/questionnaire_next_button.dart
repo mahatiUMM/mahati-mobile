@@ -26,7 +26,7 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
                         onPressed: () {
                           controller.beforePage();
                         },
-                        child: Text("Kembali")),
+                        child: const Text("Kembali")),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           fixedSize: Size(Get.width * 0.30, 24),
@@ -41,8 +41,8 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
                                   : controller.nextPage();
                         },
                         child: controller.isLastPage.value
-                            ? Text("Selesai")
-                            : Text("Berikutnya"))
+                            ? const Text("Selesai")
+                            : const Text("Berikutnya"))
                   ],
                 )
               : ElevatedButton(

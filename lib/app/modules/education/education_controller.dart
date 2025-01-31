@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/core/data/education_article_model.dart';
 import 'package:mahati_mobile/app/core/data/education_brochure_model.dart';

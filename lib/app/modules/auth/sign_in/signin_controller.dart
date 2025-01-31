@@ -62,6 +62,7 @@ class SignInController extends GetxController {
         showErrorMessage(responseData["message"]);
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }

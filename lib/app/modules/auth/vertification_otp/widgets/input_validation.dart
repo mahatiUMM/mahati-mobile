@@ -1,6 +1,5 @@
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 import 'package:pinput/pinput.dart';

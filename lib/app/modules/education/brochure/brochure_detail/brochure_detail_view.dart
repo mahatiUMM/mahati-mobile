@@ -6,7 +6,7 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_controller.dart';
 
 class BrochureDetailView extends GetView<BrochureDetailController> {
-  const BrochureDetailView({Key? key}) : super(key: key);
+  const BrochureDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {

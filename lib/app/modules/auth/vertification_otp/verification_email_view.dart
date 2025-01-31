@@ -1,6 +1,5 @@
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -174,9 +173,6 @@ class VerificationEmailView extends GetView<VerificationEmailController> {
                                 controller.formKey.currentState!.validate()
                                     ? Get.offAndToNamed(Routes.forgetPassword)
                                     : null;
-
-                                print(
-                                    "ini formkey validator: ${controller.formKey.currentState!.validate()}");
                                 break;
                               case "signup":
                                 controller.formKey.currentState!.validate()
@@ -187,9 +183,6 @@ class VerificationEmailView extends GetView<VerificationEmailController> {
                                             password: controller.password.value,
                                             number: controller.number.value)
                                     : Get.snackbar("Failed", "gagal daftar");
-
-                                print(
-                                    "ini formkey validator: ${controller.formKey.currentState!.validate()}");
                                 break;
                               default:
                             }

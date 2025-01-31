@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
@@ -11,6 +10,7 @@ import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
+  final GetStorage storage = GetStorage();
   var username = Rx<String>('');
 
   RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);

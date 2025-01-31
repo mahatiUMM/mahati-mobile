@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/data/questionnaire_user_answer_model.dart';
@@ -12,6 +15,7 @@ class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final PageController pageController = PageController();
   final ScrollController indicatorScrollController = ScrollController();
+  final GetStorage storage = GetStorage();
 
   late final FocusNode focusNode;
 
@@ -43,7 +47,6 @@ class QuestionnaireQuestionController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     focusNode.dispose();
     pageController.dispose();
     indicatorScrollController.dispose();
@@ -185,13 +188,15 @@ class QuestionnaireQuestionController extends GetxController {
     }).toList();
 
     QuestioinnaireAnswer questioinnaireAnswer = QuestioinnaireAnswer(
-      user_id: userId,
+      userId: userId,
       questionnaireQuestionId: Get.arguments['id'],
       answers: answerData,
     );
 
     await restClient.request('/questionnaire_question_answer', HttpMethod.POST,
         questioinnaireAnswer.toJson());
+    
+    storage.write(Get.arguments['id'].toString(), true);
     showSuccessMessage("Survey Berhasil di Submit", "Terima kasih");
     Get.offAndToNamed('/questionnaire');
   }

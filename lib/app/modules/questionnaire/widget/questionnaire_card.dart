@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -10,14 +8,15 @@ class QuestionnaireCard extends StatelessWidget {
   final String description;
   final String imageUrl;
   final VoidCallback onPressed;
+  final bool isFilled;
 
-  const QuestionnaireCard({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.onPressed,
-  });
+  const QuestionnaireCard(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.imageUrl,
+      required this.onPressed,
+      required this.isFilled});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +43,11 @@ class QuestionnaireCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(width: Get.width * 0.6,
-                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 2,
+                    SizedBox(
+                      width: Get.width * 0.6,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
                         title,
                         style: TextStyle(
                             fontSize: 18,
@@ -54,8 +56,12 @@ class QuestionnaireCard extends StatelessWidget {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    SizedBox(width: Get.width * 0.6,
-                      child: Text(overflow: TextOverflow.ellipsis, maxLines: 3, textAlign: TextAlign.justify,
+                    SizedBox(
+                      width: Get.width * 0.6,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        textAlign: TextAlign.justify,
                         description,
                         style: TextStyle(
                             fontSize: 15,
@@ -68,12 +74,14 @@ class QuestionnaireCard extends StatelessWidget {
                 const Spacer(),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF40D99E),
+                    backgroundColor: isFilled == true
+                        ? const Color(0x4D6CE9B4)
+                        : Resources.color.primaryColor,
                   ),
                   onPressed: onPressed,
-                  child: const Text(
-                    "Mulai",
-                    style: TextStyle(
+                  child: Text(
+                    isFilled == true ? "Selesai" : "Mulai",
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 24, 82, 60),
                       fontWeight: FontWeight.w800,
                     ),

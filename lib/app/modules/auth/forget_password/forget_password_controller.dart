@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/state_manager.dart';
 import 'package:mahati_mobile/app/core/data/forget_password_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/routes/app_pages.dart';
@@ -37,7 +34,6 @@ class ForgetPasswordController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     newPasswordFormKey = GlobalKey<FormState>();
     emailFormKey = GlobalKey<FormState>();
     emailFocusNode = FocusNode();
@@ -48,7 +44,6 @@ class ForgetPasswordController extends GetxController {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     emailOTPController.dispose();
     newPasswordController.dispose();
     confirmPasswordController.dispose();
@@ -93,6 +88,7 @@ class ForgetPasswordController extends GetxController {
         showErrorMessage(json.decode(result.body)["message"]);
       }
     } catch (e) {
+      // ignore: avoid_print
       print("uknow error: $e");
     }
   }

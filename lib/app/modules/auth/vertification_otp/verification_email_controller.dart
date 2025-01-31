@@ -4,12 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:mahati_mobile/app/core/network/smpt_email.dart';
 import 'package:mahati_mobile/app/modules/auth/sign_up/signup_controller.dart';
 
 class VerificationEmailController extends GetxController {
-  final EmailVerification email_otp = EmailVerification();
+  final EmailVerification emailOtp = EmailVerification();
   final SignUpController signUpController = Get.find<SignUpController>();
   RxString username = "".obs;
   RxString email = "".obs;
@@ -33,7 +32,6 @@ class VerificationEmailController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     final arguments = Get.arguments as Map<String, dynamic>;
     switch (otpFor.value = arguments['otp_for']) {
@@ -78,7 +76,7 @@ class VerificationEmailController extends GetxController {
   void startTimer() {
     duration = penalty;
     isTimerRunning.value = true;
-    timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (duration > 0) {
         duration--;
         timeString.value = formatTime(duration);

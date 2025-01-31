@@ -74,23 +74,35 @@ class QuestionnaireAvailable extends StatelessWidget {
                       itemCount: controller.questionnaires.length,
                       itemBuilder: (context, index) {
                         var questionnaire = controller.questionnaires[index];
+                        var isFilled = controller.storage
+                                        .read(questionnaire.id.toString()) ==
+                                    true ||
+                                controller.storage
+                                        .read(questionnaire.id.toString()) !=
+                                    null
+                            ? true
+                            : false;
                         return Padding(
                           padding: const EdgeInsets.only(top: 18),
                           child: QuestionnaireCard(
+                            isFilled: isFilled,
                             title: questionnaire.title!,
                             description: questionnaire.description!,
                             imageUrl: questionnaire.image?.isNotEmpty == true
                                 ? dotenv.get('IMAGE_URL') + questionnaire.image!
                                 : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                             onPressed: () {
-                              Get.toNamed('/questionnaire_question',
-                                  arguments: {
-                                    'id': questionnaire.id,
-                                    'image': questionnaire.image ?? '',
-                                    'title': questionnaire.title ?? '',
-                                    'desc': questionnaire.description ?? '',
-                                    'type': 'available'
-                                  });
+                              isFilled
+                                  ? null
+                                  : Get.toNamed('/questionnaire_question',
+                                      arguments: {
+                                          'id': questionnaire.id,
+                                          'image': questionnaire.image ?? '',
+                                          'title': questionnaire.title ?? '',
+                                          'desc':
+                                              questionnaire.description ?? '',
+                                          'type': 'available'
+                                        });
                             },
                           ),
                         );

@@ -78,6 +78,7 @@ class QuestionnaireHistory extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(top: 18),
                           child: QuestionnaireCard(
+                            isFilled: false,
                             title: item.title,
                             description: item.description,
                             imageUrl: item.image.isNotEmpty == true

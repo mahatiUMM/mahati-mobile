@@ -6,7 +6,6 @@ import 'package:mahati_mobile/app/modules/auth/vertification_otp/verification_em
 class ForgetPasswordBinding extends Bindings {
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.lazyPut(() => ForgetPasswordController());
     Get.lazyPut(() => VerificationEmailController());
     Get.lazyPut(() => SignUpController());

@@ -10,7 +10,7 @@ enum HttpMethod { POST, GET, PUT, DELETE, PATCH }
 
 class RestClient extends GetxService {
   // ignore: constant_identifier_names
-  String BASE_URL = dotenv.get('BASE_URL');
+  String baseUrl = dotenv.get('BASE_URL');
 
   Map<String, String> header() {
     return {
@@ -36,7 +36,7 @@ class RestClient extends GetxService {
     File? imageFile,
   }) async {
     try {
-      Uri uri = Uri.parse(BASE_URL + url);
+      Uri uri = Uri.parse(baseUrl + url);
       late http.Response response;
 
       params ??= {};
@@ -110,7 +110,7 @@ class RestClient extends GetxService {
     File? imageFile,
   }) async {
     try {
-      Uri uri = Uri.parse(BASE_URL + url);
+      Uri uri = Uri.parse(baseUrl + url);
       late http.Response response;
 
       params ??= {};

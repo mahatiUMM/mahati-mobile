@@ -23,7 +23,7 @@ class ArticleDetailView extends GetView<ArticleDetailController> {
           ),
           title: Text(
             controller.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
