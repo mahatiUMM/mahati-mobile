@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
+import 'package:mahati_mobile/app/core/data/questionnaire_user_answer_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 import 'package:mahati_mobile/app/utils/token_utils.dart';
@@ -19,6 +20,10 @@ class QuestionnaireQuestionController extends GetxController {
   RxList<QuestionnaireQuestion> questionnaireQuestion =
       RxList<QuestionnaireQuestion>([]);
   RxList<AvailableAnswer> availableAnswer = RxList<AvailableAnswer>([]);
+  RxList<DataQuestionnaireUser> questionnaireUserAlreadyUse =
+      <DataQuestionnaireUser>[].obs;
+  RxList<DataQuestionnaireUser> filteredQuestions =
+      <DataQuestionnaireUser>[].obs;
   RxList selectedAnswer = [].obs;
 
   RxBool isAnswerd = false.obs;
@@ -31,6 +36,7 @@ class QuestionnaireQuestionController extends GetxController {
   @override
   onInit() async {
     await getQuestionnaires();
+    await getUserQuestionAndAnswer();
     focusNode = FocusNode();
     super.onInit();
   }
@@ -44,13 +50,21 @@ class QuestionnaireQuestionController extends GetxController {
     super.dispose();
   }
 
-  void startPage(){
-    pageController.jumpToPage(0);
-  }
-
   void nextPage() {
+    isStart.value = false;
     int pageIndex = currentPageIndex.value + 1;
     pageController.jumpToPage(pageIndex);
+    print(isAnswerd.value.toString());
+    isLastPageCheck();
+  }
+
+  void beforePage() {
+    int pageIndex =
+        currentPageIndex.value == 0 ? 0 : currentPageIndex.value - 1;
+    currentPageIndex.value == 0
+        ? isStart.value = true
+        : pageController.jumpToPage(pageIndex);
+
     isAnswerd.value = false;
     isLastPageCheck();
   }
@@ -69,6 +83,50 @@ class QuestionnaireQuestionController extends GetxController {
       } else {}
       currentPageIndex.value = index;
     }
+  }
+
+  getUserQuestionAndAnswer() async {
+    final token = await getToken();
+    final result = await restClient.requestWithToken(
+        '/questionnaire_question_answer',
+        HttpMethod.GET,
+        null,
+        token.toString());
+    if (result.statusCode == 200) {
+      final jsonData = result.body;
+      final userQuestionResult =
+          QuestionnaireUserAnswer.fromJson(json.decode(jsonData));
+
+      for (var userData in userQuestionResult.data) {
+        if (!questionnaireUserAlreadyUse
+            .any((item) => item.question.id == userData.question.id)) {
+          // Menambahkan data ke dalam list sebagai objek QuestionnaireUser
+          questionnaireUserAlreadyUse.add(DataQuestionnaireUser(
+            id: userData.id,
+            questionId: userData.questionId,
+            answer: userData.answer,
+            userId: userData.userId,
+            createdAt: userData.createdAt,
+            updatedAt: userData.updatedAt,
+            question: userData.question,
+            selectedAnswer: userData.selectedAnswer,
+            selectedAnswerId: userData.selectedAnswerId,
+          ));
+        }
+      }
+      displayQuestionsByQuestionnaireId(Get.arguments['id']);
+    } else {
+      if (kDebugMode) {
+        print('Request failed with status: ${result.statusCode}');
+      }
+    }
+  }
+
+  void displayQuestionsByQuestionnaireId(int targetQuestionnaireId) {
+    // Mengelompokkan data berdasarkan Questionnaire ID
+    filteredQuestions.value = questionnaireUserAlreadyUse
+        .where((item) => item.question.questionnaireId == targetQuestionnaireId)
+        .toList();
   }
 
   getQuestionnaires() async {

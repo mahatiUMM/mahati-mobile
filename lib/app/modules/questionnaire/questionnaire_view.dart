@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_controller.dart';
-import 'package:mahati_mobile/app/modules/questionnaire/widget/questionnaire_card.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/widget/questionnaire_history.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 import 'widget/questionnaire_available.dart';
@@ -11,6 +11,9 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
 
   @override
   Widget build(BuildContext context) {
+    // controller.getQuestionnaireUserAnswer();
+   
+    // print("Answer: ${answer.answer}");
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -40,22 +43,28 @@ class QuestionnaireView extends GetView<QuestionnaireController> {
                 labelColor: Resources.color.titleColor,
                 indicatorColor: Resources.color.primaryColor,
                 tabs: [
-                  Text(
-                    "Kuesioner",
-                    style: TextStyle(
-                        fontFamily: Resources.font.primaryFont, fontSize: 14),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Kuesioner",
+                      style: TextStyle(
+                          fontFamily: Resources.font.primaryFont, fontSize: 14),
+                    ),
                   ),
-                  Text(
-                    "Riwayat kuesioner",
-                    style: TextStyle(
-                        fontFamily: Resources.font.primaryFont, fontSize: 14),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      "Riwayat kuesioner",
+                      style: TextStyle(
+                          fontFamily: Resources.font.primaryFont, fontSize: 14),
+                    ),
                   )
                 ]),
           ),
           backgroundColor: Resources.color.backgroundHome2,
           body: TabBarView(children: [
             QuestionnaireAvailable(controller: controller),
-            QuestionnaireAvailable(controller: controller)
+            QuestionnaireHistory(controller: controller,)
           ])),
     );
   }

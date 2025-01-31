@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_answer_option.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_next_button.dart';
@@ -10,17 +11,9 @@ import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireQuestionView
     extends GetView<QuestionnaireQuestionController> {
-  QuestionnaireQuestionView({super.key});
-  final List<String> options = [
-    'Sangat Tidak Setuju',
-    'Tidak Setuju',
-    'Netral',
-    'Setuju',
-    'Sangat Setuju',
-  ];
+  const QuestionnaireQuestionView({super.key});
   @override
   Widget build(BuildContext context) {
-    debugPrint(Get.arguments['desc']);
     return Scaffold(
       appBar: AppBar(
         foregroundColor: AppColors.backgroundHome,
@@ -61,11 +54,11 @@ class QuestionnaireQuestionView
             child: Center(
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(24),
-                    bottomRight: Radius.circular(24)),
+                    bottomLeft: Radius.elliptical(20, 15),
+                    bottomRight: Radius.elliptical(20, 14)),
                 child: CachedNetworkImage(
                   imageUrl: Get.arguments['image'].isNotEmpty == true
-                      ?  dotenv.get('IMAGE_URL')+Get.arguments['image']
+                      ? dotenv.get('IMAGE_URL') + Get.arguments['image']
                       : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                   fit: BoxFit.cover,
                   width: Get.width,

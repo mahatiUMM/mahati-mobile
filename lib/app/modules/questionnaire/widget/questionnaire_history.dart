@@ -6,8 +6,8 @@ import 'package:mahati_mobile/app/utils/resources.dart';
 import '../questionnaire_controller.dart';
 import 'questionnaire_card.dart';
 
-class QuestionnaireAvailable extends StatelessWidget {
-  const QuestionnaireAvailable({
+class QuestionnaireHistory extends StatelessWidget {
+  const QuestionnaireHistory({
     super.key,
     required this.controller,
   });
@@ -29,7 +29,6 @@ class QuestionnaireAvailable extends StatelessWidget {
             Obx(
               () => Text(
                 "Hai, ${controller.username.value}",
-                textAlign: TextAlign.justify,
                 style: TextStyle(
                     fontFamily: Resources.font.primaryFont,
                     fontSize: 18,
@@ -39,7 +38,8 @@ class QuestionnaireAvailable extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
-                "Anda dapat mengisi kuesioner section dibawah ini",
+                textAlign: TextAlign.justify,
+                "Anda dapat melihat kuesioner yang sudah dilakukan dibawah ini",
                 style: TextStyle(
                   fontFamily: Resources.font.primaryFont,
                   color: Colors.grey,
@@ -71,25 +71,26 @@ class QuestionnaireAvailable extends StatelessWidget {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.questionnaires.length,
+                      itemCount: controller.questionnaireUserAlreadyUse.length,
                       itemBuilder: (context, index) {
-                        var questionnaire = controller.questionnaires[index];
+                        final item =
+                            controller.questionnaireUserAlreadyUse[index];
                         return Padding(
                           padding: const EdgeInsets.only(top: 18),
                           child: QuestionnaireCard(
-                            title: questionnaire.title!,
-                            description: questionnaire.description!,
-                            imageUrl: questionnaire.image?.isNotEmpty == true
-                                ? dotenv.get('IMAGE_URL') + questionnaire.image!
+                            title: item.title,
+                            description: item.description,
+                            imageUrl: item.image.isNotEmpty == true
+                                ? dotenv.get('IMAGE_URL') + item.image
                                 : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                             onPressed: () {
                               Get.toNamed('/questionnaire_question',
                                   arguments: {
-                                    'id': questionnaire.id,
-                                    'image': questionnaire.image ?? '',
-                                    'title': questionnaire.title ?? '',
-                                    'desc': questionnaire.description ?? '',
-                                    'type': 'available'
+                                    'id': item.id,
+                                    'image': item.image,
+                                    'title': item.title,
+                                    'desc': item.description,
+                                    'type': 'history'
                                   });
                             },
                           ),
