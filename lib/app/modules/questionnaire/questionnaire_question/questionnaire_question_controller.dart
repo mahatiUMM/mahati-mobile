@@ -130,6 +130,10 @@ class QuestionnaireQuestionController extends GetxController {
     filteredQuestions.value = questionnaireUserAlreadyUse
         .where((item) => item.question.questionnaireId == targetQuestionnaireId)
         .toList();
+    for(var items in filteredQuestions){
+      print("Questionnaire ID:${items.question.questionnaireId}");
+
+    }
   }
 
   getQuestionnaires() async {

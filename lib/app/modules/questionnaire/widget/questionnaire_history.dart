@@ -81,8 +81,8 @@ class QuestionnaireHistory extends StatelessWidget {
                             isFilled: false,
                             title: item.title,
                             description: item.description,
-                            imageUrl: item.image.isNotEmpty == true
-                                ? dotenv.get('IMAGE_URL') + item.image
+                            imageUrl: item.image?.isNotEmpty == true
+                                ? dotenv.get('IMAGE_URL') + item.image!
                                 : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                             onPressed: () {
                               Get.toNamed('/questionnaire_question',

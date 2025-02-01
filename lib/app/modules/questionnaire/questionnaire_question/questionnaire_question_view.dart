@@ -57,7 +57,7 @@ class QuestionnaireQuestionView
                     bottomLeft: Radius.elliptical(20, 15),
                     bottomRight: Radius.elliptical(20, 14)),
                 child: CachedNetworkImage(
-                  imageUrl: Get.arguments['image'].isNotEmpty == true
+                  imageUrl: Get.arguments['image'] != null
                       ? dotenv.get('IMAGE_URL') + Get.arguments['image']
                       : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
                   fit: BoxFit.cover,
