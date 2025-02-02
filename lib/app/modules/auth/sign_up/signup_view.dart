@@ -23,7 +23,6 @@ class SignUpView extends GetView<SignUpController> {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return Scaffold(
-          resizeToAvoidBottomInset: false,
           body: Container(
             width: Get.width,
             height: Get.height,
@@ -49,11 +48,13 @@ class SignUpView extends GetView<SignUpController> {
                 ),
                 SingleChildScrollView(
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 70, left: 30, right: 30),
+                    padding: const EdgeInsets.only(top: 0, left: 30, right: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: Get.height * 0.07,
+                        ),
                         Text.rich(
                           TextSpan(
                             children: [

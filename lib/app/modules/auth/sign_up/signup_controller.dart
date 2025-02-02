@@ -11,14 +11,93 @@ class SignUpController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final signUp = <SignUpModel>[].obs;
   RxBool showPassword = true.obs;
+  RxBool isFieldValid = false.obs;
+  RxBool isUsernameInvalid = false.obs;
+  RxBool isEmailInvalid = false.obs;
+  RxBool isPhoneNumberInvalid = false.obs;
+  RxBool isPasswordInvalid = false.obs;
+  RxString errorUsernameMessage = "".obs;
+  RxString errorEmailMessage = "".obs;
+  RxString errorPhoneMessage = "".obs;
+  RxString errorPasswordMessage = "".obs;
+  RxString usernameInput = "".obs;
+  RxString emailInput = "".obs;
+  RxString phoneNumberInput = "".obs;
+  RxString passwordInput = "".obs;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
+  }
+
+  void validateUsername() {
+    if (usernameController.text.isEmpty) {
+      isUsernameInvalid.value = true;
+      errorUsernameMessage.value = "Harap masukkan nama pengguna";
+      usernameInput.value = '';
+    } else {
+      isUsernameInvalid.value = false;
+      usernameInput.value = usernameController.text;
+    }
+  }
+
+  void validateEmail() {
+    if (emailController.text.isEmpty) {
+      isEmailInvalid.value = true;
+      errorEmailMessage.value = "Harap masukkan email";
+      emailInput.value = '';
+    } else if (!emailController.text.isEmail) {
+      isEmailInvalid.value = true;
+      errorEmailMessage.value = "Masukkan email yang valid";
+      emailInput.value = '';
+    } else {
+      isEmailInvalid.value = false;
+      emailInput.value = emailController.text;
+    }
+  }
+
+  void validatePhoneNumber() {
+    if (phoneController.text.isEmpty) {
+      isPhoneNumberInvalid.value = true;
+      errorPhoneMessage.value = "Harap masukkan nomor telpon";
+      phoneNumberInput.value = '';
+    } else if (!RegExp(r"^(?:\+62|62|0)8[1-9][0-9]{6,9}$")
+        .hasMatch(phoneController.text)) {
+      isPhoneNumberInvalid.value = true;
+      errorPhoneMessage.value = "Masukkan nomor telp yang benar";
+      phoneNumberInput.value = '';
+    } else {
+      isPhoneNumberInvalid.value = false;
+      phoneNumberInput.value = phoneController.text;
+    }
+  }
+
+  void validatePassword() {
+    if (passwordController.text.isEmpty) {
+      isPasswordInvalid.value = true;
+      errorPasswordMessage.value = "Harap masukkan password";
+      passwordInput.value = '';
+    } else if (passwordController.text.length < 8) {
+      isPasswordInvalid.value = true;
+      errorPasswordMessage.value = "Password harus lebih dari 8 karakter";
+      passwordInput.value = '';
+    } else {
+      isPasswordInvalid.value = false;
+      passwordInput.value = passwordController.text;
+    }
   }
 
   registerAccount({
@@ -58,8 +137,7 @@ class SignUpController extends GetxController {
 
       if (responseData["success"] == true) {
         Get.offAllNamed('/signin');
-        showSuccessMessage(
-            'Authentication successful', 'Berhasil mendaftar');
+        showSuccessMessage('Authentication successful', 'Berhasil mendaftar');
         var responseData = SignUpModel.fromJson(jsonDecode(result.body));
         signUp.add(responseData);
       } else {

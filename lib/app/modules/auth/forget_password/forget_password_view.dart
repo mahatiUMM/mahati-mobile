@@ -102,7 +102,9 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                       onPressed: () async {
                         controller.isNewPasswordError.isTrue ||
                                 controller.isConfirmPasswordError.isTrue ||
-                                controller.confirmPassword.value.length < 8
+                                controller.confirmPassword.value.length < 8 ||
+                                controller.confirmPassword.value !=
+                                    controller.newPassword.value
                             ? null
                             : await controller.updatePassword();
                       },
@@ -110,14 +112,16 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                          backgroundColor:
-                              controller.isNewPasswordError.isTrue ||
-                                      controller.isNewPasswordError.isTrue ||
-                                      controller.confirmPassword.value.length < 8
-                                  ? MaterialStatePropertyAll(
-                                      Resources.color.disableButtonColor)
-                                  : MaterialStatePropertyAll(
-                                      Resources.color.primaryColor),
+                          backgroundColor: controller
+                                      .isNewPasswordError.isTrue ||
+                                  controller.isNewPasswordError.isTrue ||
+                                  controller.confirmPassword.value.length < 8 ||
+                                  controller.confirmPassword.value !=
+                                      controller.newPassword.value
+                              ? MaterialStatePropertyAll(
+                                  Resources.color.disableButtonColor)
+                              : MaterialStatePropertyAll(
+                                  Resources.color.primaryColor),
                           fixedSize: MaterialStatePropertyAll(
                               Size(Get.width, Get.height * 0.055))),
                       child: Text(

@@ -128,11 +128,11 @@ class SendEmailView extends GetView<ForgetPasswordController> {
                       minLines: 1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
+                          return 'Harap masukkan email';
                         } else if (!RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]+")
                             .hasMatch(value)) {
-                          return 'Please enter a valid email';
+                          return 'Masukkan email yang valid';
                         } else {
                           controller.isEmailError.value = false;
                           return null;

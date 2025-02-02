@@ -20,13 +20,13 @@ class TextStrings {
   static const String authTitle1 = "Selamat Datang 👋";
   static const String authTitle2 = "Email";
   static const String authTitle3 = "Password";
-  static const String authTitle4 = "Username";
-  static const String authTitle5 = "Phone Number";
+  static const String authTitle4 = "Nama Pengguna";
+  static const String authTitle5 = "Nomor Telpon";
 
   //Auth subtitle
-  static const String authSubtitle1 = "Masukkan Email";
+  static const String authSubtitle1 = "example@gmail.com";
   static const String authSubtitle2 = "Masukkan Password";
-  static const String authSubtitle3 = "Masukkan Username";
+  static const String authSubtitle3 = "Masukkan Nama Pengguna";
   static RichText authSubtitle4 = RichText(
       textAlign: TextAlign.center,
       text: TextSpan(children: [
