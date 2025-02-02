@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:mahati_mobile/app/core/data/profile_model.dart';
 import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
@@ -10,8 +9,8 @@ import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
-  final GetStorage storage = GetStorage();
   var username = Rx<String>('');
+  RxList<Map<int, bool>> isFilled = <Map<int, bool>>[].obs;
 
   RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);
   RxList<QuestionnaireUser> questionnaireUserAlreadyUse =
@@ -39,11 +38,13 @@ class QuestionnaireController extends GetxController {
   }
 
   getQuestionnaires() async {
+    isLoading.value = true;
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/questionnaire", HttpMethod.GET, null, token.toString());
 
     if (result.statusCode == 200) {
+      isLoading.value = false;
       final jsonData = result.body;
       final questionnaireResult =
           QuestionnaireResult.fromJson(json.decode(jsonData));
@@ -56,6 +57,7 @@ class QuestionnaireController extends GetxController {
   }
 
   Future<void> getQuestionnaireUser() async {
+    isLoading.value = true;
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/questionnaire_question_answer",
@@ -64,6 +66,7 @@ class QuestionnaireController extends GetxController {
         token.toString());
 
     if (result.statusCode == 200) {
+      isLoading.value = false;
       final responseData =
           QuestionnaireUserAnswer.fromJson(json.decode(result.body));
 
@@ -80,6 +83,17 @@ class QuestionnaireController extends GetxController {
           ));
         }
       }
+      for (var questionnaire in questionnaires) {
+        if (questionnaire.id != null) {
+          bool exists = questionnaireUserAlreadyUse.any(
+              (userQuestionnaire) => userQuestionnaire.id == questionnaire.id);
+
+          // Menyimpan hasil ke dalam isFilled
+          isFilled.add({
+            questionnaire.id!: exists
+          }); // Gunakan ! untuk mengakses nilai non-null
+        }
+      }
     } else {
       if (kDebugMode) {
         print('Request failed with status: ${result.statusCode}');
@@ -87,4 +101,5 @@ class QuestionnaireController extends GetxController {
       }
     }
   }
+
 }
