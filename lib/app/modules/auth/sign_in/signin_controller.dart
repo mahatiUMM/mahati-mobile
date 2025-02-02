@@ -12,12 +12,21 @@ class SignInController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   final signIn = <SignInModel>[].obs;
   RxBool showPassword = true.obs;
+  RxBool isFieldValid = false.obs;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   void toggleObscureText() {
     showPassword.value = !showPassword.value;
+  }
+
+  void validateEmailAndPassField() {
+    isFieldValid.value =
+        (emailController.text.isEmpty || !emailController.text.isEmail) ||
+                passwordController.text.isEmpty
+            ? false
+            : true;
   }
 
   Future<void> saveUserData(String token, String userId) async {

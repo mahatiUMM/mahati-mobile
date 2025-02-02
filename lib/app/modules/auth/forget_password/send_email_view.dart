@@ -176,7 +176,7 @@ class SendEmailView extends GetView<ForgetPasswordController> {
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(Get.width, Get.height * 0.04),
                       backgroundColor: controller.isEmailError.value
-                          ? const Color(0x4D6CE9B4)
+                          ? Resources.color.disableButtonColor
                           : Resources.color.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),

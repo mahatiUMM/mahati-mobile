@@ -193,8 +193,8 @@ class VerificationEmailView extends GetView<VerificationEmailController> {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             backgroundColor: controller.pin.value.isEmpty
-                                ? const MaterialStatePropertyAll(
-                                    Color(0x4D6CE9B4))
+                                ? MaterialStatePropertyAll(
+                                    Resources.color.disableButtonColor)
                                 : MaterialStatePropertyAll(
                                     Resources.color.primaryColor),
                             fixedSize: MaterialStatePropertyAll(

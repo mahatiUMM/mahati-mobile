@@ -50,7 +50,7 @@ class QuestionnaireNextButton extends GetView<QuestionnaireQuestionController> {
                     fixedSize: Size(Get.width - 42, 24),
                     backgroundColor: controller.isAnswerd.isFalse &&
                             controller.isStart.isFalse
-                        ? const Color(0x4D6CE9B4)
+                        ? Resources.color.disableButtonColor
                         : Resources.color.primaryColor,
                     foregroundColor: Colors.white,
                   ),

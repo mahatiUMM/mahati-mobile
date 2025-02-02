@@ -75,7 +75,7 @@ class QuestionnaireCard extends StatelessWidget {
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: isFilled == true
-                        ? const Color(0x4D6CE9B4)
+                        ? Resources.color.disableButtonColor
                         : Resources.color.primaryColor,
                   ),
                   onPressed: onPressed,

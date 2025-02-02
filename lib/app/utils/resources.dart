@@ -32,6 +32,7 @@ class AppColors {
   Color whiteColor = const Color(0xFFFFFFFF);
   Color textFieldColor = const Color(0xFFF5F6F8);
   Color hintColor = const Color(0xFFA0A0A0);
+  Color disableButtonColor = const Color(0x4D6CE9B4);
 
   Color titleColor = const Color(0xFF11371C);
   Color subtitleColor = const Color(0xFF383838);

@@ -114,8 +114,8 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                               controller.isNewPasswordError.isTrue ||
                                       controller.isNewPasswordError.isTrue ||
                                       controller.confirmPassword.value.length < 8
-                                  ? const MaterialStatePropertyAll(
-                                      Color(0x4D6CE9B4))
+                                  ? MaterialStatePropertyAll(
+                                      Resources.color.disableButtonColor)
                                   : MaterialStatePropertyAll(
                                       Resources.color.primaryColor),
                           fixedSize: MaterialStatePropertyAll(

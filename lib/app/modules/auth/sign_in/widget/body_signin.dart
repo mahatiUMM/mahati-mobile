@@ -38,10 +38,12 @@ class BodySignIn extends GetView<SignInController> {
                 height: Get.height * 0.07,
                 width: Get.width,
                 child: TextField(
+                  onEditingComplete: () =>
+                      controller.validateEmailAndPassField(),
                   controller: controller.emailController,
                   decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       filled: true,
                       fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
@@ -71,9 +73,11 @@ class BodySignIn extends GetView<SignInController> {
                   () => TextField(
                     controller: controller.passwordController,
                     obscureText: controller.showPassword.value,
+                    onEditingComplete: () =>
+                        controller.validateEmailAndPassField(),
                     decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       filled: true,
                       fillColor: Resources.color.textFieldColor,
                       hintText: TextStrings.authSubtitle1,
@@ -119,21 +123,27 @@ class BodySignIn extends GetView<SignInController> {
               ),
               SizedBox(
                 width: 1000.w,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Resources.color.primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    onPressed: () async {
-                      await controller.loginAccount(
-                        email: controller.emailController.text,
-                        password: controller.passwordController.text,
-                      );
-                    },
-                    child: Text(
-                      TextStrings.signTitle2,
-                      style: StyleText.authElevatedButton,
-                    )),
+                child: Obx(
+                  () => ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: controller.isFieldValid.isFalse
+                              ? Resources.color.disableButtonColor
+                              : Resources.color.primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      onPressed: () async {
+                        controller.isFieldValid.isFalse
+                            ? null
+                            : await controller.loginAccount(
+                                email: controller.emailController.text,
+                                password: controller.passwordController.text,
+                              );
+                      },
+                      child: Text(
+                        TextStrings.signTitle2,
+                        style: StyleText.authElevatedButton,
+                      )),
+                ),
               ),
               SizedBox(
                 height: 2.h,
