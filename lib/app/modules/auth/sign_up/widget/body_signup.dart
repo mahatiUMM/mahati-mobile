@@ -255,17 +255,17 @@ class BodySignUp extends GetView<SignUpController> {
                             controller.emailInput.isNotEmpty &&
                             controller.passwordInput.isNotEmpty &&
                             controller.phoneNumberInput.isNotEmpty) {
-                          // EmailVerification()
-                          //     .emailTemplate(controller.usernameController.text);
-                          // EmailOTP.sendOTP(
-                          //     email: controller.emailController.text);
-                          // Get.toNamed(Routes.verificationOTP, arguments: {
-                          //   'username': controller.usernameController.text,
-                          //   'email': controller.emailController.text,
-                          //   'password': controller.passwordController.text,
-                          //   'number': controller.phoneController.text,
-                          //   'otp_for': 'signup'
-                          // });
+                          EmailVerification()
+                              .emailTemplate(controller.usernameController.text);
+                          EmailOTP.sendOTP(
+                              email: controller.emailController.text);
+                          Get.toNamed(Routes.verificationOTP, arguments: {
+                            'username': controller.usernameController.text,
+                            'email': controller.emailController.text,
+                            'password': controller.passwordController.text,
+                            'number': controller.phoneController.text,
+                            'otp_for': 'signup'
+                          });
                           debugPrint("Clicked");
                         } else {
                           debugPrint("Clicked Null");
