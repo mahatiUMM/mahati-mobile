@@ -14,6 +14,7 @@ class QuestionnaireQuestionView
   const QuestionnaireQuestionView({super.key});
   @override
   Widget build(BuildContext context) {
+    print("argumen gambar: ${Get.arguments["image"]}");
     return Scaffold(
       appBar: AppBar(
         foregroundColor: AppColors.backgroundHome,
@@ -53,18 +54,24 @@ class QuestionnaireQuestionView
             height: Get.height * 0.25,
             child: Center(
               child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.elliptical(20, 15),
-                      bottomRight: Radius.elliptical(20, 14)),
-                  child: CachedNetworkImage(
-                      imageUrl: Get.arguments['image'].toString().isEmpty
-                          ? dotenv.get('IMAGE_URL') + Get.arguments['image']
-                          : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
-                      fit: BoxFit.cover,
-                      width: Get.width,
-                      height: Get.height * 0.4,
-                      errorWidget: (context, url, error) => Image.network(
-                          'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500'))),
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.elliptical(20, 15),
+                    bottomRight: Radius.elliptical(20, 14)),
+                child: CachedNetworkImage(
+                    imageUrl: Get.arguments['image'] != null
+                        ? dotenv.get('IMAGE_URL') +
+                            Get.arguments['image'].toString()
+                        : 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
+                    fit: BoxFit.cover,
+                    width: Get.width,
+                    height: Get.height * 0.4,
+                    errorWidget: (context, url, error) => Image.network(
+                          'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500',
+                          fit: BoxFit.cover,
+                          height: Get.height * 0.4,
+                          width: Get.width,
+                        )),
+              ),
             ),
           ),
           Positioned(

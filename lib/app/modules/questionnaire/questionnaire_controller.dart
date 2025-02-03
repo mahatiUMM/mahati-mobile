@@ -26,7 +26,13 @@ class QuestionnaireController extends GetxController {
     await getUserProfile();
     await getQuestionnaires();
     await getQuestionnaireUser();
-    // getFormattedQuestionnaires();
+  }
+
+  @override
+  void dispose() {
+    getQuestionnaireUser();
+    getQuestionnaires();
+    super.dispose();
   }
 
   Future<void> getUserProfile() async {
