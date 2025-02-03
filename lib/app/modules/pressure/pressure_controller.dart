@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
@@ -109,7 +110,7 @@ class PressureController extends GetxController {
   Future<void> takeBloodPressureImage(ImageSource source) async {
     final model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
-      apiKey: 'AIzaSyAya0s1Jc0RraJTQ5Ooh3xidk99jcbiZb4',
+      apiKey: dotenv.get('API_KEY'),
     );
 
     final pickedImage =
