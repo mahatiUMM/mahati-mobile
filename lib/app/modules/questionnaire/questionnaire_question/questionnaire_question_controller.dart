@@ -8,11 +8,13 @@ import 'dart:convert';
 import 'package:mahati_mobile/app/core/data/questionnaire_model.dart';
 import 'package:mahati_mobile/app/core/data/questionnaire_user_answer_model.dart';
 import 'package:mahati_mobile/app/core/network/rest_client.dart';
+import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_controller.dart';
 import 'package:mahati_mobile/app/utils/show_bar/show_bar.dart';
 import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
+  final QuestionnaireController _questionnaireController = Get.find<QuestionnaireController>(); 
   final PageController pageController = PageController();
   final ScrollController indicatorScrollController = ScrollController();
   final GetStorage storage = GetStorage();
@@ -200,7 +202,9 @@ class QuestionnaireQuestionController extends GetxController {
     await restClient.request('/questionnaire_question_answer', HttpMethod.POST,
         questioinnaireAnswer.toJson());
     
-    storage.write(Get.arguments['id'].toString(), true);
+    await _questionnaireController.getQuestionnaires();
+    await _questionnaireController.getQuestionnaireUser();
+    
     showSuccessMessage("Survey Berhasil di Submit", "Terima kasih");
     Get.offAndToNamed('/questionnaire');
   }

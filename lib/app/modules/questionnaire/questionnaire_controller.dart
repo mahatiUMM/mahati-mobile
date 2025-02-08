@@ -11,12 +11,13 @@ class QuestionnaireController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
   var username = Rx<String>('');
   RxList<Map<int, bool>> isFilled = <Map<int, bool>>[].obs;
-
   RxList<Questionnaire> questionnaires = RxList<Questionnaire>([]);
   RxList<QuestionnaireUser> questionnaireUserAlreadyUse =
       <QuestionnaireUser>[].obs;
   int? questionnaireUserId;
-  RxBool isLoading = false.obs;
+  RxBool isLoadingAvailableQuestionnaire = false.obs;
+  RxBool isLoadingHistoryQuestionnaire = false.obs;
+  RxBool isFilledValue = false.obs;
 
   final token = getToken();
 
@@ -24,15 +25,32 @@ class QuestionnaireController extends GetxController {
   void onInit() async {
     super.onInit();
     await getUserProfile();
-    await getQuestionnaires();
     await getQuestionnaireUser();
+    await getQuestionnaires();
+    for (var questionnaire in questionnaires) {
+      if (questionnaire.id != null) {
+        bool exists = questionnaireUserAlreadyUse.any(
+            (userQuestionnaire) => userQuestionnaire.id == questionnaire.id);
+        // Menyimpan hasil ke dalam isFilled
+        isFilled.add({
+          questionnaire.id!: exists
+        }); // Gunakan ! untuk mengakses nilai non-null
+      }
+    }
   }
 
   @override
   void dispose() {
     getQuestionnaireUser();
     getQuestionnaires();
+    Get.delete<QuestionnaireController>();
     super.dispose();
+  }
+
+  Future<void> refreshQuestionnaire() async {
+    await getUserProfile();
+    await getQuestionnaireUser();
+    await getQuestionnaires();
   }
 
   Future<void> getUserProfile() async {
@@ -44,13 +62,13 @@ class QuestionnaireController extends GetxController {
   }
 
   getQuestionnaires() async {
-    isLoading.value = true;
+    isLoadingAvailableQuestionnaire.value = true;
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/questionnaire", HttpMethod.GET, null, token.toString());
 
     if (result.statusCode == 200) {
-      isLoading.value = false;
+      isLoadingAvailableQuestionnaire.value = false;
       final jsonData = result.body;
       final questionnaireResult =
           QuestionnaireResult.fromJson(json.decode(jsonData));
@@ -63,7 +81,7 @@ class QuestionnaireController extends GetxController {
   }
 
   Future<void> getQuestionnaireUser() async {
-    isLoading.value = true;
+    isLoadingHistoryQuestionnaire.value = true;
     final token = await getToken();
     final result = await restClient.requestWithToken(
         "/questionnaire_question_answer",
@@ -72,7 +90,7 @@ class QuestionnaireController extends GetxController {
         token.toString());
 
     if (result.statusCode == 200) {
-      isLoading.value = false;
+      isLoadingHistoryQuestionnaire.value = false;
       final responseData =
           QuestionnaireUserAnswer.fromJson(json.decode(result.body));
 
@@ -99,6 +117,9 @@ class QuestionnaireController extends GetxController {
             questionnaire.id!: exists
           }); // Gunakan ! untuk mengakses nilai non-null
         }
+        for (var fill in isFilled) {
+          debugPrint("id yang masuk: ${fill[questionnaire.id]}");
+        }
       }
     } else {
       if (kDebugMode) {
@@ -107,5 +128,4 @@ class QuestionnaireController extends GetxController {
       }
     }
   }
-
 }

@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/questionnaire_question_controller.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_answer_option.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_next_button.dart';
 import 'package:mahati_mobile/app/modules/questionnaire/questionnaire_question/widget/questionnaire_page_indicator.dart';
+import 'package:mahati_mobile/app/routes/app_pages.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
 class QuestionnaireQuestionView
@@ -14,7 +14,6 @@ class QuestionnaireQuestionView
   const QuestionnaireQuestionView({super.key});
   @override
   Widget build(BuildContext context) {
-    print("argumen gambar: ${Get.arguments["image"]}");
     return Scaffold(
       appBar: AppBar(
         foregroundColor: AppColors.backgroundHome,
@@ -31,7 +30,7 @@ class QuestionnaireQuestionView
                   const BoxConstraints(), // Remove minimum size constraints
               icon: const Icon(Icons.arrow_back_ios_new_rounded,
                   color: Colors.black),
-              onPressed: () => Get.back(),
+              onPressed: () => Get.offAndToNamed(Routes.questionnaire),
             ),
             Text(
               'Kembali',
