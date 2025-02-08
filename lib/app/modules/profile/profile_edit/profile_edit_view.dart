@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/profile_edit_controller.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_edit/widget/label_field.dart';
@@ -65,30 +66,30 @@ class ProfileEditView extends GetView<ProfileEditController> {
                       CircleAvatar(
                         radius: 62,
                         backgroundColor: Colors.grey[200],
-                        child:
-                            controller.profileController.photo.value.isNotEmpty
-                                ? CachedNetworkImage(
-                                    imageUrl:
-                                        'https://mahati.xyzuan.my.id/${controller.profileController.photo.value}',
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(
-                                      Icons.error,
-                                      color: Colors.red,
-                                      size: 40,
-                                    ),
-                                    imageBuilder: (context, imageProvider) =>
-                                        CircleAvatar(
-                                      radius: 70,
-                                      backgroundColor: Colors.grey[200],
-                                      backgroundImage: imageProvider,
-                                    ),
-                                  )
-                                : CircleAvatar(
-                                    radius: 70,
-                                    backgroundColor: Colors.grey[200],
-                                  ),
+                        child: controller
+                                .profileController.photo.value.isNotEmpty
+                            ? CachedNetworkImage(
+                                imageUrl: dotenv.get('IMAGE_URL') +
+                                    controller.profileController.photo.value,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                  size: 40,
+                                ),
+                                imageBuilder: (context, imageProvider) =>
+                                    CircleAvatar(
+                                  radius: 70,
+                                  backgroundColor: Colors.grey[200],
+                                  backgroundImage: imageProvider,
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 70,
+                                backgroundColor: Colors.grey[200],
+                              ),
                       ),
                       Positioned(
                         bottom: 0,

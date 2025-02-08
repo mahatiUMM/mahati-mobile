@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/layout/layout_controller.dart';
 import 'package:mahati_mobile/app/constants/text_strings.dart';
@@ -53,7 +54,7 @@ class GreetingWidget extends StatelessWidget {
               backgroundColor: Colors.grey[200],
               child: image.isNotEmpty
                   ? CachedNetworkImage(
-                      imageUrl: 'https://mahati.xyzuan.my.id/$image',
+                      imageUrl: dotenv.get('IMAGE_URL')+image,
                       placeholder: (context, url) => CircleAvatar(
                         radius: 24,
                         backgroundColor: Colors.grey[200],

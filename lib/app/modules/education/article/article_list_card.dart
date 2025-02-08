@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/article/article_detail/article_detail_view.dart';
@@ -43,7 +44,7 @@ class ArticleListCard extends StatelessWidget {
                 defaultPage: 1,
                 preventLinkNavigation: true,
               ).cachedFromUrl(
-                'https://mahati.xyzuan.my.id/$file',
+                dotenv.get('IMAGE_URL')+file,
                 placeholder: (progress) => Center(
                   child: LinearProgressIndicator(
                     color: Resources.color.primaryColor.withAlpha(100),

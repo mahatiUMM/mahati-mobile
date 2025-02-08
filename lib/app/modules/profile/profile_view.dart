@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/profile/profile_controller.dart';
 import 'package:mahati_mobile/app/constants/text_style.dart';
@@ -97,8 +98,9 @@ class ProfileView extends GetView<ProfileController> {
                                           child: controller
                                                   .photo.value.isNotEmpty
                                               ? CachedNetworkImage(
-                                                  imageUrl:
-                                                      'https://mahati.xyzuan.my.id/${controller.photo.value}',
+                                                  imageUrl: dotenv
+                                                          .get('IMAGE_URL') +
+                                                      controller.photo.value,
                                                   placeholder: (context, url) =>
                                                       const CircularProgressIndicator(),
                                                   errorWidget:

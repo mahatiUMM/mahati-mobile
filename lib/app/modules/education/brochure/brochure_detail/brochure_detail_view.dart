@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
@@ -52,7 +53,7 @@ class BrochureDetailView extends GetView<BrochureDetailController> {
                   child: PinchZoom(
                     maxScale: 2.5,
                     child: CachedNetworkImage(
-                      imageUrl: 'https://mahati.xyzuan.my.id/$i',
+                      imageUrl: dotenv.get('IMAGE_URL')+i,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>

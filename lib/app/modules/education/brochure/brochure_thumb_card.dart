@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_binding.dart';
 import 'package:mahati_mobile/app/modules/education/brochure/brochure_detail/brochure_detail_view.dart';
@@ -47,7 +48,7 @@ class BrochureThumbCard extends StatelessWidget {
           children: [
             if (imageUrl.isNotEmpty)
               CachedNetworkImage(
-                imageUrl: 'https://mahati.xyzuan.my.id/${imageUrl[0]}',
+                imageUrl: dotenv.get('IMAGE_URL') + imageUrl[0],
                 height: 150,
                 width: double.infinity,
                 imageBuilder: (context, imageProvider) => Container(

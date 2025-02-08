@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:mahati_mobile/app/utils/resources.dart';
 
@@ -62,7 +63,7 @@ Widget pressureDetailBottomSheet({
             ),
             child: image.isNotEmpty
                 ? CachedNetworkImage(
-                    imageUrl: 'https://mahati.xyzuan.my.id/$image',
+                    imageUrl: dotenv.get('IMAGE_URL')+image,
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => const Center(
                       child: Text(
