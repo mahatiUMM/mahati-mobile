@@ -38,8 +38,7 @@ class BodySignIn extends GetView<SignInController> {
                 height: Get.height * 0.07,
                 width: Get.width,
                 child: TextField(
-                  onEditingComplete: () =>
-                      controller.validateEmailAndPassField(),
+                  onChanged: (value) => controller.validateEmailAndPassField(),
                   controller: controller.emailController,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -73,7 +72,7 @@ class BodySignIn extends GetView<SignInController> {
                   () => TextField(
                     controller: controller.passwordController,
                     obscureText: controller.showPassword.value,
-                    onEditingComplete: () =>
+                    onChanged: (value) =>
                         controller.validateEmailAndPassField(),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(

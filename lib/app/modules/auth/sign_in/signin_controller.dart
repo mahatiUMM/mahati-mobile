@@ -24,7 +24,8 @@ class SignInController extends GetxController {
   void validateEmailAndPassField() {
     isFieldValid.value =
         (emailController.text.isEmpty || !emailController.text.isEmail) ||
-                passwordController.text.isEmpty
+                passwordController.text.isEmpty ||
+                passwordController.text.length < 8
             ? false
             : true;
   }
