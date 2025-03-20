@@ -35,13 +35,18 @@ class BodySignUp extends GetView<SignUpController> {
                 height: 2.h,
               ),
               SizedBox(
-                height: controller.isUsernameInvalid.isTrue
-                    ? Get.height * 0.09
-                    : Get.height * 0.06,
+                height: controller.isUsernameInvalid.isFalse
+                    ? Get.height * 0.07
+                    : Get.height * 0.07,
                 width: Get.width,
                 child: TextField(
+                  style: StyleText.inputStyle1,
+                  textAlign: TextAlign.left,
+                  textAlignVertical: TextAlignVertical.center,
                   controller: controller.usernameController,
                   decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(
+                          left: 10, right: 10, top: 0, bottom: 10),
                       errorText: controller.isUsernameInvalid.isTrue
                           ? controller.errorUsernameMessage.value
                           : null,
@@ -53,10 +58,12 @@ class BodySignUp extends GetView<SignUpController> {
                       hintText: TextStrings.authSubtitle3,
                       hintStyle: StyleText.signInField,
                       enabledBorder: OutlineInputBorder(
+                          gapPadding: 0,
                           borderSide:
                               BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15)),
                       focusedBorder: OutlineInputBorder(
+                          gapPadding: 0,
                           borderSide:
                               BorderSide(color: Resources.color.textFieldColor),
                           borderRadius: BorderRadius.circular(15))),
@@ -83,17 +90,24 @@ class BodySignUp extends GetView<SignUpController> {
               Obx(
                 () => SizedBox(
                   height: controller.isEmailInvalid.isFalse
-                      ? Get.height * 0.06
-                      : Get.height * 0.09,
+                      ? Get.height * 0.07
+                      : Get.height * 0.10,
                   width: Get.width,
                   child: TextField(
+                    style: StyleText.inputStyle1,
                     controller: controller.emailController,
+                    textAlignVertical: TextAlignVertical.center,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(
+                            left: 10, right: 10, top: 0, bottom: 10),
                         errorText: controller.isEmailInvalid.isTrue
                             ? controller.errorEmailMessage.value
                             : null,
                         errorBorder: UnderlineInputBorder(
+                            borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(15),
+                                topLeft: Radius.circular(15)),
                             borderSide: BorderSide(
                                 color: Resources.color.secondaryColor2)),
                         filled: true,
@@ -132,17 +146,25 @@ class BodySignUp extends GetView<SignUpController> {
               Obx(
                 () => SizedBox(
                   height: controller.isPhoneNumberInvalid.isFalse
-                      ? Get.height * 0.06
-                      : Get.height * 0.09,
+                      ? Get.height * 0.07
+                      : Get.height * 0.10,
                   width: Get.width,
                   child: TextField(
                       controller: controller.phoneController,
                       keyboardType: TextInputType.phone,
+                      textAlign: TextAlign.left,
+                      textAlignVertical: TextAlignVertical.center,
+                      style: StyleText.inputStyle1,
                       decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.only(
+                              left: 10, right: 10, top: 0, bottom: 10),
                           errorText: controller.isPhoneNumberInvalid.isTrue
                               ? controller.errorPhoneMessage.value
                               : null,
                           errorBorder: UnderlineInputBorder(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15)),
                               borderSide: BorderSide(
                                   color: Resources.color.secondaryColor2)),
                           filled: true,
@@ -182,18 +204,26 @@ class BodySignUp extends GetView<SignUpController> {
               Obx(
                 () => SizedBox(
                   height: controller.isPasswordInvalid.isFalse
-                      ? Get.height * 0.06
-                      : Get.height * 0.09,
+                      ? Get.height * 0.07
+                      : Get.height * 0.10,
                   width: Get.width,
                   child: TextField(
+                      style: StyleText.inputStyle1,
                       controller: controller.passwordController,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: controller.showPassword.value,
+                      textAlign: TextAlign.left,
+                      textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(
+                            left: 10, right: 10, top: 0, bottom: 0),
                         errorText: controller.isPasswordInvalid.isTrue
                             ? controller.errorPasswordMessage.value
                             : null,
                         errorBorder: UnderlineInputBorder(
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15)),
                             borderSide: BorderSide(
                                 color: Resources.color.secondaryColor2)),
                         filled: true,
@@ -255,8 +285,8 @@ class BodySignUp extends GetView<SignUpController> {
                             controller.emailInput.isNotEmpty &&
                             controller.passwordInput.isNotEmpty &&
                             controller.phoneNumberInput.isNotEmpty) {
-                          EmailVerification()
-                              .emailTemplate(controller.usernameController.text);
+                          EmailVerification().emailTemplate(
+                              controller.usernameController.text);
                           EmailOTP.sendOTP(
                               email: controller.emailController.text);
                           Get.toNamed(Routes.verificationOTP, arguments: {

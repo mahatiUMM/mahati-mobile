@@ -14,7 +14,8 @@ import 'package:mahati_mobile/app/utils/token_utils.dart';
 
 class QuestionnaireQuestionController extends GetxController {
   final RestClient restClient = Get.find<RestClient>();
-  final QuestionnaireController _questionnaireController = Get.find<QuestionnaireController>(); 
+  final QuestionnaireController _questionnaireController =
+      Get.find<QuestionnaireController>();
   final PageController pageController = PageController();
   final ScrollController indicatorScrollController = ScrollController();
   final GetStorage storage = GetStorage();
@@ -132,9 +133,9 @@ class QuestionnaireQuestionController extends GetxController {
     filteredQuestions.value = questionnaireUserAlreadyUse
         .where((item) => item.question.questionnaireId == targetQuestionnaireId)
         .toList();
-    for(var items in filteredQuestions){
+    for (var items in filteredQuestions) {
       print("Questionnaire ID:${items.question.questionnaireId}");
-
+      print("Selected Answer: ${items.selectedAnswer}");
     }
   }
 
@@ -201,10 +202,10 @@ class QuestionnaireQuestionController extends GetxController {
 
     await restClient.request('/questionnaire_question_answer', HttpMethod.POST,
         questioinnaireAnswer.toJson());
-    
+
     await _questionnaireController.getQuestionnaires();
     await _questionnaireController.getQuestionnaireUser();
-    
+
     showSuccessMessage("Survey Berhasil di Submit", "Terima kasih");
     Get.offAndToNamed('/questionnaire');
   }

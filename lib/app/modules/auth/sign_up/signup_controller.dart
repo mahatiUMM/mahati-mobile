@@ -74,7 +74,7 @@ class SignUpController extends GetxController {
       isPhoneNumberInvalid.value = true;
       errorPhoneMessage.value = "Harap masukkan nomor telpon";
       phoneNumberInput.value = '';
-    } else if (!RegExp(r"^(?:\+62|62|0)8[1-9][0-9]{6,9}$")
+    } else if (!RegExp(r"^(?:\+62|62|0)8[1-9][0-9]{6,10}$")
         .hasMatch(phoneController.text)) {
       isPhoneNumberInvalid.value = true;
       errorPhoneMessage.value = "Masukkan nomor telp yang benar";

@@ -117,11 +117,22 @@ class StyleText {
 
   // Frequently asked questions
   static TextStyle faqHeaderStyle = TextStyle(
-      color: const Color(0xffffffff), fontSize: 16, fontWeight: FontWeight.bold, fontFamily: Resources.font.primaryFont);
+      color: const Color(0xffffffff),
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      fontFamily: Resources.font.primaryFont);
   static TextStyle faqContentStyle = TextStyle(
       color: const Color(0xff999999),
       fontSize: 14,
       fontWeight: FontWeight.normal,
       fontFamily: Resources.font.primaryFont);
   // static TextStyle faq1Style = TextStyle()
+
+  // input style
+  static TextStyle inputStyle1 = TextStyle(
+      fontSize: 11.sp,
+      fontFamily: Resources.font.primaryFont,
+      fontStyle: FontStyle.normal,
+      color: Resources.color.titleColor,
+      fontWeight: FontWeight.normal);
 }
